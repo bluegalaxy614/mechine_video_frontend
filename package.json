@@ -9,31 +9,42 @@
 		"lint": "eslint . --ext .ts,.tsx -c .eslintrc.json --fix"
 	},
 	"dependencies": {
+		"@nextui-org/avatar": "^2.0.33",
+		"@nextui-org/badge": "^2.0.32",
 		"@nextui-org/button": "2.0.38",
+		"@nextui-org/card": "^2.0.34",
 		"@nextui-org/code": "2.0.33",
+		"@nextui-org/divider": "^2.0.32",
+		"@nextui-org/image": "^2.0.32",
 		"@nextui-org/input": "2.2.5",
 		"@nextui-org/kbd": "2.0.34",
 		"@nextui-org/link": "2.0.35",
 		"@nextui-org/listbox": "2.1.27",
 		"@nextui-org/navbar": "2.0.37",
+		"@nextui-org/pagination": "^2.0.36",
 		"@nextui-org/snippet": "2.0.43",
 		"@nextui-org/switch": "2.0.34",
 		"@nextui-org/system": "2.2.6",
 		"@nextui-org/theme": "2.2.11",
 		"@react-aria/ssr": "3.9.4",
 		"@react-aria/visually-hidden": "3.8.12",
+		"@splidejs/react-splide": "^0.7.12",
+		"@splidejs/splide": "^4.1.4",
+		"chart.js": "^4.4.4",
 		"clsx": "2.1.1",
 		"framer-motion": "~11.1.1",
 		"intl-messageformat": "^10.5.0",
 		"next": "14.2.4",
 		"next-themes": "^0.2.1",
 		"react": "18.3.1",
+		"react-chartjs-2": "^5.2.0",
 		"react-dom": "18.3.1"
 	},
 	"devDependencies": {
 		"@types/node": "20.5.7",
 		"@types/react": "18.3.3",
 		"@types/react-dom": "18.3.0",
+		"@types/swiper": "^6.0.0",
 		"@typescript-eslint/eslint-plugin": "7.2.0",
 		"@typescript-eslint/parser": "7.2.0",
 		"autoprefixer": "10.4.19",
@@ -51,5 +62,6 @@
 		"tailwind-variants": "0.1.20",
 		"tailwindcss": "3.4.3",
 		"typescript": "5.0.4"
-	}
+	},
+	"packageManager": "yarn@3.1.1+sha512.05e7cd089fdbb9a82ea64d75895b2712026aa50110e046be9a8f4672bafbd05fbd368256831c9e02cd96d8e637917eaeace985482375fb828062bc915883e2c5"
 }

@@ -5,55 +5,47 @@ export const siteConfig = {
   description: "Make beautiful websites regardless of your design experience.",
   navItems: [
     {
-      label: "Home",
+      label: "ホーム",
       href: "/",
     },
     {
-      label: "Docs",
-      href: "/docs",
+      label: "すべての動画",
+      href: "/videos",
     },
     {
-      label: "Pricing",
-      href: "/pricing",
+      label: "投稿する",
+      href: "/post",
     },
     {
-      label: "Blog",
-      href: "/blog",
+      label: "マイページ",
+      href: "/mypage",
     },
     {
-      label: "About",
-      href: "/about",
+      label: "お問い合わせ",
+      href: "/inquiry",
     },
   ],
   navMenuItems: [
     {
-      label: "Profile",
-      href: "/profile",
+      label: "ホーム",
+      href: "/",
     },
     {
-      label: "Dashboard",
-      href: "/dashboard",
+      label: "すべての動画",
+      href: "/videos",
     },
     {
-      label: "Projects",
-      href: "/projects",
+      label: "投稿する",
+      href: "/post",
     },
     {
-      label: "Team",
-      href: "/team",
+      label: "マイページ",
+      href: "/mypage",
     },
     {
-      label: "Calendar",
-      href: "/calendar",
-    },
-    {
-      label: "Settings",
-      href: "/settings",
-    },
-    {
-      label: "Help & Feedback",
-      href: "/help-feedback",
-    },
+      label: "お問い合わせ",
+      href: "/inquiry",
+    }, 
     {
       label: "Logout",
       href: "/logout",
