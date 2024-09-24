@@ -12,7 +12,7 @@ interface FavVideoCardsProps {
     describe: string;
     author: string;
     date: string;
-    duration: string;
+    duration?: string|null;
   }[];
 }
 const FavVideoCards = ({ data }: FavVideoCardsProps) => {

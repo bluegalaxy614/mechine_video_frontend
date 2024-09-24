@@ -4,7 +4,6 @@ import CategoryButton from "@/components/categoryButton";
 import { Divider } from "@nextui-org/divider";
 import SubCategoryButton from "@/components/subCategoryButton";
 import VideoCards from "@/components/videoCards";
-import FavVideoCards from "@/components/favVideoCards";
 import NewsCards from "@/components/newCards";
 import ImageButton from "@/components/imageButton";
 import UserCards from "@/components/userCards";
@@ -334,7 +333,7 @@ export default function Home() {
             <CategoryButton
               name={category.name}
               selected={category.selected}
-              onClick={console.log(category.name)}
+              // onClick={console.log(category.name)}
             />
           ))}
         </div>
@@ -347,7 +346,7 @@ export default function Home() {
             <SubCategoryButton
               name={category.name}
               selected={category.selected}
-              onClick={console.log(category.name)}
+              // onClick={console.log(category.name)}
             />
           ))}
         </div>

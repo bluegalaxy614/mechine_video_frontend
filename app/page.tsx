@@ -621,7 +621,7 @@ export default function Home() {
             <CategoryButton
               name={category.name}
               selected={category.selected}
-              onClick={console.log(category.name)}
+              // onClick={console.log(category.name)}
             />
           ))}
         </div>
@@ -634,7 +634,7 @@ export default function Home() {
             <SubCategoryButton
               name={category.name}
               selected={category.selected}
-              onClick={console.log(category.name)}
+              // onClick={console.log(category.name)}
             />
           ))}
         </div>
