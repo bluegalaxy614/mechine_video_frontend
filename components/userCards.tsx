@@ -1,8 +1,6 @@
 "use client";
 import Image from "next/image";
-import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
-import { describe } from "node:test";
-import { Button } from "@nextui-org/button";
+import { Card, CardBody, CardFooter } from "@nextui-org/card";
 
 interface UserCardsProps {
   data: {

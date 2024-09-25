@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
-import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
-import { describe } from "node:test";
+import { Card } from "@nextui-org/card";
 import { Button } from "@nextui-org/button";
 
 interface FavVideoCardsProps {

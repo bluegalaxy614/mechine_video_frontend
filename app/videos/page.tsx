@@ -1,13 +1,8 @@
-import { siteConfig } from "@/config/site";
 import ImageSlider from "@/components/imageSlider";
 import CategoryButton from "@/components/categoryButton";
 import { Divider } from "@nextui-org/divider";
 import SubCategoryButton from "@/components/subCategoryButton";
 import VideoCards from "@/components/videoCards";
-import NewsCards from "@/components/newCards";
-import ImageButton from "@/components/imageButton";
-import UserCards from "@/components/userCards";
-import CompanySlider from "@/components/companySlider";
 import HomeFooter from "@/components/homeFooter";
 import { Pagination } from "@nextui-org/pagination";
 

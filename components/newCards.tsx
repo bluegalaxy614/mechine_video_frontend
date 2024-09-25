@@ -1,4 +1,4 @@
-import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card";
+import { Card } from "@nextui-org/card";
 import Image from "next/image";
 import { Button } from "@nextui-org/button";
 

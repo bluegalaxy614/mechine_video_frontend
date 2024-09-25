@@ -1,4 +1,3 @@
-import { siteConfig } from "@/config/site";
 import ImageSlider from "@/components/imageSlider";
 import CategoryButton from "@/components/categoryButton";
 import { Divider } from "@nextui-org/divider";

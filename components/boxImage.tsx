@@ -1,5 +1,3 @@
-import { Button } from "@nextui-org/button";
-
 interface BoxImageProps {
   id: number;
   image: string;

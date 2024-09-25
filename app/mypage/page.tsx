@@ -1,4 +1,3 @@
-import { Divider } from "@nextui-org/divider";
 import VideoCards from "@/components/videoCards";
 import ImageButton from "@/components/imageButton";
 import { Pagination } from "@nextui-org/pagination";

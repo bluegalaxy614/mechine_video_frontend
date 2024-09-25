@@ -8,24 +8,14 @@ import {
   NavbarMenuItem,
 } from "@nextui-org/navbar";
 import { Avatar } from "@nextui-org/avatar";
-import { Button } from "@nextui-org/button";
-import { Kbd } from "@nextui-org/kbd";
 import { Link } from "@nextui-org/link";
-import { Input } from "@nextui-org/input";
 import { link as linkStyles } from "@nextui-org/theme";
 import NextLink from "next/link";
 import clsx from "clsx";
 
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
-import {
-  TwitterIcon,
-  GithubIcon,
-  DiscordIcon,
-  HeartFilledIcon,
-  SearchIcon,
-  Logo,
-} from "@/components/icons";
+import { GithubIcon } from "@/components/icons";
 
 export const Navbar = () => {
   // const searchInput = (
@@ -50,7 +40,11 @@ export const Navbar = () => {
   // );
 
   return (
-    <NextUINavbar maxWidth="xl" position="sticky" className="h-[90px] z-[1000] fixed shadow-md">
+    <NextUINavbar
+      maxWidth="xl"
+      position="sticky"
+      className="h-[90px] z-[1000] fixed shadow-md"
+    >
       <div className="flex w-[1440px] mx-auto justify-center items-center">
         <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
           <NavbarBrand as="li" className="gap-3 max-w-fit">
@@ -83,7 +77,7 @@ export const Navbar = () => {
           <NavbarItem className="flex items-center rounded-full bg-[#F4F4F4] w-[194px] h-[65px] p-1 hover:pointer">
             <Avatar
               className="h-[57px] w-[57px] border-2 border-default-500 border-[#4291EF]"
-              src="https://i.pravatar.cc/150?u=a04258a2462d826712d"
+              src="/profile/3.png"
             />
             <span className="mx-auto text-[20px] text-[#1F2B3E]">
               高橋 文哉
