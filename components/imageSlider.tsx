@@ -33,11 +33,11 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ slides }) => {
             <img
               src={slide.image}
               alt={slide.title}
-              className="!w-full object-cover"
+              className="!w-full h-full object-cover"
             />
             <div className="absolute top-[50%] left-[10%] right-0 text-white p-4 w-[810px]">
               <h2 className="text-[72px] font-bold">{slide.title}</h2>
-              <p className="text-[24px]">{slide.description}</p>
+              <p className="text-[24px] text-[#C0C0C0]">{slide.description}</p>
             </div>
           </div>
         </SplideSlide>

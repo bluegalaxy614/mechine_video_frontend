@@ -16,23 +16,23 @@ export default function Home() {
   const slides = [
     {
       image:
-        "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+        "/slides/1.png",
       title: "修理動画で学ぼう",
       description:
         "専門家による工作機械や建機、農機の修理動画を視聴・投稿し、知識を共有しながら収益を得られる新しい動画プラットフォームです。",
     },
     {
       image:
-        "https://images.unsplash.com/photo-1518756131217-31eb79b20e8f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-      title: "Amazing Cityscape",
-      description: "A stunning city view during the evening lights.",
+        "/slides/2.png",
+      title: "修理動画で学ぼう",
+      description: "専門家による工作機械や建機、農機の修理動画を視聴・投稿し、知識を共有しながら収益を得られる新しい動画プラットフォームです。",
     },
     {
       image:
-        "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-      title: "Desert Dunes",
+        "/slides/3.png",
+      title: "修理動画で学ぼう",
       description:
-        "The serene beauty of the desert sand dunes under the sunset.",
+        "専門家による工作機械や建機、農機の修理動画を視聴・投稿し、知識を共有しながら収益を得られる新しい動画プラットフォームです。",
     },
   ];
   const lastest = {
