@@ -26,10 +26,27 @@ const CompanySlider: React.FC<CompanySliderProps> = ({ slides, dir }) => {
         speed: 1000,
         arrows: false,
         pagination: false,
-        perPage: 7,
+        // perPage: 7,
         interval: 1000,
         drag: false,
         easing: "ease",
+        responsive: {
+          0: {
+            perPage: 1,
+          },
+          768: {
+            perPage: 3,
+          },
+          1024: {
+            perPage: 5,
+          },
+          1280: {
+            perPage: 7,
+          },
+          1440: {
+            perPage: 7,
+          },
+        }
       }}
       aria-label="Image Slider"
     >

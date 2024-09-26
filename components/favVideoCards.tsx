@@ -17,10 +17,10 @@ interface FavVideoCardsProps {
 const FavVideoCards = ({ data }: FavVideoCardsProps) => {
   return (
     <>
-      <div className="grid grid-cols-4 gap-6">
+      <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xsm:grid-cols-1 gap-6">
         {data.map((item, index) => (
           <Card
-            className="w-[332px] h-[481px] rounded-[18px] shadow-md hover:shadow-xl transition-shadow duration-lg"
+            className="w-[332px] h-[481px] rounded-[18px] shadow-md hover:shadow-xl transition-shadow duration-lg mx-auto"
             key={index}
             isPressable
           >

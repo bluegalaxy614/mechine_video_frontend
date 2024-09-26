@@ -7,6 +7,7 @@ import { Providers } from "./providers";
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
+import { Link } from "@nextui-org/link";
 
 export const metadata: Metadata = {
   title: {
@@ -36,17 +37,24 @@ export default function RootLayout({
       <head />
       <body
         className={clsx(
-          "min-h-screen bg-background font-sans antialiased overflow-x-hidden",
+          "min-h-screen bg-background font-sans antialiased overflow-x-hidden scroll-smooth",
           fontSans.variable
         )}
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-          <div className="relative flex flex-col h-screen">
+          <div className="relative flex flex-col h-screen w-screen">
             <Navbar />
             <main className="mt-[90px]">{children}</main>
-            <footer className="w-full flex items-center justify-center py-3 bg-[#4291EF]">
-              <p className="text-white text-[20px]"> All rights reserved.</p>
-            </footer>
+            <Link
+              className="absolute fixed flex justify-center items-center bottom-16 right-6 w-[92px] h-[92px] bg-white rounded-full border border-gray-200 shadow-md hover:shadow-default-300"
+              href="/ask"
+            >
+              <img
+                src="/icons/icon-ask.png"
+                alt="home"
+                className="w-[57px] h-[57px]"
+              />
+            </Link>
           </div>
         </Providers>
       </body>

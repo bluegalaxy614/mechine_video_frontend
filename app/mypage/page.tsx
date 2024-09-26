@@ -5,7 +5,7 @@ import BoxImage from "@/components/boxImage";
 import LineChart from "@/components/lineChart";
 import { Button } from "@nextui-org/button";
 
-export default function Home() {
+export default function MyPage() {
   const lastestVideos = [
     {
       title: "旋盤のベアリング交換方法",
@@ -184,6 +184,9 @@ export default function Home() {
           className="flex align-items-center justify-center my-[30px]"
         />
       </section>
+      <footer className="w-full flex items-center justify-center py-3 bg-[#4291EF]">
+        <p className="text-white text-[20px]"> All rights reserved.</p>
+      </footer>
     </>
   );
 }

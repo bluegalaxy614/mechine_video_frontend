@@ -8,6 +8,12 @@ module.exports = {
     './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}'
   ],
   theme: {
+    screens:{
+      'xsm' : '320px',
+      'sm' : '768px',
+      'md' : '1024px',
+      'lg': '1440px',
+    },
     extend: {
       fontFamily: {
         sans: ["var(--font-sans)"],

@@ -13,7 +13,7 @@ export default function CategoryButton({
 }) {
   return (
     <Button
-      className={`h-[41px] w-[144px] rounded-full border shadow-md hover:shadow-default-300 px-[8px] py-[1px]
+      className={`h-[41px] w-[144px] rounded-full border shadow-md hover:shadow-default-300 px-[8px] py-[1px] mx-auto
         ${selected ? "bg-[#4291EF]" : "bg-default-100"
       }`}
       // onPress={onClick}

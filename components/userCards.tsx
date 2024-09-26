@@ -13,10 +13,10 @@ interface UserCardsProps {
 const UserCards = ({ data }: UserCardsProps) => {
   return (
     <>
-      <div className="gap-6 grid grid-cols-2 sm:grid-cols-4">
+      <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xsm:grid-cols-1 gap-6 ">
         {data.map((item, index) => (
           <Card
-            className="flex w-[277px] h-[380px] rounded-xl shadow-md hover:shadow-xl transition-shadow duration-lg pt-4"
+            className="flex w-[277px] h-[380px] rounded-xl shadow-md hover:shadow-xl transition-shadow duration-lg pt-4 mx-auto"
             key={index}
             isPressable
           >
