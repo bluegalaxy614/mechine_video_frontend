@@ -31,7 +31,7 @@ const FavVideoCards = ({ data }: FavVideoCardsProps) => {
               alt={item.title}
               src={item.img}
             />
-            <div className="w-[292px] h-[195px] p-2 flex flex-col !justify-start !items-start my-2">
+            <div className="w-[292px] h-[195px] py-5 flex flex-col !justify-start !items-start my-2 px-[25px]">
               {/* Title */}
               <h1 className="text-lg font-bold text-blue-500 !justify-start !items-start">
                 {item.title}

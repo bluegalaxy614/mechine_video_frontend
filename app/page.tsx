@@ -52,7 +52,7 @@ export default function Home() {
       <ImageSlider slides={slides} />
       <section className="max-w-[1280px] mx-auto">
         <div className="flex mt-[117px] my-[84px] lg:mx-[0px] md:mx-[40px] sm:mx-[20px] xsm:mx-[10px]">
-          <div className='grow max-w-[866px] lg:mx-[0px] md:mx-[40px] sm:mx-[20px] xsm:mx-[10px]'>
+          <div className="grow max-w-[866px] lg:mx-[0px] md:mx-[40px] sm:mx-[20px] xsm:mx-[10px]">
             <Input
               isClearable
               fullWidth={true}
@@ -88,16 +88,21 @@ export default function Home() {
           <SubCategoryButton
             name={'カテゴリ'}
             selected={false}
-          // onClick={console.log(category.name)}
+            // onClick={console.log(category.name)}
           />
-          <div className='flex-none'>
+          <div className="flex-none">
             <div className="flex gap-4">
               <p className="flex items-center">並べ替え</p>
               <Dropdown placement="bottom-end">
                 <DropdownTrigger>
                   <Button className="capitalize h-[41px] w-[144px] rounded-full border hover:shadow-default-300 px-[8px] py-[1px] mx-auto">
                     {selectedValue}
-                    <Image width={21} height={21} src="/icons/icon-arrange.png" alt="" />
+                    <Image
+                      width={21}
+                      height={21}
+                      src="/icons/icon-arrange.png"
+                      alt=""
+                    />
                   </Button>
                 </DropdownTrigger>
                 <DropdownMenu
@@ -121,7 +126,7 @@ export default function Home() {
               key={index}
               name={category.name}
               selected={category.selected}
-            // onClick={console.log(category.name)}
+              // onClick={console.log(category.name)}
             />
           ))}
         </div>
@@ -135,7 +140,7 @@ export default function Home() {
               key={index}
               name={category.name}
               selected={category.selected}
-            // onClick={console.log(category.name)}
+              // onClick={console.log(category.name)}
             />
           ))}
         </div>

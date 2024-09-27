@@ -81,7 +81,12 @@ export default function Home() {
               <DropdownTrigger>
                 <Button className="capitalize h-[41px] w-[144px] rounded-full border hover:shadow-default-300 px-[8px] py-[1px] mx-auto">
                   {selectedValue}
-                  <Image width={21} height={21}  src="/icons/icon-arrange.png" alt="" />
+                  <Image
+                    width={21}
+                    height={21}
+                    src="/icons/icon-arrange.png"
+                    alt=""
+                  />
                 </Button>
               </DropdownTrigger>
               <DropdownMenu

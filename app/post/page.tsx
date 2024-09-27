@@ -74,7 +74,12 @@ export default function PostPage() {
             </div>
             <Button className="w-[100px] h-[30px] bg-[#4291EF] mx-auto mt-[40px] mb-[71px]">
               <p className=" text-[#FFFFFF] text-[20px]">提出</p>
-              <Image width={28} height={28} src="/icons/icon-store.png" alt="" />
+              <Image
+                width={28}
+                height={28}
+                src="/icons/icon-store.png"
+                alt=""
+              />
             </Button>
           </div>
 

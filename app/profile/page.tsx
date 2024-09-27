@@ -20,8 +20,10 @@ export default function PostPage() {
               <div className="w-[554px] flex flex-col gap-6">
                 <div>
                   <Image width={248} height={248} src="/profile/3.png" alt="" />
-                  <p className='text-[#FFFFFF] text-[20px] bg-[#4291EF] w-[248px] h-[51px] rounded-b-[21px]'>アバターアップロード</p>
-                </div> 
+                  <p className="text-[#FFFFFF] text-[20px] bg-[#4291EF] w-[248px] h-[51px] rounded-b-[21px]">
+                    アバターアップロード
+                  </p>
+                </div>
               </div>
 
               {/* Image upload + Youtube Link */}
@@ -49,7 +51,12 @@ export default function PostPage() {
             </div>
             <Button className="w-[185px] h-[31px] bg-[#4291EF] mt-[40px] mb-[71px]">
               <p className=" text-[#FFFFFF] text-[20px]">アップデート</p>
-              <Image width={28} height={28} src="/icons/icon-store.png" alt="" />
+              <Image
+                width={28}
+                height={28}
+                src="/icons/icon-store.png"
+                alt=""
+              />
             </Button>
           </div>
         </div>
@@ -73,7 +80,12 @@ export default function PostPage() {
                 </p>
                 <Button className="w-[185px] h-[31px] bg-[#4291EF] mt-[40px] mb-[71px]">
                   <p className="text-[#FFFFFF] text-[20px]">アップデート</p>
-                  <Image width={28} height={28} src="/icons/icon-store.png" alt="" />
+                  <Image
+                    width={28}
+                    height={28}
+                    src="/icons/icon-store.png"
+                    alt=""
+                  />
                 </Button>
               </div>
 
@@ -88,7 +100,12 @@ export default function PostPage() {
                 </p>
                 <Button className="w-[185px] h-[31px] bg-[#4291EF] mt-[40px] mb-[71px]">
                   <p className="text-[#FFFFFF] text-[20px]">アップデート</p>
-                  <Image width={28} height={28} src="/icons/icon-store.png" alt="" />
+                  <Image
+                    width={28}
+                    height={28}
+                    src="/icons/icon-store.png"
+                    alt=""
+                  />
                 </Button>
               </div>
             </div>

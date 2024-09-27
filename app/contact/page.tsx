@@ -44,7 +44,12 @@ export default function ContactPage() {
             </div>
             <Button className="w-[141px] h-[26px] bg-[#4291EF] mt-[40px] mb-[71px] mx-auto">
               <p className=" text-[#FFFFFF] text-[20px]">提出</p>
-              <Image width={28} height={28} src="/icons/icon-store.png" alt="" />
+              <Image
+                width={28}
+                height={28}
+                src="/icons/icon-store.png"
+                alt=""
+              />
             </Button>
           </div>
         </div>
