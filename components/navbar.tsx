@@ -33,7 +33,7 @@ export const Navbar = () => {
         position="static"
         className="!h-[90px] z-[1000] fixed shadow-md"
       >
-        <div className="flex w-[1440px] mx-auto justify-center items-center">
+        <div className="flex w-[1280px] mx-auto justify-center items-center">
           <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
             <NavbarBrand as="li" className="gap-3 max-w-fit">
               <NextLink

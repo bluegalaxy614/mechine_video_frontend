@@ -79,7 +79,7 @@ export default function PaymentPage() {
   return (
     <>
       {/* Section for summary statistics */}
-      <section className="flex justify-between max-w-[1440px] mx-auto mt-[90px]">
+      <section className="flex justify-between max-w-[1280px] mx-auto mt-[90px]">
         <BoxImage
           id={1}
           image={'/icons/icons-checked.png'}
@@ -101,7 +101,7 @@ export default function PaymentPage() {
       </section>
 
       {/* Section for the payment table */}
-      <section className="max-w-[1440px] mx-auto mt-[60px] h-[100vh]">
+      <section className="max-w-[1280px] mx-auto mt-[60px] h-[100vh]">
         <div className="w-full rounded-md shadow-md">
           <Table
             aria-label="Payment Table"

@@ -9,7 +9,7 @@ export default function PostPage() {
         className="w-full flex mt-[85px]"
         style={{ justifyContent: 'space-evenly' }}
       >
-        <div className="flex w-[1440px]">
+        <div className="flex w-[1280px]">
           {/* Left side content */}
           <div className="flex flex-col w-[900px] mx-auto">
             <h1 className="text-[32px] text-[#4291EF] font-bold">

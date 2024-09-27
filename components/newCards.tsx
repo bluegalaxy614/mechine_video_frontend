@@ -13,11 +13,11 @@ interface NewsCardsProps {
 
 const NewsCards = ({ data }: NewsCardsProps) => {
   return (
-    <div className="flex flex-col space-y-4 p-2 my-[20px]">
+    <div className="flex flex-col space-y-4 p-2 my-[20px] lg:mx-[0px] md:mx-[40px] sm:mx-[20px] xsm:mx-[10px]">
       {data.map((item, index) => (
         <Card
           key={index}
-          className="max-w-[1398px] h-[176px] lg:px-[37px] py-[25px] md:px-[20px] sm:px-[10px] sxsm:px-[5px] shadow-lg rounded-lg border border-gray-200 shadow-md hover:shadow-default-300 hover:bg-[#E4F1FF]"
+          className="max-w-[1280] h-[176px] lg:px-[37px] py-[25px] md:px-[20px] sm:px-[10px] sxsm:px-[5px] shadow-lg rounded-lg border border-gray-200 shadow-md hover:shadow-default-300 hover:bg-[#E4F1FF]"
         >
           <div className="flex justify-between">
             <div className="flex-none max-w-[65px]">

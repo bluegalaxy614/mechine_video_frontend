@@ -12,7 +12,7 @@ const HomeFooter = () => {
         className="absolute inset-0 w-full h-full object-cover brightness-50"
       />
       {/* Content Container */}
-      <div className="absolute inset-0 flex flex-wrap max-w-[1440px] mx-auto h-full">
+      <div className="absolute inset-0 flex flex-wrap max-w-[1280px] mx-auto h-full">
         {/* Left Section */}
         <div className="flex flex-col w-full md:w-[40%] mx-auto my-auto items-start gap-6 px-4">
           <div className="flex items-center gap-4">

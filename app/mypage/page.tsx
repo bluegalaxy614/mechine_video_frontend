@@ -146,7 +146,7 @@ export default function MyPage() {
   };
   return (
     <>
-      <section className="flex flex-wrap justify-between max-w-[1440px] mx-auto">
+      <section className="flex flex-wrap justify-between max-w-[1280px] mx-auto">
         <div className="mx-auto my-[10px]">
           <BoxImage
             id={1}
@@ -172,10 +172,10 @@ export default function MyPage() {
           />
         </div>
       </section>
-      <section className="max-w-[1440px] mx-auto my-[10px]">
+      <section className="max-w-[1280px] mx-auto my-[10px]">
         <LineChart chartData={data} />
       </section>
-      <section className="max-w-[1440px] mx-auto my-[10px]">
+      <section className="max-w-[1280px] mx-auto my-[10px]">
         <ImageButton data={icon} />
         <div className="mb-[30px] flex gap-[40px]">
           <Button className="rounded-full w-[144px] h-[41px] bg-[#FDE48D] text-[#725C10] text-[16px]">

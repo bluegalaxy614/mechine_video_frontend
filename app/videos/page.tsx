@@ -38,7 +38,7 @@ export default function Home() {
   return (
     <>
       <ImageSlider slides={slides} />
-      <section className="max-w-[1440px] mx-auto">
+      <section className="max-w-[1280px] mx-auto">
         <div className="flex mt-[117px] my-[84px]">
           <Input
             isClearable
@@ -112,7 +112,7 @@ export default function Home() {
         <p className="w-[181px] h-[35px] rounded-full bg-[#E4F1FF] text-[20px] flex justify-center items-center my-[40px]">
           サブカテゴリ
         </p>
-        <div className="flex grid grid-cols-7 gap-3 py-[9px] px-[0px] w-[1440px] h-[208px] overflow-y-auto my-[20px]">
+        <div className="flex grid grid-cols-7 gap-3 py-[9px] px-[0px] w-[1280px] h-[208px] overflow-y-auto my-[20px]">
           {subCategories.map((category, index) => (
             <SubCategoryButton
               key={index}
@@ -124,7 +124,7 @@ export default function Home() {
         </div>
         <Divider />
       </section>
-      <section className="max-w-[1440px] mx-auto my-[30px]">
+      <section className="max-w-[1280px] mx-auto my-[30px]">
         <VideoCards data={lastestVideos} />
         <Pagination
           showControls

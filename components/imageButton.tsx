@@ -10,7 +10,7 @@ interface ImageButtonProps {
 
 const ImageButton = ({ data }: ImageButtonProps) => {
   return (
-    <div className="flex flex-col gap-4 items-start my-[60px]">
+    <div className="flex flex-col gap-4 items-start my-[60px] lg:mx-[0px] md:mx-[40px] sm:mx-[20px] xsm:mx-[10px]">
       <div className="flex justify-start gap-6 items-center">
         <Image src={data.icon} alt={data.title} width={48} height={48} />
         <h2 className="text-[40px] text-[#4291EF] font-bold">{data.title}</h2>
