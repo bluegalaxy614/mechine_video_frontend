@@ -52,7 +52,7 @@ export default function AskPage() {
           />
           <Button className="w-[141px] h-[31px] bg-[#4291EF] mt-[40px] mb-[71px] float-right">
             <p className=" text-[#FFFFFF] text-[20px]">送信</p>
-            <Image src="/icons/icon-send.png" alt="" />
+            <Image width={28} height={28} src="/icons/icon-send.png" alt="" />
           </Button>
         </form>
       </div>

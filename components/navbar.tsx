@@ -86,9 +86,10 @@ export const Navbar = () => {
                       <div className="flex justify-between items-center gap-2                    ">
                         ログアウト
                         <Image
+                          width={39}
+                          height={39}
                           src="/icons/icon-logout.png"
                           alt=""
-                          className="w-[39px] h-[39px]"
                         />
                       </div>
                     </DropdownItem>

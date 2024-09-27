@@ -53,7 +53,8 @@ export default function RootLayout({
               <Image
                 src="/icons/icon-ask.png"
                 alt="home"
-                className="w-[57px] h-[57px]"
+                width={57}
+                height={57}
               />
             </Link>
           </div>

@@ -35,6 +35,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ slides }) => {
             {' '}
             {/* Maintains the aspect ratio */}
             <Image
+              fill
               src={slide.image}
               alt={slide.title}
               className="w-full object-cover h-full" // Ensures the image fills the container while keeping the aspect ratio

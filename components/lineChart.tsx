@@ -119,7 +119,8 @@ const LineChart: React.FC<LineChartProps> = ({ chartData, options }) => {
     <div className="relative flex w-full h-[545px] mx-auto my-8 w-full border border-gray-300 shadow-lg rounded-lg p-[30px] pt-[60px] pl-[40px]">
       <div className="absolute top-3 left-[30px] flex justify-center items-center gap-9">
         <Image
-          className="w-[39px] h-[39px]"
+          width={39}
+          height={39}
           src="/icons/icon-chart.png"
           alt="chart icon"
         />

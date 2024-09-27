@@ -24,12 +24,12 @@ const CompanySlider: React.FC<CompanySliderProps> = ({ slides, dir }) => {
         gap: '3rem',
         autoplay: true,
         direction: dir, // Use the `dir` prop to set the slider direction
-        speed: 3000,
+        speed: 5000,
         arrows: false,
         pagination: false,
         perPage: 7,
         perMove: 1,
-        interval: 1000,
+        interval: 10,
         easing: 'linear',
         breakpoints: {
           1200: {
@@ -52,6 +52,8 @@ const CompanySlider: React.FC<CompanySliderProps> = ({ slides, dir }) => {
         >
           <div className="flex justify-center items-center w-[155px] h-[55px] overflow-hidden">
             <Image
+              width={155}
+              height={55}
               src={slide.image}
               alt={slide.title}
               className="w-full object-cover mx-auto"

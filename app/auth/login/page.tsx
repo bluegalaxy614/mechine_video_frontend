@@ -42,6 +42,8 @@ export default function LoginPage() {
             </h2>
             <div className="w-[202px] h-[202px] rounded-[29px] text-center mx-auto">
               <Image
+                width={202}
+                height={202}
                 src="/profile/user.png" // Replace with the appropriate image URL
                 alt="Mechanical Support"
                 className="mx-auto w-full h-full object-cover rounded-[29px]"

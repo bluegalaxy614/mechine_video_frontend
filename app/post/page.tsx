@@ -46,6 +46,8 @@ export default function PostPage() {
               <div className="w-[387px] flex flex-col gap-6">
                 <div className="w-[248px] h-[196px] bg-[#E4F1FF] flex justify-center items-center rounded-lg mx-auto">
                   <Image
+                    width={105}
+                    height={105}
                     src="/icons/icon-upload.png"
                     alt="Upload"
                     className="w-[105px] h-[105px] p-0 hover:cursor-pointer hover:opacity-50 transition-opacity duration-200"
@@ -72,7 +74,7 @@ export default function PostPage() {
             </div>
             <Button className="w-[100px] h-[30px] bg-[#4291EF] mx-auto mt-[40px] mb-[71px]">
               <p className=" text-[#FFFFFF] text-[20px]">提出</p>
-              <Image src="/icons/icon-store.png" alt="" />
+              <Image width={28} height={28} src="/icons/icon-store.png" alt="" />
             </Button>
           </div>
 
