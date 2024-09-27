@@ -26,7 +26,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ slides }) => {
             aria-label="Image Slider"
         >
             {slides.map((slide, index) => (
-                <SplideSlide key={index} className="relative w-full h-[483px]">
+                <SplideSlide key={index} className="relative w-full h-[483px] from-transparent">
                     <div className="w-full"> {/* Maintains the aspect ratio */}
                         <img
                             src={slide.image}

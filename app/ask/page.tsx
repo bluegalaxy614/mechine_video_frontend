@@ -17,27 +17,27 @@ export default function AskPage() {
                         type="text"
                         id="name"
                         name="name"
-                        className="border border-gray-300 rounded px-3 py-2 w-full"
+                        className="border border-gray-300 rounded px-3 py-2 w-full bg-[#F4F4F4]"
                     />
                     <label htmlFor="email" className="text-[20px]">メールアドレス</label>
                     <input
                         type="email"
                         id="email"
                         name="email"
-                        className="border border-gray-300 rounded px-3 py-2 w-full"
+                        className="border border-gray-300 rounded px-3 py-2 w-full bg-[#F4F4F4]"
                     />
                     <label htmlFor="phone" className="text-[20px]">電話番号</label>
                     <input
                         type="tel"
                         id="phone"
                         name="phone"
-                        className="border border-gray-300 rounded px-3 py-2 w-full"
+                        className="border border-gray-300 rounded px-3 py-2 w-full bg-[#F4F4F4]"
                     />
                     <label htmlFor="message" className="text-[20px]">メッセージ</label>
                     <textarea
                         id="message"
                         name="message"
-                        className="border border-gray-300 rounded px-3 py-2 w-full h-[200px]" />
+                        className="border border-gray-300 rounded px-3 py-2 w-full h-[200px] bg-[#F4F4F4]" />
                     <Button className="w-[141px] h-[31px] bg-[#4291EF] mt-[40px] mb-[71px] float-right">
                         <p className=" text-[#FFFFFF] text-[20px]">送信</p>
                         <img src="/icons/icon-send.png" alt="" />
