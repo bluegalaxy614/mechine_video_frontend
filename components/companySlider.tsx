@@ -23,13 +23,12 @@ const CompanySlider: React.FC<CompanySliderProps> = ({ slides, dir }) => {
                 gap: "3rem",
                 autoplay: true,
                 direction: dir, // Use the `dir` prop to set the slider direction
-                speed: 5000,
+                speed: 3000,
                 arrows: false,
                 pagination: false,
                 perPage: 7,
                 perMove: 1,
                 interval: 1000,
-                drag: true,
                 easing:"linear",
                 breakpoints: {
                     1200: {
