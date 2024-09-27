@@ -20,10 +20,15 @@ export default function LoginPage() {
 
     return (
         <div
-            className="min-h-screen bg-cover bg-center flex justify-center items-center"
-            style={{ backgroundImage: `url('/bg/1.png')` }}
+            className="h-[calc(100vh-90px)] w-full bg-cover bg-center flex flex-wrap justify-between items-center px-[153px]"
+            style={{ backgroundImage: `url('/bg/bg 1.png')` }}
         >
-            <div className="flex justify-between bg-white shadow-lg rounded-lg w-[914] p-8">
+            <div className='text-center'>
+                <h1 className='text-[#212121] text-[24px] font-bold'>Mechanical Repair Support Platform</h1>
+                <p className='text-[#4291EF] text-[40px] font-bold'>メカニカルリペア</p>
+                <p className='text-[#4291EF] text-[40px] font-bold'>サポートプラットフォーム</p>
+            </div>
+            <div className="flex justify-between items-center bg-white shadow-lg rounded-lg w-[914px] h-[691px] p-8">
                 {/* Logo and Heading */}
                 <div className="w-full flex justify-center items-center">
                     <div className='w-[283px] h-[283px] text-center '>

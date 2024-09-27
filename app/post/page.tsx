@@ -3,7 +3,7 @@ import { Button } from "@nextui-org/button";
 
 export default function PostPage() {
     return (
-        <div className=" h-[100vh]">
+        <div className=" h-[calc(100vh-90px)]">
             <div
                 className="w-full flex mt-[85px]"
                 style={{ justifyContent: "space-evenly" }}

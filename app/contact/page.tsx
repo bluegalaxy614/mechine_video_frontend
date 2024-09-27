@@ -6,7 +6,7 @@ export default function ContactPage() {
 
     return (
         <>
-            <section className="h-[100vh]">
+            <section className=" h-[calc(100vh-90px)]">
                 <div className="w-[958px] h-[628px] rounded-[36px] divider shadow-lg mt-[123px] mx-auto bg-[#FFFFFF]">
                     <div className="flex flex-col pt-[51px] px-[65px] mx-auto gap-[25px]">
                         <h1 className="text-[32px] text-[#4291EF] font-bold">

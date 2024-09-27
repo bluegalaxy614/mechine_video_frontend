@@ -146,25 +146,31 @@ export default function MyPage() {
     };
     return (
         <>
-            <section className="flex justify-between max-w-[1440px] mx-auto mt-[90px]">
-                <BoxImage
-                    id={1}
-                    image={"/icons/icons-checked.png"}
-                    title="総投稿件数"
-                    info="250"
-                />
-                <BoxImage
-                    id={2}
-                    image={"/icons/icon-clock.png"}
-                    title="総視聴時間"
-                    info="40000"
-                />
-                <BoxImage
-                    id={3}
-                    image={"/icons/icon-coin.png"}
-                    title="総輸入額"
-                    info="50万+"
-                />
+            <section className="flex flex-wrap justify-between max-w-[1440px] mx-auto">
+                <div className="mx-auto my-[10px]">
+                    <BoxImage
+                        id={1}
+                        image={"/icons/icons-checked.png"}
+                        title="総投稿件数"
+                        info="250"
+                    />
+                </div>
+                <div className="mx-auto my-[10px]">
+                    <BoxImage
+                        id={2}
+                        image={"/icons/icon-clock.png"}
+                        title="総視聴時間"
+                        info="40000"
+                    />
+                </div>
+                <div className="mx-auto my-[10px]">
+                    <BoxImage
+                        id={3}
+                        image={"/icons/icon-coin.png"}
+                        title="総輸入額"
+                        info="50万+"
+                    />
+                </div>
             </section>
             <section className="max-w-[1440px] mx-auto my-[10px]">
                 <LineChart chartData={data} />

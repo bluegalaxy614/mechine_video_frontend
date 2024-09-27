@@ -5,7 +5,7 @@ import { Divider } from "@nextui-org/divider";
 
 export default function PostPage() {
 	return (
-		<div className=" h-[100vh]">
+		<div className="h-[calc(100vh-90px)]">
 			<div className="w-full flex mt-[85px] flex-col w-[1440px]">
 				<div className="flex mx-auto">
 					{/* Left side content */}

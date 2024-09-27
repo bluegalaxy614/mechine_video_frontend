@@ -90,7 +90,7 @@ export const Navbar = () => {
                     </NavbarContent>
 
                     <NavbarContent className="lg:hidden md:hidden basis-1 pl-4" justify="end">
-                        <NavbarMenuToggle className="w-[48px] h-[48px]"/>
+                        <NavbarMenuToggle className="w-[48px] h-[48px]" />
                     </NavbarContent>
 
                     <NavbarMenu>
@@ -105,7 +105,7 @@ export const Navbar = () => {
                                                     ? "danger"
                                                     : "foreground"
                                         }
-                                        href="#"
+                                        href={item.href}
                                         size="lg"
                                     >
                                         {item.label}
