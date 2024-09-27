@@ -2,7 +2,6 @@
 import React from "react";
 import BoxImage from "@/components/boxImage";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, getKeyValue } from "@nextui-org/table";
-import { User } from "@nextui-org/user";
 import { Chip, ChipProps } from "@nextui-org/chip";
 import { Tooltip } from "@nextui-org/tooltip";
 import { columns, rows } from "../../../config/data";
