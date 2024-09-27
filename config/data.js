@@ -6,7 +6,6 @@ const columns = [
   { name: "支払い状態", uid: "status" },
   { name: "削除", uid: "actions" },
 ];
-
 const rows = [
   {
     id: 1,
@@ -121,7 +120,6 @@ const rows = [
     status: "保留中",
   },
 ];
-
 const slides = [
   {
     image:

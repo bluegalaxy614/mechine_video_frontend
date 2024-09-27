@@ -17,7 +17,7 @@ const NewsCards = ({ data }: NewsCardsProps) => {
       {data.map((item, index) => (
         <Card
           key={index}
-          className="max-w-[1398px] h-[176px] px-[37px] py-[25px] shadow-lg rounded-lg border border-gray-200 shadow-md hover:shadow-default-300 hover:bg-[#E4F1FF]"
+          className="max-w-[1398px] h-[176px] lg:px-[37px] py-[25px] md:px-[20px] sm:px-[10px] sxsm:px-[5px] shadow-lg rounded-lg border border-gray-200 shadow-md hover:shadow-default-300 hover:bg-[#E4F1FF]"
         >
           <div className="flex justify-between">
             <div className="flex-none max-w-[65px]">
@@ -25,7 +25,7 @@ const NewsCards = ({ data }: NewsCardsProps) => {
             </div>
             <div className="grow mt-4 ml-4 grid gap-4">
               <h1 className="text-[20px] text-[#4291EF] font-bold">{item.title}</h1>
-              <p className="text-[14px] text-[#212121] max-w-[862px] h-[73px]">{item.description}</p>
+              <p className="text-[14px] text-[#212121] maFx-w-[862px] h-[73px] truncate">{item.description}</p>
             </div>
             <div className="flex-none bg-blue-100 text-blue-500 px-3 py-1 rounded-full w-[147px] h-[35px]">
               {item.date}
