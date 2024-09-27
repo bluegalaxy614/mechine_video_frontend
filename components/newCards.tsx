@@ -1,6 +1,6 @@
-import { Card } from "@nextui-org/card";
-import Image from "next/image";
-import { Button } from "@nextui-org/button";
+import { Card } from '@nextui-org/card';
+import Image from 'next/image';
+import { Button } from '@nextui-org/button';
 
 interface NewsCardsProps {
   data: {
@@ -24,8 +24,12 @@ const NewsCards = ({ data }: NewsCardsProps) => {
               <Image width={64} height={62} alt={item.title} src={item.icon} />
             </div>
             <div className="grow mt-4 ml-4 grid gap-4">
-              <h1 className="text-[20px] text-[#4291EF] font-bold">{item.title}</h1>
-              <p className="text-[14px] text-[#212121] maFx-w-[862px] h-[73px] truncate">{item.description}</p>
+              <h1 className="text-[20px] text-[#4291EF] font-bold">
+                {item.title}
+              </h1>
+              <p className="text-[14px] text-[#212121] maFx-w-[862px] h-[73px] truncate">
+                {item.description}
+              </p>
             </div>
             <div className="flex-none bg-blue-100 text-blue-500 px-3 py-1 rounded-full w-[147px] h-[35px]">
               {item.date}
