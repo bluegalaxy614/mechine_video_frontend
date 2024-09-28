@@ -47,7 +47,6 @@ export default function Home() {
     [selectedKeys],
   );
 
-  
   return (
     <>
       <ImageSlider slides={slides} />
@@ -86,9 +85,7 @@ export default function Home() {
               }
             />
           </div>
-          <Button
-            className='h-[41px] w-[144px] rounded-full border hover:shadow-default-300 px-[8px] py-[1px] mx-auto bg-[#F4F4F4]'
-          >
+          <Button className="h-[41px] w-[144px] rounded-full border hover:shadow-default-300 px-[8px] py-[1px] mx-auto bg-[#F4F4F4]">
             カテゴリ
           </Button>
           <div className="flex-none">
@@ -122,15 +119,9 @@ export default function Home() {
           </div>
         </div>
         <div className="flex grid lg:grid-cols-7 md:grid-cols-6 sm:grid-cols-4 xsm:grid-cols-3 gap-3 divide-gray-200 py-[9px] lg:mx-[0px] md:mx-[40px] sm:mx-[20px] xsm:mx-[10px]">
-          <CategoryButton
-            key="all"
-            name="All"
-          />
-          {categoryConfig.map((category, index) => (
-            <CategoryButton
-              key={category.id}
-              name={category.label}
-            />
+          <CategoryButton key="all" name="All" />
+          {categoryConfig.map((category) => (
+            <CategoryButton key={category.id} name={category.label} />
           ))}
         </div>
         <Divider />
@@ -138,14 +129,11 @@ export default function Home() {
           サブカテゴリ
         </p>
         <div className="flex grid lg:grid-cols-7 md:grid-cols-6 sm:grid-cols-4 xsm:grid-cols-3 gap-3 py-[9px] h-[208px] overflow-y-auto my-[20px] lg:mx-[0px] md:mx-[40px] sm:mx-[20px] xsm:mx-[10px]">
-          {
-            categoryConfig.flatMap((category) => category.subCategories).map((category, index) => (
-              <SubCategoryButton
-                key={category.id}
-                name={category.label}
-              />
-            ))
-          }
+          {categoryConfig
+            .flatMap((category) => category.subCategories)
+            .map((category) => (
+              <SubCategoryButton key={category.id} name={category.label} />
+            ))}
         </div>
         <Divider />
       </section>

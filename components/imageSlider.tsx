@@ -45,7 +45,8 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ slides }) => {
             <h2
               className="text-6xl font-bold bg-clip-text text-transparent"
               style={{
-                backgroundImage: 'linear-gradient(to right, #FFFFFF, #4291EF, #F5F5F5, #4291EF, #FFFFFF)',
+                backgroundImage:
+                  'linear-gradient(to right, #FFFFFF, #4291EF, #F5F5F5, #4291EF, #FFFFFF)',
               }}
             >
               {slide.title}

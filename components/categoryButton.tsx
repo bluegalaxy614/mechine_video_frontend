@@ -7,9 +7,7 @@ interface CategoryButtonProps {
   name: string;
 }
 
-export default function CategoryButton({
-  name,
-}: CategoryButtonProps) {
+export default function CategoryButton({ name }: CategoryButtonProps) {
   const [selectedState, setSelectedState] = useState(false);
 
   const onClick = () => {

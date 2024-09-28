@@ -88,7 +88,7 @@ export const categoryConfig = [
         id: 's_5',
         label: '汎用工作機械 その他',
       },
-    ]
+    ],
   },
   {
     id: 'm_2',
@@ -110,7 +110,7 @@ export const categoryConfig = [
         id: 's_4',
         label: '板金機械_その他',
       },
-    ]
+    ],
   },
   {
     id: 'm_3',
@@ -132,7 +132,7 @@ export const categoryConfig = [
         id: 's_4',
         label: '鉄骨加工機 その他',
       },
-    ]
+    ],
   },
   {
     id: 'm_4',
@@ -154,7 +154,7 @@ export const categoryConfig = [
         id: 's_4',
         label: 'プレス その他',
       },
-    ]
+    ],
   },
   {
     id: 'm_5',
@@ -172,7 +172,7 @@ export const categoryConfig = [
         id: 's_3',
         label: '成形機 その他',
       },
-    ]
+    ],
   },
   {
     id: 'm_6',
@@ -202,7 +202,7 @@ export const categoryConfig = [
         id: 's_6',
         label: '研磨機 その他',
       },
-    ]
+    ],
   },
   {
     id: 'm_7',
@@ -232,7 +232,7 @@ export const categoryConfig = [
         id: 's_6',
         label: '冷熱・空調機器　その他',
       },
-    ]
+    ],
   },
   {
     id: 'm_9',
@@ -254,7 +254,7 @@ export const categoryConfig = [
         id: 's_4',
         label: '理化学機器 その他',
       },
-    ]
+    ],
   },
 
   {
@@ -273,7 +273,7 @@ export const categoryConfig = [
         id: 's_3',
         label: 'コンプレッサー その他',
       },
-    ]
+    ],
   },
   {
     id: 'm_10',
@@ -295,7 +295,7 @@ export const categoryConfig = [
         id: 's_4',
         label: '運搬・物流機器 その他',
       },
-    ]
+    ],
   },
   {
     id: 'm_11',
@@ -313,7 +313,7 @@ export const categoryConfig = [
         id: 's_3',
         label: '溶接機 その他',
       },
-    ]
+    ],
   },
   {
     id: 'm_12',
@@ -343,7 +343,7 @@ export const categoryConfig = [
         id: 's_6',
         label: '木工機械 その他',
       },
-    ]
+    ],
   },
   {
     id: 'm_13',
@@ -381,7 +381,7 @@ export const categoryConfig = [
         id: 's_8',
         label: '建設機械 その他',
       },
-    ]
+    ],
   },
   {
     id: 'm_14',
@@ -403,63 +403,60 @@ export const categoryConfig = [
         id: 's_4',
         label: '農業機械 その他',
       },
-    ]
+    ],
   },
   {
     id: 'm_15',
     label: '半導体製造装置',
-    subCategories: [
-    ]
+    subCategories: [],
   },
   {
     id: 'm_16',
     label: '厨房機器',
-    subCategories: [
-    ]
+    subCategories: [],
   },
   {
     id: 'm_17',
     label: 'その他',
-    subCategories: [
-    ]
+    subCategories: [],
   },
-]
+];
 
 export const companyList = [
   {
     image: '/company/image 9.png',
     title: '有村 架純',
-    link: '#'
+    link: '#',
   },
   {
     image: '/company/image 10.png',
     title: '有村 架純',
-    link: '#'
+    link: '#',
   },
   {
     image: '/company/image 13.png',
     title: '有村 架純',
-    link: '#'
+    link: '#',
   },
   {
     image: '/company/image 16.png',
     title: '有村 架純',
-    link: '#'
+    link: '#',
   },
   {
     image: '/company/image 18.png',
     title: '有村 架純',
-    link: '#'
+    link: '#',
   },
   {
     image: '/company/image 9.png',
     title: '有村 架純',
-    link: '#'
+    link: '#',
   },
   {
     image: '/company/image 10.png',
     title: '有村 架純',
-    link: '#'
+    link: '#',
   },
 ];
 
@@ -470,4 +467,4 @@ export const tableConfig = [
   { name: '報酬額（円）', uid: 'revenue' },
   { name: '支払い状態', uid: 'status' },
   { name: '削除', uid: 'actions' },
-]
+];

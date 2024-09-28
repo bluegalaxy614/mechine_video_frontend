@@ -15,13 +15,8 @@ import {
 import { Button } from '@nextui-org/button';
 import React from 'react';
 import { Selection } from '@nextui-org/table';
-
-import {
-  slides,
-  categories,
-  subCategories,
-  lastestVideos,
-} from '@/config/data';
+import { categoryConfig } from '@/config/site';
+import { slides, lastestVideos } from '@/config/data';
 import { Input } from '@nextui-org/input';
 import { SearchIcon } from '@/components/icons';
 import Image from 'next/image';
@@ -70,11 +65,9 @@ export default function Home() {
               <SearchIcon className="text-black/50 mb-0.5 dark:text-white/90 text-slate-400 pointer-events-none flex-shrink-0" />
             }
           />
-          <SubCategoryButton
-            name={'カテゴリ'}
-            selected={false}
-            // onClick={console.log(category.name)}
-          />
+          <Button className="h-[41px] w-[144px] rounded-full border hover:shadow-default-300 px-[8px] py-[1px] mx-auto bg-[#F4F4F4]">
+            カテゴリ
+          </Button>
           <div className="flex gap-4">
             <p className="flex items-center">並べ替え</p>
             <Dropdown placement="bottom-end">
@@ -104,13 +97,9 @@ export default function Home() {
           </div>
         </div>
         <div className="flex grid grid-cols-7 gap-3 divide-gray-200 py-[9px] px-[0px]">
-          {categories.map((category, index) => (
-            <CategoryButton
-              key={index}
-              name={category.name}
-              selected={category.selected}
-              // onClick={console.log(category.name)}
-            />
+          <CategoryButton key="all" name="All" />
+          {categoryConfig.map((category) => (
+            <CategoryButton key={category.id} name={category.label} />
           ))}
         </div>
         <Divider />
@@ -118,14 +107,11 @@ export default function Home() {
           サブカテゴリ
         </p>
         <div className="flex grid grid-cols-7 gap-3 py-[9px] px-[0px] w-[1280px] h-[208px] overflow-y-auto my-[20px]">
-          {subCategories.map((category, index) => (
-            <SubCategoryButton
-              key={index}
-              name={category.name}
-              selected={category.selected}
-              // onClick={console.log(category.name)}
-            />
-          ))}
+          {categoryConfig
+            .flatMap((category) => category.subCategories)
+            .map((category) => (
+              <SubCategoryButton key={category.id} name={category.label} />
+            ))}
         </div>
         <Divider />
       </section>
