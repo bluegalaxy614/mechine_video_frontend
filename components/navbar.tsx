@@ -77,9 +77,11 @@ export const Navbar = () => {
                     </Button>
                   </DropdownTrigger>
                   <DropdownMenu aria-label="Profile Actions" variant="flat">
-                    <DropdownItem key="マイページ">マイページ</DropdownItem>
+                    <DropdownItem key="マイページ">
+                      <Link href="/mypage">マイページ</Link>
+                    </DropdownItem>
                     <DropdownItem key="プロフィール編集">
-                      プロフィール編集
+                      <Link href="/profile">プロフィール編集</Link>
                     </DropdownItem>
                     <DropdownItem key="ログアウト">
                       <Divider />
