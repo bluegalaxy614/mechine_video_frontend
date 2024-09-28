@@ -11,8 +11,9 @@ import {
 } from '@nextui-org/table';
 import { Chip, ChipProps } from '@nextui-org/chip';
 import { Tooltip } from '@nextui-org/tooltip';
-import { columns, rows } from '../../../config/data';
+import { rows } from '../../../config/data';
 import { DeleteIcon } from '@/components/icons';
+import { tableConfig } from '@/config/site';
 
 const statusColorMap: Record<string, ChipProps['color']> = {
   支払い: 'success',
@@ -108,7 +109,7 @@ export default function PaymentPage() {
             selectionMode="multiple"
             color="primary"
           >
-            <TableHeader columns={columns}>
+            <TableHeader columns={tableConfig}>
               {(column) => (
                 <TableColumn
                   key={column.uid}

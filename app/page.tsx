@@ -17,14 +17,13 @@ import { Button } from '@nextui-org/button';
 import { Image } from '@nextui-org/image';
 import { Input } from '@nextui-org/input';
 import { SearchIcon } from '@/components/icons';
+import { categoryConfig } from '@/config/site';
+import { companyList } from '@/config/site';
 import {
   users,
-  company,
   slides,
   lastest,
   favorite,
-  categories,
-  subCategories,
   newsData,
   lastestVideos,
   favVideos,
@@ -85,11 +84,11 @@ export default function Home() {
               }
             />
           </div>
-          <SubCategoryButton
-            name={'カテゴリ'}
-            selected={false}
-            // onClick={console.log(category.name)}
-          />
+          <Button
+            className='h-[41px] w-[144px] rounded-full border hover:shadow-default-300 px-[8px] py-[1px] mx-auto bg-[#F4F4F4]'
+          >
+            カテゴリ
+          </Button>
           <div className="flex-none">
             <div className="flex gap-4">
               <p className="flex items-center">並べ替え</p>
@@ -121,12 +120,14 @@ export default function Home() {
           </div>
         </div>
         <div className="flex grid lg:grid-cols-7 md:grid-cols-6 sm:grid-cols-4 xsm:grid-cols-3 gap-3 divide-gray-200 py-[9px] lg:mx-[0px] md:mx-[40px] sm:mx-[20px] xsm:mx-[10px]">
-          {categories.map((category, index) => (
+          <CategoryButton
+            key="all"
+            name="All"
+          />
+          {categoryConfig.map((category, index) => (
             <CategoryButton
-              key={index}
-              name={category.name}
-              selected={category.selected}
-              // onClick={console.log(category.name)}
+              key={category.id}
+              name={category.label}
             />
           ))}
         </div>
@@ -135,14 +136,14 @@ export default function Home() {
           サブカテゴリ
         </p>
         <div className="flex grid lg:grid-cols-7 md:grid-cols-6 sm:grid-cols-4 xsm:grid-cols-3 gap-3 py-[9px] h-[208px] overflow-y-auto my-[20px] lg:mx-[0px] md:mx-[40px] sm:mx-[20px] xsm:mx-[10px]">
-          {subCategories.map((category, index) => (
-            <SubCategoryButton
-              key={index}
-              name={category.name}
-              selected={category.selected}
-              // onClick={console.log(category.name)}
-            />
-          ))}
+          {
+            categoryConfig.flatMap((category) => category.subCategories).map((category, index) => (
+              <SubCategoryButton
+                key={category.id}
+                name={category.label}
+              />
+            ))
+          }
         </div>
         <Divider />
       </section>
@@ -181,10 +182,10 @@ export default function Home() {
       </section>
       <section>
         <div className="my-[20px]">
-          <CompanySlider slides={company} dir={'ltr'} />
+          <CompanySlider slides={companyList} dir={'ltr'} />
         </div>
         <div className="my-[20px]">
-          <CompanySlider slides={company} dir={'rtl'} />
+          <CompanySlider slides={companyList} dir={'rtl'} />
         </div>
       </section>
       <HomeFooter />

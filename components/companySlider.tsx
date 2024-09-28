@@ -24,12 +24,12 @@ const CompanySlider: React.FC<CompanySliderProps> = ({ slides, dir }) => {
         gap: '3rem',
         autoplay: true,
         direction: dir, // Use the `dir` prop to set the slider direction
-        speed: 2000,
+        speed: 3000,
         arrows: false,
         pagination: false,
         perPage: 7,
         perMove: 1,
-        interval: 1000,
+        interval: 3000,
         easing: 'linear',
         pauseOnHover: true,
         breakpoints: {
@@ -49,9 +49,9 @@ const CompanySlider: React.FC<CompanySliderProps> = ({ slides, dir }) => {
       {slides.map((slide, index) => (
         <SplideSlide
           key={index}
-          className="flex w-[220px] h-[120px] rounded-[30px] shadow-md my-[30px] justify-center items-center mx-[10px] border"
+          className="flex w-[220px] h-[120px] rounded-[30px] my-[30px] justify-center items-center mx-[10px] border border-gray-200"
         >
-          <div className="flex justify-center items-center w-[155px] h-[55px] overflow-hidden">
+          <div className="flex justify-center items-center w-[155px] h-[55px]">
             <Image
               width={155}
               height={55}

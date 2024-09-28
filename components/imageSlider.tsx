@@ -42,7 +42,15 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ slides }) => {
             />
           </div>
           <div className="absolute top-[40%] left-[10%] right-0 text-white p-4 max-w-[810px]">
-            <h2 className="text-[72px] font-bold">{slide.title}</h2>
+            <h2
+              className="text-6xl font-bold bg-clip-text text-transparent"
+              style={{
+                backgroundImage: 'linear-gradient(to right, #FFFFFF, #4291EF, #F5F5F5, #4291EF, #FFFFFF)',
+              }}
+            >
+              {slide.title}
+            </h2>
+
             <p className="text-[24px] text-[#C0C0C0]">{slide.description}</p>
           </div>
         </SplideSlide>

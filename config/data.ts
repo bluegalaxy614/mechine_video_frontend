@@ -1,11 +1,3 @@
-const columns = [
-  { name: 'タイトル', uid: 'name' },
-  { name: '総視聴時間（時間）', uid: 'duration' },
-  { name: '視聴者数（人）', uid: 'viewers' },
-  { name: '報酬額（円）', uid: 'revenue' },
-  { name: '支払い状態', uid: 'status' },
-  { name: '削除', uid: 'actions' },
-];
 const rows = [
   {
     id: 1,
@@ -422,174 +414,6 @@ const lastestVideos = [
     date: '2024年9月10日',
   },
 ];
-const categories = [
-  {
-    name: '全て',
-    selected: false,
-  },
-  {
-    name: '工作機械',
-    selected: true,
-  },
-  {
-    name: '板金機械',
-    selected: false,
-  },
-  {
-    name: '鉄骨加工機',
-    selected: false,
-  },
-  {
-    name: 'プレス',
-    selected: false,
-  },
-  {
-    name: '成形機',
-    selected: false,
-  },
-  {
-    name: '研磨機',
-    selected: false,
-  },
-  {
-    name: '冷熱・空調機器',
-    selected: false,
-  },
-  {
-    name: 'コンプレッサー',
-    selected: false,
-  },
-  {
-    name: '理化学機器',
-    selected: false,
-  },
-  {
-    name: '運搬・物流機器',
-    selected: false,
-  },
-  {
-    name: '溶接機',
-    selected: false,
-  },
-  {
-    name: '木工機械',
-    selected: false,
-  },
-  {
-    name: '建設機械',
-    selected: false,
-  },
-  {
-    name: '農業機械',
-    selected: false,
-  },
-  {
-    name: '半導体製造装置',
-    selected: false,
-  },
-  {
-    name: '厨房機器',
-    selected: false,
-  },
-  {
-    name: 'その他',
-    selected: false,
-  },
-];
-const subCategories = [
-  {
-    name: '全て',
-    selected: false,
-  },
-  {
-    name: '工作機械',
-    selected: true,
-  },
-  {
-    name: '板金機械',
-    selected: false,
-  },
-  {
-    name: '鉄骨加工機',
-    selected: false,
-  },
-  {
-    name: 'プレス',
-    selected: false,
-  },
-  {
-    name: '成形機',
-    selected: false,
-  },
-  {
-    name: '研磨機',
-    selected: false,
-  },
-  {
-    name: '冷熱・空調機器',
-    selected: false,
-  },
-  {
-    name: 'コンプレッサー',
-    selected: false,
-  },
-  {
-    name: '理化学機器',
-    selected: false,
-  },
-  {
-    name: '運搬・物流機器',
-    selected: false,
-  },
-  {
-    name: '溶接機',
-    selected: false,
-  },
-  {
-    name: '木工機械',
-    selected: false,
-  },
-  {
-    name: '建設機械',
-    selected: false,
-  },
-  {
-    name: '理化学機器',
-    selected: false,
-  },
-  {
-    name: '運搬・物流機器',
-    selected: false,
-  },
-  {
-    name: '溶接機',
-    selected: false,
-  },
-  {
-    name: '木工機械',
-    selected: false,
-  },
-  {
-    name: '建設機械',
-    selected: false,
-  },
-  {
-    name: '農業機械',
-    selected: false,
-  },
-  {
-    name: '半導体製造装置',
-    selected: false,
-  },
-  {
-    name: '厨房機器',
-    selected: false,
-  },
-  {
-    name: 'その他',
-    selected: false,
-  },
-];
 const newsData = [
   {
     icon: '/icons/icons-checked.png',
@@ -675,58 +499,14 @@ const users = [
     name: '有村 架純',
     number: '112',
   },
-  {
-    img: '/profile/3.png',
-    name: '有村 架純',
-    number: '112',
-  },
-  {
-    img: '/profile/4.png',
-    name: '有村 架純',
-    number: '112',
-  },
-];
-const company = [
-  {
-    image: '/company/image 9.png',
-    title: '有村 架純',
-  },
-  {
-    image: '/company/image 10.png',
-    title: '有村 架純',
-  },
-  {
-    image: '/company/image 13.png',
-    title: '有村 架純',
-  },
-  {
-    image: '/company/image 16.png',
-    title: '有村 架純',
-  },
-  {
-    image: '/company/image 18.png',
-    title: '有村 架純',
-  },
-  {
-    image: '/company/image 9.png',
-    title: '有村 架純',
-  },
-  {
-    image: '/company/image 10.png',
-    title: '有村 架純',
-  },
 ];
 
 export {
-  columns,
   rows,
   users,
-  company,
   slides,
   lastest,
   favorite,
-  categories,
-  subCategories,
   newsData,
   lastestVideos,
   favVideos,
