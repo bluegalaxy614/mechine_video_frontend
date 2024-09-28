@@ -61,7 +61,7 @@ const HomeFooter = () => {
                         width={40}
                         height={40}
                         src="/icons/icons8-mail-50.png"
-                        alt="Phone Icon"
+                        alt="Email Icon"
                       />
                       <p className="text-[24px] w-[170px] font-bold text-[#C7C7C7] h-[40px] flex items-center">
                         メールアドレス
@@ -74,8 +74,8 @@ const HomeFooter = () => {
                       <Image
                         width={40}
                         height={40}
-                        src="/icons/icons8-phone-100.png"
-                        alt="Phone Icon"
+                        src="/icons/icons8-location-100.png"
+                        alt="Location Icon"
                       />
                       <p className="text-[24px] w-[170px] font-bold text-[#C7C7C7] h-[40px] flex items-center">
                         所在地
@@ -84,37 +84,7 @@ const HomeFooter = () => {
                         東京都 港区 六本木 2-15-8
                       </p>
                     </div>
-                    {/* <Image
-                      width={40}
-                      height={40}
-                      src="/icons/icons8-phone-100.png"
-                      alt="Phone Icon"
-                    />
-                    <Image
-                      width={40}
-                      height={40}
-                      src="/icons/icons8-mail-50.png"
-                      alt="Phone Icon"
-                    />
-                    <Image
-                      width={40}
-                      height={40}
-                      src="/icons/icons8-location-100.png"
-                      alt="Phone Icon"
-                    /> */}
                   </div>
-                  {/* Labels Section */}
-                  {/* <div className='flex flex-col gap-6'>
-                    <p className="text-[24px] font-bold text-[#C7C7C7] h-[40px] flex items-center">電話番号</p>
-                    <p className="text-[24px] font-bold text-[#C7C7C7] h-[40px] flex items-center">メールアドレス</p>
-                    <p className="text-[24px] font-bold text-[#C7C7C7] h-[40px] flex items-center">所在地</p>
-                  </div> */}
-                  {/* Contact Info Section */}
-                  {/* <div className='flex flex-col gap-6'>
-                    <p className="text-[24px] font-bold text-white h-[40px] flex items-center">03-8765-4321</p>
-                    <p className="text-[24px] font-bold text-white h-[40px] flex items-center">contact@sample.jp</p>
-                    <p className="text-[24px] font-bold text-white h-[40px] flex items-center">東京都 港区 六本木 2-15-8</p>
-                  </div> */}
                 </div>
               </div>
             </div>
