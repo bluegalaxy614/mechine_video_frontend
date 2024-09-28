@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 export default function AskPage() {
   return (
-    <div className="h-[calc(100vh-90px)] max-w-[1280px] flex flex-col mx-auto">
+    <div className="h-[calc(100vh-90px)] max-w-[1280px] flex flex-col justify-between mx-auto">
       <div className="w-full">
         <h1 className="text-[32px] text-[#4291EF] font-bold my-[39px]">
           問題解決サポート申請

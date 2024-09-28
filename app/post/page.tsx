@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 export default function PostPage() {
   return (
-    <div className=" h-[calc(100vh-90px)]">
+    <div className="h-[calc(100vh-90px)] flex flex-col justify-between">
       <div
         className="w-full flex mt-[85px]"
         style={{ justifyContent: 'space-evenly' }}

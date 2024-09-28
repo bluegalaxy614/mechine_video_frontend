@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 export default function PostPage() {
   return (
-    <div className="h-[calc(100vh-90px)]">
+    <div className="h-[calc(100vh-90px)] flex flex-col justify-between gap-12">
       <div className="w-full flex mt-[85px] flex-col w-[1280px]">
         <div className="flex mx-auto">
           {/* Left side content */}
