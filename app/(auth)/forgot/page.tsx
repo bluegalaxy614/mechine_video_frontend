@@ -19,20 +19,20 @@ export default function ForgotPage() {
 
   return (
     <div
-      className="h-[calc(100vh-90px)] w-full bg-cover bg-center flex flex-wrap justify-between items-center px-[153px]"
+      className="min-h-[calc(100vh-90px)] w-full bg-cover bg-center flex flex-wrap justify-between items-center"
       style={{ backgroundImage: `url('/bg/bg 1.png')` }}
     >
       <div className="text-center">
         <h1 className="text-[#212121] text-[24px] font-bold">
           Mechanical Repair Support Platform
         </h1>
-        <p className="text-[#4291EF] text-[40px] font-bold">メカニカルリペア</p>
-        <p className="text-[#4291EF] text-[40px] font-bold">
+        <p className="text-[#4291EF] lg:text-4xl font-bold">メカニカルリペア</p>
+        <p className="text-[#4291EF] lg:text-4xl font-bold">
           サポートプラットフォーム
         </p>
       </div>
       <div>
-        <div className="flex justify-between items-center bg-white shadow-lg rounded-lg w-[914px] h-[691px] p-8">
+        <div className="flex justify-between items-center bg-white shadow-lg rounded-lg w-[914px] h-[691px] p-8 mx-auto">
           {/* Logo and Heading */}
           <div className="w-full flex justify-center items-center">
             <div className="w-[283px] h-[283px] text-center ">
