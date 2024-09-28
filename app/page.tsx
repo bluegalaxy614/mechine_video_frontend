@@ -46,6 +46,8 @@ export default function Home() {
     () => Array.from(selectedKeys).join(', ').replaceAll('_', ' '),
     [selectedKeys],
   );
+
+  
   return (
     <>
       <ImageSlider slides={slides} />
