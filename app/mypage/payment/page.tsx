@@ -86,18 +86,21 @@ export default function PaymentPage() {
           image={'/icons/icons-checked.png'}
           title="総投稿件数"
           info="250"
+          unit="件"
         />
         <BoxImage
           id={2}
           image={'/icons/icon-clock.png'}
           title="総視聴時間"
           info="40000"
+          unit="時間"
         />
         <BoxImage
           id={3}
           image={'/icons/icon-coin.png'}
           title="総輸入額"
           info="50万+"
+          unit="円"
         />
       </section>
 

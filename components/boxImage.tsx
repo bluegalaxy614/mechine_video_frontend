@@ -5,15 +5,15 @@ interface BoxImageProps {
   image: string;
   title: string;
   info: string;
+  unit: string;
 }
 
-const BoxImage = ({ id, image, title, info }: BoxImageProps) => {
-  const unit = id === 1 ? '件' : id === 2 ? '時間' : '円';
+const BoxImage = ({ id, image, title, info, unit }: BoxImageProps) => {
   return (
     <>
       <div
         key={id}
-        className="relative flex items-center justify-start w-[328px] h-[146px] pl-[42px] pr-[18px] pt-[20px] pb-[40px] shadow-md rounded-3xl bg-white border border-gray-200 gap-8"
+        className="relative flex items-center justify-start w-[294px] h-[146px] pl-[42px] pr-[18px] pt-[20px] pb-[40px] shadow-md rounded-3xl bg-white border border-gray-200 gap-8"
       >
         <div className="w-[58px] h-[58px]">
           <Image
@@ -27,7 +27,7 @@ const BoxImage = ({ id, image, title, info }: BoxImageProps) => {
         <div>
           <p className="text-[16px] text-[#4291EF]">{title}</p>
           <p className="text-[16px] text-[#4291EF]">
-            <strong className="!text-[40px] font-bold">{info}</strong>
+            <strong className="!text-[30px] font-bold">{info}</strong>
             {unit}
           </p>
         </div>

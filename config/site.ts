@@ -6,7 +6,7 @@ export type TableConfig = typeof tableConfig;
 export const siteConfig = {
   name: 'Mechines Friends',
   description: 'Make beautiful websites regardless of your design experience.',
-  navItems: [
+  userNavItems: [
     {
       label: 'ホーム',
       href: '/',
@@ -28,7 +28,7 @@ export const siteConfig = {
       href: '/inquiry',
     },
   ],
-  navMenuItems: [
+  userNavMenuItems: [
     {
       label: 'ホーム',
       href: '/',
@@ -54,13 +54,38 @@ export const siteConfig = {
       href: '/logout',
     },
   ],
-  links: {
-    github: 'https://github.com/nextui-org/nextui',
-    twitter: 'https://twitter.com/getnextui',
-    docs: 'https://nextui.org',
-    discord: 'https://discord.gg/9b6yyZKmH4',
-    sponsor: 'https://patreon.com/jrgarciadev',
-  },
+  adminNavItems: [
+    {
+      label: 'ダッシュボード',
+      href: '/dashboard',
+    },
+    {
+      label: 'ビデオステータス',
+      href: '/status',
+    },
+    {
+      label: 'ユーザリスト',
+      href: '/userList',
+    },
+  ],
+  adminNavMenuItems: [
+    {
+      label: 'ダッシュボード',
+      href: '/dashboard',
+    },
+    {
+      label: 'ビデオステータス',
+      href: '/status',
+    },
+    {
+      label: 'ユーザリスト',
+      href: '/userList',
+    },
+    {
+      label: 'Logout',
+      href: '/logout',
+    },
+  ],
 };
 
 export const categoryConfig = [

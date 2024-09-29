@@ -500,7 +500,17 @@ const users = [
     number: '112',
   },
 ];
-
+const chartData = {
+  labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+  datasets: [
+    {
+      label: '',
+      data: [10, 15, 23, 12, 13, 5, 8, 15, 23, 12, 13, 5],
+      borderColor: '#4291EF',
+      backgroundColor: 'rgba(75, 192, 192, 0.2)',
+    },
+  ],
+};
 export {
   rows,
   users,
@@ -512,4 +522,5 @@ export {
   favVideos,
   userIcon,
   news,
+  chartData,
 };

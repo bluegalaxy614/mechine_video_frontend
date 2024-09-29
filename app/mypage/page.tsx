@@ -153,6 +153,7 @@ export default function MyPage() {
             image={'/icons/icons-checked.png'}
             title="総投稿件数"
             info="250"
+            unit="件"
           />
         </div>
         <div className="mx-auto my-[10px]">
@@ -161,6 +162,7 @@ export default function MyPage() {
             image={'/icons/icon-clock.png'}
             title="総視聴時間"
             info="40000"
+            unit="時間"
           />
         </div>
         <div className="mx-auto my-[10px]">
@@ -169,6 +171,7 @@ export default function MyPage() {
             image={'/icons/icon-coin.png'}
             title="総輸入額"
             info="50万+"
+            unit="円"
           />
         </div>
       </section>

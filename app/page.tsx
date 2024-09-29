@@ -118,22 +118,24 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="flex grid lg:grid-cols-7 md:grid-cols-6 sm:grid-cols-4 xsm:grid-cols-3 gap-3 divide-gray-200 py-[9px] lg:mx-[0px] md:mx-[40px] sm:mx-[20px] xsm:mx-[10px]">
-          <CategoryButton key="all" name="All" />
-          {categoryConfig.map((category) => (
-            <CategoryButton key={category.id} name={category.label} />
-          ))}
-        </div>
-        <Divider />
-        <p className="w-[181px] h-[35px] rounded-full bg-[#E4F1FF] text-[20px] flex justify-center items-center my-[40px]  lg:mx-[0px] md:mx-[40px] sm:mx-[20px] xsm:mx-[10px]">
-          サブカテゴリ
-        </p>
-        <div className="flex grid lg:grid-cols-7 md:grid-cols-6 sm:grid-cols-4 xsm:grid-cols-3 gap-3 py-[9px] h-[208px] overflow-y-auto my-[20px] lg:mx-[0px] md:mx-[40px] sm:mx-[20px] xsm:mx-[10px]">
-          {categoryConfig
-            .flatMap((category) => category.subCategories)
-            .map((category) => (
-              <SubCategoryButton key={category.id} name={category.label} />
+        <div className=" lg:mx-[0px] md:mx-[40px]">
+          <div className="flex grid lg:grid-cols-7 md:grid-cols-6 sm:grid-cols-4 xsm:grid-cols-3 gap-3 divide-gray-200 py-[9px">
+            <CategoryButton key="all" name="All" />
+            {categoryConfig.map((category) => (
+              <CategoryButton key={category.id} name={category.label} />
             ))}
+          </div>
+          <Divider />
+          <p className="w-[181px] h-[35px] rounded-full bg-[#E4F1FF] text-[20px] flex justify-center items-center my-[40px]">
+            サブカテゴリ
+          </p>
+          <div className="flex grid lg:grid-cols-7 md:grid-cols-6 sm:grid-cols-4 xsm:grid-cols-3 gap-3 py-[9px] h-[208px] overflow-y-auto my-[20px">
+            {categoryConfig
+              .flatMap((category) => category.subCategories)
+              .map((category) => (
+                <SubCategoryButton key={category.id} name={category.label} />
+              ))}
+          </div>
         </div>
         <Divider />
       </section>

@@ -47,7 +47,7 @@ export const Navbar = () => {
           </NavbarContent>
           <NavbarContent className="basis-1/5 sm:basis-full" justify="end">
             <ul className="hidden lg:flex md:flex gap-4 justify-start ml-2">
-              {siteConfig.navItems.map((item) => (
+              {siteConfig.adminNavItems.map((item) => (
                 <NavbarItem key={item.href}>
                   <NextLink
                     className={clsx(
@@ -110,13 +110,13 @@ export const Navbar = () => {
 
           <NavbarMenu>
             <div className="mx-4 mt-2 flex flex-col gap-2 mt-[30px]">
-              {siteConfig.navMenuItems.map((item, index) => (
+              {siteConfig.adminNavMenuItems.map((item, index) => (
                 <NavbarMenuItem key={`${item}-${index}`}>
                   <Link
                     color={
                       index === 2
                         ? 'primary'
-                        : index === siteConfig.navMenuItems.length - 1
+                        : index === siteConfig.adminNavMenuItems.length - 1
                           ? 'danger'
                           : 'foreground'
                     }

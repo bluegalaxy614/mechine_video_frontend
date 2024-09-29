@@ -11,7 +11,7 @@ export default function SubCategoryButton({ name }: { name: string }) {
   return (
     <Button
       className={`h-[41px] w-[144px] rounded-full border hover:shadow-default-300 px-[8px] py-[1px] mx-auto
-        ${selected ? 'bg-[#FFFFFF] shadow-md' : 'bg-[#F4F4F4]'}`}
+        ${selected ? 'bg-[#FFFFFF] shadow-md' : 'bg-[#ececec]'}`}
       onPress={onClick}
     >
       {name}
