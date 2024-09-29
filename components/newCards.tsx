@@ -17,14 +17,14 @@ const NewsCards = ({ data }: NewsCardsProps) => {
       {data.map((item, index) => (
         <Card
           key={index}
-          className="max-w-[1280] h-[176px] py-[25px] shadow-lg rounded-lg border border-gray-200 shadow-md hover:shadow-default-300 hover:bg-[#E4F1FF]"
+          className="max-w-[1280] lg:h-[176px] md:h-[170px] sm:h-[160px] xsm:h-[140px] py-[25px] shadow-lg rounded-lg border border-gray-200 shadow-md hover:shadow-default-300 hover:bg-[#E4F1FF]"
         >
           <div className="flex justify-between mx-[20px]">
             <div className="flex-none max-w-[65px]">
               <Image width={64} height={62} alt={item.title} src={item.icon} />
             </div>
             <div className="grow mt-4 ml-4 grid gap-4">
-              <h1 className="lg:text-[20px] md:text-[20px] sm:text-[18px] xsm:text-[16px] text-[#4291EF] font-bold">
+              <h1 className="lg:text-[20px] md:text-[20px] sm:text-[18px] xsm:text-[16px] text-[#4291EF] font-bold truncate">
                 {item.title}
               </h1>
               <p className="lg:text-[14px] md:text-[14px] sm:text-[12px] xsm:text-[10px] text-[#212121] max-w-[862px] h-[73px] truncate">
