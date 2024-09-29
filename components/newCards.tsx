@@ -13,25 +13,25 @@ interface NewsCardsProps {
 
 const NewsCards = ({ data }: NewsCardsProps) => {
   return (
-    <div className="flex flex-col space-y-4 p-2 my-[20px] lg:mx-[0px] md:mx-[40px] sm:mx-[20px] xsm:mx-[10px]">
+    <div className="flex flex-col space-y-4 p-2 my-[20px] lg:px-[0px] md:px-[40px] sm:px-[40px] xsm:mx-[30px]">
       {data.map((item, index) => (
         <Card
           key={index}
-          className="max-w-[1280] h-[176px] lg:px-[37px] py-[25px] md:px-[20px] sm:px-[10px] sxsm:px-[5px] shadow-lg rounded-lg border border-gray-200 shadow-md hover:shadow-default-300 hover:bg-[#E4F1FF]"
+          className="max-w-[1280] h-[176px] py-[25px] shadow-lg rounded-lg border border-gray-200 shadow-md hover:shadow-default-300 hover:bg-[#E4F1FF]"
         >
-          <div className="flex justify-between">
+          <div className="flex justify-between mx-[20px]">
             <div className="flex-none max-w-[65px]">
               <Image width={64} height={62} alt={item.title} src={item.icon} />
             </div>
             <div className="grow mt-4 ml-4 grid gap-4">
-              <h1 className="text-[20px] text-[#4291EF] font-bold">
+              <h1 className="lg:text-[20px] md:text-[20px] sm:text-[18px] xsm:text-[16px] text-[#4291EF] font-bold">
                 {item.title}
               </h1>
-              <p className="text-[14px] text-[#212121] maFx-w-[862px] h-[73px] truncate">
+              <p className="lg:text-[14px] md:text-[14px] sm:text-[12px] xsm:text-[10px] text-[#212121] max-w-[862px] h-[73px] truncate">
                 {item.description}
               </p>
             </div>
-            <div className="flex-none bg-blue-100 text-blue-500 px-3 py-1 rounded-full w-[147px] h-[35px]">
+            <div className="flex-none bg-blue-100 text-blue-500 px-3 py-1 rounded-full max-w-[147px] max-h-fit py-[6px] lg:text-[14px] md:text-[14px] sm:text-[12px] xsm:text-[10px]">
               {item.date}
             </div>
           </div>

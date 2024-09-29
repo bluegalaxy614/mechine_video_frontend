@@ -51,8 +51,8 @@ export default function Home() {
     <>
       <ImageSlider slides={slides} />
       <section className="max-w-[1280px] mx-auto">
-        <div className="flex mt-[117px] my-[84px] lg:mx-[0px] md:mx-[40px] sm:mx-[20px] xsm:mx-[10px]">
-          <div className="grow max-w-[866px] lg:mx-[0px] md:mx-[40px] sm:mx-[20px] xsm:mx-[10px]">
+        <div className="flex lg:flex-row md:flex-row sm:flex-row xsm:flex-col justify-between lg:mt-[117px] lg:mb-[84px] lg:mx-[0px] md:mx-[40px] sm:mx-[20px] xsm:mx-[10px] xsm:items-end gap-[30px] my-[40px] lg:px-[20px] md:px-[20px] sm:px-[20px] xsm:px-[40px]">
+          <div className="lg:w-[700px] md:w-[500px] sm:w-[300px] xsm:w-full">
             <Input
               isClearable
               fullWidth={true}
@@ -85,41 +85,41 @@ export default function Home() {
               }
             />
           </div>
-          <Button className="h-[41px] w-[144px] rounded-full border hover:shadow-default-300 px-[8px] py-[1px] mx-auto bg-[#F4F4F4]">
-            カテゴリ
-          </Button>
-          <div className="flex-none">
-            <div className="flex gap-4">
-              <p className="flex items-center">並べ替え</p>
-              <Dropdown placement="bottom-end">
-                <DropdownTrigger>
-                  <Button className="capitalize h-[41px] w-[144px] rounded-full border hover:shadow-default-300 px-[8px] py-[1px] mx-auto">
-                    {selectedValue}
-                    <Image
-                      width={21}
-                      height={21}
-                      src="/icons/icon-arrange.png"
-                      alt=""
-                    />
-                  </Button>
-                </DropdownTrigger>
-                <DropdownMenu
-                  aria-label="Select Arrange Type"
-                  variant="flat"
-                  disallowEmptySelection
-                  selectionMode="single"
-                  selectedKeys={selectedKeys}
-                  onSelectionChange={setSelectedKeys}
-                >
-                  <DropdownItem key="最新順">最新順</DropdownItem>
-                  <DropdownItem key="人気順">人気順</DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
-            </div>
+          <div className="flex items-center">
+            <Button className="h-[41px] lg:w-[144px] md:w-[144px] sm:w-[144px] xsm:w-[90px] rounded-full border hover:shadow-default-300 px-[8px] py-[1px] mx-auto bg-[#F4F4F4] lg:text-[14px] md:text-[14px] sm:text-[14px] xsm:text-[10px]">
+              カテゴリ
+            </Button>
+            <p className="flex justify-center items-center px-[20px] lg:w-[144px] md:w-[144px] sm:w-[144px] xsm:w-[90px] lg:text-[14px] md:text-[14px] sm:text-[14px] xsm:text-[10px]">
+              並べ替え
+            </p>
+            <Dropdown placement="bottom-end">
+              <DropdownTrigger>
+                <Button className="capitalize h-[41px] lg:w-[144px] md:w-[144px] sm:w-[144px] xsm:w-[90px] rounded-full border hover:shadow-default-300 px-[8px] py-[1px] mx-auto  lg:text-[14px] md:text-[14px] sm:text-[14px] xsm:text-[10px]">
+                  {selectedValue}
+                  <Image
+                    width={21}
+                    height={21}
+                    src="/icons/icon-arrange.png"
+                    alt=""
+                  />
+                </Button>
+              </DropdownTrigger>
+              <DropdownMenu
+                aria-label="Select Arrange Type"
+                variant="flat"
+                disallowEmptySelection
+                selectionMode="single"
+                selectedKeys={selectedKeys}
+                onSelectionChange={setSelectedKeys}
+              >
+                <DropdownItem key="最新順">最新順</DropdownItem>
+                <DropdownItem key="人気順">人気順</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
           </div>
         </div>
-        <div className=" lg:mx-[0px] md:mx-[40px]">
-          <div className="flex grid lg:grid-cols-7 md:grid-cols-6 sm:grid-cols-4 xsm:grid-cols-3 gap-3 divide-gray-200 py-[9px">
+        <div className="lg:mx-[20px] md:mx-[40px] sm:ml-[40px] sm:mr-[50px] xsm:ml-[30px] xsm:mr-[40px]">
+          <div className="flex grid lg:grid-cols-7 md:grid-cols-6 sm:grid-cols-4 xsm:grid-cols-3 gap-3 divide-gray-200 py-[9px] mb-[40px]">
             <CategoryButton key="all" name="All" />
             {categoryConfig.map((category) => (
               <CategoryButton key={category.id} name={category.label} />
@@ -157,7 +157,7 @@ export default function Home() {
         </Button>
       </section>
       <section className="bg-[#DEF5FF] !w-[100vw]">
-        <div className="max-w-[1280px] mx-auto py-[60px]">
+        <div className="max-w-[1280px] mx-auto lg:py-[60px] md:py-[40px] sm:py-[20px] xsm:py-[10px]">
           <ImageButton data={favorite} />
           <FavVideoCards data={favVideos} />
         </div>
