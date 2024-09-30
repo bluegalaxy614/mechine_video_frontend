@@ -4,14 +4,28 @@ import { Button } from '@nextui-org/button';
 import { useState } from 'react';
 
 interface CategoryButtonProps {
+  id: string;
   name: string;
+  setSelectedCategories: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-export default function CategoryButton({ name }: CategoryButtonProps) {
+export default function CategoryButton({
+  id,
+  name,
+  setSelectedCategories,
+}: CategoryButtonProps) {
   const [selectedState, setSelectedState] = useState(false);
 
   const onClick = () => {
     setSelectedState(!selectedState);
+
+    setSelectedCategories((prevState) => {
+      if (!selectedState) {
+        return [...prevState, id];
+      } else {
+        return prevState.filter((categoryId) => categoryId !== id);
+      }
+    });
   };
   return (
     <Button

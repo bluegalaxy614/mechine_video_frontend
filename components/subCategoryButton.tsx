@@ -3,14 +3,31 @@
 import { Button } from '@nextui-org/button';
 import { useState } from 'react';
 
-export default function SubCategoryButton({ name }: { name: string }) {
+interface subCategoryButtonProps {
+  id: string;
+  name: string;
+  setSelectedSubCategories: React.Dispatch<React.SetStateAction<string[]>>;
+}
+
+export default function SubCategoryButton({
+  id,
+  name,
+  setSelectedSubCategories,
+}: subCategoryButtonProps) {
   const [selected, setSelected] = useState(false);
   const onClick = () => {
     setSelected(!selected);
+    setSelectedSubCategories((prevState) => {
+      if (!selected) {
+        return [...prevState, id];
+      } else {
+        return prevState.filter((categoryId) => categoryId !== id);
+      }
+    });
   };
   return (
     <Button
-      className={`h-[41px] lg:w-[144px] md:w-[144px] sm:w-[144px] xsm:w-[90px] rounded-full border hover:shadow-default-300 px-[8px] py-[1px] mx-auto lg:text-[14px] md:text-[14px] sm:text-[14px] xsm:text-[10px]
+      className={`h-[41px] lg:min-w-[144px] md:min-w-[144px] sm:min-w-[144px] xsm:min-w-[90px] rounded-full border hover:shadow-default-300 px-[8px] py-[1px] lg:text-[14px] md:text-[14px] sm:text-[14px] xsm:text-[10px]
         ${selected ? 'bg-[#FFFFFF] shadow-md' : 'bg-[#ececec]'}`}
       onPress={onClick}
     >

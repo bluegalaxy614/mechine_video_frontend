@@ -47,6 +47,18 @@ export default function Home() {
     [selectedKeys],
   );
 
+  const [selectAll, setSelectAll] = React.useState<boolean>(true);
+  const [selectedCategories, setSelectedCategories] = React.useState<string[]>(
+    [],
+  );
+  const [selectedSubCategories, setSelectedSubCategories] = React.useState<
+    string[]
+  >([]);
+  console.log(selectedSubCategories);
+  const handleClickAllButton = () => {
+    setSelectAll(!selectAll);
+  };
+
   return (
     <>
       <ImageSlider slides={slides} />
@@ -120,20 +132,44 @@ export default function Home() {
         </div>
         <div className="lg:mx-[20px] md:mx-[40px] sm:ml-[40px] sm:mr-[50px] xsm:ml-[30px] xsm:mr-[40px]">
           <div className="flex grid lg:grid-cols-7 md:grid-cols-6 sm:grid-cols-4 xsm:grid-cols-3 gap-3 divide-gray-200 py-[9px] mb-[40px]">
-            <CategoryButton key="all" name="All" />
-            {categoryConfig.map((category) => (
-              <CategoryButton key={category.id} name={category.label} />
+            <Button
+              className={`h-[41px] lg:w-[144px] md:w-[144px] sm:w-[144px] xsm:w-[90px] rounded-full border shadow-md hover:shadow-default-300 px-[8px] py-[1px] mx-auto lg:text-[14px] md:text-[14px] sm:text-[14px] xsm:text-[10px]
+                ${selectAll ? 'bg-[#4291EF]' : 'bg-default-100'}`}
+              onClick={handleClickAllButton}
+            >
+              All
+            </Button>
+            {categoryConfig.map((category, index) => (
+              <CategoryButton
+                key={index}
+                id={category.id}
+                name={category.label}
+                setSelectedCategories={setSelectedCategories}
+              />
             ))}
           </div>
           <Divider />
           <p className="w-[181px] h-[35px] rounded-full bg-[#E4F1FF] text-[20px] flex justify-center items-center my-[40px]">
             サブカテゴリ
           </p>
-          <div className="flex grid lg:grid-cols-7 md:grid-cols-6 sm:grid-cols-4 xsm:grid-cols-3 gap-3 py-[9px] h-[208px] overflow-y-auto my-[20px">
-            {categoryConfig
+          <div className="flex flex-wrap justify-start gap-3 py-[9px] h-[208px] overflow-y-auto my-[20px]">
+            {/* {
+            categoryConfig
               .flatMap((category) => category.subCategories)
               .map((category) => (
-                <SubCategoryButton key={category.id} name={category.label} />
+                <SubCategoryButton key={category.id} id={category.id} name={category.label} setSelectedSubCategories={setSelectedSubCategories} />
+              ))
+              } */}
+            {categoryConfig
+              .filter((category) => selectedCategories.includes(category.id))
+              .flatMap((category) => category.subCategories)
+              .map((subCategory) => (
+                <SubCategoryButton
+                  key={subCategory.id}
+                  id={subCategory.id}
+                  name={subCategory.label}
+                  setSelectedSubCategories={setSelectedSubCategories}
+                />
               ))}
           </div>
         </div>
