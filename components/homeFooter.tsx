@@ -79,7 +79,7 @@ const HomeFooter = () => {
                     src="/icons/icons8-phone-100.png"
                     alt="Phone Icon"
                   />
-                  <p className="hidden md:block lg:text-[22px] md:text-[20px] sm:text-[18px] xsm:text-[16px] lg:w-[170px] md:w-[160px] sm:w-[140px] xsm:w-[130px] font-bold text-[#C7C7C7] h-[40px] flex items-center">
+                  <p className="lg:text-[22px] md:text-[20px] sm:text-[18px] xsm:text-[16px] lg:w-[170px] md:w-[160px] sm:w-[140px] xsm:w-[130px] font-bold text-[#C7C7C7] h-[40px] flex items-center">
                     電話番号
                   </p>
                   <p className="lg:text-[22px] md:text-[20px] sm:text-[18px] xsm:text-[16px] font-bold text-white h-[40px] flex items-center">
@@ -93,7 +93,7 @@ const HomeFooter = () => {
                     src="/icons/icons8-mail-50.png"
                     alt="Email Icon"
                   />
-                  <p className="hidden md:block lg:text-[22px] md:text-[20px] sm:text-[18px] xsm:text-[16px] lg:w-[170px] md:w-[160px] sm:w-[140px] xsm:w-[130px] font-bold text-[#C7C7C7] h-[40px] flex items-center">
+                  <p className="lg:text-[22px] md:text-[20px] sm:text-[18px] xsm:text-[16px] lg:w-[170px] md:w-[160px] sm:w-[140px] xsm:w-[130px] font-bold text-[#C7C7C7] h-[40px] flex items-center">
                     メールアドレス
                   </p>
                   <p className="lg:text-[22px] md:text-[20px] sm:text-[18px] xsm:text-[16px] font-bold text-white h-[40px] flex items-center">
@@ -107,7 +107,7 @@ const HomeFooter = () => {
                     src="/icons/icons8-location-100.png"
                     alt="Location Icon"
                   />
-                  <p className="hidden md:block lg:text-[22px] md:text-[20px] sm:text-[18px] xsm:text-[16px] lg:w-[170px] md:w-[160px] sm:w-[140px] xsm:w-[130px] font-bold text-[#C7C7C7] h-[40px] flex items-center">
+                  <p className="lg:text-[22px] md:text-[20px] sm:text-[18px] xsm:text-[16px] lg:w-[170px] md:w-[160px] sm:w-[140px] xsm:w-[130px] font-bold text-[#C7C7C7] h-[40px] flex items-center">
                     所在地
                   </p>
                   <p className="lg:text-[22px] md:text-[20px] sm:text-[18px] xsm:text-[16px] font-bold text-white h-[40px] flex items-center">

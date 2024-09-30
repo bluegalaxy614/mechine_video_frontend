@@ -1,6 +1,5 @@
 import { Card } from '@nextui-org/card';
 import Image from 'next/image';
-import { Button } from '@nextui-org/button';
 
 interface NewsCardsProps {
   data: {
@@ -37,7 +36,7 @@ const NewsCards = ({ data }: NewsCardsProps) => {
           </div>
         </Card>
       ))}
-      <Button className="flex rounded-full w-[188px] h-[43px] bg-[#4291EF] my-[40px] text-[#FFFDFD] text-[20px] mx-auto">
+      {/* <Button className="flex rounded-full w-[188px] h-[43px] bg-[#4291EF] my-[40px] text-[#FFFDFD] text-[20px] mx-auto">
         <div className="flex justify-start gap-6">
           <p className="flex justify-center text-[20px] text-[#FFFDFD] font-bold">
             もっと見る
@@ -49,7 +48,7 @@ const NewsCards = ({ data }: NewsCardsProps) => {
             height={24}
           />
         </div>
-      </Button>
+      </Button> */}
     </div>
   );
 };

@@ -21,9 +21,9 @@ const CompanySlider: React.FC<CompanySliderProps> = ({ slides, dir }) => {
       options={{
         rewind: true,
         type: 'loop',
-        gap: '3rem',
         autoplay: true,
-        direction: dir, // Use the `dir` prop to set the slider direction
+        direction: dir,
+        gap: '20px',
         speed: 3000,
         arrows: false,
         pagination: false,
@@ -51,7 +51,7 @@ const CompanySlider: React.FC<CompanySliderProps> = ({ slides, dir }) => {
           key={index}
           className="flex w-[220px] h-[120px] rounded-[30px] my-[30px] justify-center items-center mx-[10px] border border-gray-200"
         >
-          <div className="flex justify-center items-center w-[155px] h-[55px]">
+          <div className="flex justify-center items-center">
             <Image
               width={155}
               height={55}
