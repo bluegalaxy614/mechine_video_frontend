@@ -29,7 +29,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ slides }) => {
       {slides.map((slide, index) => (
         <SplideSlide
           key={index}
-          className="relative w-full h-[483px] from-transparent"
+          className="relative w-full lg:h-[483px] md:h-[483px] sm:h-[400px] xsm:h-[300px] from-transparent"
         >
           <div className="w-full">
             {' '}
@@ -41,9 +41,9 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ slides }) => {
               className="w-full object-cover h-full"
             />
           </div>
-          <div className="absolute top-[40%] left-[10%] right-0 text-white p-4 lg:w-[810px] md:w-[810px] sm:w-[600px] xsm:w-[400px]">
+          <div className="absolute top-[40%] lg:left-[10%] md:left-[10%] sm:left-[5%] xsm:left-3 right-0 text-white p-4 lg:w-[820px] md:w-[820px] sm:max-w-[630px] xsm:max-w-[400px]">
             <h2
-              className="lg:text-6xl md:text-5xl sm:text-4xl xsm:text-4xl font-bold bg-clip-text text-transparent"
+              className="lg:text-6xl md:text-5xl sm:text-4xl xsm:text-3xl font-bold bg-clip-text text-transparent"
               style={{
                 backgroundImage:
                   'linear-gradient(to right, #FFFFFF, #4291EF, #F5F5F5, #4291EF, #FFFFFF)',
@@ -52,7 +52,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ slides }) => {
               {slide.title}
             </h2>
 
-            <p className="lg:text-[24px] md:text-[20px] sm:text-[18px] xsm:text-[16px] text-[#C0C0C0] my-2">
+            <p className="lg:text-[24px] md:text-[20px] sm:text-[18px] xsm:text-[14px] text-[#C0C0C0] my-2">
               {slide.description}
             </p>
           </div>

@@ -47,7 +47,7 @@ export const Navbar = () => {
           </NavbarContent>
           <NavbarContent className="basis-1/5 sm:basis-full" justify="end">
             <ul className="hidden lg:flex md:flex gap-4 justify-start ml-2">
-              {siteConfig.adminNavItems.map((item) => (
+              {siteConfig.userNavItems.map((item) => (
                 <NavbarItem key={item.href}>
                   <NextLink
                     className={clsx(
@@ -63,41 +63,39 @@ export const Navbar = () => {
               ))}
             </ul>
             <NavbarItem className="hidden lg:flex md:flex">
-              <div className="mt-[15px]">
-                <Dropdown placement="bottom-end">
-                  <DropdownTrigger>
-                    <Button className="flex items-center rounded-full bg-[#F4F4F4] w-[194px] h-[65px] p-1 hover:pointer">
-                      <Avatar
-                        className="h-[57px] w-[57px] border-2 border-default-500 border-[#4291EF]"
-                        src="/profile/3.png"
+              <Dropdown placement="bottom-end">
+                <DropdownTrigger>
+                  <Button className="flex justify-center items-center rounded-full bg-[#F4F4F4] w-[194px] h-[65px] p-1 hover:pointer">
+                    <Avatar
+                      className="h-[57px] w-[57px] border-2 border-default-500 border-[#4291EF]"
+                      src="/profile/3.png"
+                    />
+                    <span className="mx-auto text-[20px] text-[#1F2B3E]">
+                      高橋 文哉
+                    </span>
+                  </Button>
+                </DropdownTrigger>
+                <DropdownMenu aria-label="Profile Actions" variant="flat">
+                  <DropdownItem key="マイページ">
+                    <Link href="/mypage">マイページ</Link>
+                  </DropdownItem>
+                  <DropdownItem key="プロフィール編集">
+                    <Link href="/profile">プロフィール編集</Link>
+                  </DropdownItem>
+                  <DropdownItem key="ログアウト">
+                    <Divider />
+                    <div className="flex justify-between items-center gap-2                    ">
+                      ログアウト
+                      <Image
+                        width={39}
+                        height={39}
+                        src="/icons/icon-logout.png"
+                        alt=""
                       />
-                      <span className="mx-auto text-[20px] text-[#1F2B3E]">
-                        高橋 文哉
-                      </span>
-                    </Button>
-                  </DropdownTrigger>
-                  <DropdownMenu aria-label="Profile Actions" variant="flat">
-                    <DropdownItem key="マイページ">
-                      <Link href="/mypage">マイページ</Link>
-                    </DropdownItem>
-                    <DropdownItem key="プロフィール編集">
-                      <Link href="/profile">プロフィール編集</Link>
-                    </DropdownItem>
-                    <DropdownItem key="ログアウト">
-                      <Divider />
-                      <div className="flex justify-between items-center gap-2                    ">
-                        ログアウト
-                        <Image
-                          width={39}
-                          height={39}
-                          src="/icons/icon-logout.png"
-                          alt=""
-                        />
-                      </div>
-                    </DropdownItem>
-                  </DropdownMenu>
-                </Dropdown>
-              </div>
+                    </div>
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
             </NavbarItem>
           </NavbarContent>
 
@@ -110,7 +108,7 @@ export const Navbar = () => {
 
           <NavbarMenu>
             <div className="mx-4 mt-2 flex flex-col gap-2 mt-[30px]">
-              {siteConfig.adminNavMenuItems.map((item, index) => (
+              {siteConfig.userNavItems.map((item, index) => (
                 <NavbarMenuItem key={`${item}-${index}`}>
                   <Link
                     color={
@@ -127,6 +125,18 @@ export const Navbar = () => {
                   </Link>
                 </NavbarMenuItem>
               ))}
+              <NavbarMenuItem>
+                <Divider />
+                <div className="flex justify-start items-center gap-2                    ">
+                  ログアウト
+                  <Image
+                    width={39}
+                    height={39}
+                    src="/icons/icon-logout.png"
+                    alt=""
+                  />
+                </div>
+              </NavbarMenuItem>
             </div>
           </NavbarMenu>
         </div>

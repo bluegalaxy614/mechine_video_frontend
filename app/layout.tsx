@@ -34,7 +34,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html suppressHydrationWarning lang="jp">
+    <html suppressHydrationWarning lang="en">
       <head />
       <body
         className={clsx(
@@ -47,7 +47,7 @@ export default function RootLayout({
             <Navbar />
             <main className="mt-[90px]">{children}</main>
             <Link
-              className="absolute fixed flex justify-center items-center bottom-16 right-6 w-[92px] h-[92px] bg-white rounded-full border border-gray-200 shadow-md hover:shadow-default-300"
+              className="absolute fixed flex justify-center items-center lg:bottom-6 lg:right-6 md:bottom-5 md:right-5 sm:bottom-4 sm:right-4 xsm:bottom-3 xsm:right-3 lg:w-[92px] lg:h-[92px] md:w-[72px] md:h-[72px] sm:w-[60px] sm:h-[60px] xsm:w-[50px] xsm:h-[50px] bg-white rounded-full border border-gray-200 shadow-md hover:shadow-default-300"
               href="/ask"
             >
               <Image
@@ -55,6 +55,7 @@ export default function RootLayout({
                 alt="home"
                 width={57}
                 height={57}
+                className="lg:w-[57px] lg:h-[57px] md:w-[50px] md:h-[50px] sm:w-[42px] sm:h-[42px] xsm:w-[35px] xsm:h-[35px]"
               />
             </Link>
           </div>

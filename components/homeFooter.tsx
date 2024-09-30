@@ -10,14 +10,14 @@ const HomeFooter = () => {
         alt="Footer Background"
         className="absolute inset-0 w-full h-full object-cover brightness-50"
       />
-      <div className="absolute inset-2 flex flex-col justify-center items-center h-full ">
+      <div className="absolute inset-2 flex flex-col justify-center items-center h-full">
         <div className="flex flex-wrap w-full">
-          <div className="lg:w-1/2 md:w-1/2 sm:w-full xsm:w-full flex justify-center">
+          <div className="lg:w-1/2 md:w-1/2 sm:w-full xsm:w-full flex justify-center lg:px-[0px] md:px-[40px] sm:px-[30px] xsm:px-[30px]">
             <div className="flex flex-col justify-center items-center">
               <div className="flex justify-start w-full items-center gap-4 mb-[28px]">
                 <Image
-                  width={75}
-                  height={75}
+                  width={65}
+                  height={65}
                   src="/icons/icons-contact.png"
                   alt="Contact Icon"
                 />
@@ -38,8 +38,8 @@ const HomeFooter = () => {
                   aria-label="Twitter"
                 >
                   <Image
-                    width={40}
-                    height={40}
+                    width={30}
+                    height={30}
                     src="/icons/icons8-twitter-100.png"
                     alt="Twitter"
                   />
@@ -49,8 +49,8 @@ const HomeFooter = () => {
                   aria-label="Facebook"
                 >
                   <Image
-                    width={40}
-                    height={40}
+                    width={30}
+                    height={30}
                     src="/icons/icons8-facebook-100.png"
                     alt="Facebook"
                   />
@@ -60,8 +60,8 @@ const HomeFooter = () => {
                   aria-label="YouTube"
                 >
                   <Image
-                    width={40}
-                    height={40}
+                    width={30}
+                    height={30}
                     src="/icons/icons8-youtube-100.png"
                     alt="YouTube"
                   />
@@ -69,47 +69,47 @@ const HomeFooter = () => {
               </div>
             </div>
           </div>
-          <div className="lg:w-1/2 md:w-1/2 sm:w-full xsm:w-full flex justify-center">
+          <div className="lg:w-1/2 md:w-1/2 sm:w-full xsm:w-full flex justify-center lg:px-[0px] md:px-[40px] sm:px-[30px] xsm:px-[30px]">
             <div className="w-full flex justify-center items-center">
               <div className="flex w-[500px] flex-col gap-4">
                 <div className="flex gap-3 items-center">
                   <Image
-                    width={40}
-                    height={40}
+                    width={30}
+                    height={30}
                     src="/icons/icons8-phone-100.png"
                     alt="Phone Icon"
                   />
-                  <p className="lg:text-[22px] md:text-[20px] sm:text-[18px] xsm:text-[16px] lg:w-[170px] md:w-[160px] sm:w-[140px] xsm:w-[130px] font-bold text-[#C7C7C7] h-[40px] flex items-center">
+                  {/* <p className="lg:text-[22px] md:text-[20px] sm:text-[18px] xsm:text-[16px] lg:w-[170px] md:w-[160px] sm:w-[140px] xsm:w-[130px] font-bold text-[#C7C7C7] h-[40px] flex items-center">
                     電話番号
-                  </p>
+                  </p> */}
                   <p className="lg:text-[22px] md:text-[20px] sm:text-[18px] xsm:text-[16px] font-bold text-white h-[40px] flex items-center">
                     03-8765-4321
                   </p>
                 </div>
                 <div className="flex gap-3 items-center">
                   <Image
-                    width={40}
-                    height={40}
+                    width={30}
+                    height={30}
                     src="/icons/icons8-mail-50.png"
                     alt="Email Icon"
                   />
-                  <p className="lg:text-[22px] md:text-[20px] sm:text-[18px] xsm:text-[16px] lg:w-[170px] md:w-[160px] sm:w-[140px] xsm:w-[130px] font-bold text-[#C7C7C7] h-[40px] flex items-center">
+                  {/* <p className="lg:text-[22px] md:text-[20px] sm:text-[18px] xsm:text-[16px] lg:w-[170px] md:w-[160px] sm:w-[140px] xsm:w-[130px] font-bold text-[#C7C7C7] h-[40px] flex items-center">
                     メールアドレス
-                  </p>
+                  </p> */}
                   <p className="lg:text-[22px] md:text-[20px] sm:text-[18px] xsm:text-[16px] font-bold text-white h-[40px] flex items-center">
                     contact@sample.jp
                   </p>
                 </div>
                 <div className="flex gap-3 items-center">
                   <Image
-                    width={40}
-                    height={40}
+                    width={30}
+                    height={30}
                     src="/icons/icons8-location-100.png"
                     alt="Location Icon"
                   />
-                  <p className="lg:text-[22px] md:text-[20px] sm:text-[18px] xsm:text-[16px] lg:w-[170px] md:w-[160px] sm:w-[140px] xsm:w-[130px] font-bold text-[#C7C7C7] h-[40px] flex items-center">
+                  {/* <p className="lg:text-[22px] md:text-[20px] sm:text-[18px] xsm:text-[16px] lg:w-[170px] md:w-[160px] sm:w-[140px] xsm:w-[130px] font-bold text-[#C7C7C7] h-[40px] flex items-center">
                     所在地
-                  </p>
+                  </p> */}
                   <p className="lg:text-[22px] md:text-[20px] sm:text-[18px] xsm:text-[16px] font-bold text-white h-[40px] flex items-center">
                     東京都 港区 六本木 2-15-8
                   </p>
