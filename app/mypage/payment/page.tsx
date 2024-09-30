@@ -78,6 +78,7 @@ export default function PaymentPage() {
         return cellValue;
     }
   }, []);
+
   return (
     <>
       {/* Section for summary statistics */}

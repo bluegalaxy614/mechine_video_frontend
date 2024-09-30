@@ -25,7 +25,7 @@ export const siteConfig = {
     },
     {
       label: 'お問い合わせ',
-      href: '/inquiry',
+      href: '/contact',
     },
   ],
   userNavMenuItems: [
@@ -47,7 +47,7 @@ export const siteConfig = {
     },
     {
       label: 'お問い合わせ',
-      href: '/inquiry',
+      href: '/contact',
     },
     {
       label: 'Logout',
@@ -90,7 +90,7 @@ export const siteConfig = {
 
 export const categoryConfig = [
   {
-    id: 'm_1',
+    id: '1',
     label: '工作機械',
     subCategories: [
       {
@@ -116,7 +116,7 @@ export const categoryConfig = [
     ],
   },
   {
-    id: 'm_2',
+    id: '2',
     label: '板金機械',
     subCategories: [
       {
@@ -138,7 +138,7 @@ export const categoryConfig = [
     ],
   },
   {
-    id: 'm_3',
+    id: '3',
     label: '鉄骨加工機',
     subCategories: [
       {
@@ -160,7 +160,7 @@ export const categoryConfig = [
     ],
   },
   {
-    id: 'm_4',
+    id: '4',
     label: 'プレス',
     subCategories: [
       {
@@ -182,7 +182,7 @@ export const categoryConfig = [
     ],
   },
   {
-    id: 'm_5',
+    id: '5',
     label: '成形機',
     subCategories: [
       {
@@ -200,7 +200,7 @@ export const categoryConfig = [
     ],
   },
   {
-    id: 'm_6',
+    id: '6',
     label: '研磨機',
     subCategories: [
       {
@@ -230,7 +230,7 @@ export const categoryConfig = [
     ],
   },
   {
-    id: 'm_7',
+    id: '7',
     label: '冷熱・空調機器',
     subCategories: [
       {
@@ -260,7 +260,7 @@ export const categoryConfig = [
     ],
   },
   {
-    id: 'm_9',
+    id: '9',
     label: '理化学機器',
     subCategories: [
       {
@@ -283,7 +283,7 @@ export const categoryConfig = [
   },
 
   {
-    id: 'm_8',
+    id: '8',
     label: 'コンプレッサー',
     subCategories: [
       {
@@ -301,7 +301,7 @@ export const categoryConfig = [
     ],
   },
   {
-    id: 'm_10',
+    id: '10',
     label: '運搬・物流機器',
     subCategories: [
       {
@@ -323,7 +323,7 @@ export const categoryConfig = [
     ],
   },
   {
-    id: 'm_11',
+    id: '11',
     label: '溶接機',
     subCategories: [
       {
@@ -341,7 +341,7 @@ export const categoryConfig = [
     ],
   },
   {
-    id: 'm_12',
+    id: '12',
     label: '木工機械',
     subCategories: [
       {
@@ -371,7 +371,7 @@ export const categoryConfig = [
     ],
   },
   {
-    id: 'm_13',
+    id: '13',
     label: '農業機械',
     subCategories: [
       {
@@ -409,7 +409,7 @@ export const categoryConfig = [
     ],
   },
   {
-    id: 'm_14',
+    id: '14',
     label: '農業機械',
     subCategories: [
       {
@@ -431,17 +431,17 @@ export const categoryConfig = [
     ],
   },
   {
-    id: 'm_15',
+    id: '15',
     label: '半導体製造装置',
     subCategories: [],
   },
   {
-    id: 'm_16',
+    id: '16',
     label: '厨房機器',
     subCategories: [],
   },
   {
-    id: 'm_17',
+    id: '17',
     label: 'その他',
     subCategories: [],
   },

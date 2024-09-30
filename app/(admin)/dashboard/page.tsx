@@ -15,7 +15,7 @@ export default function DashboardPage() {
       'ニュース記事の作成、公開状況を管理し、最新情報をユーザーに届けます',
   };
   return (
-    <>
+    <div>
       <section className="flex flex-wrap justify-between max-w-[1280px] mx-auto">
         <div className="mx-auto my-[10px]">
           <BoxImage
@@ -85,6 +85,6 @@ export default function DashboardPage() {
       <footer className="w-full flex items-center justify-center py-3 bg-[#4291EF]">
         <p className="text-white text-[20px]"> All rights reserved.</p>
       </footer>
-    </>
+    </div>
   );
 }
