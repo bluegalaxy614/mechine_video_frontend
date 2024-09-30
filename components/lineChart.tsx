@@ -116,7 +116,7 @@ interface LineChartProps {
 
 const LineChart: React.FC<LineChartProps> = ({ chartData, options }) => {
   return (
-    <div className="relative flex w-full h-[545px] mx-auto my-8 w-full border border-gray-300 shadow-lg rounded-lg p-[30px] pt-[60px] pl-[40px]">
+    <div className="hidden sm:block relative flex w-full lg:h-[545px] md:h-[450px] sm:h-[350px] mx-auto my-8 w-full border border-gray-300 shadow-lg rounded-lg p-[30px] pt-[60px] pl-[40px]">
       <div className="absolute top-3 left-[30px] flex justify-center items-center gap-9">
         <Image
           width={39}

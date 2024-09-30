@@ -11,9 +11,10 @@ import {
 } from '@nextui-org/table';
 import { Chip, ChipProps } from '@nextui-org/chip';
 import { Tooltip } from '@nextui-org/tooltip';
-import { rows } from '../../../config/data';
+import { rows } from '@/config/data';
 import { DeleteIcon } from '@/components/icons';
 import { tableConfig } from '@/config/site';
+import { Button } from '@nextui-org/button';
 
 const statusColorMap: Record<string, ChipProps['color']> = {
   支払い: 'success',
@@ -80,7 +81,7 @@ export default function PaymentPage() {
   return (
     <>
       {/* Section for summary statistics */}
-      <section className="flex justify-between max-w-[1280px] mx-auto mt-[90px]">
+      <section className="max-w-[1280px] mx-auto flex flex-wrap gap-4 lg:justify-between md:justify-between sm:justify-between xsm:justify-center lg:px-[0px] md:px-[40px] sm:px-[50px] xsm:px-[35px]">
         <BoxImage
           id={1}
           image={'/icons/icons-checked.png'}
@@ -90,27 +91,38 @@ export default function PaymentPage() {
         />
         <BoxImage
           id={2}
-          image={'/icons/icon-clock.png'}
-          title="総視聴時間"
-          info="40000"
-          unit="時間"
+          image={'/icons/icon-cancel.png'}
+          title="未払い動画の数"
+          info="8"
+          unit="件"
         />
         <BoxImage
           id={3}
           image={'/icons/icon-coin.png'}
-          title="総輸入額"
-          info="50万+"
+          title="未払い総額"
+          info="4万+"
           unit="円"
         />
       </section>
 
       {/* Section for the payment table */}
-      <section className="max-w-[1280px] mx-auto mt-[60px] h-[100vh]">
-        <div className="w-full rounded-md shadow-md">
+      <section className="max-w-[1280px] mx-auto my-[60px] lg:px-[0px] md:px-[40px] sm:px-[50px] xsm:px-[35px]">
+        <div className="w-full">
+          <div className="flex justify-between my-[20px]">
+            <h1 className="text-[24px] text-[#4291EF]">支払い状態</h1>
+            <Button className="w-[181px] h-[31px] rounded-full bg-[#4291EF] text-[#FFFFFF] flex justify-center items-center text-[20px]">
+              リクエストする
+            </Button>
+          </div>
           <Table
+            isHeaderSticky
             aria-label="Payment Table"
             selectionMode="multiple"
             color="primary"
+            classNames={{
+              tbody: 'max-h-[500px]',
+              // table: "min-h-[200px]",
+            }}
           >
             <TableHeader columns={tableConfig}>
               {(column) => (
@@ -134,9 +146,9 @@ export default function PaymentPage() {
           </Table>
         </div>
       </section>
-      <footer className="w-full flex items-center justify-center py-3 bg-[#4291EF]">
+      {/* <footer className="w-full flex items-center justify-center py-3 bg-[#4291EF]">
         <p className="text-white text-[20px]"> All rights reserved.</p>
-      </footer>
+      </footer> */}
     </>
   );
 }

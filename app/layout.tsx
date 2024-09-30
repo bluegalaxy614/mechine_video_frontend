@@ -47,7 +47,7 @@ export default function RootLayout({
             <Navbar />
             <main className="mt-[90px]">{children}</main>
             <Link
-              className="absolute fixed flex justify-center items-center lg:bottom-6 lg:right-6 md:bottom-5 md:right-5 sm:bottom-4 sm:right-4 xsm:bottom-3 xsm:right-3 lg:w-[92px] lg:h-[92px] md:w-[72px] md:h-[72px] sm:w-[60px] sm:h-[60px] xsm:w-[50px] xsm:h-[50px] bg-white rounded-full border border-gray-200 shadow-md hover:shadow-default-300"
+              className="absolute fixed flex justify-center items-center lg:bottom-[60px] lg:right-6 md:bottom-[60px] md:right-5 sm:bottom-[60px] sm:right-4 xsm:bottom-[60px] xsm:right-3 lg:w-[92px] lg:h-[92px] md:w-[72px] md:h-[72px] sm:w-[60px] sm:h-[60px] xsm:w-[50px] xsm:h-[50px] bg-white rounded-full border border-gray-200 shadow-md hover:shadow-default-300"
               href="/ask"
             >
               <Image

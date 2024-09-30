@@ -4,130 +4,9 @@ import { Pagination } from '@nextui-org/pagination';
 import BoxImage from '@/components/boxImage';
 import LineChart from '@/components/lineChart';
 import { Button } from '@nextui-org/button';
+import { lastestVideos } from '@/config/data';
 
 export default function MyPage() {
-  const lastestVideos = [
-    {
-      title: '旋盤のベアリング交換方法',
-      img: '/videos/video_screen.png',
-      categories: ['工作機械', '旋盤'],
-      describe: '旋盤のベアリング交換を安全かつ効率的に行う手順。',
-      author: '山田機械修理工房',
-      date: '2024年9月10日',
-    },
-    {
-      title: '旋盤のベアリング交換方法',
-      img: '/videos/video_screen (1).png',
-      categories: ['工作機械', '旋盤'],
-      describe: '旋盤のベアリング交換を安全かつ効率的に行う手順。',
-      author: '山田機械修理工房',
-      date: '2024年9月10日',
-    },
-    {
-      title: '旋盤のベアリング交換方法',
-      img: '/videos/video_screen (2).png',
-      categories: ['工作機械', '旋盤'],
-      describe: '旋盤のベアリング交換を安全かつ効率的に行う手順。',
-      author: '山田機械修理工房',
-      date: '2024年9月10日',
-    },
-    {
-      title: '旋盤のベアリング交換方法',
-      img: '/videos/video_screen (3).png',
-      categories: ['工作機械', '旋盤'],
-      describe: '旋盤のベアリング交換を安全かつ効率的に行う手順。',
-      author: '山田機械修理工房',
-      date: '2024年9月10日',
-    },
-    {
-      title: '旋盤のベアリング交換方法',
-      img: '/videos/video_screen (4).png',
-      categories: ['工作機械', '旋盤'],
-      describe: '旋盤のベアリング交換を安全かつ効率的に行う手順。',
-      author: '山田機械修理工房',
-      date: '2024年9月10日',
-    },
-    {
-      title: '旋盤のベアリング交換方法',
-      img: '/videos/video_screen (5).png',
-      categories: ['工作機械', '旋盤'],
-      describe: '旋盤のベアリング交換を安全かつ効率的に行う手順。',
-      author: '山田機械修理工房',
-      date: '2024年9月10日',
-    },
-    {
-      title: '旋盤のベアリング交換方法',
-      img: '/videos/video_screen (1).png',
-      categories: ['工作機械', '旋盤'],
-      describe: '旋盤のベアリング交換を安全かつ効率的に行う手順。',
-      author: '山田機械修理工房',
-      date: '2024年9月10日',
-    },
-    {
-      title: '旋盤のベアリング交換方法',
-      img: '/videos/video_screen (2).png',
-      categories: ['工作機械', '旋盤'],
-      describe: '旋盤のベアリング交換を安全かつ効率的に行う手順。',
-      author: '山田機械修理工房',
-      date: '2024年9月10日',
-    },
-    {
-      title: '旋盤のベアリング交換方法',
-      img: '/videos/video_screen (3).png',
-      categories: ['工作機械', '旋盤'],
-      describe: '旋盤のベアリング交換を安全かつ効率的に行う手順。',
-      author: '山田機械修理工房',
-      date: '2024年9月10日',
-    },
-    {
-      title: '旋盤のベアリング交換方法',
-      img: '/videos/video_screen (4).png',
-      categories: ['工作機械', '旋盤'],
-      describe: '旋盤のベアリング交換を安全かつ効率的に行う手順。',
-      author: '山田機械修理工房',
-      date: '2024年9月10日',
-    },
-    {
-      title: '旋盤のベアリング交換方法',
-      img: '/videos/video_screen (5).png',
-      categories: ['工作機械', '旋盤'],
-      describe: '旋盤のベアリング交換を安全かつ効率的に行う手順。',
-      author: '山田機械修理工房',
-      date: '2024年9月10日',
-    },
-    {
-      title: '旋盤のベアリング交換方法',
-      img: '/videos/video_screen (1).png',
-      categories: ['工作機械', '旋盤'],
-      describe: '旋盤のベアリング交換を安全かつ効率的に行う手順。',
-      author: '山田機械修理工房',
-      date: '2024年9月10日',
-    },
-    {
-      title: '旋盤のベアリング交換方法',
-      img: '/videos/video_screen (2).png',
-      categories: ['工作機械', '旋盤'],
-      describe: '旋盤のベアリング交換を安全かつ効率的に行う手順。',
-      author: '山田機械修理工房',
-      date: '2024年9月10日',
-    },
-    {
-      title: '旋盤のベアリング交換方法',
-      img: '/videos/video_screen (3).png',
-      categories: ['工作機械', '旋盤'],
-      describe: '旋盤のベアリング交換を安全かつ効率的に行う手順。',
-      author: '山田機械修理工房',
-      date: '2024年9月10日',
-    },
-    {
-      title: '旋盤のベアリング交換方法',
-      img: '/videos/video_screen (4).png',
-      categories: ['工作機械', '旋盤'],
-      describe: '旋盤のベアリング交換を安全かつ効率的に行う手順。',
-      author: '山田機械修理工房',
-      date: '2024年9月10日',
-    },
-  ];
   const icon = {
     icon: '/icons/icons-setting.png',
     title: '動画承認ステータス',
@@ -145,42 +24,38 @@ export default function MyPage() {
     ],
   };
   return (
-    <>
-      <section className="flex flex-wrap justify-between max-w-[1280px] mx-auto">
-        <div className="mx-auto my-[10px]">
-          <BoxImage
-            id={1}
-            image={'/icons/icons-checked.png'}
-            title="総投稿件数"
-            info="250"
-            unit="件"
-          />
-        </div>
-        <div className="mx-auto my-[10px]">
-          <BoxImage
-            id={2}
-            image={'/icons/icon-clock.png'}
-            title="総視聴時間"
-            info="40000"
-            unit="時間"
-          />
-        </div>
-        <div className="mx-auto my-[10px]">
-          <BoxImage
-            id={3}
-            image={'/icons/icon-coin.png'}
-            title="総輸入額"
-            info="50万+"
-            unit="円"
-          />
+    <div className="min-h-[calc(100vh-90px)] flex flex-col lg:w-full xsm:w-fit justify-between">
+      <section className="max-w-[1280px] mx-auto">
+        <div className="flex flex-col lg:w-[1280px] md:w-[945px] sm:w-[710px] lg:mt-[85px] md:mt-[55px] sm:mt-[45px] xsm:mt-[35px]">
+          <div className="flex flex-wrap gap-4 lg:justify-between md:justify-between sm:justify-between xsm:justify-center lg:px-[0px] md:px-[40px] sm:px-[50px] xsm:px-[35px]">
+            <BoxImage
+              id={1}
+              image={'/icons/icons-checked.png'}
+              title="総投稿件数"
+              info="250"
+              unit="件"
+            />
+            <BoxImage
+              id={2}
+              image={'/icons/icon-clock.png'}
+              title="総視聴時間"
+              info="40000"
+              unit="時間"
+            />
+            <BoxImage
+              id={3}
+              image={'/icons/icon-coin.png'}
+              title="総輸入額"
+              info="50万+"
+              unit="円"
+            />
+          </div>
+          <LineChart chartData={data} />
         </div>
       </section>
-      <section className="max-w-[1280px] mx-auto my-[10px]">
-        <LineChart chartData={data} />
-      </section>
-      <section className="max-w-[1280px] mx-auto my-[10px]">
+      <section className="max-w-[1280px] mx-auto">
         <ImageButton data={icon} />
-        <div className="mb-[30px] flex gap-[40px]">
+        <div className="mb-[30px] flex gap-[40px] lg:px-[40px] md:px-[40px] sm:px-[50px] xsm:px-[35px]">
           <Button className="rounded-full w-[144px] h-[41px] bg-[#FDE48D] text-[#725C10] text-[16px]">
             リクエスト中
           </Button>
@@ -202,6 +77,6 @@ export default function MyPage() {
       <footer className="w-full flex items-center justify-center py-3 bg-[#4291EF]">
         <p className="text-white text-[20px]"> All rights reserved.</p>
       </footer>
-    </>
+    </div>
   );
 }
