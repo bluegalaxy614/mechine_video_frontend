@@ -51,25 +51,55 @@ export default function DashboardPage() {
       </section>
       <section className="max-w-[1280px] mx-auto my-[10px]">
         <ImageButton data={icon} />
-        <div className="flex flex-col justify-between items-center">
-          <p className="text-[20px] text-[#4291EF]">新規ニュース作成</p>
-          <Image src="/icons/icons-plus.png" width={68} height={68} alt="" />
+        <div className="flex justify-center gap-6 items-center">
+          <h2 className="lg:text-[32px] md:text-[28px] sm:text-[22px] xsm:text-[22px] text-[#4291EF] font-bold">
+            新規ニュース作成
+          </h2>
+          <Image
+            src="/icons/icons-edit.png"
+            alt=""
+            width={64}
+            height={64}
+            className="lg:w-[48px] lg:h-[48px] md:w-[48px] md:h-[48px] sm:w-[44px] sm:h-[44px] xsm:w-[40px] xsm:h-[40px]"
+          />
         </div>
-        <div>
-          <Input />
-          <Textarea />
-          <Button />
-        </div>
+        <form className="lg:w-[930px] mx-auto mt-[39px] gap-[39px] h-full gap-6">
+          <label htmlFor="phone" className="text-[20px]">
+            タイトル
+          </label>
+          <Input
+            type="tel"
+            id="phone"
+            name="phone"
+            className="rounded w-full bg-[#F4F4F4]"
+            placeholder="入力してください..."
+          />
+          <label htmlFor="message" className="text-[20px]">
+            説明
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            className="rounded w-full h-[200px] bg-[#F4F4F4]"
+            placeholder="入力してください..."
+          />
+          <Button className="w-[178px] h-[36px] bg-[#4291EF] rounded-full mt-[40px] mb-[71px] mx-auto">
+            <p className=" text-[#FFFFFF] text-[20px]">提出</p>
+            <Image width={28} height={28} src="/icons/icon-save.png" alt="" />
+          </Button>
+        </form>
       </section>
       <section className="max-w-1280px mx-auto my-[10px] flex flex-col justify-center items-center">
-        <div className="flex flex-row justify-center items-center">
-          <p>公開済みニュース一覧</p>
+        <div className="flex justify-center gap-6 items-center">
+          <h2 className="lg:text-[32px] md:text-[28px] sm:text-[22px] xsm:text-[22px] text-[#4291EF] font-bold">
+            公開済みニュース一覧
+          </h2>
           <Image
-            width={68}
-            height={68}
-            src="/icons/icons-setting.png"
-            className="w-[68px] h-[68px]"
+            src="/icons/icons-list.png"
             alt=""
+            width={64}
+            height={64}
+            className="lg:w-[48px] lg:h-[48px] md:w-[48px] md:h-[48px] sm:w-[44px] sm:h-[44px] xsm:w-[40px] xsm:h-[40px]"
           />
         </div>
         <NewsCards data={newsData} />

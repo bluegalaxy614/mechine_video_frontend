@@ -4,7 +4,7 @@ import { Button } from '@nextui-org/button';
 import { Divider } from '@nextui-org/divider';
 import Image from 'next/image';
 
-export default function PostPage() {
+export default function ViewerProfilePage() {
   return (
     <div className="min-h-[calc(100vh-90px)] flex flex-col lg:w-full xsm:w-fit justify-between">
       <section className="max-w-[1280px] mx-auto flex flex-col lg:mt-[85px] md:mt-[55px] sm:mt-[45px] xsm:mt-[35px]">

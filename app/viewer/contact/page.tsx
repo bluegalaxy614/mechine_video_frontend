@@ -47,9 +47,9 @@ export default function ContactPage() {
           </Button>
         </div>
       </div>
-      {/* <footer className="w-full flex items-center justify-center py-3 bg-[#4291EF]">
-          <p className="text-white text-[20px]"> All rights reserved.</p>
-        </footer> */}
+      <footer className="w-full flex items-center justify-center py-3 bg-[#4291EF]">
+        <p className="text-white text-[20px]"> All rights reserved.</p>
+      </footer>
     </section>
   );
 }

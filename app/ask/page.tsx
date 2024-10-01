@@ -20,7 +20,7 @@ export default function AskPage() {
               <Image
                 width={59}
                 height={59}
-                className="h-[59px] w-[59px]  bg-white rounded-full p-[8px] border-2 border-default-500 border-[#4291EF]"
+                className="h-[59px] w-[59px]  bg-white rounded-full p-[8px] border-2 border-[#4291EF]"
                 src="/icons/icon-ask.png"
                 alt=""
               />
@@ -45,7 +45,7 @@ export default function AskPage() {
               <Image
                 width={59}
                 height={59}
-                className="h-[59px] w-[59px]  bg-white rounded-full p-[8px] border-2 border-default-500 border-[#4291EF]"
+                className="h-[59px] w-[59px]  bg-white rounded-full p-[8px] border-2 border-[#4291EF]"
                 src="/profile/3.png"
                 alt=""
               />

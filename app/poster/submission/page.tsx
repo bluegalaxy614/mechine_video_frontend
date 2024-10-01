@@ -6,7 +6,7 @@ import { Select, SelectItem } from '@nextui-org/select';
 import { useState } from 'react';
 import { categoryConfig } from '@/config/site';
 
-export default function PostPage() {
+export default function SubmissionPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [selectedSubCategory, setSelectedSubCategory] = useState<string>('');
 

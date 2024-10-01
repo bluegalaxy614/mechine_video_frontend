@@ -2,6 +2,8 @@ export type SiteConfig = typeof siteConfig;
 export type CategoryConfig = typeof categoryConfig;
 export type CompanyList = typeof companyList;
 export type TableConfig = typeof tableConfig;
+export type VideoTableConfig = typeof videoTableConfig;
+export type UserTableConfig = typeof userTableConfig;
 
 export const siteConfig = {
   name: 'Mechines Friends',
@@ -492,4 +494,78 @@ export const tableConfig = [
   { name: '報酬額（円）', uid: 'revenue' },
   { name: '支払い状態', uid: 'status' },
   { name: '削除', uid: 'actions' },
+];
+
+export const videoTableConfig = [
+  {
+    name: '',
+    uid: 'image',
+  },
+  {
+    name: 'タイトル',
+    uid: 'name',
+  },
+  {
+    name: '説明',
+    uid: 'description',
+  },
+  {
+    name: '投稿者',
+    uid: 'auth',
+  },
+  {
+    name: 'メインカテゴリ',
+    uid: 'main',
+  },
+  {
+    name: 'サブカテゴリ',
+    uid: 'sub',
+  },
+  {
+    name: 'ステータス',
+    uid: 'status',
+  },
+  {
+    name: '投稿日',
+    uid: 'date',
+  },
+  {
+    name: '削除',
+    uid: 'actions',
+  },
+];
+
+export const userTableConfig = [
+  {
+    name: '',
+    uid: 'avatar',
+  },
+  {
+    name: '名前',
+    uid: 'name',
+  },
+  {
+    name: 'メール',
+    uid: 'mail',
+  },
+  {
+    name: '登録日',
+    uid: 'date',
+  },
+  {
+    name: '投稿数',
+    uid: 'count',
+  },
+  {
+    name: '役割',
+    uid: 'role',
+  },
+  {
+    name: '決済状況(から～まで)',
+    uid: 'expired',
+  },
+  {
+    name: 'アクション',
+    uid: 'actions',
+  },
 ];

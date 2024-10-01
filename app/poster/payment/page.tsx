@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import BoxImage from '@/components/boxImage';
 import {
   Table,
@@ -15,6 +15,7 @@ import { rows } from '@/config/data';
 import { DeleteIcon } from '@/components/icons';
 import { tableConfig } from '@/config/site';
 import { Button } from '@nextui-org/button';
+import { Pagination } from '@nextui-org/pagination';
 
 const statusColorMap: Record<string, ChipProps['color']> = {
   支払い: 'success',
@@ -24,8 +25,20 @@ const statusColorMap: Record<string, ChipProps['color']> = {
 
 type Row = (typeof rows)[0];
 
-export default function PaymentPage() {
-  const renderCell = React.useCallback((user: Row, columnKey: React.Key) => {
+export default function PosterPaymentPage() {
+  const [page, setPage] = useState(1);
+  const rowsPerPage = 10;
+
+  const pages = Math.ceil(rows.length / rowsPerPage);
+
+  const items = useMemo(() => {
+    const start = (page - 1) * rowsPerPage;
+    const end = start + rowsPerPage;
+
+    return rows.slice(start, end);
+  }, [page, rows]);
+
+  const renderCell = useCallback((user: Row, columnKey: React.Key) => {
     const cellValue = user[columnKey as keyof Row];
 
     switch (columnKey) {
@@ -80,7 +93,7 @@ export default function PaymentPage() {
   }, []);
 
   return (
-    <>
+    <div className="min-h-[calc(100vh-90px)] lg:w-full xsm:w-fit">
       {/* Section for summary statistics */}
       <section className="max-w-[1280px] mx-auto flex flex-wrap gap-4 lg:justify-between md:justify-between sm:justify-between xsm:justify-center lg:px-[0px] md:px-[40px] sm:px-[50px] xsm:px-[35px]">
         <BoxImage
@@ -121,9 +134,22 @@ export default function PaymentPage() {
             selectionMode="multiple"
             color="primary"
             classNames={{
-              tbody: 'max-h-[500px]',
-              // table: "min-h-[200px]",
+              wrapper: 'min-h-[500px]',
+              base: 'w-full',
             }}
+            bottomContent={
+              <div className="flex w-full justify-center">
+                <Pagination
+                  isCompact
+                  showControls
+                  showShadow
+                  color="secondary"
+                  page={page}
+                  total={pages}
+                  onChange={(page) => setPage(page)}
+                />
+              </div>
+            }
           >
             <TableHeader columns={tableConfig}>
               {(column) => (
@@ -135,7 +161,7 @@ export default function PaymentPage() {
                 </TableColumn>
               )}
             </TableHeader>
-            <TableBody items={rows}>
+            <TableBody items={items}>
               {(item) => (
                 <TableRow key={item.id} className="cursor-pointer">
                   {(columnKey) => (
@@ -147,9 +173,9 @@ export default function PaymentPage() {
           </Table>
         </div>
       </section>
-      {/* <footer className="w-full flex items-center justify-center py-3 bg-[#4291EF]">
+      <footer className="w-full flex items-center justify-center py-3 bg-[#4291EF]">
         <p className="text-white text-[20px]"> All rights reserved.</p>
-      </footer> */}
-    </>
+      </footer>
+    </div>
   );
 }
