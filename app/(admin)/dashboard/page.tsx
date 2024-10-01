@@ -16,43 +16,35 @@ export default function DashboardPage() {
   };
   return (
     <div>
-      <section className="flex flex-wrap justify-between max-w-[1280px] mx-auto">
-        <div className="mx-auto my-[10px]">
-          <BoxImage
-            id={1}
-            image={'/icons/icons-checked.png'}
-            title="総投稿件数"
-            info="5千+"
-            unit="件"
-          />
-        </div>
-        <div className="mx-auto my-[10px]">
-          <BoxImage
-            id={2}
-            image={'/icons/icon-clock.png'}
-            title="総視聴者数"
-            info="8千+"
-            unit="人"
-          />
-        </div>
-        <div className="mx-auto my-[10px]">
-          <BoxImage
-            id={3}
-            image={'/icons/icon-coin.png'}
-            title="総投稿者数"
-            info="3千+"
-            unit="人"
-          />
-        </div>
-        <div className="mx-auto my-[10px]">
-          <BoxImage
-            id={4}
-            image={'/icons/icon-coin.png'}
-            title="総輸入額"
-            info="400万+"
-            unit="円"
-          />
-        </div>
+      <section className="max-w-[1280px] mx-auto flex flex-wrap gap-4 lg:justify-between md:justify-between sm:justify-between xsm:justify-center lg:px-[0px] md:px-[40px] sm:px-[50px] xsm:px-[35px]">
+        <BoxImage
+          id={1}
+          image={'/icons/icons-checked.png'}
+          title="総投稿件数"
+          info="250"
+          unit="件"
+        />
+        <BoxImage
+          id={2}
+          image={'/icons/viwer.png'}
+          title="未払い動画の数"
+          info="8"
+          unit="件"
+        />
+        <BoxImage
+          id={3}
+          image={'/icons/user.png'}
+          title="未払い総額"
+          info="4万+"
+          unit="円"
+        />
+        <BoxImage
+          id={4}
+          image={'/icons/icon-coin.png'}
+          title="未払い総額"
+          info="4万+"
+          unit="円"
+        />
       </section>
       <section className="max-w-[1280px] mx-auto my-[10px]">
         <LineChart chartData={chartData} />

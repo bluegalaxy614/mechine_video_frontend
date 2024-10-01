@@ -1,4 +1,5 @@
 import { Button } from '@nextui-org/button';
+import { Input } from '@nextui-org/input';
 import Image from 'next/image';
 
 export default function AskPage() {
@@ -13,34 +14,83 @@ export default function AskPage() {
         </p>
       </div>
       <div className="flex gap-[34px]">
-        <div className="grow h-[516px] shadow-lg bg-[#F4F4F4] mt-[39px]"></div>
+        <div className="grow h-[516px] shadow-lg bg-[#F4F4F4] mt-[39px] overflow-scroll p-[28px]">
+          <div>
+            <div className="flex justify-center items-center rounded-full w-[191px] h-[59px] p-1 hover:pointer my-[20px]">
+              <Image
+                width={59}
+                height={59}
+                className="h-[59px] w-[59px]  bg-white rounded-full p-[8px] border-2 border-default-500 border-[#4291EF]"
+                src="/icons/icon-ask.png"
+                alt=""
+              />
+              <span className="mx-auto text-[20px] text-[#1F2B3E]">
+                管理チーム
+              </span>
+            </div>
+            <div className="relative bg-[#E4F1FF] w-full p-[28px] gap-[20px]">
+              {/* <p className="alsolute right-0 top-[-20px] text-[14px]">2024-9-24 09:21</p> */}
+              <p className="text-[14px]">
+                お問い合わせありがとうございます。ネジが固い場合、トルクレンチやインパクトドライバーの使用を推奨します。動画で使用しているのは「KTC
+                トルクレンチ」です。詳しい使用方法については別途動画を用意しておりますので、ご参照ください。
+                お問い合わせありがとうございます。ネジが固い場合、トルクレンチやインパクトドライバーの使用を推奨します。動画で使用しているのは「KTC
+                トルクレンチ」です。詳しい使用方法については別途動画を用意しておりますので、ご参照ください。
+                お問い合わせありがとうございます。ネジが固い場合、トルクレンチやインパクトドライバーの使用を推奨します。動画で使用しているのは「KTC
+                トルクレンチ」です。詳しい使用方法については別途動画を用意しておりますので、ご参照ください。
+              </p>
+            </div>
+          </div>
+          <div>
+            <div className="flex justify-center items-center rounded-full w-[191px] h-[59px] p-1 hover:pointer my-[20px]">
+              <Image
+                width={59}
+                height={59}
+                className="h-[59px] w-[59px]  bg-white rounded-full p-[8px] border-2 border-default-500 border-[#4291EF]"
+                src="/profile/3.png"
+                alt=""
+              />
+              <span className="mx-auto text-[20px] text-[#1F2B3E]">あなた</span>
+            </div>
+            <div className="relative bg-[#E4F1FF] w-full p-[28px] gap-[20px]">
+              {/* <p className="alsolute right-0 top-[-20px] text-[14px]">2024-9-24 09:21</p> */}
+              <p className="text-[14px]">
+                お問い合わせありがとうございます。ネジが固い場合、トルクレンチやインパクトドライバーの使用を推奨します。動画で使用しているのは「KTC
+                トルクレンチ」です。詳しい使用方法については別途動画を用意しておりますので、ご参照ください。
+                お問い合わせありがとうございます。ネジが固い場合、トルクレンチやインパクトドライバーの使用を推奨します。動画で使用しているのは「KTC
+                トルクレンチ」です。詳しい使用方法については別途動画を用意しておりますので、ご参照ください。
+                お問い合わせありがとうございます。ネジが固い場合、トルクレンチやインパクトドライバーの使用を推奨します。動画で使用しているのは「KTC
+                トルクレンチ」です。詳しい使用方法については別途動画を用意しておりますので、ご参照ください。
+              </p>
+            </div>
+          </div>
+        </div>
         <form className="flex-none max-w-[389px] mt-[39px] gap-[39px] h-full">
           <label htmlFor="name" className="text-[20px]">
             お名前
           </label>
-          <input
+          <Input
             type="text"
             id="name"
             name="name"
-            className="border border-gray-300 rounded px-3 py-2 w-full bg-[#F4F4F4]"
+            className="rounded w-full bg-[#F4F4F4]"
           />
           <label htmlFor="email" className="text-[20px]">
             メールアドレス
           </label>
-          <input
+          <Input
             type="email"
             id="email"
             name="email"
-            className="border border-gray-300 rounded px-3 py-2 w-full bg-[#F4F4F4]"
+            className="rounded w-full bg-[#F4F4F4]"
           />
           <label htmlFor="phone" className="text-[20px]">
             電話番号
           </label>
-          <input
+          <Input
             type="tel"
             id="phone"
             name="phone"
-            className="border border-gray-300 rounded px-3 py-2 w-full bg-[#F4F4F4]"
+            className="rounded w-full bg-[#F4F4F4]"
           />
           <label htmlFor="message" className="text-[20px]">
             メッセージ
@@ -48,7 +98,7 @@ export default function AskPage() {
           <textarea
             id="message"
             name="message"
-            className="border border-gray-300 rounded px-3 py-2 w-full h-[200px] bg-[#F4F4F4]"
+            className="rounded w-full h-[200px] bg-[#F4F4F4]"
           />
           <Button className="w-[141px] h-[31px] bg-[#4291EF] mt-[40px] mb-[71px] float-right">
             <p className=" text-[#FFFFFF] text-[20px]">送信</p>
