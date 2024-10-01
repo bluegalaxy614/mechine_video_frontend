@@ -3,7 +3,7 @@ import BoxImage from '@/components/boxImage';
 import LineChart from '@/components/lineChart';
 import { Button } from '@nextui-org/button';
 import { Image } from '@nextui-org/image';
-import { Input, Textarea } from '@nextui-org/input';
+import { Input } from '@nextui-org/input';
 import NewsCards from '@/components/newCards';
 import { chartData, newsData } from '@/config/data';
 

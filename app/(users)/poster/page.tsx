@@ -68,8 +68,8 @@ export default function MyPage() {
             拒否
           </Button>
         </div>
-      <SearchCategories/>
-      <VideoCards data={lastestVideos} />
+        <SearchCategories />
+        <VideoCards data={lastestVideos} />
         <Pagination
           showControls
           total={lastestVideos.length}

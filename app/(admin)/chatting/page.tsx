@@ -16,7 +16,7 @@ export default function ChattingPage() {
             <span className="bg-[#ED1C24] rounded-full w-[21px] h-[21px] text-white flex justify-center items-center">
               4
             </span>
-          </div> 
+          </div>
           <div className="w-[223px] h-[81px] mx-auto bg-[#E4F1FF] rounded-md flex justify-start items-center px-[5px] gap-6">
             <Avatar src="/profile/1.png" name="高橋 文哉" size="lg" />
             <p className="text-[20px] text-center">高橋 文哉</p>
@@ -131,7 +131,12 @@ export default function ChattingPage() {
             <div className="flex h-full justify-end items-center gap-6 px-[30px]">
               <Input className="max-w-[1130px] h-[54px] rounded-md" />
               <Button className="flex justify-center items-center rounded-full w-[80px] h-[54px] bg-[#4291EF]">
-                <Image width={28} height={28} src="/icons/icon-send.png" />
+                <Image
+                  width={28}
+                  height={28}
+                  src="/icons/icon-send.png"
+                  alt=""
+                />
               </Button>
             </div>
           </div>

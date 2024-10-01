@@ -1,28 +1,30 @@
 'use client';
-import Image from 'next/image';
 import React from 'react';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+import authService from '@/services/authService';
 
 export default function RegisterPage() {
-  const [form, setForm] = useState({
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-  });
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const router = useRouter();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(form);
+    try {
+      await authService.register({ name, email, password, confirmPassword });
+      router.push('verify-email');
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
     <div
-      className="min-h-[calc(100vh-90px)] w-full bg-cover bg-center flex flex-wrap justify-between items-center"
+      className="min-h-screen w-full bg-cover bg-center flex flex-wrap justify-between items-center"
       style={{ backgroundImage: `url('/bg/bg 1.png')` }}
     >
       <div className="text-center mx-auto">
@@ -55,7 +57,7 @@ export default function RegisterPage() {
 
         <div className="w-full">
           {/* Form */}
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleRegister}>
             <div className="mb-4">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
@@ -67,8 +69,8 @@ export default function RegisterPage() {
                 type="text"
                 id="username"
                 name="username"
-                value={form.username}
-                onChange={handleChange}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 placeholder="田中 太郎"
                 className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
@@ -85,8 +87,8 @@ export default function RegisterPage() {
                 type="email"
                 id="email"
                 name="email"
-                value={form.email}
-                onChange={handleChange}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="taro.tanaka@example.com"
                 className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
@@ -103,8 +105,8 @@ export default function RegisterPage() {
                 type="password"
                 id="password"
                 name="password"
-                value={form.password}
-                onChange={handleChange}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 placeholder="請輸入密碼"
                 className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
@@ -121,8 +123,8 @@ export default function RegisterPage() {
                 type="password"
                 id="confirmPassword"
                 name="confirmPassword"
-                value={form.confirmPassword}
-                onChange={handleChange}
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="請確認密碼"
                 className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
@@ -139,7 +141,7 @@ export default function RegisterPage() {
           </form>
 
           <div className="text-center mt-4">
-            <a href="#" className="text-blue-500 text-sm underline">
+            <a href="/login" className="text-blue-500 text-sm underline">
               ログインはこちら
             </a>
           </div>

@@ -36,7 +36,7 @@ export default function PosterPaymentPage() {
     const end = start + rowsPerPage;
 
     return rows.slice(start, end);
-  }, [page, rows]);
+  }, [page]);
 
   const renderCell = useCallback((user: Row, columnKey: React.Key) => {
     const cellValue = user[columnKey as keyof Row];

@@ -41,6 +41,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ slides }) => {
               className="w-full object-cover h-full"
             />
           </div>
+          <div className="absolute inset-0 bg-black bg-opacity-50"></div>
           <div className="absolute top-[40%] lg:left-[10%] md:left-[10%] sm:left-[5%] xsm:left-3 right-0 text-white p-4 lg:w-[820px] md:w-[820px] sm:max-w-[630px] xsm:max-w-[400px]">
             <h2
               className="lg:text-6xl md:text-5xl sm:text-4xl xsm:text-3xl font-bold bg-clip-text text-transparent"
@@ -52,7 +53,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ slides }) => {
               {slide.title}
             </h2>
 
-            <p className="lg:text-[24px] md:text-[20px] sm:text-[18px] xsm:text-[14px] text-[#C0C0C0] my-2">
+            <p className="lg:text-[24px] md:text-[20px] sm:text-[18px] xsm:text-[14px] text-white my-2">
               {slide.description}
             </p>
           </div>

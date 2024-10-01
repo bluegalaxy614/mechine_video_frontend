@@ -7,7 +7,7 @@ export type UserTableConfig = typeof userTableConfig;
 
 export const siteConfig = {
   name: 'Mechines Friends',
-  description: 'Make beautiful websites regardless of your design experience.',
+  description: 'Enjoy your life!',
   userNavItems: [
     {
       label: 'ホーム',
@@ -19,15 +19,15 @@ export const siteConfig = {
     },
     {
       label: '投稿する',
-      href: '/post',
+      href: '/poster',
     },
     {
       label: 'マイページ',
-      href: '/mypage',
+      href: '/viwer',
     },
     {
       label: 'お問い合わせ',
-      href: '/contact',
+      href: '/ask',
     },
   ],
   userNavMenuItems: [

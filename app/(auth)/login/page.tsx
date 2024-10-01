@@ -1,27 +1,30 @@
 'use client';
+import React, { useState } from 'react';
 import Image from 'next/image';
-import React from 'react';
-import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import authService from '@/services/authService';
 
 export default function LoginPage() {
-  const [form, setForm] = useState({
-    username: '',
-    email: '',
-    password: '',
-  });
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const router = useRouter();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(form);
+    setErrorMessage(''); // Reset error message
+    try {
+      await authService.login({ email, password });
+      router.push('/');
+    } catch (err) {
+      setErrorMessage('ログインに失敗しました。再試行してください。');
+      console.error(err);
+    }
   };
 
   return (
     <div
-      className="w-full min-h-[calc(100vh-90px)] bg-cover bg-center flex flex-wrap justify-between items-center"
+      className="w-full min-h-[100vh] bg-cover bg-center flex flex-wrap justify-between items-center"
       style={{ backgroundImage: `url('/bg/bg 1.png')` }}
     >
       <div className="text-center mx-auto">
@@ -36,7 +39,7 @@ export default function LoginPage() {
       <div className="flex flex-col md:flex-row justify-between items-center bg-white shadow-lg rounded-lg w-[914px] h-[691px] p-8 mx-auto">
         {/* Logo and Heading */}
         <div className="w-full flex justify-center items-center">
-          <div className="w-[283px] h-[283px] text-center ">
+          <div className="w-[283px] h-[283px] text-center">
             <h2 className="text-xl font-bold text-blue-600 mb-8">
               メカニカルリアサポート
             </h2>
@@ -55,25 +58,7 @@ export default function LoginPage() {
         <div className="w-full">
           <h2 className="text-xl font-bold text-blue-600 mb-8">ログイン</h2>
           {/* Form */}
-          <form onSubmit={handleSubmit}>
-            <div className="mb-4">
-              <label
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="username"
-              >
-                ユーザー名
-              </label>
-              <input
-                type="text"
-                id="username"
-                name="username"
-                value={form.username}
-                onChange={handleChange}
-                placeholder="田中 太郎"
-                className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
-              />
-            </div>
-
+          <form onSubmit={handleLogin}>
             <div className="mb-4">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
@@ -85,13 +70,13 @@ export default function LoginPage() {
                 type="email"
                 id="email"
                 name="email"
-                value={form.email}
-                onChange={handleChange}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="taro.tanaka@example.com"
                 className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+                required
               />
             </div>
-
             <div className="mb-4">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
@@ -103,15 +88,22 @@ export default function LoginPage() {
                 type="password"
                 id="password"
                 name="password"
-                value={form.password}
-                onChange={handleChange}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 placeholder="請輸入密碼"
                 className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+                required
               />
             </div>
 
+            {errorMessage && (
+              <div className="text-red-500 text-sm mb-4 text-center">
+                {errorMessage}
+              </div>
+            )}
+
             <div className="text-center my-4">
-              <a href="#" className="text-gray-500 text-sm underline">
+              <a href="/forgot" className="text-gray-500 text-sm underline">
                 パスワードを忘れた場合
               </a>
             </div>
@@ -126,7 +118,7 @@ export default function LoginPage() {
           </form>
 
           <div className="text-center mt-4">
-            <a href="#" className="text-blue-500 text-sm underline">
+            <a href="/register" className="text-blue-500 text-sm underline">
               会員登録
             </a>
           </div>

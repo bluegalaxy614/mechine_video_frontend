@@ -1,6 +1,5 @@
 'use client';
 import { DeleteIcon, EditIcon, SearchIcon } from '@/components/icons';
-import { Button } from '@nextui-org/button';
 import { Chip, ChipProps } from '@nextui-org/chip';
 import { Input } from '@nextui-org/input';
 import { Pagination } from '@nextui-org/pagination';
@@ -38,7 +37,7 @@ export default function VideoManagePage() {
     const end = start + rowsPerPage;
 
     return videoTableRows.slice(start, end);
-  }, [page, videoTableRows]);
+  }, [page]);
 
   const renderCell = useCallback((videos: Row, columnKey: React.Key) => {
     const cellValue = videos[columnKey as keyof Row];

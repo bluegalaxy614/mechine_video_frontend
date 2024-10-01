@@ -36,7 +36,7 @@ export default function UserManagePage() {
     const end = start + rowsPerPage;
 
     return userTableRows.slice(start, end);
-  }, [page, userTableRows]);
+  }, [page]);
 
   const renderCell = useCallback((users: Row, columnKey: React.Key) => {
     const cellValue = users[columnKey as keyof Row];

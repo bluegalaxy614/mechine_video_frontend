@@ -1,5 +1,5 @@
 'use client';
-import { Input, Textarea } from '@nextui-org/input';
+import { Input } from '@nextui-org/input';
 import { Button } from '@nextui-org/button';
 import Image from 'next/image';
 import { Select, SelectItem } from '@nextui-org/select';
