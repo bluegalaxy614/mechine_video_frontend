@@ -1,9 +1,7 @@
 'use client';
 import { DeleteIcon } from '@/components/icons';
 import { Avatar } from '@nextui-org/avatar';
-import { Badge } from '@nextui-org/badge';
 import { Button } from '@nextui-org/button';
-import { Divider } from '@nextui-org/divider';
 import { Image } from '@nextui-org/image';
 import { Input } from '@nextui-org/input';
 
@@ -18,7 +16,7 @@ export default function ChattingPage() {
             <span className="bg-[#ED1C24] rounded-full w-[21px] h-[21px] text-white flex justify-center items-center">
               4
             </span>
-          </div>
+          </div> 
           <div className="w-[223px] h-[81px] mx-auto bg-[#E4F1FF] rounded-md flex justify-start items-center px-[5px] gap-6">
             <Avatar src="/profile/1.png" name="高橋 文哉" size="lg" />
             <p className="text-[20px] text-center">高橋 文哉</p>

@@ -1,3 +1,4 @@
+'use client';
 import VideoCards from '@/components/videoCards';
 import ImageButton from '@/components/imageButton';
 import { Pagination } from '@nextui-org/pagination';
@@ -5,6 +6,7 @@ import BoxImage from '@/components/boxImage';
 import LineChart from '@/components/lineChart';
 import { Button } from '@nextui-org/button';
 import { lastestVideos } from '@/config/data';
+import SearchCategories from '@/components/searchCategories';
 
 export default function MyPage() {
   const icon = {
@@ -66,7 +68,8 @@ export default function MyPage() {
             拒否
           </Button>
         </div>
-        <VideoCards data={lastestVideos} />
+      <SearchCategories/>
+      <VideoCards data={lastestVideos} />
         <Pagination
           showControls
           total={lastestVideos.length}
