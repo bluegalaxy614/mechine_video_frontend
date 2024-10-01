@@ -31,7 +31,7 @@ export default function EditPage() {
 
   return (
     <div className="h-[calc(100vh-90px)] lg:w-full xsm:w-fit flex flex-col justify-between">
-      <div className="lg:w-[1280px] flex flex-col mx-auto justify-start lg:mt-[85px] md:mt-[55px] sm:mt-[45px] xsm:mt-[35px] gap-12">
+      <div className="lg:w-[1280px] md:w-[940px] sm:w-[700px] flex flex-col mx-auto justify-start lg:mt-[85px] md:mt-[55px] sm:mt-[45px] xsm:mt-[35px] gap-12">
         <h1 className="lg:text-[30px] md:text-[28px] sm:text-[24px] xsm:text-[22px] text-[#4291EF] font-bold">
           動画編集と承認
         </h1>
@@ -135,19 +135,8 @@ export default function EditPage() {
               labelPlacement="outside"
             />
           </div>
-          <div className="w-full flex">
-            <Button className="w-[185px] h-[30px] bg-[#4291EF] mx-auto mt-[40px] mb-[71px]">
-              <p className="text-[#FFFFFF] text-[20px]">アップデート</p>
-              <Image
-                width={28}
-                height={28}
-                src="/icons/icon-store.png"
-                alt=""
-              />
-            </Button>
-          </div>
         </div>
-        <div className="flex flex-col  w-[388px] h-[514px] gap-12 mx-auto">
+        <div className="flex flex-col w-[388px] max-h-[514px] gap-12 mx-auto">
           <div className="flex">
             <p className="w-[100px]">動画コード:</p>
             <p className="font-bold">CM20240901</p>
@@ -170,6 +159,12 @@ export default function EditPage() {
               リクエスト中
             </p>
           </div>
+        </div>
+        <div className="w-full flex">
+          <Button className="w-[185px] h-[30px] bg-[#4291EF] mx-auto mt-[40px] mb-[71px]">
+            <p className="text-[#FFFFFF] text-[20px]">アップデート</p>
+            <Image width={28} height={28} src="/icons/icon-store.png" alt="" />
+          </Button>
         </div>
       </section>
     </div>
