@@ -41,15 +41,15 @@ export const siteConfig = {
     },
     {
       label: '投稿する',
-      href: '/post',
+      href: '/poster',
     },
     {
       label: 'マイページ',
-      href: '/mypage',
+      href: '/viwer',
     },
     {
       label: 'お問い合わせ',
-      href: '/contact',
+      href: '/ask',
     },
     {
       label: 'Logout',
@@ -63,11 +63,11 @@ export const siteConfig = {
     },
     {
       label: 'ビデオステータス',
-      href: '/status',
+      href: '/videoManage',
     },
     {
       label: 'ユーザリスト',
-      href: '/userList',
+      href: '/userManage',
     },
   ],
   adminNavMenuItems: [
@@ -77,11 +77,11 @@ export const siteConfig = {
     },
     {
       label: 'ビデオステータス',
-      href: '/status',
+      href: '/videoManage',
     },
     {
       label: 'ユーザリスト',
-      href: '/userList',
+      href: '/userManage',
     },
     {
       label: 'Logout',
