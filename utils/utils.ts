@@ -1,14 +1,18 @@
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
-import { DecodedToken } from '@/types/libType';
+
+export interface DecodedToken {
+  exp: number;
+  [key: string]: any; // Allow additional properties
+}
 
 // Function to set the token in localStorage and Axios headers
-export const setSession = (access_token: string | null): void => {
-  if (access_token) {
+export const setSession = (accessToken: string | null): void => {
+  if (accessToken) {
     // Store token in localStorage
-    localStorage.setItem('jwt_access_token', access_token);
+    localStorage.setItem('jwt_access_token', accessToken);
     // Set default Axios header
-    axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
+    axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
   } else {
     // Remove token from localStorage
     localStorage.removeItem('jwt_access_token');
@@ -18,13 +22,13 @@ export const setSession = (access_token: string | null): void => {
 };
 
 // Function to check if the token is valid
-export const isAuthTokenValid = (access_token: string | null): boolean => {
-  if (!access_token) {
+export const isAuthTokenValid = (accessToken: string | null): boolean => {
+  if (!accessToken) {
     return false;
   }
 
   try {
-    const decoded: DecodedToken = jwtDecode(access_token);
+    const decoded: DecodedToken = jwtDecode<DecodedToken>(accessToken);
     const currentTime = Date.now() / 1000; // Current time in seconds
 
     if (decoded.exp < currentTime) {
@@ -41,5 +45,5 @@ export const isAuthTokenValid = (access_token: string | null): boolean => {
 
 // Function to get the token from localStorage
 export const getAccessToken = (): string | null => {
-  return window.localStorage.getItem('jwt_access_token');
+  return localStorage.getItem('jwt_access_token');
 };

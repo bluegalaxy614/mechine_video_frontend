@@ -5,28 +5,38 @@ import Image from 'next/image';
 import { Select, SelectItem } from '@nextui-org/select';
 import { useState } from 'react';
 import { categoryConfig } from '@/config/site';
-import axios from 'axios';
-const API_URL = process.env.NEXT_PUBLIC_SERVER_URL;
+import { uploadVideo } from '@/lib/api';
 
 export default function SubmissionPage() {
+  const [video, setVideo] = useState<File | null>(null);
+  const [formData, setFormData] = useState({
+    title: '',
+    description: '',
+    youtubeLink: '',
+    videoCode: '',
+    machineName: '',
+    format: '',
+    manufacturer: '',
+    selectedCategory: '',
+    selectedSubCategory: '',
+  });
+  const [uploadedStatus, setUploadedStatus] = useState(false);
+  const [videoPreview, setVideoPreview] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [selectedSubCategory, setSelectedSubCategory] = useState<string>('');
-  const [title, setTitle] = useState<string>('');
-  const [description, setDescription] = useState<string>('');
-  const [youtubeLink, setYoutubeLink] = useState<string>('');
-  const [videoCode, setVideoCode] = useState<string>('');
-  const [machineName, setMachineName] = useState<string>('');
-  const [format, setFormat] = useState<string>('');
-  const [manufacturer, setManufacturer] = useState<string>('');
-  const [videoPreview, setVideoPreview] = useState<string | null>(null);
-  const [videoFile, setVideoFile] = useState<File | null>(null);
-  const [uploadUrl, setUploadUrl] = useState<string | null>(null);
 
   // Handle category change
   const handleCategoryChange = (value: string) => {
     console.log(value);
     setSelectedCategory(value);
     setSelectedSubCategory(''); // Reset subcategory when main category changes
+  };
+
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
   // Handle subcategory change
@@ -53,42 +63,31 @@ export default function SubmissionPage() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    const formData = {
-      title,
-      description,
-      youtubeLink,
-      videoCode,
-      machineName,
-      format,
-      manufacturer,
-      selectedCategory,
-      selectedSubCategory,
-      video: videoFile,
-    };
-
-    // Log the form data or send it to an API
-    console.log('Form submitted with the following data:', formData);
-
-    try {
-      const res = await axios.post(`${API_URL}/api/poster/videoFile`, formData);
-      setUploadUrl(res.data.url);
-    } catch (err) {
-      console.error(err);
+    if (!video) {
+      console.log('No video selected');
+      return;
     }
 
-    // Reset form fields
-    setTitle('');
-    setDescription('');
-    setYoutubeLink('');
-    setVideoCode('');
-    setMachineName('');
-    setFormat('');
-    setManufacturer('');
-    setSelectedCategory('');
-    setSelectedSubCategory('');
-    setVideoPreview(null);
-    setVideoFile(null);
+    const data = new FormData();
+
+    data.append('video', video);
+    data.append('title', formData.title);
+    data.append('description', formData.description);
+    data.append('youtubeLink', formData.youtubeLink);
+    data.append('videoCode', formData.videoCode);
+    data.append('machineName', formData.machineName);
+    data.append('format', formData.format);
+    data.append('manufacturer', formData.manufacturer);
+    data.append('selectedCategory', selectedCategory);
+    data.append('selectedSubCategory', selectedSubCategory);
+
+    try {
+      const res = await uploadVideo(data);
+      setUploadedStatus(true);
+      console.log(uploadedStatus, res);
+    } catch (error) {
+      console.error('Error uploading video:', error);
+    }
   };
 
   return (
@@ -114,17 +113,19 @@ export default function SubmissionPage() {
                   height={41}
                   placeholder="入力してください..."
                   labelPlacement="outside"
-                  onChange={(e) => setTitle(e.target.value)}
+                  value={formData.title}
+                  onChange={handleInputChange}
                 />
               </div>
 
               <div>
                 <p className="mb-2">説明</p>
                 <Textarea
+                  value={formData.description}
                   labelPlacement="outside"
                   placeholder="入力してください..."
                   className="w-[300px] h-[100px]"
-                  onChange={(e) => setDescription(e.target.value)}
+                  onChange={handleInputChange}
                 />
               </div>
             </div>
@@ -145,9 +146,11 @@ export default function SubmissionPage() {
                   )}
                   <Input
                     type="file"
+                    name="video"
                     accept=".mp4, .avi"
                     onChange={handleFileChange}
                     className="hidden"
+                    required
                   />
                   <Image
                     width={105}
@@ -162,6 +165,7 @@ export default function SubmissionPage() {
               <div>
                 <p className="mb-2">Youtubeリンク</p>
                 <Input
+                  value={formData.youtubeLink}
                   width={387}
                   type="url"
                   placeholder="www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -173,7 +177,7 @@ export default function SubmissionPage() {
                       </span>
                     </div>
                   }
-                  onChange={(e) => setYoutubeLink(e.target.value)}
+                  onChange={handleInputChange}
                 />
               </div>
             </div>
@@ -184,44 +188,48 @@ export default function SubmissionPage() {
           <div>
             <p className="mb-2">動画コード</p>
             <Input
+              value={formData.videoCode}
               width={387}
               height={41}
               placeholder="入力してください..."
               labelPlacement="outside"
-              onChange={(e) => setVideoCode(e.target.value)}
+              onChange={handleInputChange}
             />
           </div>
 
           <div>
             <p className="mb-2">機械名</p>
             <Input
+              value={formData.machineName}
               width={387}
               height={41}
               placeholder="入力してください..."
               labelPlacement="outside"
-              onChange={(e) => setMachineName(e.target.value)}
+              onChange={handleInputChange}
             />
           </div>
 
           <div>
             <p className="mb-2">形式</p>
             <Input
+              value={formData.format}
               width={387}
               height={41}
               placeholder="入力してください..."
               labelPlacement="outside"
-              onChange={(e) => setFormat(e.target.value)}
+              onChange={handleInputChange}
             />
           </div>
 
           <div>
             <p className="mb-2">メーカー</p>
             <Input
+              value={formData.manufacturer}
               width={387}
               height={41}
               placeholder="入力してください..."
               labelPlacement="outside"
-              onChange={(e) => setManufacturer(e.target.value)}
+              onChange={handleInputChange}
             />
           </div>
 
