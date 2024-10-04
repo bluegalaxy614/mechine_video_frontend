@@ -1,17 +1,8 @@
 'use client';
 import Image from 'next/image';
 import { Card } from '@nextui-org/card';
+import { VideoCardsProps } from '@/types';
 
-interface VideoCardsProps {
-  data: {
-    title: string;
-    img: string;
-    categories: string[];
-    describe: string;
-    author: string;
-    date: string;
-  }[];
-}
 const VideoCards = ({ data }: VideoCardsProps) => {
   return (
     <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xsm:grid-cols-1 gap-6 lg:mx-[0px] md:mx-[40px] sm:mx-[20px] xsm:mx-[10px]">

@@ -1,3 +1,8 @@
+export interface DecodedToken {
+  exp: number; // Expiration time in seconds
+  [key: string]: any; // Optional, to handle any other properties
+}
+
 export interface RegisterData {
   name: string;
   email: string;
@@ -12,4 +17,9 @@ export interface LoginData {
 
 export interface ForgotPasswordData {
   email: string;
+}
+
+export interface UploadFileData {
+  fileName: string;
+  fileType: string;
 }

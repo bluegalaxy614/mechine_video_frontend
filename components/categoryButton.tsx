@@ -2,12 +2,7 @@
 
 import { Button } from '@nextui-org/button';
 import { useState } from 'react';
-
-interface CategoryButtonProps {
-  id: string;
-  name: string;
-  setSelectedCategories: React.Dispatch<React.SetStateAction<string[]>>;
-}
+import { CategoryButtonProps } from '@/types';
 
 export default function CategoryButton({
   id,

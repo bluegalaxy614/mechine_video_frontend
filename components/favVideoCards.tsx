@@ -2,21 +2,11 @@
 import Image from 'next/image';
 import { Card } from '@nextui-org/card';
 import { Button } from '@nextui-org/button';
+import { FavVideoCardsProps } from '@/types';
 
-interface FavVideoCardsProps {
-  data: {
-    title: string;
-    img: string;
-    categories: string[];
-    describe: string;
-    author: string;
-    date: string;
-    duration?: string | null;
-  }[];
-}
 const FavVideoCards = ({ data }: FavVideoCardsProps) => {
   return (
-    <>
+    <div>
       <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xsm:grid-cols-1 gap-6 lg:mx-[0px] md:mx-[40px] sm:mx-[20px] xsm:mx-[10px]">
         {data.map((item, index) => (
           <Card
@@ -84,7 +74,7 @@ const FavVideoCards = ({ data }: FavVideoCardsProps) => {
           />
         </div>
       </Button>
-    </>
+    </div>
   );
 };
 

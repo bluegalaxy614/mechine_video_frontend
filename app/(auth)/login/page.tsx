@@ -2,9 +2,13 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import authService from '@/services/authService';
+import authService from '@/lib/auth';
+import { setSession } from '@/utils/utils';
+import { useStore } from '@/store/store';
+import axios from 'axios';
 
 export default function LoginPage() {
+  const { setUser } = useStore();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -15,10 +19,17 @@ export default function LoginPage() {
     setErrorMessage(''); // Reset error message
     try {
       await authService.login({ email, password });
+      const res = await authService.login({ email, password });
+      const token = res.data.token;
+      setSession(token);
+      setUser(res.data.user);
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       router.push('/');
     } catch (err) {
-      setErrorMessage('ログインに失敗しました。再試行してください。');
       console.error(err);
+      setErrorMessage(
+        err.response?.data.message || 'An unexpected error occurred',
+      );
     }
   };
 

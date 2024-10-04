@@ -3,22 +3,45 @@ import React from 'react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import authService from '@/services/authService';
+import authService from '@/lib/auth';
+import axios from 'axios';
+import { setSession } from '@/utils/utils';
+import { useStore } from '@/store/store';
 
 export default function RegisterPage() {
+  const { user, setUser } = useStore();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
   const router = useRouter();
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError('');
+    setMessage('');
     try {
-      await authService.register({ name, email, password, confirmPassword });
-      router.push('verify-email');
+      console.log(name, email, password, confirmPassword);
+      const res = await authService.register({
+        name,
+        email,
+        password,
+        confirmPassword,
+      });
+      console.log(res);
+      const token = res.data.token;
+      setSession(token);
+      setUser(res.data.user);
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+      setMessage(res.data.message);
+      router.push('/');
+      // router.push('verify-email');
     } catch (err) {
-      console.log(err);
+      console.log(err.response?.data.message, 'erere');
+      setError(err.response?.data.message || 'An unexpected error occurred');
     }
   };
 
@@ -131,6 +154,8 @@ export default function RegisterPage() {
             </div>
 
             <div className="text-center">
+              {message && <p style={{ color: 'green' }}>{message}</p>}
+              {error && <p style={{ color: 'red' }}>{error}</p>}
               <button
                 type="submit"
                 className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition duration-300"

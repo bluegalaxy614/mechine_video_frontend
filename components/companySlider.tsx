@@ -3,17 +3,7 @@
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/splide/css';
 import Image from 'next/image';
-// Define the type for the individual slide
-interface Slide {
-  image: string;
-  title: string;
-}
-
-// Define the props for the CompanySlider component
-interface CompanySliderProps {
-  slides: Slide[];
-  dir: 'ltr' | 'rtl'; // Restrict the direction to either "ltr" or "rtl"
-}
+import { CompanySliderProps } from '@/types';
 
 const CompanySlider: React.FC<CompanySliderProps> = ({ slides, dir }) => {
   return (

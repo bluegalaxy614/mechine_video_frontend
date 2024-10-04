@@ -1,12 +1,5 @@
 import Image from 'next/image';
-
-interface BoxImageProps {
-  id: number;
-  image: string;
-  title: string;
-  info: string;
-  unit: string;
-}
+import { BoxImageProps } from '@/types';
 
 const BoxImage = ({ id, image, title, info, unit }: BoxImageProps) => {
   return (

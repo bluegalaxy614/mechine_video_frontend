@@ -140,13 +140,6 @@ const SearchCategories = () => {
           サブカテゴリ
         </p>
         <div className="flex flex-wrap justify-start gap-3 py-[9px] h-[208px] overflow-y-auto my-[20px]">
-          {/* {
-            categoryConfig
-              .flatMap((category) => category.subCategories)
-              .map((category) => (
-                <SubCategoryButton key={category.id} id={category.id} name={category.label} setSelectedSubCategories={setSelectedSubCategories} />
-              ))
-              } */}
           {categoryConfig
             .filter((category) => selectedCategories.includes(category.id))
             .flatMap((category) => category.subCategories)

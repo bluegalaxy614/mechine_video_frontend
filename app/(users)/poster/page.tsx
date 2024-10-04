@@ -7,6 +7,8 @@ import LineChart from '@/components/lineChart';
 import { Button } from '@nextui-org/button';
 import { lastestVideos } from '@/config/data';
 import SearchCategories from '@/components/searchCategories';
+import { Image } from '@nextui-org/image';
+import Link from 'next/link';
 
 export default function MyPage() {
   const icon = {
@@ -56,19 +58,33 @@ export default function MyPage() {
         </div>
       </section>
       <section className="max-w-[1280px] mx-auto">
+        {/* <SearchCategories /> */}
         <ImageButton data={icon} />
-        <div className="mb-[30px] flex gap-[40px] lg:px-[40px] md:px-[40px] sm:px-[50px] xsm:px-[35px]">
-          <Button className="rounded-full w-[144px] h-[41px] bg-[#FDE48D] text-[#725C10] text-[16px]">
-            リクエスト中
-          </Button>
-          <Button className="rounded-full w-[144px] h-[41px] bg-[#B1FF9D] text-[#21770B] text-[16px]">
-            承認済み
-          </Button>
-          <Button className="rounded-full w-[144px] h-[41px] bg-[#FFC2C5] text-[#9D0E14] text-[16px]">
-            拒否
-          </Button>
+        <div className="flex w-full justify-between">
+          <div className="mb-[30px] flex gap-[40px] lg:px-[40px] md:px-[40px] sm:px-[50px] xsm:px-[35px]">
+            <Button className="rounded-full w-[144px] h-[41px] bg-[#FDE48D] text-[#725C10] text-[16px]">
+              リクエスト中
+            </Button>
+            <Button className="rounded-full w-[144px] h-[41px] bg-[#B1FF9D] text-[#21770B] text-[16px]">
+              承認済み
+            </Button>
+            <Button className="rounded-full w-[144px] h-[41px] bg-[#FFC2C5] text-[#9D0E14] text-[16px]">
+              拒否
+            </Button>
+          </div>
+          <Link
+            href="/poster/submission"
+            className="flex items-center justify-center gap-5 rounded-full w-[144px] h-[41px] bg-[#4291EF] text-white text-[16px]"
+          >
+            投稿する
+            <Image
+              src="/icons/icon-video-upload.png"
+              alt=""
+              width={24}
+              height={24}
+            />
+          </Link>
         </div>
-        <SearchCategories />
         <VideoCards data={lastestVideos} />
         <Pagination
           showControls

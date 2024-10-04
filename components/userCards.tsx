@@ -1,14 +1,7 @@
 'use client';
 import Image from 'next/image';
 import { Card, CardBody } from '@nextui-org/card';
-
-interface UserCardsProps {
-  data: {
-    img: string;
-    name: string;
-    number: string;
-  }[];
-}
+import { UserCardsProps } from '@/types';
 
 const UserCards = ({ data }: UserCardsProps) => {
   return (

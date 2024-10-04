@@ -1,14 +1,6 @@
 import { Card } from '@nextui-org/card';
 import Image from 'next/image';
-
-interface NewsCardsProps {
-  data: {
-    icon: string;
-    title: string;
-    description: string;
-    date: string;
-  }[];
-}
+import { NewsCardsProps } from '@/types';
 
 const NewsCards = ({ data }: NewsCardsProps) => {
   return (

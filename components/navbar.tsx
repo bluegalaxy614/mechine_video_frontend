@@ -19,13 +19,18 @@ import { Link } from '@nextui-org/link';
 import { link as linkStyles } from '@nextui-org/theme';
 import NextLink from 'next/link';
 import clsx from 'clsx';
+import { useStore } from '@/store/store';
 
 import { siteConfig } from '@/config/site';
 import { Button } from '@nextui-org/button';
 import { Divider } from '@nextui-org/divider';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 export const Navbar = () => {
+  const { user, setUser } = useStore((state) => state);
+  const router = useRouter();
+  console.log(user);
   return (
     <div>
       <NextUINavbar
@@ -63,39 +68,49 @@ export const Navbar = () => {
               ))}
             </ul>
             <NavbarItem className="hidden lg:flex md:flex">
-              <Dropdown placement="bottom-end">
-                <DropdownTrigger>
-                  <Button className="flex justify-center items-center rounded-full bg-[#F4F4F4] w-[194px] h-[65px] p-1 hover:pointer">
-                    <Avatar
-                      className="h-[57px] w-[57px] border-2 border-default-500 border-[#4291EF]"
-                      src="/profile/3.png"
-                    />
-                    <span className="mx-auto text-[20px] text-[#1F2B3E]">
-                      高橋 文哉
-                    </span>
-                  </Button>
-                </DropdownTrigger>
-                <DropdownMenu aria-label="Profile Actions" variant="flat">
-                  <DropdownItem key="マイページ">
-                    <Link href="/mypage">マイページ</Link>
-                  </DropdownItem>
-                  <DropdownItem key="プロフィール編集">
-                    <Link href="/profile">プロフィール編集</Link>
-                  </DropdownItem>
-                  <DropdownItem key="ログアウト">
-                    <Divider />
-                    <div className="flex justify-between items-center gap-2                    ">
-                      ログアウト
-                      <Image
-                        width={39}
-                        height={39}
-                        src="/icons/icon-logout.png"
-                        alt=""
+              {user ? (
+                <Dropdown placement="bottom-end">
+                  <DropdownTrigger>
+                    <Button className="flex justify-center items-center rounded-full bg-[#F4F4F4] w-[194px] h-[65px] p-1 hover:pointer">
+                      <Avatar
+                        className="h-[57px] w-[57px] border-2 border-default-500 border-[#4291EF]"
+                        src={user?.avatar ? user.avatar : '/profile/user.png'}
                       />
-                    </div>
-                  </DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
+                      <span className="mx-auto text-[20px] text-[#1F2B3E]">
+                        {user.name}
+                      </span>
+                    </Button>
+                  </DropdownTrigger>
+                  <DropdownMenu aria-label="Profile Actions" variant="flat">
+                    <DropdownItem key="マイページ">
+                      <Link href="/mypage">マイページ</Link>
+                    </DropdownItem>
+                    <DropdownItem key="プロフィール編集">
+                      <Link href="/profile">プロフィール編集</Link>
+                    </DropdownItem>
+                    <DropdownItem key="ログアウト">
+                      <div
+                        className="flex justify-between items-center gap-2"
+                        onClick={() => {
+                          localStorage.clear();
+                          setUser(null);
+                          router.push('/');
+                        }}
+                      >
+                        ログアウト
+                        <Image
+                          width={39}
+                          height={39}
+                          src="/icons/icon-logout.png"
+                          alt=""
+                        />
+                      </div>
+                    </DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
+              ) : (
+                <Link href="/login">ログイン</Link>
+              )}
             </NavbarItem>
           </NavbarContent>
 

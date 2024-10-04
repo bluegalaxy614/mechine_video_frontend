@@ -1,12 +1,5 @@
 import Image from 'next/image';
-
-interface ImageButtonProps {
-  data: {
-    icon: string;
-    title: string;
-    description?: string | null; // accept null or undefined
-  };
-}
+import { ImageButtonProps } from '@/types';
 
 const ImageButton = ({ data }: ImageButtonProps) => {
   return (
@@ -33,4 +26,3 @@ const ImageButton = ({ data }: ImageButtonProps) => {
 };
 
 export default ImageButton;
-// lg:mx-[0px] md:mx-[40px] sm:mx-[20px] xsm:mx-[10px]
