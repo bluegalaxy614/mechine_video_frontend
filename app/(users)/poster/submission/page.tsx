@@ -3,7 +3,7 @@ import { Input, Textarea } from '@nextui-org/input';
 import { Button } from '@nextui-org/button';
 import Image from 'next/image';
 import { Select, SelectItem } from '@nextui-org/select';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { categoryConfig } from '@/config/site';
 import { uploadVideo } from '@/lib/api';
 
@@ -33,6 +33,7 @@ export default function SubmissionPage() {
   };
 
   const handleInputChange = (e) => {
+    console.log(e.target.name, e.target.value);
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -55,14 +56,24 @@ export default function SubmissionPage() {
     if (file) {
       console.log('Selected file:', file);
 
-      const fileURL = URL.createObjectURL(file);
-      console.log('File URL:', fileURL);
-      setVideoPreview(fileURL);
+      setVideo(file);
+
+      // const fileURL = URL.createObjectURL(file);
+      // console.log('File URL:', fileURL);
+      // setVideoPreview(fileURL);
     }
   };
 
+  useEffect(() => {
+    if (video) {
+      setVideoPreview(URL.createObjectURL(video));
+    }
+  }, [video]);
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    console.log(formData, selectedCategory, selectedSubCategory, video);
     if (!video) {
       console.log('No video selected');
       return;
@@ -82,9 +93,10 @@ export default function SubmissionPage() {
     data.append('selectedSubCategory', selectedSubCategory);
 
     try {
+      console.log(data)
       const res = await uploadVideo(data);
       setUploadedStatus(true);
-      console.log(uploadedStatus, res);
+      console.log(uploadedStatus, res, data);
     } catch (error) {
       console.error('Error uploading video:', error);
     }
@@ -111,6 +123,7 @@ export default function SubmissionPage() {
                 <Input
                   width={387}
                   height={41}
+                  name="title"
                   placeholder="入力してください..."
                   labelPlacement="outside"
                   value={formData.title}
@@ -121,6 +134,7 @@ export default function SubmissionPage() {
               <div>
                 <p className="mb-2">説明</p>
                 <Textarea
+                  name="description"
                   value={formData.description}
                   labelPlacement="outside"
                   placeholder="入力してください..."
@@ -136,6 +150,7 @@ export default function SubmissionPage() {
                   {/* Video Preview */}
                   {videoPreview && (
                     <video
+                      key={videoPreview}
                       className="absolute inset-0 w-full h-full rounded-lg"
                       controls
                     >
@@ -165,6 +180,7 @@ export default function SubmissionPage() {
               <div>
                 <p className="mb-2">Youtubeリンク</p>
                 <Input
+                  name="youtubeLink"
                   value={formData.youtubeLink}
                   width={387}
                   type="url"
@@ -188,6 +204,7 @@ export default function SubmissionPage() {
           <div>
             <p className="mb-2">動画コード</p>
             <Input
+              name="videoCode"
               value={formData.videoCode}
               width={387}
               height={41}
@@ -200,6 +217,7 @@ export default function SubmissionPage() {
           <div>
             <p className="mb-2">機械名</p>
             <Input
+              name="machineName"
               value={formData.machineName}
               width={387}
               height={41}
@@ -212,6 +230,7 @@ export default function SubmissionPage() {
           <div>
             <p className="mb-2">形式</p>
             <Input
+              name="format"
               value={formData.format}
               width={387}
               height={41}
@@ -224,6 +243,7 @@ export default function SubmissionPage() {
           <div>
             <p className="mb-2">メーカー</p>
             <Input
+              name="manufacturer"
               value={formData.manufacturer}
               width={387}
               height={41}
