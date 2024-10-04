@@ -3,7 +3,7 @@ import { Input, Textarea } from '@nextui-org/input';
 import { Button } from '@nextui-org/button';
 import Image from 'next/image';
 import { Select, SelectItem } from '@nextui-org/select';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { categoryConfig } from '@/config/site';
 import { uploadVideo } from '@/lib/api';
 
@@ -12,6 +12,7 @@ export default function SubmissionPage() {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
+    videoDuration: '',
     youtubeLink: '',
     videoCode: '',
     machineName: '',
@@ -27,13 +28,11 @@ export default function SubmissionPage() {
 
   // Handle category change
   const handleCategoryChange = (value: string) => {
-    console.log(value);
     setSelectedCategory(value);
     setSelectedSubCategory(''); // Reset subcategory when main category changes
   };
 
   const handleInputChange = (e) => {
-    console.log(e.target.name, e.target.value);
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -42,7 +41,6 @@ export default function SubmissionPage() {
 
   // Handle subcategory change
   const handleSubCategoryChange = (value: string) => {
-    console.log(value);
     setSelectedSubCategory(value);
   };
 
@@ -53,22 +51,19 @@ export default function SubmissionPage() {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
+    
     if (file) {
-      console.log('Selected file:', file);
-
       setVideo(file);
+      const fileURL = URL.createObjectURL(file);
+      setVideoPreview(fileURL);
 
-      // const fileURL = URL.createObjectURL(file);
-      // console.log('File URL:', fileURL);
-      // setVideoPreview(fileURL);
+      const tempVideo = document.createElement('video');
+      tempVideo.src = fileURL;
+      tempVideo.addEventListener('loadedmetadata', () => {
+        formData.videoDuration =  Math.floor(tempVideo.duration).toString();
+      })
     }
   };
-
-  useEffect(() => {
-    if (video) {
-      setVideoPreview(URL.createObjectURL(video));
-    }
-  }, [video]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -82,6 +77,7 @@ export default function SubmissionPage() {
     const data = new FormData();
 
     data.append('video', video);
+    data.append('videoDuration', formData.videoDuration);
     data.append('title', formData.title);
     data.append('description', formData.description);
     data.append('youtubeLink', formData.youtubeLink);
@@ -93,11 +89,11 @@ export default function SubmissionPage() {
     data.append('selectedSubCategory', selectedSubCategory);
 
     try {
-      console.log(data)
       const res = await uploadVideo(data);
       setUploadedStatus(true);
       console.log(uploadedStatus, res, data);
     } catch (error) {
+      setUploadedStatus(false);
       console.error('Error uploading video:', error);
     }
   };

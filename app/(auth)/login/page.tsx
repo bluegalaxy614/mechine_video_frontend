@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import authService from '@/lib/auth';
 import { setSession } from '@/utils/utils';
 import { useStore } from '@/store/store';
-import axios from 'axios';
 
 export default function LoginPage() {
   const { setUser } = useStore();
@@ -16,14 +15,12 @@ export default function LoginPage() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setErrorMessage(''); // Reset error message
+    setErrorMessage('');
     try {
-      await authService.login({ email, password });
       const res = await authService.login({ email, password });
       const token = res.data.token;
       setSession(token);
       setUser(res.data.user);
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       router.push('/');
     } catch (err) {
       console.error(err);

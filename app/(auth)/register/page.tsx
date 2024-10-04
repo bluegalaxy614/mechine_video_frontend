@@ -23,24 +23,19 @@ export default function RegisterPage() {
     setError('');
     setMessage('');
     try {
-      console.log(name, email, password, confirmPassword);
       const res = await authService.register({
         name,
         email,
         password,
         confirmPassword,
       });
-      console.log(res);
       const token = res.data.token;
       setSession(token);
       setUser(res.data.user);
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-
       setMessage(res.data.message);
+      console.log('register successfully');
       router.push('/');
-      // router.push('verify-email');
     } catch (err) {
-      console.log(err.response?.data.message, 'erere');
       setError(err.response?.data.message || 'An unexpected error occurred');
     }
   };
