@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { jwtDecode } from 'jwt-decode'; // Make sure to use this correctly without destructuring
+import {jwtDecode} from 'jwt-decode'; // Correct the import by removing destructuring
 
 // Interface for decoded JWT token
 export interface DecodedToken {
@@ -10,12 +10,14 @@ export interface DecodedToken {
 // Function to set session by storing access token and adding it to axios headers
 export const setSession = (accessToken: string | null): void => {
   if (typeof window !== 'undefined' && accessToken) {
-    // Check if in the browser
+    // Check if running in the browser and token is provided
     console.log('Setting access token:', accessToken);
     localStorage.setItem('jwt_access_token', accessToken); // Store token in localStorage
+    console.log(localStorage.getItem('jwt_access_token'));
     axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`; // Set axios header
   } else if (typeof window !== 'undefined') {
-    localStorage.removeItem('jwt_access_token'); // Remove token if not provided
+    // If running in the browser and no token is provided
+    localStorage.removeItem('jwt_access_token'); // Remove token from localStorage
     delete axios.defaults.headers.common['Authorization']; // Remove axios header
   }
 };
@@ -45,8 +47,8 @@ export const isAuthTokenValid = (accessToken: string | null): boolean => {
 // Function to get the access token from localStorage
 export const getAccessToken = (): string | null => {
   if (typeof window !== 'undefined') {
-    // Check if in the browser
+    // Check if running in the browser
     return localStorage.getItem('jwt_access_token'); // Get token from localStorage
   }
-  return null; // Return null if not in the browser
+  return null; // Return null if not running in the browser
 };

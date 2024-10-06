@@ -12,7 +12,7 @@ const login = async (data: LoginData) => {
 };
 
 const forgotPassword = async (data: ForgotPasswordData) => {
-  return axios.post(`${API_URL}f/api/auth/orgot-password`, data);
+  return axios.post(`${API_URL}/api/auth/forgot-password`, data);
 };
 
 export default { register, login, forgotPassword };
