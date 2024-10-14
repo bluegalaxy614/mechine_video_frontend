@@ -1,9 +1,7 @@
 'use client';
-import React from 'react';
-import ImageSlider from '@/components/imageSlider';
+import React, { useEffect, useState } from 'react';
 import VideoCards from '@/components/videoCards';
 import { Pagination } from '@nextui-org/pagination';
-import { slides, lastestVideos } from '@/config/data';
 import SearchCategories from '@/components/searchCategories';
 import ImageButton from '@/components/imageButton';
 import { Button } from '@nextui-org/button';
@@ -16,10 +14,22 @@ const icon = {
 };
 
 export default function ViwerPage() {
+  const [videos, setVideos] = useState([]);
+  const [totalPages, setTotalPages] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [displyVideos, setDisplyVideos] = useState([]);
+
+  useEffect(() => {
+    setDisplyVideos(videos)
+    console.log(videos)
+  }, [videos])
   return (
     <>
-      <ImageSlider slides={slides} />
-      <SearchCategories />
+      <SearchCategories
+        setVideos={setVideos}
+        setTotalPages={setTotalPages}
+        currentPage={currentPage}
+      />
       <section className="max-w-[1280px] mx-auto my-[30px]">
         <ImageButton data={icon} />
         <div className="mb-[30px] flex gap-[40px] lg:px-[40px] md:px-[40px] sm:px-[50px] xsm:px-[35px]">
@@ -28,11 +38,12 @@ export default function ViwerPage() {
             お気に入り
           </Button>
         </div>
-        <VideoCards data={lastestVideos} />
+        <VideoCards data={displyVideos} />
         <Pagination
           showControls
-          total={lastestVideos.length}
-          initialPage={1}
+          total={totalPages}
+          page={currentPage}
+          onChange={setCurrentPage}
           className="flex align-items-center justify-center my-[30px]"
         />
       </section>

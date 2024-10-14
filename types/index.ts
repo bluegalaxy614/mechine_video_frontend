@@ -137,17 +137,22 @@ export interface LineChartProps {
 
 export interface NewsCardsProps {
   data: {
-    icon: string;
     title: string;
-    description: string;
+    content: string;
     date: string;
   }[];
+}
+
+export interface category {
+  main: string;
+  sub: string;
 }
 
 export interface subCategoryButtonProps {
   id: string;
   name: string;
-  setSelectedSubCategories: React.Dispatch<React.SetStateAction<string[]>>;
+  category: category;
+  setSelectedSubCategories: React.Dispatch<React.SetStateAction<category[]>>;
 }
 
 export interface UserCardsProps {
@@ -159,11 +164,42 @@ export interface UserCardsProps {
 }
 export interface VideoCardsProps {
   data: {
-    title: string;
-    img: string;
-    categories: string[];
-    describe: string;
-    author: string;
-    date: string;
+    _id: string;
+    title: String,
+    description: String,
+    videoDuration: String,
+    videoCode: String,
+    machineName: String,
+    format: String,
+    manufacturer: String,
+    selectedCategory: String,
+    selectedSubCategory: String,
+    thumbnailsUrl: string,
+    videoUrl: string,
+    posterId: string,
+    posterName: string,
+    uploadDate: string,
+    views: number
+    status: string,
   }[];
+}
+
+export interface Video {
+  _id: string;
+  title: string,
+  description: string,
+  videoDuration: string,
+  videoCode: string,
+  machineName: string,
+  format: string,
+  manufacturer: string,
+  selectedCategory: string,
+  selectedSubCategory: string,
+  thumbnailsUrl: string,
+  videoUrl: string,
+  posterId: string,
+  posterName: string,
+  uploadDate: string,
+  views: number,
+  status: string,
 }

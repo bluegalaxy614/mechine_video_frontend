@@ -30,7 +30,6 @@ import { useRouter } from 'next/navigation';
 export const Navbar = () => {
   const { user, setUser } = useStore((state) => state);
   const router = useRouter();
-  console.log(user);
   return (
     <div>
       <NextUINavbar
@@ -71,7 +70,7 @@ export const Navbar = () => {
               {user ? (
                 <Dropdown placement="bottom-end">
                   <DropdownTrigger>
-                    <Button className="flex justify-center items-center rounded-full bg-[#F4F4F4] w-[194px] h-[65px] p-1 hover:pointer">
+                    <Button className="flex justify-center items-center rounded-full bg-[#F4F4F4] min-w-[190px] conten-fit h-[65px] p-1 hover:pointer pr-[10px]">
                       <Avatar
                         className="h-[57px] w-[57px] border-2 border-default-500 border-[#4291EF]"
                         src={user?.avatar ? user.avatar : '/profile/user.png'}
@@ -94,7 +93,7 @@ export const Navbar = () => {
                         onClick={() => {
                           localStorage.clear();
                           setUser(null);
-                          router.push('/');
+                          router.push('/login');
                         }}
                       >
                         ログアウト

@@ -6,7 +6,7 @@ export type VideoTableConfig = typeof videoTableConfig;
 export type UserTableConfig = typeof userTableConfig;
 
 export const siteConfig = {
-  name: 'Mechines Friends',
+  name: 'LOGO',
   description: 'Enjoy your life!',
   userNavItems: [
     {
@@ -23,7 +23,7 @@ export const siteConfig = {
     },
     {
       label: 'マイページ',
-      href: '/viwer',
+      href: '/viewer',
     },
     {
       label: 'お問い合わせ',
@@ -98,22 +98,42 @@ export const categoryConfig = [
       {
         id: 's_1',
         label: '旋盤',
+        category: {
+          main: '1',
+          sub: 's_1'
+        }
       },
       {
         id: 's_2',
         label: 'フライス盤',
+        category: {
+          main: '1',
+          sub: 's_2'
+        }
       },
       {
         id: 's_3',
         label: '研削盤',
+        category: {
+          main: '1',
+          sub: 's_3'
+        }
       },
       {
         id: 's_4',
         label: 'ボール盤',
+        category: {
+          main: '1',
+          sub: 's_4'
+        }
       },
       {
         id: 's_5',
         label: '汎用工作機械 その他',
+        category: {
+          main: '1',
+          sub: 's_5'
+        }
       },
     ],
   },
@@ -124,18 +144,34 @@ export const categoryConfig = [
       {
         id: 's_1',
         label: 'プレスブレーキ・aベンダー',
+        category: {
+          main: '2',
+          sub: 's_1'
+        }
       },
       {
         id: 's_2',
         label: 'シャーリング',
+        category: {
+          main: '2',
+          sub: 's_2'
+        }
       },
       {
         id: 's_3',
         label: 'パンチプレス',
+        category: {
+          main: '2',
+          sub: 's_3'
+        }
       },
       {
         id: 's_4',
         label: '板金機械_その他',
+        category: {
+          main: '2',
+          sub: 's_4'
+        }
       },
     ],
   },
@@ -146,18 +182,34 @@ export const categoryConfig = [
       {
         id: 's_1',
         label: 'バンドソー',
+        category: {
+          main: '3',
+          sub: 's_1'
+        }
       },
       {
         id: 's_2',
         label: 'メタルソー',
+        category: {
+          main: '3',
+          sub: 's_2'
+        }
       },
       {
         id: 's_3',
         label: 'コンターマシン',
+        category: {
+          main: '3',
+          sub: 's_3'
+        }
       },
       {
         id: 's_4',
         label: '鉄骨加工機 その他',
+        category: {
+          main: '3',
+          sub: 's_4'
+        }
       },
     ],
   },
@@ -168,18 +220,34 @@ export const categoryConfig = [
       {
         id: 's_1',
         label: '電動・油圧プレス',
+        category: {
+          main: '4',
+          sub: 's_1'
+        }
       },
       {
         id: 's_2',
         label: 'エアープレス',
+        category: {
+          main: '4',
+          sub: 's_2'
+        }
       },
       {
         id: 's_3',
         label: 'リベッティングマシン',
+        category: {
+          main: '4',
+          sub: 's_3'
+        }
       },
       {
         id: 's_4',
         label: 'プレス その他',
+        category: {
+          main: '4',
+          sub: 's_4'
+        }
       },
     ],
   },
@@ -190,14 +258,26 @@ export const categoryConfig = [
       {
         id: 's_1',
         label: '射出成型機',
+        category: {
+          main: '5',
+          sub: 's_1'
+        }
       },
       {
         id: 's_2',
         label: '真空成型機',
+        category: {
+          main: '5',
+          sub: 's_2'
+        }
       },
       {
         id: 's_3',
         label: '成形機 その他',
+        category: {
+          main: '5',
+          sub: 's_3'
+        }
       },
     ],
   },
@@ -208,26 +288,50 @@ export const categoryConfig = [
       {
         id: 's_1',
         label: 'ベルトグラインダー',
+        category: {
+          main: '6',
+          sub: 's_1'
+        }
       },
       {
         id: 's_2',
         label: 'バフグラインダー',
+        category: {
+          main: '6',
+          sub: 's_2'
+        }
       },
       {
         id: 's_3',
         label: '工具研磨機',
+        category: {
+          main: '6',
+          sub: 's_3'
+        }
       },
       {
         id: 's_4',
         label: '面取り機',
+        category: {
+          main: '6',
+          sub: 's_4'
+        }
       },
       {
         id: 's_5',
         label: 'バレル研磨機',
+        category: {
+          main: '6',
+          sub: 's_5'
+        }
       },
       {
         id: 's_6',
         label: '研磨機 その他',
+        category: {
+          main: '6',
+          sub: 's_6'
+        }
       },
     ],
   },
@@ -238,26 +342,50 @@ export const categoryConfig = [
       {
         id: 's_1',
         label: 'チラー',
+        category: {
+          main: '7',
+          sub: 's_1'
+        }
       },
       {
         id: 's_2',
         label: 'クーリングタワー',
+        category: {
+          main: '7',
+          sub: 's_2'
+        }
       },
       {
         id: 's_3',
         label: '集塵機',
+        category: {
+          main: '7',
+          sub: 's_3'
+        }
       },
       {
         id: 's_4',
         label: 'ミストコレクター',
+        category: {
+          main: '7',
+          sub: 's_4'
+        }
       },
       {
         id: 's_5',
         label: 'スポットクーラー',
+        category: {
+          main: '7',
+          sub: 's_5'
+        }
       },
       {
         id: 's_6',
         label: '冷熱・空調機器　その他',
+        category: {
+          main: '7',
+          sub: 's_6'
+        }
       },
     ],
   },
@@ -268,18 +396,34 @@ export const categoryConfig = [
       {
         id: 's_1',
         label: 'ポンプ',
+        category: {
+          main: '9',
+          sub: 's_1'
+        }
       },
       {
         id: 's_2',
         label: 'ガス発生装置',
+        category: {
+          main: '9',
+          sub: 's_2'
+        }
       },
       {
         id: 's_3',
         label: '恒温器',
+        category: {
+          main: '9',
+          sub: 's_3'
+        }
       },
       {
         id: 's_4',
         label: '理化学機器 その他',
+        category: {
+          main: '9',
+          sub: 's_4'
+        }
       },
     ],
   },
@@ -291,14 +435,26 @@ export const categoryConfig = [
       {
         id: 's_1',
         label: 'コンプレッサー',
+        category: {
+          main: '8',
+          sub: 's_1'
+        }
       },
       {
         id: 's_2',
         label: 'エアードライヤー',
+        category: {
+          main: '8',
+          sub: 's_2'
+        }
       },
       {
         id: 's_3',
         label: 'コンプレッサー その他',
+        category: {
+          main: '8',
+          sub: 's_3'
+        }
       },
     ],
   },
@@ -309,18 +465,34 @@ export const categoryConfig = [
       {
         id: 's_1',
         label: 'フォークリフト',
+        category: {
+          main: '10',
+          sub: 's_1'
+        }
       },
       {
         id: 's_2',
         label: 'リフター',
+        category: {
+          main: '10',
+          sub: 's_2'
+        }
       },
       {
         id: 's_3',
         label: '研削盤',
+        category: {
+          main: '10',
+          sub: 's_3'
+        }
       },
       {
         id: 's_4',
         label: '運搬・物流機器 その他',
+        category: {
+          main: '10',
+          sub: 's_4'
+        }
       },
     ],
   },
@@ -331,14 +503,26 @@ export const categoryConfig = [
       {
         id: 's_1',
         label: '溶接機',
+        category: {
+          main: '11',
+          sub: 's_1'
+        }
       },
       {
         id: 's_2',
         label: 'ポジショナー',
+        category: {
+          main: '11',
+          sub: 's_2'
+        }
       },
       {
         id: 's_3',
         label: '溶接機 その他',
+        category: {
+          main: '11',
+          sub: 's_3'
+        }
       },
     ],
   },
@@ -349,26 +533,50 @@ export const categoryConfig = [
       {
         id: 's_1',
         label: 'かんな盤',
+        category: {
+          main: '12',
+          sub: 's_1'
+        }
       },
       {
         id: 's_2',
         label: '丸鋸盤',
+        category: {
+          main: '12',
+          sub: 's_2'
+        }
       },
       {
         id: 's_3',
         label: '帯鋸盤',
+        category: {
+          main: '12',
+          sub: 's_3'
+        }
       },
       {
         id: 's_4',
         label: 'パネルソー',
+        category: {
+          main: '12',
+          sub: 's_4'
+        }
       },
       {
         id: 's_5',
         label: 'ルータ',
+        category: {
+          main: '12',
+          sub: 's_5'
+        }
       },
       {
         id: 's_6',
         label: '木工機械 その他',
+        category: {
+          main: '12',
+          sub: 's_6'
+        }
       },
     ],
   },
@@ -379,34 +587,66 @@ export const categoryConfig = [
       {
         id: 's_1',
         label: '油圧ショベル',
+        category: {
+          main: '13',
+          sub: 's_1'
+        }
       },
       {
         id: 's_2',
         label: 'ブルドーザー',
+        category: {
+          main: '13',
+          sub: 's_2'
+        }
       },
       {
         id: 's_3',
         label: 'ホイールローダー',
+        category: {
+          main: '13',
+          sub: 's_3'
+        }
       },
       {
         id: 's_4',
         label: 'ロードローラー',
+        category: {
+          main: '13',
+          sub: 's_4'
+        }
       },
       {
         id: 's_5',
         label: 'フィニッシャー',
+        category: {
+          main: '13',
+          sub: 's_5'
+        }
       },
       {
         id: 's_6',
         label: 'グレーダー',
+        category: {
+          main: '13',
+          sub: 's_6'
+        }
       },
       {
         id: 's_7',
         label: 'キャリアダンプ',
+        category: {
+          main: '13',
+          sub: 's_7'
+        }
       },
       {
         id: 's_8',
         label: '建設機械 その他',
+        category: {
+          main: '13',
+          sub: 's_8'
+        }
       },
     ],
   },
@@ -417,18 +657,34 @@ export const categoryConfig = [
       {
         id: 's_1',
         label: 'トラクタ',
+        category: {
+          main: '14',
+          sub: 's_1'
+        }
       },
       {
         id: 's_2',
         label: '田植え機',
+        category: {
+          main: '14',
+          sub: 's_2'
+        }
       },
       {
         id: 's_3',
         label: 'コンバイン',
+        category: {
+          main: '14',
+          sub: 's_3'
+        }
       },
       {
         id: 's_4',
         label: '農業機械 その他',
+        category: {
+          main: '14',
+          sub: 's_4'
+        }
       },
     ],
   },
@@ -488,9 +744,9 @@ export const companyList = [
 ];
 
 export const tableConfig = [
-  { name: 'タイトル', uid: 'name' },
-  { name: '総視聴時間（時間）', uid: 'duration' },
-  { name: '視聴者数（人）', uid: 'viewers' },
+  { name: 'タイトル', uid: 'title' },
+  { name: '総視聴時間（時間）', uid: 'videoDuration' },
+  { name: '視聴者数（人）', uid: 'views' },
   { name: '報酬額（円）', uid: 'revenue' },
   { name: '支払い状態', uid: 'status' },
   { name: '削除', uid: 'actions' },
@@ -499,11 +755,11 @@ export const tableConfig = [
 export const videoTableConfig = [
   {
     name: '',
-    uid: 'image',
+    uid: 'thumbnailsUrl',
   },
   {
     name: 'タイトル',
-    uid: 'name',
+    uid: 'title',
   },
   {
     name: '説明',
@@ -511,15 +767,15 @@ export const videoTableConfig = [
   },
   {
     name: '投稿者',
-    uid: 'auth',
+    uid: 'posterName',
   },
   {
     name: 'メインカテゴリ',
-    uid: 'main',
+    uid: 'selectedCategory',
   },
   {
     name: 'サブカテゴリ',
-    uid: 'sub',
+    uid: 'selectedSubCategory',
   },
   {
     name: 'ステータス',
@@ -527,7 +783,7 @@ export const videoTableConfig = [
   },
   {
     name: '投稿日',
-    uid: 'date',
+    uid: 'createdAt',
   },
   {
     name: '削除',
@@ -546,7 +802,7 @@ export const userTableConfig = [
   },
   {
     name: 'メール',
-    uid: 'mail',
+    uid: 'email',
   },
   {
     name: '登録日',
@@ -554,7 +810,7 @@ export const userTableConfig = [
   },
   {
     name: '投稿数',
-    uid: 'count',
+    uid: 'posterCounts',
   },
   {
     name: '役割',

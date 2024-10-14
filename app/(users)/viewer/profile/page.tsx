@@ -3,8 +3,37 @@ import { Input } from '@nextui-org/input';
 import { Button } from '@nextui-org/button';
 import { Divider } from '@nextui-org/divider';
 import Image from 'next/image';
+import { useState } from 'react';
+import { loadStripe } from '@stripe/stripe-js';
+
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
 export default function ViewerProfilePage() {
+  const [loading, setLoading] = useState(false);
+
+  const handleCheckout = async () => {
+    setLoading(true);
+    const stripe = await stripePromise;
+
+    // Call your backend to create the Checkout Session
+    const response = await fetch(`${API_URL}/api/payment/create-checkout-session`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const { id } = await response.json();
+    console.log(id)
+
+    // Redirect to Stripe Checkout
+    const { error } = await stripe.redirectToCheckout({ sessionId: id });
+    if (error) {
+      console.error('Stripe checkout failed:', error);
+    }
+    setLoading(false);
+  };
   return (
     <div className="min-h-[calc(100vh-90px)] flex flex-col lg:w-full xsm:w-fit justify-between">
       <section className="max-w-[1280px] mx-auto flex flex-col lg:mt-[85px] md:mt-[55px] sm:mt-[45px] xsm:mt-[35px]">
@@ -90,14 +119,15 @@ export default function ViewerProfilePage() {
                 <p className="w-[440px] h-[140px] text-[#999999] text-[20px] mt-[25px]">
                   月額8,000円で、すべての動画をフルで視聴可能。制限なくコンテンツを楽しむことができ、修理技術を学ぶには最適なプランです。
                 </p>
-                <Button className="w-[185px] h-[31px] bg-[#4291EF] mt-[40px] mb-[71px]">
-                  <p className="text-[#FFFFFF] text-[20px]">アップデート</p>
-                  <Image
-                    width={28}
-                    height={28}
-                    src="/icons/icon-store.png"
-                    alt=""
-                  />
+                <Button
+                  className="w-[185px] h-[31px] bg-[#4291EF] mt-[40px] mb-[71px] mx-auto"
+                  onClick={handleCheckout}
+                  disabled={loading}
+                >
+                  <p className="text-[#FFFFFF] text-[20px]">
+                    {loading ? '処理中...' : 'アップデート'}
+                  </p>
+                  <Image width={28} height={28} src="/icons/icon-store.png" alt="icon" />
                 </Button>
               </div>
             </div>

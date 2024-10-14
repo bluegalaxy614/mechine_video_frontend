@@ -7,4 +7,6 @@ export interface User {
 export interface StorageState {
   user: User | null;
   setUser: (user: User | null) => void; // user can be null
+  // lastestVideos : Video[];
+  // setLastestVideos : (lastestVideos : Video[]) => void
 }

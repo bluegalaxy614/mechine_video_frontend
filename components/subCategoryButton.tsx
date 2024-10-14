@@ -7,16 +7,19 @@ import { subCategoryButtonProps } from '@/types';
 export default function SubCategoryButton({
   id,
   name,
+  category,
   setSelectedSubCategories,
 }: subCategoryButtonProps) {
+  
   const [selected, setSelected] = useState(false);
   const onClick = () => {
     setSelected(!selected);
     setSelectedSubCategories((prevState) => {
       if (!selected) {
-        return [...prevState, id];
+        return [...prevState, category];
       } else {
-        return prevState.filter((categoryId) => categoryId !== id);
+        
+        return prevState.filter((cat) => !(cat.main === category.main && cat.sub === category.sub));
       }
     });
   };

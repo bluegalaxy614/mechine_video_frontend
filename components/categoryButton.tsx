@@ -13,7 +13,6 @@ export default function CategoryButton({
 
   const onClick = () => {
     setSelectedState(!selectedState);
-
     setSelectedCategories((prevState) => {
       if (!selectedState) {
         return [...prevState, id];

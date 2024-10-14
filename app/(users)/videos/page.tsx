@@ -1,23 +1,38 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ImageSlider from '@/components/imageSlider';
 import VideoCards from '@/components/videoCards';
 import HomeFooter from '@/components/homeFooter';
 import { Pagination } from '@nextui-org/pagination';
-import { slides, lastestVideos } from '@/config/data';
+import { slides } from '@/config/data';
 import SearchCategories from '@/components/searchCategories';
 
-export default function Home() {
+export default function VideoPage() {
+  const [videos, setVideos] = useState([]);
+  const [totalPages, setTotalPages] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [displyVideos, setDisplyVideos] = useState([]);
+
+  useEffect(() => {
+    setDisplyVideos(videos)
+    console.log(videos)
+  },[videos])
+
   return (
     <>
       <ImageSlider slides={slides} />
-      <SearchCategories />
+      <SearchCategories
+        setVideos={setVideos}
+        setTotalPages={setTotalPages}
+        currentPage={currentPage}
+      />
       <section className="max-w-[1280px] mx-auto my-[30px]">
-        <VideoCards data={lastestVideos} />
+        <VideoCards data={displyVideos} />
         <Pagination
           showControls
-          total={lastestVideos.length}
-          initialPage={1}
+          total={totalPages}
+          page={currentPage}
+          onChange={setCurrentPage}
           className="flex align-items-center justify-center my-[30px]"
         />
       </section>

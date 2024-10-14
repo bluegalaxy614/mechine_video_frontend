@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {jwtDecode} from 'jwt-decode'; // Correct the import by removing destructuring
+import { jwtDecode } from 'jwt-decode'; // Correct the import by removing destructuring
 
 // Interface for decoded JWT token
 export interface DecodedToken {

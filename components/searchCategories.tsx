@@ -4,49 +4,40 @@ import SubCategoryButton from './subCategoryButton';
 import { categoryConfig } from '@/config/site';
 import CategoryButton from './categoryButton';
 import { Button } from '@nextui-org/button';
-import {
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownTrigger,
-} from '@nextui-org/dropdown';
-import { Image } from '@nextui-org/image';
 import { SearchIcon } from './icons';
 import { Input } from '@nextui-org/input';
+import { searchVideos } from '@/lib/api';
+import { Select, SelectItem } from '@nextui-org/select';
 import { Selection } from '@nextui-org/table';
 
-const SearchCategories = () => {
-  const [selectedKeys, setSelectedKeys] = useState<Selection>(
-    new Set(['最新順']),
-  );
-
-  const selectedValue = useMemo(
-    () => Array.from(selectedKeys).join(', ').replaceAll('_', ' '),
-    [selectedKeys],
-  );
-
-  const [selectAll, setSelectAll] = useState<boolean>(true);
+export default function SearchCategories({
+  setVideos,
+  setTotalPages,
+  currentPage
+}) {
+  const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set(["uploadDate"]));
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [selectedSubCategories, setSelectedSubCategories] = useState<string[]>(
-    [],
+  const [selectedSubCategories, setSelectedSubCategories] = useState(
+    []
   );
-
-  console.log(selectedSubCategories);
 
   useEffect(() => {
-    if (!selectAll) {
-      setSelectedCategories([]);
-    } else {
-      const allCategoryIds = categoryConfig.map((category) => category.id);
-      console.log(allCategoryIds, 'here');
-
-      setSelectedCategories(allCategoryIds);
+    const fetchVideos = async () => {
+      try {
+        console.log('Fetching search videos...');
+        const res = await searchVideos(
+          { selectedCategories, selectedSubCategories, currentPage, selectedKeys }
+        )
+        console.log(res)
+        const { videos, totalPage } = res;
+        setVideos(videos)
+        setTotalPages(totalPage)
+      } catch (error) {
+        console.error('Error fetching videos:', error);
+      }
     }
-  }, [selectAll]);
-
-  const handleClickAllButton = () => {
-    setSelectAll(!selectAll);
-  };
+    fetchVideos()
+  }, [selectedCategories, selectedSubCategories, selectedKeys])
 
   return (
     <section className="max-w-[1280px] mx-auto">
@@ -91,41 +82,30 @@ const SearchCategories = () => {
           <p className="flex justify-center items-center px-[20px] lg:w-[144px] md:w-[144px] sm:w-[144px] xsm:w-[90px] lg:text-[14px] md:text-[14px] sm:text-[14px] xsm:text-[10px]">
             並べ替え
           </p>
-          <Dropdown placement="bottom-end">
-            <DropdownTrigger>
-              <Button className="capitalize h-[41px] lg:w-[144px] md:w-[144px] sm:w-[144px] xsm:w-[90px] rounded-full border hover:shadow-default-300 px-[8px] py-[1px] mx-auto  lg:text-[14px] md:text-[14px] sm:text-[14px] xsm:text-[10px]">
-                {selectedValue}
-                <Image
-                  width={21}
-                  height={21}
-                  src="/icons/icon-arrange.png"
-                  alt=""
-                />
-              </Button>
-            </DropdownTrigger>
-            <DropdownMenu
-              aria-label="Select Arrange Type"
-              variant="flat"
-              disallowEmptySelection
-              selectionMode="single"
-              selectedKeys={selectedKeys}
-              onSelectionChange={setSelectedKeys}
+          <Select
+            defaultSelectedKeys={"uploadDate"}
+            variant="bordered"
+            selectedKeys={selectedKeys}
+            onSelectionChange={setSelectedKeys}
+            className="h-[41px] w-[144px] lg:text-[14px] md:text-[14px] sm:text-[14px] xsm:text-[10px]"
+          >
+            <SelectItem
+              key={"uploadDate"}
+              value={"uploadDate"}
             >
-              <DropdownItem key="最新順">最新順</DropdownItem>
-              <DropdownItem key="人気順">人気順</DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
+              最新順
+            </SelectItem>
+            <SelectItem
+              key={"views"}
+              value={"views"}
+            >
+              人気順
+            </SelectItem>
+          </Select>
         </div>
       </div>
       <div className="lg:mx-[20px] md:mx-[40px] sm:ml-[40px] sm:mr-[50px] xsm:ml-[30px] xsm:mr-[40px]">
         <div className="flex grid lg:grid-cols-7 md:grid-cols-6 sm:grid-cols-4 xsm:grid-cols-3 gap-3 divide-gray-200 py-[9px] mb-[40px]">
-          <Button
-            className={`h-[41px] lg:w-[144px] md:w-[144px] sm:w-[144px] xsm:w-[90px] rounded-full border shadow-md hover:shadow-default-300 px-[8px] py-[1px] mx-auto lg:text-[14px] md:text-[14px] sm:text-[14px] xsm:text-[10px]
-                                    ${selectAll ? 'bg-[#4291EF]' : 'bg-default-100'}`}
-            onClick={handleClickAllButton}
-          >
-            All
-          </Button>
           {categoryConfig.map((category, index) => (
             <CategoryButton
               key={index}
@@ -148,6 +128,7 @@ const SearchCategories = () => {
                 key={index}
                 id={subCategory.id}
                 name={subCategory.label}
+                category={subCategory.category}
                 setSelectedSubCategories={setSelectedSubCategories}
               />
             ))}
@@ -157,5 +138,3 @@ const SearchCategories = () => {
     </section>
   );
 };
-
-export default SearchCategories;

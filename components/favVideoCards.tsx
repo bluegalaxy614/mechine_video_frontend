@@ -1,26 +1,75 @@
 'use client';
 import Image from 'next/image';
 import { Card } from '@nextui-org/card';
-import { Button } from '@nextui-org/button';
-import { FavVideoCardsProps } from '@/types';
+import { VideoCardsProps } from '@/types';
+import { Modal, ModalContent, useDisclosure } from '@nextui-org/modal';
+import { useState, useRef, useEffect } from 'react';
+import videojs from 'video.js';
+import 'video.js/dist/video-js.css';
 
-const FavVideoCards = ({ data }: FavVideoCardsProps) => {
+const FavVideoCards = ({ data }: VideoCardsProps) => {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [videoUrl, setVideoUrl] = useState<string>("");
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const playerRef = useRef<any>(null);
+
+  const formatDate = (dateStr: string) => {
+    const date = new Date(dateStr);
+    return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
+  };
+
+  // Initialize Video.js player
+  useEffect(() => {
+    if (videoRef.current && !playerRef.current) {
+      playerRef.current = videojs(videoRef.current, {
+        controls: true,
+        autoplay: false,
+        preload: 'auto',
+        loop: false,
+        responsive: true,
+        fluid: true, // Enables responsive mode
+      });
+
+      // Handle video time update and stop after 10 seconds
+      playerRef.current.on('timeupdate', () => {
+        if (playerRef.current.currentTime() >= 10) {
+          playerRef.current.pause();
+          playerRef.current.currentTime(0);
+        }
+      });
+    }
+
+    // Dispose the player when the component unmounts
+    return () => {
+      if (playerRef.current) {
+        playerRef.current.dispose();
+        playerRef.current = null;
+      }
+    };
+  }, [videoUrl, isOpen]);
+
   return (
     <div>
       <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xsm:grid-cols-1 gap-6 lg:mx-[0px] md:mx-[40px] sm:mx-[20px] xsm:mx-[10px]">
         {data.map((item, index) => (
           <Card
-            className="max-w-[332px] h-[481px] rounded-[18px] shadow-md hover:shadow-xl transition-shadow duration-lg mx-auto"
+            className="max-w-[302px] h-[481px] rounded-[18px] shadow-md hover:shadow-xl transition-shadow duration-lg mx-auto"
             key={index}
             isPressable
+            onPress={() => {
+              onOpen();
+              setVideoUrl(item.videoUrl);
+            }}
           >
-            <Image
-              className="rounded-t-[18px]"
-              width={332}
-              height={218}
-              alt={item.title}
-              src={item.img}
-            />
+            <div className="w-[332px] h-[218px] rounded-t-[18px] overflow-hidden">
+              <Image
+                width={332}
+                height={218}
+                alt={"Thumbnail of " + item.title}
+                src={item.thumbnailsUrl}
+                unoptimized={true}
+              />
+            </div>
             <div className="w-[292px] h-[195px] py-5 flex flex-col !justify-start !items-start my-2 px-[25px]">
               {/* Title */}
               <h1 className="text-lg font-bold text-blue-500 !justify-start !items-start">
@@ -29,51 +78,52 @@ const FavVideoCards = ({ data }: FavVideoCardsProps) => {
 
               {/* Categories */}
               <div className="flex gap-2 mt-2">
-                {item.categories.map((category, index) => (
-                  <p
-                    className="px-4 py-1 bg-blue-100 text-blue-500 rounded-full text-[14px]"
-                    key={index}
-                  >
-                    {category}
-                  </p>
-                ))}
+                <p className="px-4 py-1 bg-blue-100 text-blue-500 rounded-full text-[14px] min-w-[80px] min-h-[32px]">
+                  {item.selectedCategory}
+                </p>
+                <p className="px-4 py-1 bg-blue-100 text-blue-500 rounded-full text-[14px] min-w-[80px] min-h-[32px]">
+                  {item.selectedSubCategory}
+                </p>
               </div>
 
               {/* Description, Author, Date, Duration */}
               <div className="mt-4">
                 <p className="mt-2 text-gray-700 text-[14px] !text-justify">
-                  {item.describe}
+                  {item.description}
                 </p>
                 <p className="mt-2 text-gray-700 text-[14px] !text-justify">
-                  投稿者 : <strong>{item.author}</strong>
+                  投稿者 : <strong>{item.posterName}</strong>
                 </p>
                 <p className="text-gray-500 text-[14px] !text-justify font-bold">
-                  {item.date}
+                  {formatDate(item.uploadDate)}
                 </p>
                 <p className="mt-2 text-gray-700 text-[14px] !text-justify">
                   視聴時間:{' '}
                   <strong className="text-[#ED1C24] !text-[20px]">
-                    {item.duration}
+                    {item.views}時間
                   </strong>
                 </p>
               </div>
             </div>
           </Card>
         ))}
+        <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
+          <ModalContent>
+            {(onClose) => (
+              <div data-vjs-player>
+                <video
+                  ref={videoRef}
+                  className="video-js vjs-big-play-centered"
+                  playsInline
+                >
+                  <source src={videoUrl} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            )}
+          </ModalContent>
+        </Modal>
       </div>
-      <Button className="flex rounded-full w-[188px] h-[43px] bg-[#4291EF] my-[40px] text-[#FFFDFD] text-[20px] mx-auto">
-        <div className="flex justify-start gap-6">
-          <p className="flex justify-center text-[20px] text-[#FFFDFD] font-bold">
-            最新の動画
-          </p>
-          <Image
-            src="/icons/icons-more.png"
-            alt="new video"
-            width={28}
-            height={24}
-          />
-        </div>
-      </Button>
     </div>
   );
 };

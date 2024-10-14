@@ -11,12 +11,13 @@ import {
   TableHeader,
   TableRow,
 } from '@nextui-org/table';
-import { userTableRows } from '@/config/data';
+// import { userTableRows } from '@/config/data';
 import { userTableConfig } from '@/config/site';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Tooltip } from '@nextui-org/tooltip';
 import { Divider } from '@nextui-org/divider';
 import { Avatar } from '@nextui-org/avatar';
+import { getUsers } from '@/lib/api';
 
 const statusColorMap: Record<string, ChipProps['color']> = {
   Admin: 'primary',
@@ -24,53 +25,65 @@ const statusColorMap: Record<string, ChipProps['color']> = {
   無料会員: 'danger',
 };
 
-type Row = (typeof userTableRows)[0];
+interface Row {
+  _id: number;
+  avatar: string;
+  name: string;
+  email: string;
+  date: string;
+  status: string;
+  role: string;
+  expired:{
+    start: string;
+    end: string;
+  };
+  posterCounts: number;
+  actions: string;
+}
+
 export default function UserManagePage() {
   const [page, setPage] = useState(1);
+  const [users, setUsers] = useState<Row[]>([]);
+  const [totalPages, setTotalPages] = useState(0);
   const rowsPerPage = 10;
 
-  const pages = Math.ceil(userTableRows.length / rowsPerPage);
-
-  const items = useMemo(() => {
-    const start = (page - 1) * rowsPerPage;
-    const end = start + rowsPerPage;
-
-    return userTableRows.slice(start, end);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await getUsers({ perPage: rowsPerPage, page: page, sort: 'createdAt' });
+        setTotalPages(res.totalPages)
+        setUsers(res.users);
+      } catch (error) {
+        console.error('Error fetching users:', error);
+      }
+    }
+    fetchData();
   }, [page]);
 
   const renderCell = useCallback((users: Row, columnKey: React.Key) => {
-    const cellValue = users[columnKey as keyof Row];
-
-    switch (columnKey) {
+    const key = columnKey as keyof Row;
+    const cellValue = users[key];
+  
+    switch (key) {
       case 'avatar':
         return (
           <div className="flex flex-col rouned-md">
-            <Avatar src={cellValue} />
+            <Avatar src={String(cellValue)} />
           </div>
         );
       case 'name':
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-[14px]">{cellValue}</p>
-          </div>
-        );
-      case 'mail':
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-[14px] truncate">{cellValue}</p>
-          </div>
-        );
+      case 'email':
       case 'date':
         return (
           <div className="flex flex-col">
-            <p className="text-bold text-[14px]">{cellValue}</p>
+            <p className="text-bold text-[14px]">{String(cellValue)}</p>
           </div>
         );
-      case 'count':
+      case 'posterCounts':
         return (
           <div className="flex flex-col">
             <p className="text-bold text-[14px] rounded-full bg-[#E4F1FF] text-[#4291EF] mx-auto px-[5px]">
-              {cellValue}
+              {String(cellValue)}
             </p>
           </div>
         );
@@ -82,13 +95,16 @@ export default function UserManagePage() {
             variant="flat"
             className="!w-[200px] flex mx-auto"
           >
-            {cellValue}
+            {String(cellValue)}
           </Chip>
         );
       case 'expired':
+        const expiredValue = cellValue as Row['expired'];
         return (
           <div className="flex flex-col">
-            <p className="text-bold text-[14px]">{cellValue}</p>
+            <p className="text-bold text-[14px]">
+              {`${expiredValue.start} - ${expiredValue.end}`}
+            </p>
           </div>
         );
       case 'actions':
@@ -97,6 +113,7 @@ export default function UserManagePage() {
             <Tooltip color="primary" content="Edit">
               <span className="text-lg text-danger cursor-pointer active:opacity-50">
                 <EditIcon />
+                
               </span>
             </Tooltip>
             <Tooltip color="danger" content="Delete">
@@ -107,9 +124,83 @@ export default function UserManagePage() {
           </div>
         );
       default:
-        return cellValue;
+        return <>{String(cellValue)}</>;
     }
   }, []);
+  
+
+  // const renderCell = useCallback((users: Row, columnKey: React.Key) => {
+  //   const cellValue = users[columnKey as keyof Row];
+
+  //   switch (columnKey) {
+  //     case 'avatar':
+  //       return (
+  //         <div className="flex flex-col rouned-md">
+  //           <Avatar src={cellValue} />
+  //         </div>
+  //       );
+  //     case 'name':
+  //       return (
+  //         <div className="flex flex-col">
+  //           <p className="text-bold text-[14px]">{cellValue}</p>
+  //         </div>
+  //       );
+  //     case 'email':
+  //       return (
+  //         <div className="flex flex-col">
+  //           <p className="text-bold text-[14px] truncate">{cellValue}</p>
+  //         </div>
+  //       );
+  //     case 'date':
+  //       return (
+  //         <div className="flex flex-col">
+  //           <p className="text-bold text-[14px]">{cellValue}</p>
+  //         </div>
+  //       );
+  //     case 'posterCounts':
+  //       return (
+  //         <div className="flex flex-col">
+  //           <p className="text-bold text-[14px] rounded-full bg-[#E4F1FF] text-[#4291EF] mx-auto px-[5px]">
+  //             {cellValue}
+  //           </p>
+  //         </div>
+  //       );
+  //     case 'role':
+  //       return (
+  //         <Chip
+  //           color={statusColorMap[users.role]}
+  //           size="md"
+  //           variant="flat"
+  //           className="!w-[200px] flex mx-auto"
+  //         >
+  //           {cellValue}
+  //         </Chip>
+  //       );
+  //     case 'expired':
+  //       return (
+  //         <div className="flex flex-col">
+  //           <p className="text-bold text-[14px]">{`${cellValue.start} - ${cellValue.end}`}</p>
+  //         </div>
+  //       );
+  //     case 'actions':
+  //       return (
+  //         <div className="relative flex items-center gap-2">
+  //           <Tooltip color="primary" content="Edit">
+  //             <span className="text-lg text-danger cursor-pointer active:opacity-50">
+  //               <EditIcon />
+  //             </span>
+  //           </Tooltip>
+  //           <Tooltip color="danger" content="Delete">
+  //             <span className="text-lg text-danger cursor-pointer active:opacity-50">
+  //               <DeleteIcon />
+  //             </span>
+  //           </Tooltip>
+  //         </div>
+  //       );
+  //     default:
+  //       return cellValue;
+  //   }
+  // }, []);
   return (
     <section className="h-[calc(100vh-90px)] flex flex-col px-[60px] py-[30px] gap-12">
       <div className="max-w-[913px] lg:px-0 md:px-[40px] sm:px-[50px] xsm:px-[30px]">
@@ -172,7 +263,7 @@ export default function UserManagePage() {
                   showShadow
                   color="secondary"
                   page={page}
-                  total={pages}
+                  total={totalPages}
                   onChange={(page) => setPage(page)}
                 />
               </div>
@@ -182,15 +273,16 @@ export default function UserManagePage() {
               {(column) => (
                 <TableColumn
                   key={column.uid}
-                  align={column.uid === 'actions' ? 'center' : 'start'}
+                  align={'start'}
+                  // align={column.uid === 'actions' ? 'center' : 'start'}
                 >
                   {column.name}
                 </TableColumn>
               )}
             </TableHeader>
-            <TableBody items={items}>
+            <TableBody items={users}>
               {(item) => (
-                <TableRow key={item.id} className="cursor-pointer">
+                <TableRow key={item._id} className="cursor-pointer">
                   {(columnKey) => (
                     <TableCell>{renderCell(item, columnKey)}</TableCell>
                   )}

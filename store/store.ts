@@ -1,8 +1,6 @@
 import { create } from 'zustand';
 import { User, StorageState } from '../types/storeType';
 
-// Define the structure of the store
-
 // Create the Zustand store
 export const useStore = create<StorageState>((set) => {
   // Load user from localStorage on initial state
@@ -20,5 +18,11 @@ export const useStore = create<StorageState>((set) => {
         localStorage.removeItem('user'); // Remove user from localStorage if null
       }
     },
+
+    // lastestVideos : [],
+    // setLastestVideos :(video: Video[]) => {
+    //   set({lastestVideos : video})
+    // }
+
   };
 });

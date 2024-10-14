@@ -11,13 +11,27 @@ import {
   TableHeader,
   TableRow,
 } from '@nextui-org/table';
-import { videoTableRows } from '@/config/data';
+// import { videoTableRows } from '@/config/data';
 import { videoTableConfig } from '@/config/site';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Tooltip } from '@nextui-org/tooltip';
 import Image from 'next/image';
 import { Divider } from '@nextui-org/divider';
 import { Link } from '@nextui-org/link';
+import { getAllVideos } from '@/lib/api';
+
+interface Row {
+  _id: number;
+  title: string;
+  thumbnailsUrl: string;
+  description: string;
+  posterName: string;
+  selectedCategory: string;
+  selectedSubCategory: string;
+  status: string;
+  createdAt: string;
+  actions: string;
+}
 
 const statusColorMap: Record<string, ChipProps['color']> = {
   支払い: 'success',
@@ -25,83 +39,77 @@ const statusColorMap: Record<string, ChipProps['color']> = {
   保留中: 'warning',
 };
 
-type Row = (typeof videoTableRows)[0];
 export default function VideoManagePage() {
   const [page, setPage] = useState(1);
+  const [videos, setVideos] = useState<Row[]>([]);
+  const [totalPages, setTotalPages] = useState(0);
   const rowsPerPage = 10;
 
-  const pages = Math.ceil(videoTableRows.length / rowsPerPage);
-
-  const items = useMemo(() => {
-    const start = (page - 1) * rowsPerPage;
-    const end = start + rowsPerPage;
-
-    return videoTableRows.slice(start, end);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await getAllVideos({ page: page, perPage: rowsPerPage, sort: 'createdAt' });
+        setTotalPages(res.totalPages);
+        setVideos(res.videos);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
   }, [page]);
 
   const renderCell = useCallback((videos: Row, columnKey: React.Key) => {
-    const cellValue = videos[columnKey as keyof Row];
+    const key = columnKey as keyof Row;
+    const cellValue = videos[key];
 
-    switch (columnKey) {
-      case 'image':
+    switch (key) {
+      case 'thumbnailsUrl':
         return (
-          <div className="flex flex-col rouned-md">
-            <Image src={cellValue} width={71} height={47} alt="" />
+          <div className="flex flex-col rounded-md w-[71px] h-[71px] overflow-hidden">
+            <Image
+              src={String(cellValue)}
+              width={71}
+              height={47}
+              alt="thumbnail"
+              unoptimized={true}
+            />
           </div>
         );
-      case 'name':
+      case 'title':
         return (
           <div className="flex flex-col">
-            <p className="text-bold text-[14px] capitalize">{cellValue}</p>
+            <p className="text-bold text-[14px] capitalize">{String(cellValue)}</p>
           </div>
         );
       case 'description':
         return (
           <div className="flex flex-col">
-            <p className="text-bold text-[14px] capitalize truncate">
-              {cellValue}
-            </p>
+            <p className="text-bold text-[14px] capitalize truncate">{String(cellValue)}</p>
           </div>
         );
-      case 'auth':
+      case 'posterName':
         return (
           <div className="flex flex-col">
-            <p className="text-bold text-[14px] capitalize">{cellValue}</p>
+            <p className="text-bold text-[14px] capitalize">{String(cellValue)}</p>
           </div>
         );
-      case 'main':
+      case 'selectedCategory':
         return (
           <div className="flex flex-col">
-            <p className="text-bold text-[14px] capitalize">{cellValue}</p>
+            <p className="text-bold text-[14px] capitalize">{String(cellValue)}</p>
           </div>
         );
       case 'status':
         return (
           <Chip color={statusColorMap[videos.status]} size="sm" variant="flat">
-            {cellValue}
+            {String(cellValue)}
           </Chip>
         );
-      case 'actions':
-        return (
-          <div className="relative flex items-center gap-2">
-            <Tooltip color="primary" content="Edit">
-              <span className="text-lg text-danger cursor-pointer active:opacity-50">
-                <Link href="/videoManage/edit">
-                  <EditIcon />
-                </Link>
-              </span>
-            </Tooltip>
-            <Tooltip color="danger" content="Delete">
-              <span className="text-lg text-danger cursor-pointer active:opacity-50">
-                <DeleteIcon />
-              </span>
-            </Tooltip>
-          </div>
-        );
       default:
-        return cellValue;
+        return <>{String(cellValue)}</>;
     }
   }, []);
+
   return (
     <section className="h-[calc(100vh-90px)] flex flex-col px-[60px] py-[30px] gap-12">
       <div className="max-w-[913px] lg:px-0 md:px-[40px] sm:px-[50px] xsm:px-[30px]">
@@ -164,7 +172,7 @@ export default function VideoManagePage() {
                   showShadow
                   color="secondary"
                   page={page}
-                  total={pages}
+                  total={totalPages}
                   onChange={(page) => setPage(page)}
                 />
               </div>
@@ -180,15 +188,44 @@ export default function VideoManagePage() {
                 </TableColumn>
               )}
             </TableHeader>
-            <TableBody items={items}>
+            {/* <TableBody items={videos}>
               {(item) => (
-                <TableRow key={item.id} className="cursor-pointer">
+                <TableRow key={item._id} className="cursor-pointer">
                   {(columnKey) => (
                     <TableCell>{renderCell(item, columnKey)}</TableCell>
                   )}
                 </TableRow>
               )}
+            </TableBody> */}
+            <TableBody items={videos}>
+              {(item) => (
+                <TableRow key={item._id} className="cursor-pointer">
+                  {(columnKey) => (
+                    <TableCell>
+                      {columnKey === 'actions' ? (
+                        <div className="relative flex items-center gap-2">
+                          <Tooltip color="primary" content="Edit">
+                            <span className="text-lg text-danger cursor-pointer active:opacity-50">
+                              <Link href={`/videoManage/edit/${item._id}`}>
+                                <EditIcon />
+                              </Link>
+                            </span>
+                          </Tooltip>
+                          <Tooltip color="danger" content="Delete">
+                            <span className="text-lg text-danger cursor-pointer active:opacity-50">
+                              <DeleteIcon />
+                            </span>
+                          </Tooltip>
+                        </div>
+                      ) : (
+                        renderCell(item, columnKey) // Your other render logic for other columns
+                      )}
+                    </TableCell>
+                  )}
+                </TableRow>
+              )}
             </TableBody>
+
           </Table>
         </div>
       </div>

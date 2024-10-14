@@ -1,5 +1,5 @@
 'use client';
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { use, useCallback, useEffect, useMemo, useState } from 'react';
 import BoxImage from '@/components/boxImage';
 import {
   Table,
@@ -11,11 +11,12 @@ import {
 } from '@nextui-org/table';
 import { Chip, ChipProps } from '@nextui-org/chip';
 import { Tooltip } from '@nextui-org/tooltip';
-import { rows } from '@/config/data';
+// import { rows } from '@/config/data';
 import { DeleteIcon } from '@/components/icons';
 import { tableConfig } from '@/config/site';
 import { Button } from '@nextui-org/button';
 import { Pagination } from '@nextui-org/pagination';
+import { getPosterVideos, getVideos } from '@/lib/api';
 
 const statusColorMap: Record<string, ChipProps['color']> = {
   支払い: 'success',
@@ -23,38 +24,62 @@ const statusColorMap: Record<string, ChipProps['color']> = {
   保留中: 'warning',
 };
 
-type Row = (typeof rows)[0];
-
+interface Row {
+  id: number;
+  name: string;
+  duration: string;
+  viewers: string;
+  revenue: string;
+  status: '未払い' | '支払い' | '保留中'; // use a union type for the possible statuses
+}[]
 export default function PosterPaymentPage() {
   const [page, setPage] = useState(1);
-  const rowsPerPage = 10;
+  const [videos, setVideos] = useState([]);
+  const [pages, setPages] = useState(0);
 
-  const pages = Math.ceil(rows.length / rowsPerPage);
+  const [paidVideos, setPaidVideos] = useState('0');
+  const [unPaidVideos, setUnPaidVideos] = useState('0');
+  const [totalPaidMounts, setTotalPaidMounts] = useState('0');
 
-  const items = useMemo(() => {
-    const start = (page - 1) * rowsPerPage;
-    const end = start + rowsPerPage;
+  useEffect(() => {
+    const fetchVideos = async () => {
+      try{
+        const res = await getPosterVideos({
+          page: page,
+          perPage : 10,
+          sort:'uploadDate'
+        });
+        const {currentPage, totalPages, videos, paidVideos, unPaidVideos, totalPaidMounts} = res;
+        setVideos(videos);
+        setPages(totalPages);
+        setPaidVideos(paidVideos);
+        setUnPaidVideos(unPaidVideos);
+        setTotalPaidMounts(totalPaidMounts);
 
-    return rows.slice(start, end);
+      }catch(error){
+        console.log(error)
+      }
+    }
+    fetchVideos(); 
   }, [page]);
 
   const renderCell = useCallback((user: Row, columnKey: React.Key) => {
     const cellValue = user[columnKey as keyof Row];
 
     switch (columnKey) {
-      case 'name':
+      case 'title':
         return (
           <div className="flex flex-col">
             <p className="text-bold text-[14px] capitalize">{cellValue}</p>
           </div>
         );
-      case 'duration':
+      case 'videoDuration':
         return (
           <div className="flex flex-col">
             <p className="text-bold text-[14px] capitalize">{cellValue}</p>
           </div>
         );
-      case 'viewers':
+      case 'views':
         return (
           <div className="flex flex-col">
             <p className="text-bold text-[14px] capitalize">{cellValue}</p>
@@ -100,21 +125,21 @@ export default function PosterPaymentPage() {
           id={1}
           image={'/icons/icons-checked.png'}
           title="総投稿件数"
-          info="250"
+          info={paidVideos}
           unit="件"
         />
         <BoxImage
           id={2}
           image={'/icons/icon-cancel.png'}
           title="未払い動画の数"
-          info="8"
+          info={unPaidVideos}
           unit="件"
         />
         <BoxImage
           id={3}
           image={'/icons/icon-coin.png'}
           title="未払い総額"
-          info="4万+"
+          info = {`${totalPaidMounts}万+`}
           unit="円"
         />
       </section>
@@ -161,7 +186,7 @@ export default function PosterPaymentPage() {
                 </TableColumn>
               )}
             </TableHeader>
-            <TableBody items={items}>
+            <TableBody items={videos}>
               {(item) => (
                 <TableRow key={item.id} className="cursor-pointer">
                   {(columnKey) => (

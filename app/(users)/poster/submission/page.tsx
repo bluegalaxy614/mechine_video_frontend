@@ -58,7 +58,9 @@ export default function SubmissionPage() {
     setSelectedSubCategory('');
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     console.log(e.target.name, e.target.value);
     setFormData({
       ...formData,
@@ -71,7 +73,8 @@ export default function SubmissionPage() {
   };
 
   const filteredSubCategories =
-    categoryConfig.find((category) => category.id === selectedCategory)?.subCategories || [];
+    categoryConfig.find((category) => category.id === selectedCategory)
+      ?.subCategories || [];
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -99,7 +102,9 @@ export default function SubmissionPage() {
     }
   };
 
-  const createScreenshotBlob = (canvas: HTMLCanvasElement): Promise<Blob | null> => {
+  const createScreenshotBlob = (
+    canvas: HTMLCanvasElement,
+  ): Promise<Blob | null> => {
     return new Promise((resolve) => {
       canvas.toBlob((blob) => {
         resolve(blob);
@@ -127,7 +132,7 @@ export default function SubmissionPage() {
     data.append('manufacturer', formData.manufacturer);
     data.append('selectedCategory', selectedCategory);
     data.append('selectedSubCategory', selectedSubCategory);
-    console.log(data, formData)
+    console.log(data, formData);
 
     // If a screenshot was taken, convert it to a Blob and append to FormData
     if (screenshot && videoRef.current) {
@@ -150,21 +155,36 @@ export default function SubmissionPage() {
 
   return (
     <div className="relative h-[calc(100vh-90px)] lg:w-full xsm:w-fit flex flex-col justify-between">
-      <form onSubmit={handleSubmit} className="max-w-[1280px] mx-auto flex flex-wrap lg:mt-[85px] gap-12">
+      <form
+        onSubmit={handleSubmit}
+        className="max-w-[1280px] mx-auto flex flex-wrap lg:mt-[85px] gap-12"
+      >
         <div className="flex flex-col max-w-[900px] mx-auto lg:px-0">
-          <h1 className="lg:text-[30px] text-[#4291EF] font-bold">機械修理のノウハウを共有し、収益を得ましょう！</h1>
-          <p className="lg:text-[20px] text-[#212121] font-bold">こちらのページから、あなたの修理動画を簡単にアップロードすることができます</p>
+          <h1 className="lg:text-[30px] text-[#4291EF] font-bold">
+            機械修理のノウハウを共有し、収益を得ましょう！
+          </h1>
+          <p className="lg:text-[20px] text-[#212121] font-bold">
+            こちらのページから、あなたの修理動画を簡単にアップロードすることができます
+          </p>
 
           <div className="flex lg:mt-[85px] grid lg:grid-cols-2 gap-6">
             <div className="w-[300px] flex flex-col gap-6 mx-auto">
               <div>
                 <p className="mb-2">タイトル</p>
-                <Input name="title" value={formData.title} onChange={handleInputChange} />
+                <Input
+                  name="title"
+                  value={formData.title}
+                  onChange={handleInputChange}
+                />
               </div>
 
               <div>
                 <p className="mb-2">説明</p>
-                <Textarea name="description" value={formData.description} onChange={handleInputChange} />
+                <Textarea
+                  name="description"
+                  value={formData.description}
+                  onChange={handleInputChange}
+                />
               </div>
             </div>
 
@@ -183,12 +203,30 @@ export default function SubmissionPage() {
                       Your browser does not support the video tag.
                     </video>
                   )}
-                  <Input type="file" name="video" accept=".mp4, .avi" onChange={handleFileChange} className="hidden" required />
-                  <Image width={105} height={105} src="/icons/icon-upload.png" alt="Upload" className="z-10 opacity-30 hover:opacity-100" />
+                  <Input
+                    type="file"
+                    name="video"
+                    accept=".mp4, .avi"
+                    onChange={handleFileChange}
+                    className="hidden"
+                    required
+                  />
+                  <Image
+                    width={105}
+                    height={105}
+                    src="/icons/icon-upload.png"
+                    alt="Upload"
+                    className="z-10 opacity-30 hover:opacity-100"
+                  />
                 </label>
               </div>
               {screenshot && (
-                <Image src={screenshot} alt="Screenshot" width={300} height={200} />
+                <Image
+                  src={screenshot}
+                  alt="Screenshot"
+                  width={300}
+                  height={200}
+                />
               )}
 
               {videoPreview && (
@@ -211,27 +249,46 @@ export default function SubmissionPage() {
         <div className="flex flex-col w-[300px] gap-4 mx-auto">
           <div>
             <p className="mb-2">動画コード</p>
-            <Input name="videoCode" value={formData.videoCode} onChange={handleInputChange} />
+            <Input
+              name="videoCode"
+              value={formData.videoCode}
+              onChange={handleInputChange}
+            />
           </div>
 
           <div>
             <p className="mb-2">機械名</p>
-            <Input name="machineName" value={formData.machineName} onChange={handleInputChange} />
+            <Input
+              name="machineName"
+              value={formData.machineName}
+              onChange={handleInputChange}
+            />
           </div>
 
           <div>
             <p className="mb-2">形式</p>
-            <Input name="format" value={formData.format} onChange={handleInputChange} />
+            <Input
+              name="format"
+              value={formData.format}
+              onChange={handleInputChange}
+            />
           </div>
 
           <div>
             <p className="mb-2">メーカー</p>
-            <Input name="manufacturer" value={formData.manufacturer} onChange={handleInputChange} />
+            <Input
+              name="manufacturer"
+              value={formData.manufacturer}
+              onChange={handleInputChange}
+            />
           </div>
 
           <div>
             <p className="mb-2">メインカテゴリ</p>
-            <Select value={selectedCategory} onChange={(e) => handleCategoryChange(e.target.value)}>
+            <Select
+              value={selectedCategory}
+              onChange={(e) => handleCategoryChange(e.target.value)}
+            >
               {categoryConfig.map((category) => (
                 <SelectItem key={category.id} value={category.id}>
                   {category.label}
