@@ -104,7 +104,7 @@ export default function DashboardPage() {
   return (
     <div>
       <div className="max-w-[1280px] mx-auto px-[20px] lg:px-[0px] md:px-[40px] sm:px-[50px] xsm:px-[35px]">
-        <section className="w-full flex flex-wrap gap-4 lg:justify-between md:justify-between sm:justify-between xsm:justify-center lg:px-[0px] md:px-[40px] sm:px-[50px] xsm:px-[35px]">
+        <section className="w-full flex flex-wrap gap-4 lg:justify-between md:justify-between sm:justify-between xsm:justify-center lg:px-[0px] md:px-[40px] sm:px-[50px] xsm:px-[35px] pt-[50px]">
           <BoxImage
             id={1}
             image={'/icons/icons-checked.png'}

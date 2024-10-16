@@ -9,7 +9,7 @@ const UserCards = ({ data }: UserCardsProps) => {
       {data && data.length > 0 ? (
         data.map((item, index) => (
           <Card
-            className="flex w-[277px] h-[380px] rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 mx-auto"
+            className="flex w-[277px] h-[360px] rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 mx-auto"
             key={index}
             isPressable
           >

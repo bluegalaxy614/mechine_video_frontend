@@ -17,7 +17,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Tooltip } from '@nextui-org/tooltip';
 import { Divider } from '@nextui-org/divider';
 import { Avatar } from '@nextui-org/avatar';
-import { getUsers } from '@/lib/api';
+import { deleteUserById, getUsers } from '@/lib/api';
 
 const statusColorMap: Record<string, ChipProps['color']> = {
   Admin: 'primary',
@@ -26,14 +26,14 @@ const statusColorMap: Record<string, ChipProps['color']> = {
 };
 
 interface Row {
-  _id: number;
+  _id: string;
   avatar: string;
   name: string;
   email: string;
   date: string;
   status: string;
   role: string;
-  expired:{
+  expired: {
     start: string;
     end: string;
   };
@@ -45,6 +45,7 @@ export default function UserManagePage() {
   const [page, setPage] = useState(1);
   const [users, setUsers] = useState<Row[]>([]);
   const [totalPages, setTotalPages] = useState(0);
+  const [message, setMessage] = useState<String>('')
   const rowsPerPage = 10;
 
   useEffect(() => {
@@ -60,10 +61,26 @@ export default function UserManagePage() {
     fetchData();
   }, [page]);
 
+  const handleDelete = (id: String, event: React.MouseEvent) => {
+    event.preventDefault();
+    console.log("deleted Icon clicked", id)
+    const deleteUser = async (id) => {
+      try {
+        const res = await deleteUserById({ userId: id });
+        setUsers((prevUsers) => prevUsers.filter(user => user._id !== id));
+        console.log(res.message);
+        setMessage(res.message)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    deleteUser(id);
+  }
+
   const renderCell = useCallback((users: Row, columnKey: React.Key) => {
     const key = columnKey as keyof Row;
     const cellValue = users[key];
-  
+
     switch (key) {
       case 'avatar':
         return (
@@ -100,24 +117,35 @@ export default function UserManagePage() {
         );
       case 'expired':
         const expiredValue = cellValue as Row['expired'];
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-[14px]">
-              {`${expiredValue.start} - ${expiredValue.end}`}
-            </p>
-          </div>
-        );
+        if (expiredValue && expiredValue.start && expiredValue.end) {
+          return (
+            <div className="flex flex-col">
+              <p className="text-bold text-[14px]">
+                {`${expiredValue.start} - ${expiredValue.end}`}
+              </p>
+            </div>
+          );
+        } else {
+          return (
+            <div className="flex flex-col">
+              <p className="text-bold text-[14px] text-gray-400">No expiration data</p>
+            </div>
+          );
+        }
+
       case 'actions':
         return (
           <div className="relative flex items-center gap-2">
             <Tooltip color="primary" content="Edit">
               <span className="text-lg text-danger cursor-pointer active:opacity-50">
                 <EditIcon />
-                
               </span>
             </Tooltip>
             <Tooltip color="danger" content="Delete">
-              <span className="text-lg text-danger cursor-pointer active:opacity-50">
+              <span
+                className="text-lg text-danger cursor-pointer active:opacity-50"
+                onClick={(event) => handleDelete(users._id, event)}
+              >
                 <DeleteIcon />
               </span>
             </Tooltip>
@@ -127,80 +155,7 @@ export default function UserManagePage() {
         return <>{String(cellValue)}</>;
     }
   }, []);
-  
 
-  // const renderCell = useCallback((users: Row, columnKey: React.Key) => {
-  //   const cellValue = users[columnKey as keyof Row];
-
-  //   switch (columnKey) {
-  //     case 'avatar':
-  //       return (
-  //         <div className="flex flex-col rouned-md">
-  //           <Avatar src={cellValue} />
-  //         </div>
-  //       );
-  //     case 'name':
-  //       return (
-  //         <div className="flex flex-col">
-  //           <p className="text-bold text-[14px]">{cellValue}</p>
-  //         </div>
-  //       );
-  //     case 'email':
-  //       return (
-  //         <div className="flex flex-col">
-  //           <p className="text-bold text-[14px] truncate">{cellValue}</p>
-  //         </div>
-  //       );
-  //     case 'date':
-  //       return (
-  //         <div className="flex flex-col">
-  //           <p className="text-bold text-[14px]">{cellValue}</p>
-  //         </div>
-  //       );
-  //     case 'posterCounts':
-  //       return (
-  //         <div className="flex flex-col">
-  //           <p className="text-bold text-[14px] rounded-full bg-[#E4F1FF] text-[#4291EF] mx-auto px-[5px]">
-  //             {cellValue}
-  //           </p>
-  //         </div>
-  //       );
-  //     case 'role':
-  //       return (
-  //         <Chip
-  //           color={statusColorMap[users.role]}
-  //           size="md"
-  //           variant="flat"
-  //           className="!w-[200px] flex mx-auto"
-  //         >
-  //           {cellValue}
-  //         </Chip>
-  //       );
-  //     case 'expired':
-  //       return (
-  //         <div className="flex flex-col">
-  //           <p className="text-bold text-[14px]">{`${cellValue.start} - ${cellValue.end}`}</p>
-  //         </div>
-  //       );
-  //     case 'actions':
-  //       return (
-  //         <div className="relative flex items-center gap-2">
-  //           <Tooltip color="primary" content="Edit">
-  //             <span className="text-lg text-danger cursor-pointer active:opacity-50">
-  //               <EditIcon />
-  //             </span>
-  //           </Tooltip>
-  //           <Tooltip color="danger" content="Delete">
-  //             <span className="text-lg text-danger cursor-pointer active:opacity-50">
-  //               <DeleteIcon />
-  //             </span>
-  //           </Tooltip>
-  //         </div>
-  //       );
-  //     default:
-  //       return cellValue;
-  //   }
-  // }, []);
   return (
     <section className="h-[calc(100vh-90px)] flex flex-col px-[60px] py-[30px] gap-12">
       <div className="max-w-[913px] lg:px-0 md:px-[40px] sm:px-[50px] xsm:px-[30px]">
@@ -244,7 +199,7 @@ export default function UserManagePage() {
             selectionMode="multiple"
             color="primary"
             classNames={{
-              wrapper: 'min-h-[500px]',
+              // wrapper: 'h-[500px]',
               base: 'w-full',
             }}
             topContent={
@@ -273,8 +228,7 @@ export default function UserManagePage() {
               {(column) => (
                 <TableColumn
                   key={column.uid}
-                  align={'start'}
-                  // align={column.uid === 'actions' ? 'center' : 'start'}
+                  align="center"
                 >
                   {column.name}
                 </TableColumn>

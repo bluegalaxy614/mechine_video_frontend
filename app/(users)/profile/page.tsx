@@ -17,7 +17,7 @@ const icon = {
   title: '動画承認ステータス',
   description: null,
 };
-export default function PosterMyPage() {
+export default function ProfilePage() {
 
   const [totalPages, setTotalPages] = useState();
   const [page, setPage] = useState(1);
@@ -89,7 +89,7 @@ export default function PosterMyPage() {
       <section className="max-w-[1280px] mx-auto">
         {/* <SearchCategories /> */}
         <ImageButton data={icon} />
-        <div className="flex w-full justify-between">
+        <div className="flex lg:w-[1280px] justify-between">
           <div className="mb-[30px] flex gap-[40px] lg:px-[40px] md:px-[40px] sm:px-[50px] xsm:px-[35px]">
             <Button
               className="rounded-full w-[144px] h-[41px] bg-[#FDE48D] text-[#725C10] text-[16px]"
@@ -100,13 +100,13 @@ export default function PosterMyPage() {
             <Button
               className="rounded-full w-[144px] h-[41px] bg-[#B1FF9D] text-[#21770B] text-[16px]"
               onClick={() => setStatus('承認済み')}
-              >
+            >
               承認済み
             </Button>
             <Button
               className="rounded-full w-[144px] h-[41px] bg-[#FFC2C5] text-[#9D0E14] text-[16px]"
               onClick={() => setStatus('拒否')}
-              >
+            >
               拒否
             </Button>
           </div>
@@ -123,15 +123,16 @@ export default function PosterMyPage() {
             />
           </Link>
         </div>
-        <VideoCards data={displyVideos} />
-        <Pagination
-          showControls
-          total={totalPages}
-          page={page}
-          initialPage={1}
-          className="flex align-items-center justify-center my-[30px]"
-          onChange={setPage}
-        />
+        {displyVideos?.length === 0 ?
+          <p className="mb-[30px]">There is no any video.</p> :
+          <><VideoCards data={displyVideos} /><Pagination
+            showControls
+            total={totalPages}
+            page={page}
+            initialPage={1}
+            className="flex align-items-center justify-center my-[30px]"
+            onChange={setPage} /></>
+        }
       </section>
       <footer className="w-full flex items-center justify-center py-3 bg-[#4291EF]">
         <p className="text-white text-[20px]"> All rights reserved.</p>

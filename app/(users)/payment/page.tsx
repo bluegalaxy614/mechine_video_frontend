@@ -16,7 +16,8 @@ import { DeleteIcon } from '@/components/icons';
 import { tableConfig } from '@/config/site';
 import { Button } from '@nextui-org/button';
 import { Pagination } from '@nextui-org/pagination';
-import { getPosterVideos, getVideos } from '@/lib/api';
+import { deleteVideoById, getPosterVideos, getVideos } from '@/lib/api';
+import { useStore } from '@/store/store';
 
 const statusColorMap: Record<string, ChipProps['color']> = {
   支払い: 'success',
@@ -25,7 +26,7 @@ const statusColorMap: Record<string, ChipProps['color']> = {
 };
 
 interface Row {
-  id: number;
+  _id: string;
   name: string;
   duration: string;
   viewers: string;
@@ -41,28 +42,49 @@ export default function PosterPaymentPage() {
   const [unPaidVideos, setUnPaidVideos] = useState('0');
   const [totalPaidMounts, setTotalPaidMounts] = useState('0');
 
+  const setMessage = useStore((state) => state.setMessage);
+  const setErrorMessage = useStore((state) => state.setErrorMessage);
+
   useEffect(() => {
     const fetchVideos = async () => {
-      try{
+      try {
         const res = await getPosterVideos({
           page: page,
-          perPage : 10,
-          sort:'uploadDate'
+          perPage: 10,
+          sort: 'uploadDate'
         });
-        const {currentPage, totalPages, videos, paidVideos, unPaidVideos, totalPaidMounts} = res;
+        const { currentPage, totalPages, videos, paidVideos, unPaidVideos, totalPaidMounts } = res;
         setVideos(videos);
         setPages(totalPages);
         setPaidVideos(paidVideos);
         setUnPaidVideos(unPaidVideos);
         setTotalPaidMounts(totalPaidMounts);
 
-      }catch(error){
+      } catch (error) {
+        console.log(error);
+        setErrorMessage(error);
+      }
+    }
+    fetchVideos();
+  }, [page]);
+
+  const handleGetPaid = () => {
+  }
+
+  const handleDelete = (id: String, event: React.MouseEvent) => {
+    event.preventDefault();
+    const deleteRow = async (id) => {
+      try {
+        const res = await deleteVideoById({ videoId: id });
+        console.log(res.message);
+        setMessage(res.message)
+        setVideos((prevVideos) => prevVideos.filter(video => video._id !== id));
+      } catch (error) {
         console.log(error)
       }
     }
-    fetchVideos(); 
-  }, [page]);
-
+    deleteRow(id);
+  }
   const renderCell = useCallback((user: Row, columnKey: React.Key) => {
     const cellValue = user[columnKey as keyof Row];
 
@@ -106,7 +128,10 @@ export default function PosterPaymentPage() {
         return (
           <div className="relative flex items-center gap-2">
             <Tooltip color="danger" content="Delete">
-              <span className="text-lg text-danger cursor-pointer active:opacity-50">
+              <span
+                className="text-lg text-danger cursor-pointer active:opacity-50"
+                onClick={(event) => handleDelete(user._id, event)}
+              >
                 <DeleteIcon />
               </span>
             </Tooltip>
@@ -118,9 +143,8 @@ export default function PosterPaymentPage() {
   }, []);
 
   return (
-    <div className="min-h-[calc(100vh-90px)] lg:w-full xsm:w-fit">
-      {/* Section for summary statistics */}
-      <section className="max-w-[1280px] mx-auto flex flex-wrap gap-4 lg:justify-between md:justify-between sm:justify-between xsm:justify-center lg:px-[0px] md:px-[40px] sm:px-[50px] xsm:px-[35px]">
+    <div className="min-h-[calc(100vh-90px)]">
+      <section className="max-w-[1280px] mx-auto flex flex-wrap gap-4 lg:justify-between md:justify-between sm:justify-between xsm:justify-center lg:px-[0px] md:px-[40px] sm:px-[50px] xsm:px-[35px] pt-[50px]">
         <BoxImage
           id={1}
           image={'/icons/icons-checked.png'}
@@ -139,7 +163,7 @@ export default function PosterPaymentPage() {
           id={3}
           image={'/icons/icon-coin.png'}
           title="未払い総額"
-          info = {`${totalPaidMounts}万+`}
+          info={`${totalPaidMounts}万+`}
           unit="円"
         />
       </section>
@@ -149,7 +173,10 @@ export default function PosterPaymentPage() {
         <div className="w-full">
           <div className="flex justify-between my-[20px]">
             <h1 className="text-[24px] text-[#4291EF]">支払い状態</h1>
-            <Button className="w-[181px] h-[31px] rounded-full bg-[#4291EF] text-[#FFFFFF] flex justify-center items-center text-[20px]">
+            <Button
+              className="w-[181px] h-[31px] rounded-full bg-[#4291EF] text-[#FFFFFF] flex justify-center items-center text-[20px]"
+              onClick={handleGetPaid}
+            >
               リクエストする
             </Button>
           </div>

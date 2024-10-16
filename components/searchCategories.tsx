@@ -41,37 +41,16 @@ export default function SearchCategories({
 
   return (
     <section className="max-w-[1280px] mx-auto">
-      <div className="flex lg:flex-row md:flex-row sm:flex-row xsm:flex-col justify-between lg:mt-[117px] lg:mb-[84px] lg:mx-[0px] md:mx-[40px] sm:mx-[20px] xsm:mx-[10px] xsm:items-end gap-[30px] my-[20px] lg:px-[20px] md:px-[20px] sm:px-[20px] xsm:px-[40px]">
+      <div className="flex lg:flex-row md:flex-row sm:flex-row xsm:flex-col justify-between lg:mt-[50px] lg:mb-[40px] lg:mx-[0px] md:mx-[40px] sm:mx-[20px] xsm:mx-[10px] xsm:items-end gap-[30px] my-[20px] lg:px-[20px] md:px-[20px] sm:px-[20px] xsm:px-[40px]">
         <div className="lg:w-[700px] md:w-[500px] sm:w-[300px] xsm:w-full">
           <Input
             isClearable
             fullWidth={true}
             radius="lg"
-            className="h-[48px] rounded-full"
-            classNames={{
-              label: 'text-black/50 dark:text-white/90',
-              input: [
-                'bg-transparent',
-                'text-black/90 dark:text-white/90',
-                'placeholder:text-default-700/50 dark:placeholder:text-white/60',
-              ],
-              innerWrapper: 'bg-transparent',
-              inputWrapper: [
-                'shadow-xl',
-                'bg-default-200/50',
-                'dark:bg-default/60',
-                'backdrop-blur-xl',
-                'backdrop-saturate-200',
-                'hover:bg-default-200/70',
-                'dark:hover:bg-default/70',
-                'group-data-[focus=true]:bg-default-200/50',
-                'dark:group-data-[focus=true]:bg-default/60',
-                '!cursor-text',
-              ],
-            }}
+            className="h-[48px] block w-full resize-none border-0 focus-visible:outline-none bg-transparent px-0 py-2 text-token-text-primary placeholder:text-token-text-secondary"
             placeholder="検索..."
             startContent={
-              <SearchIcon className="text-black/50 mb-0.5 dark:text-white/90 text-slate-400 pointer-events-none flex-shrink-0" />
+              <SearchIcon className="text-black/50 mb-0.5 text-slate-400 pointer-events-none flex-shrink-0" />
             }
           />
         </div>
@@ -119,7 +98,7 @@ export default function SearchCategories({
         <p className="w-[181px] h-[35px] rounded-full bg-[#E4F1FF] text-[20px] flex justify-center items-center my-[40px]">
           サブカテゴリ
         </p>
-        <div className="flex flex-wrap justify-start gap-3 py-[9px] h-[208px] overflow-y-auto my-[20px]">
+        <div className="flex flex-wrap content-start gap-3 py-[9px] h-[208px] overflow-y-auto my-[20px]">
           {categoryConfig
             .filter((category) => selectedCategories.includes(category.id))
             .flatMap((category) => category.subCategories)

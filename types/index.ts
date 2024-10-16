@@ -22,29 +22,16 @@ export interface Slide {
   title: string;
 }
 
-// Define the props for the CompanySlider component
 export interface CompanySliderProps {
   slides: Slide[];
-  dir: 'ltr' | 'rtl'; // Restrict the direction to either "ltr" or "rtl"
-}
-
-export interface FavVideoCardsProps {
-  data: {
-    title: string;
-    img: string;
-    categories: string[];
-    describe: string;
-    author: string;
-    date: string;
-    duration?: string | null;
-  }[];
+  dir: 'ltr' | 'rtl';
 }
 
 export interface ImageButtonProps {
   data: {
     icon: string;
     title: string;
-    description?: string | null; // accept null or undefined
+    description?: string | null;
   };
 }
 
@@ -56,12 +43,12 @@ export interface LineChartProps {
       data: number[];
       borderColor: string;
       backgroundColor: string;
-      fill?: boolean | string; // Optional, for area filling
-      tension?: number; // Optional, controls curve tension between points
-      borderDash?: number[]; // Optional, for dashed lines
-      borderWidth?: number; // Optional, thickness of line
-      pointStyle?: string | HTMLImageElement | HTMLCanvasElement; // Optional, to change point style
-      pointRadius?: number; // Optional, controls the size of data points
+      fill?: boolean | string;
+      tension?: number;
+      borderDash?: number[];
+      borderWidth?: number;
+      pointStyle?: string | HTMLImageElement | HTMLCanvasElement;
+      pointRadius?: number;
     }[];
   };
   options?: {
@@ -70,14 +57,14 @@ export interface LineChartProps {
       legend?: {
         position?: 'top' | 'left' | 'right' | 'bottom';
         labels?: {
-          color?: string; // Color of the legend labels
-          boxWidth?: number; // Size of the box around each legend item
+          color?: string;
+          boxWidth?: number;
         };
       };
       title?: {
         display: boolean;
         text: string;
-        color?: string; // Optional title color
+        color?: string;
         font?: {
           size?: number;
           family?: string;
@@ -87,38 +74,38 @@ export interface LineChartProps {
         enabled?: boolean;
         mode?: 'index' | 'nearest';
         intersect?: boolean;
-        backgroundColor?: string; // Tooltip background color
-        titleColor?: string; // Tooltip title color
-        bodyColor?: string; // Tooltip body text color
+        backgroundColor?: string;
+        titleColor?: string;
+        bodyColor?: string; 
       };
     };
     scales?: {
       x: {
         grid?: {
           display: boolean;
-          color?: string; // Grid color
+          color?: string;
         };
         ticks?: {
-          color?: string; // Ticks color for X-axis
+          color?: string;
         };
       };
       y: {
         grid?: {
           display: boolean;
-          color?: string; // Grid color
+          color?: string; 
         };
         ticks?: {
-          color?: string; // Ticks color for Y-axis
+          color?: string;
         };
       };
     };
-    maintainAspectRatio?: boolean; // Option to maintain aspect ratio
+    maintainAspectRatio?: boolean;
     interaction?: {
       mode?: 'nearest' | 'index';
       intersect?: boolean;
     };
     animation?: {
-      duration?: number; // Controls animation duration
+      duration?: number;
     };
     hover?: {
       mode?: 'nearest' | 'index';
@@ -126,10 +113,10 @@ export interface LineChartProps {
     };
     elements?: {
       line?: {
-        tension?: number; // Option for line tension (curves between points)
+        tension?: number; 
       };
       point?: {
-        radius?: number; // Point radius
+        radius?: number;
       };
     };
   };
@@ -179,7 +166,7 @@ export interface VideoCardsProps {
     posterId: string,
     posterName: string,
     uploadDate: string,
-    views: number
+    views: number;
     status: string,
   }[];
 }

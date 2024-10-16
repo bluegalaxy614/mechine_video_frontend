@@ -1,28 +1,24 @@
 import { create } from 'zustand';
 import { User, StorageState } from '../types/storeType';
 
-// Create the Zustand store
-export const useStore = create<StorageState>((set) => {
-  // Load user from localStorage on initial state
-  const savedUser = localStorage.getItem('user');
-  const initialUser = savedUser ? JSON.parse(savedUser) : null;
+export const useStore = create<StorageState>((set) => ({
+  user: typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('user') || 'null') : null,
+  setUser: (user: User | null) => {
+    set({ user });
+    if (typeof window !== 'undefined' && user) {
+      localStorage.setItem('user', JSON.stringify(user));
+    } else if (typeof window !== 'undefined') {
+      localStorage.removeItem('user');
+    }
+  },
 
-  return {
-    user: initialUser, // initial user state from localStorage
-    setUser: (user: User | null) => {
-      set({ user }); // update the state
-      // Update localStorage whenever the user changes
-      if (user) {
-        localStorage.setItem('user', JSON.stringify(user));
-      } else {
-        localStorage.removeItem('user'); // Remove user from localStorage if null
-      }
-    },
+  message: '',
+  setMessage: (message: string) => {
+    set({ message });
+  },
 
-    // lastestVideos : [],
-    // setLastestVideos :(video: Video[]) => {
-    //   set({lastestVideos : video})
-    // }
-
-  };
-});
+  errorMessage: '',
+  setErrorMessage: (errorMessage: string) => {
+    set({ errorMessage });
+  }
+}));

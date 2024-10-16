@@ -19,13 +19,18 @@ import { Link } from '@nextui-org/link';
 import { link as linkStyles } from '@nextui-org/theme';
 import NextLink from 'next/link';
 import clsx from 'clsx';
+import { useRouter } from 'next/navigation';
+import { useStore } from '@/store/store';
 
 import { siteConfig } from '@/config/site';
 import { Button } from '@nextui-org/button';
 import { Divider } from '@nextui-org/divider';
 import Image from 'next/image';
+import { deleteSession } from '@/utils/utils';
 
 export const AdminNavbar = () => {
+  const { user, setUser } = useStore((state) => state);
+  const router = useRouter();
   return (
     <div>
       <NextUINavbar
@@ -38,7 +43,7 @@ export const AdminNavbar = () => {
             <NavbarBrand as="li" className="gap-3 max-w-fit">
               <NextLink
                 className="flex justify-start items-center gap-1"
-                href="/"
+                href="/dashboard"
               >
                 {/* <Logo /> */}
                 <p className="font-bold text-[40px] text-[#4291ef]">LOGO</p>
@@ -65,26 +70,33 @@ export const AdminNavbar = () => {
             <NavbarItem className="hidden lg:flex md:flex">
               <Dropdown placement="bottom-end">
                 <DropdownTrigger>
-                  <Button className="flex justify-center items-center rounded-full bg-[#F4F4F4] w-[194px] h-[65px] p-1 hover:pointer">
+                  <Button className="flex justify-center items-center rounded-full bg-[#F4F4F4] min-w-[190px] conten-fit h-[65px] p-1 hover:pointer pr-[10px]">
                     <Avatar
                       className="h-[57px] w-[57px] border-2 border-default-500 border-[#4291EF]"
-                      src="/profile/3.png"
+                      src={user?.avatar ? user.avatar : '/profile/user.png'}
                     />
                     <span className="mx-auto text-[20px] text-[#1F2B3E]">
-                      高橋 文哉
+                      {user.name}
                     </span>
                   </Button>
                 </DropdownTrigger>
                 <DropdownMenu aria-label="Profile Actions" variant="flat">
-                  <DropdownItem key="マイページ">
-                    <Link href="/mypage">マイページ</Link>
+                  <DropdownItem key="profile">
+                    <Link href="/profile">profile</Link>
                   </DropdownItem>
-                  <DropdownItem key="プロフィール編集">
-                    <Link href="/profile">プロフィール編集</Link>
+                  <DropdownItem key="payment">
+                    <Link href="/payment">payment</Link>
                   </DropdownItem>
                   <DropdownItem key="ログアウト">
                     <Divider />
-                    <div className="flex justify-between items-center gap-2                    ">
+                    <div
+                      className="flex justify-between items-center gap-2"
+                      onClick={() => {
+                        setUser(null);
+                        deleteSession();
+                        router.push('/login');
+                      }}
+                    >
                       ログアウト
                       <Image
                         width={39}
@@ -108,13 +120,13 @@ export const AdminNavbar = () => {
 
           <NavbarMenu>
             <div className="mx-4 mt-2 flex flex-col gap-2 mt-[30px]">
-              {siteConfig.adminNavMenuItems.map((item, index) => (
+              {siteConfig.adminNavItems.map((item, index) => (
                 <NavbarMenuItem key={`${item}-${index}`}>
                   <Link
                     color={
                       index === 2
                         ? 'primary'
-                        : index === siteConfig.adminNavMenuItems.length - 1
+                        : index === siteConfig.adminNavItems.length - 1
                           ? 'danger'
                           : 'foreground'
                     }
@@ -127,7 +139,14 @@ export const AdminNavbar = () => {
               ))}
               <NavbarMenuItem>
                 <Divider />
-                <div className="flex justify-start items-center gap-2                    ">
+                <div
+                  className="flex justify-start items-center gap-2"
+                  onClick={() => {
+                    setUser(null);
+                    deleteSession();
+                    router.push('/login');
+                  }}
+                >
                   ログアウト
                   <Image
                     width={39}

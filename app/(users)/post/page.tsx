@@ -7,6 +7,7 @@ import { useRef, useState } from 'react';
 import { categoryConfig } from '@/config/site';
 import { uploadVideo } from '@/lib/api';
 import { Slider } from '@nextui-org/slider';
+import { useStore } from '@/store/store';
 
 function getVideoSnapshot(videoElement: HTMLVideoElement) {
   const canvas = document.createElement('canvas');
@@ -21,12 +22,14 @@ function getVideoSnapshot(videoElement: HTMLVideoElement) {
   return canvas;
 }
 
-export default function SubmissionPage() {
+export default function PostPage() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [videoTime, setVideoTime] = useState(0);
   const [videoDuration, setVideoDuration] = useState(0);
   const [video, setVideo] = useState<File | null>(null);
   const [screenshot, setScreenshot] = useState<string | null>(null);
+  const setMessage = useStore((state) => state.setMessage);
+  const setErrorMessage = useStore((state) => state.setErrorMessage);
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -50,6 +53,7 @@ export default function SubmissionPage() {
     if (videoRef.current && !isNaN(value) && isFinite(value)) {
       videoRef.current.currentTime = value;
       setVideoTime(value);
+      setMessage("Successfully get the video thumbnail!")
     }
   };
 
@@ -118,6 +122,7 @@ export default function SubmissionPage() {
 
     if (!video) {
       console.log('No video selected');
+      setErrorMessage('No video selected');
       return;
     }
 
@@ -132,9 +137,7 @@ export default function SubmissionPage() {
     data.append('manufacturer', formData.manufacturer);
     data.append('selectedCategory', selectedCategory);
     data.append('selectedSubCategory', selectedSubCategory);
-    console.log(data, formData);
 
-    // If a screenshot was taken, convert it to a Blob and append to FormData
     if (screenshot && videoRef.current) {
       const canvas = getVideoSnapshot(videoRef.current);
       const screenshotBlob = await createScreenshotBlob(canvas);
@@ -146,28 +149,28 @@ export default function SubmissionPage() {
     try {
       const res = await uploadVideo(data);
       setUploadedStatus(false);
-      console.log('Video uploaded successfully:', res);
+      setMessage('Video uploaded successfully');
     } catch (error) {
       setUploadedStatus(false);
-      console.error('Error uploading video:', error);
+      setErrorMessage('Error uploading video');
     }
   };
 
   return (
-    <div className="relative h-[calc(100vh-90px)] lg:w-full xsm:w-fit flex flex-col justify-between">
+    <div className="relative h-[calc(100vh-90px)] w-full flex flex-col justify-between">
       <form
         onSubmit={handleSubmit}
-        className="max-w-[1280px] mx-auto flex flex-wrap lg:mt-[85px] gap-12"
+        className="max-w-[1280px] mx-auto flex flex-wrap lg:mt-[85px] md:mt-[60px] sm:mt-[50px] xsm:mt-[30px] gap-12"
       >
-        <div className="flex flex-col max-w-[900px] mx-auto lg:px-0">
-          <h1 className="lg:text-[30px] text-[#4291EF] font-bold">
+        <div className="flex flex-col max-w-[900px] mx-auto lg:px-0 md:px-[20px] sm:px-[30px] xsm:px-[30px]">
+          <h1 className="text-[30px] text-[#4291EF] font-bold">
             機械修理のノウハウを共有し、収益を得ましょう！
           </h1>
-          <p className="lg:text-[20px] text-[#212121] font-bold">
+          <p className="text-[20px] text-[#212121] font-bold">
             こちらのページから、あなたの修理動画を簡単にアップロードすることができます
           </p>
 
-          <div className="flex lg:mt-[85px] grid lg:grid-cols-2 gap-6">
+          <div className="flex lg:mt-[85px] md:mt-[60px] sm:mt-[50px] xsm:mt-[30px] grid lg:grid-cols-2 gap-6">
             <div className="w-[300px] flex flex-col gap-6 mx-auto">
               <div>
                 <p className="mb-2">タイトル</p>
@@ -184,12 +187,13 @@ export default function SubmissionPage() {
                   name="description"
                   value={formData.description}
                   onChange={handleInputChange}
+                  rows={5}
                 />
               </div>
             </div>
 
             <div className="w-[300px] flex flex-col gap-6 mx-auto">
-              <div className="w-[248px] h-[196px] bg-[#E4F1FF] flex justify-center items-center rounded-lg mx-auto">
+              <div className="w-[248px] h-[196px] bg-[#E4F1FF] flex justify-center items-center rounded-lg mx-auto overflow-hidden">
                 <label className="relative flex flex-col justify-center items-center w-full h-full cursor-pointer">
                   {videoPreview && (
                     <video
@@ -220,14 +224,14 @@ export default function SubmissionPage() {
                   />
                 </label>
               </div>
-              {screenshot && (
+              {/* {screenshot && (
                 <Image
                   src={screenshot}
                   alt="Screenshot"
                   width={300}
                   height={200}
                 />
-              )}
+              )} */}
 
               {videoPreview && (
                 <div>

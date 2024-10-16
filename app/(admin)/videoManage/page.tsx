@@ -18,10 +18,10 @@ import { Tooltip } from '@nextui-org/tooltip';
 import Image from 'next/image';
 import { Divider } from '@nextui-org/divider';
 import { Link } from '@nextui-org/link';
-import { getAllVideos } from '@/lib/api';
+import { deleteVideoById, getAllVideos } from '@/lib/api';
 
 interface Row {
-  _id: number;
+  _id: string;
   title: string;
   thumbnailsUrl: string;
   description: string;
@@ -43,6 +43,7 @@ export default function VideoManagePage() {
   const [page, setPage] = useState(1);
   const [videos, setVideos] = useState<Row[]>([]);
   const [totalPages, setTotalPages] = useState(0);
+  const [message, setMessage] = useState<String>('');
   const rowsPerPage = 10;
 
   useEffect(() => {
@@ -57,6 +58,22 @@ export default function VideoManagePage() {
     };
     fetchData();
   }, [page]);
+
+  const handleDelete = (id: String, event: React.MouseEvent) => {
+    event.preventDefault();
+    console.log("deleted Icon clicked", id)
+    const deleteRow = async (id) => {
+      try {
+        const res = await deleteVideoById({ videoId: id });
+        console.log(res.message);
+        setMessage(res.message)
+        setVideos((prevVideos) => prevVideos.filter(video => video._id !== id));
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    deleteRow(id);
+  }
 
   const renderCell = useCallback((videos: Row, columnKey: React.Key) => {
     const key = columnKey as keyof Row;
@@ -101,7 +118,7 @@ export default function VideoManagePage() {
         );
       case 'status':
         return (
-          <Chip color={statusColorMap[videos.status]} size="sm" variant="flat">
+          <Chip color={statusColorMap[videos.status]} size="md" variant="flat" className="min-w-[100px] text-center">
             {String(cellValue)}
           </Chip>
         );
@@ -153,7 +170,7 @@ export default function VideoManagePage() {
             selectionMode="multiple"
             color="primary"
             classNames={{
-              wrapper: 'min-h-[500px]',
+              // wrapper: 'min-h-[500px]',
               base: 'w-full',
             }}
             topContent={
@@ -188,15 +205,6 @@ export default function VideoManagePage() {
                 </TableColumn>
               )}
             </TableHeader>
-            {/* <TableBody items={videos}>
-              {(item) => (
-                <TableRow key={item._id} className="cursor-pointer">
-                  {(columnKey) => (
-                    <TableCell>{renderCell(item, columnKey)}</TableCell>
-                  )}
-                </TableRow>
-              )}
-            </TableBody> */}
             <TableBody items={videos}>
               {(item) => (
                 <TableRow key={item._id} className="cursor-pointer">
@@ -212,7 +220,10 @@ export default function VideoManagePage() {
                             </span>
                           </Tooltip>
                           <Tooltip color="danger" content="Delete">
-                            <span className="text-lg text-danger cursor-pointer active:opacity-50">
+                            <span
+                              className="text-lg text-danger cursor-pointer active:opacity-50"
+                              onClick={(event) => handleDelete(item._id, event)}
+                            >
                               <DeleteIcon />
                             </span>
                           </Tooltip>
@@ -225,7 +236,6 @@ export default function VideoManagePage() {
                 </TableRow>
               )}
             </TableBody>
-
           </Table>
         </div>
       </div>

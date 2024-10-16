@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import authService from '@/lib/auth';
@@ -10,18 +10,25 @@ export default function LoginPage() {
   const { setUser } = useStore();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
   const router = useRouter();
+
+  const setErrorMessage = useStore((state) => state.setErrorMessage);
+  const setMessage = useStore((state) => state.setMessage);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage('');
     try {
       const res = await authService.login({ email, password });
-      const token = res.data.token;
-      setSession(token);
-      setUser(res.data.user);
-      router.push('/');
+      const { user, message } = res.data;
+      setSession(user.token);
+      setUser(user);
+      setMessage(message);
+      if (user.role === "admin") {
+        router.push('/dashboard');
+      } else {
+        router.push('/')
+      }
     } catch (err) {
       console.error(err);
       setErrorMessage(
@@ -32,10 +39,10 @@ export default function LoginPage() {
 
   return (
     <div
-      className="w-full min-h-[100vh] bg-cover bg-center flex flex-wrap justify-between items-center"
+      className="w-full min-h-[100vh] bg-cover bg-center flex flex-wrap justify-between items-center py-[30px]"
       style={{ backgroundImage: `url('/bg/bg 1.png')` }}
     >
-      <div className="text-center mx-auto">
+      <div className="text-center p-[30px] mx-auto">
         <h1 className="text-[#212121] text-[24px] font-bold">
           Mechanical Repair Support Platform
         </h1>
@@ -44,10 +51,9 @@ export default function LoginPage() {
           サポートプラットフォーム
         </p>
       </div>
-      <div className="flex flex-col md:flex-row justify-between items-center bg-white shadow-lg rounded-lg w-[914px] h-[691px] p-8 mx-auto">
-        {/* Logo and Heading */}
+      <div className="flex flex-col md:flex-row justify-between items-center bg-white shadow-lg rounded-lg w-[914px] min-h-[530px] p-8 mx-auto">
         <div className="w-full flex justify-center items-center">
-          <div className="w-[283px] h-[283px] text-center">
+          <div className="w-[283px] min-h-[283px] text-center">
             <h2 className="text-xl font-bold text-blue-600 mb-8">
               メカニカルリアサポート
             </h2>
@@ -55,7 +61,7 @@ export default function LoginPage() {
               <Image
                 width={202}
                 height={202}
-                src="/profile/user.png" // Replace with the appropriate image URL
+                src="/profile/user.png"
                 alt="Mechanical Support"
                 className="mx-auto w-full h-full object-cover rounded-[29px]"
               />
@@ -104,12 +110,6 @@ export default function LoginPage() {
               />
             </div>
 
-            {errorMessage && (
-              <div className="text-red-500 text-sm mb-4 text-center">
-                {errorMessage}
-              </div>
-            )}
-
             <div className="text-center my-4">
               <a href="/forgot" className="text-gray-500 text-sm underline">
                 パスワードを忘れた場合
@@ -126,7 +126,7 @@ export default function LoginPage() {
           </form>
 
           <div className="text-center mt-4">
-            <a href="/register" className="text-blue-500 text-sm underline">
+            <a href="/register" className="text-blue-500 text-sm underline mb-[30px]">
               会員登録
             </a>
           </div>

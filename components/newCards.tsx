@@ -3,6 +3,10 @@ import Image from 'next/image';
 import { NewsCardsProps } from '@/types';
 
 const NewsCards = ({ data }: NewsCardsProps) => {
+  const formatDate = (dateStr: string) => {
+    const date = new Date(dateStr);
+    return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
+  };
   return (
     <div className="w-full flex flex-col space-y-4 p-2 my-[20px]">
       {data.map((item, index) => (
@@ -23,7 +27,7 @@ const NewsCards = ({ data }: NewsCardsProps) => {
               </p>
             </div>
             <div className="flex-none bg-blue-100 text-blue-500 px-3 py-1 rounded-full max-w-[147px] max-h-fit py-[6px] lg:text-[14px] md:text-[14px] sm:text-[12px] xsm:text-[10px]">
-              {item.date}
+              {formatDate(item.date)}
             </div>
           </div>
         </Card>

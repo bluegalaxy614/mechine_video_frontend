@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from 'react';
 import ImageSlider from '@/components/imageSlider';
 import VideoCards from '@/components/videoCards';
-import FavVideoCards from '@/components/favVideoCards';
 import NewsCards from '@/components/newCards';
 import ImageButton from '@/components/imageButton';
 import UserCards from '@/components/userCards';
@@ -18,7 +17,7 @@ import {
   slides,
   lastest,
   favorite,
-  newsData,
+  // newsData,
   // lastestVideos,
   // favVideos,
   userIcon,
@@ -27,6 +26,9 @@ import {
 import { getNews, getUsers, getVideos } from '@/lib/api';
 import { Spinner } from '@nextui-org/spinner';
 import { Video } from '@/types';
+import SearchCategories from '@/components/searchCategories';
+import { Input } from '@nextui-org/input';
+import { SearchIcon } from '@/components/icons';
 
 interface ResponseVideos {
   currentPage: number;
@@ -85,7 +87,7 @@ export default function Home() {
       }
     };
 
-    fetchVideos(); // Call the async function inside useEffect
+    fetchVideos();
   }, [videoConfig]);
 
   useEffect(() => {
@@ -125,7 +127,7 @@ export default function Home() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await getUsers({ perPage: 8,page: 1 , sort: 'viewCounts' });
+        const res = await getUsers({ perPage: 8, page: 1, sort: 'viewCounts' });
         console.log(res.users)
         setUsers(res.users);
       } catch (error) {
@@ -164,7 +166,18 @@ export default function Home() {
   return (
     <>
       <ImageSlider slides={slides} />
-      {/* <SearchCategories /> */}
+      <section className="max-w-[1280px] mx-auto mt-[50px]">
+        <Input
+          isClearable
+          fullWidth={true}
+          radius="lg"
+          className="block w-full resize-none border-0 focus-visible:outline-none bg-transparent px-0 py-2 text-token-text-primary placeholder:text-token-text-secondary"
+          placeholder="検索..."
+          startContent={
+            <SearchIcon className="text-black/50 mb-0.5 text-slate-400 pointer-events-none flex-shrink-0" />
+          }
+        />
+      </section >
       <section className="max-w-[1280px] mx-auto">
         <ImageButton data={lastest} />
         <VideoCards data={lastestVideos} />
@@ -194,7 +207,7 @@ export default function Home() {
       <section className="bg-[#DEF5FF] !w-[100vw]">
         <div className="max-w-[1280px] mx-auto lg:py-[60px] md:py-[40px] sm:py-[20px] xsm:py-[10px]">
           <ImageButton data={favorite} />
-          <FavVideoCards data={favTotalVideos} />
+          <VideoCards data={favTotalVideos} />
           <Button
             className="flex rounded-full w-[188px] h-[43px] bg-[#4291EF] my-[40px] text-[#FFFDFD] text-[20px] mx-auto"
             onClick={(e) => {

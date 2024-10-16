@@ -19,43 +19,39 @@ export const siteConfig = {
     },
     {
       label: '投稿する',
-      href: '/poster',
+      href: '/post',
     },
     {
       label: 'マイページ',
-      href: '/viewer',
+      href: '/myPage',
     },
     {
       label: 'お問い合わせ',
-      href: '/ask',
+      href: '/contact',
     },
   ],
-  userNavMenuItems: [
-    {
-      label: 'ホーム',
-      href: '/',
-    },
-    {
-      label: 'すべての動画',
-      href: '/videos',
-    },
-    {
-      label: '投稿する',
-      href: '/poster',
-    },
-    {
-      label: 'マイページ',
-      href: '/viwer',
-    },
-    {
-      label: 'お問い合わせ',
-      href: '/ask',
-    },
-    {
-      label: 'Logout',
-      href: '/logout',
-    },
-  ],
+  // userNavMenuItems: [
+  //   {
+  //     label: 'ホーム',
+  //     href: '/',
+  //   },
+  //   {
+  //     label: 'すべての動画',
+  //     href: '/videos',
+  //   },
+  //   {
+  //     label: '投稿する',
+  //     href: '/post',
+  //   },
+  //   {
+  //     label: 'マイページ',
+  //     href: '/myPage',
+  //   },
+  //   {
+  //     label: 'お問い合わせ',
+  //     href: '/contact',
+  //   },
+  // ],
   adminNavItems: [
     {
       label: 'ダッシュボード',
@@ -69,25 +65,29 @@ export const siteConfig = {
       label: 'ユーザリスト',
       href: '/userManage',
     },
-  ],
-  adminNavMenuItems: [
     {
-      label: 'ダッシュボード',
-      href: '/dashboard',
-    },
-    {
-      label: 'ビデオステータス',
-      href: '/videoManage',
-    },
-    {
-      label: 'ユーザリスト',
-      href: '/userManage',
-    },
-    {
-      label: 'Logout',
-      href: '/logout',
+      label: 'メッセージ',
+      href: '/message',
     },
   ],
+  // adminNavMenuItems: [
+  //   {
+  //     label: 'ダッシュボード',
+  //     href: '/dashboard',
+  //   },
+  //   {
+  //     label: 'ビデオステータス',
+  //     href: '/videoManage',
+  //   },
+  //   {
+  //     label: 'ユーザリスト',
+  //     href: '/userManage',
+  //   },
+  //   {
+  //     label: 'メッセージ',
+  //     href: '/message',
+  //   },
+  // ],
 };
 
 export const categoryConfig = [

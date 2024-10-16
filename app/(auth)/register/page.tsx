@@ -4,9 +4,8 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import authService from '@/lib/auth';
-import axios from 'axios';
-import { setSession } from '@/utils/utils';
 import { useStore } from '@/store/store';
+import { setSession } from '@/utils/utils';
 
 export default function RegisterPage() {
   const { user, setUser } = useStore();
@@ -14,14 +13,13 @@ export default function RegisterPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [message, setMessage] = useState('');
-  const [error, setError] = useState('');
   const router = useRouter();
+
+  const setErrorMessage = useStore((state) => state.setErrorMessage);
+  const setMessage = useStore((state) => state.setMessage);
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
-    setMessage('');
     try {
       const res = await authService.register({
         name,
@@ -29,23 +27,26 @@ export default function RegisterPage() {
         password,
         confirmPassword,
       });
-      const token = res.data.token;
-      setSession(token);
-      setUser(res.data.user);
-      setMessage(res.data.message);
-      console.log('register successfully');
-      router.push('/');
+      const { user, message } = res.data;
+      setSession(user.token);
+      setUser(user);
+      setMessage(message);
+      if(user.role === "admin"){
+        router.push('/dashboard');
+      }else{
+        router.push('/')
+      }
     } catch (err) {
-      setError(err.response?.data.message || 'An unexpected error occurred');
+      setErrorMessage(err.response?.data.message || 'An unexpected error occurred');
     }
   };
 
   return (
     <div
-      className="min-h-screen w-full bg-cover bg-center flex flex-wrap justify-between items-center"
+      className="min-h-screen w-full bg-cover bg-center flex flex-wrap justify-between items-center py-[30px]"
       style={{ backgroundImage: `url('/bg/bg 1.png')` }}
     >
-      <div className="text-center mx-auto">
+      <div className="text-center p-[30px] mx-auto">
         <h1 className="text-[#212121] text-[24px] font-bold">
           Mechanical Repair Support Platform
         </h1>
@@ -54,10 +55,9 @@ export default function RegisterPage() {
           サポートプラットフォーム
         </p>
       </div>
-      <div className="flex justify-between items-center bg-white shadow-lg rounded-lg w-[914px] h-[691px] p-8 mx-auto">
-        {/* Logo and Heading */}
+      <div className="flex flex-col md:flex-row justify-between items-center bg-white shadow-lg rounded-lg w-[914px] min-h-[691px] p-8 mx-auto">
         <div className="w-full flex justify-center items-center">
-          <div className="w-[283px] h-[283px] text-center ">
+          <div className="w-[283px] min-h-[283px] text-center ">
             <h2 className="text-xl font-bold text-blue-600 mb-8">
               メカニカルリアサポート
             </h2>
@@ -65,7 +65,7 @@ export default function RegisterPage() {
               <Image
                 width={202}
                 height={202}
-                src="/profile/user.png" // Replace with the appropriate image URL
+                src="/profile/user.png"
                 alt="Mechanical Support"
                 className="mx-auto w-full h-full object-cover rounded-[29px]"
               />
@@ -74,7 +74,6 @@ export default function RegisterPage() {
         </div>
 
         <div className="w-full">
-          {/* Form */}
           <form onSubmit={handleRegister}>
             <div className="mb-4">
               <label
@@ -149,8 +148,6 @@ export default function RegisterPage() {
             </div>
 
             <div className="text-center">
-              {message && <p style={{ color: 'green' }}>{message}</p>}
-              {error && <p style={{ color: 'red' }}>{error}</p>}
               <button
                 type="submit"
                 className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition duration-300"
@@ -161,7 +158,7 @@ export default function RegisterPage() {
           </form>
 
           <div className="text-center mt-4">
-            <a href="/login" className="text-blue-500 text-sm underline">
+            <a href="/login" className="text-blue-500 text-sm underline mb-[30px]">
               ログインはこちら
             </a>
           </div>

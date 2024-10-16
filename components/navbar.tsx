@@ -26,6 +26,7 @@ import { Button } from '@nextui-org/button';
 import { Divider } from '@nextui-org/divider';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { deleteSession } from '@/utils/utils';
 
 export const Navbar = () => {
   const { user, setUser } = useStore((state) => state);
@@ -73,7 +74,7 @@ export const Navbar = () => {
                     <Button className="flex justify-center items-center rounded-full bg-[#F4F4F4] min-w-[190px] conten-fit h-[65px] p-1 hover:pointer pr-[10px]">
                       <Avatar
                         className="h-[57px] w-[57px] border-2 border-default-500 border-[#4291EF]"
-                        src={user?.avatar ? user.avatar : '/profile/user.png'}
+                        src={user.avatar || '/profile/user.png'}
                       />
                       <span className="mx-auto text-[20px] text-[#1F2B3E]">
                         {user.name}
@@ -81,18 +82,21 @@ export const Navbar = () => {
                     </Button>
                   </DropdownTrigger>
                   <DropdownMenu aria-label="Profile Actions" variant="flat">
-                    <DropdownItem key="マイページ">
-                      <Link href="/mypage">マイページ</Link>
+                    <DropdownItem key="profile">
+                      <Link href="/profile">profile</Link>
                     </DropdownItem>
-                    <DropdownItem key="プロフィール編集">
-                      <Link href="/profile">プロフィール編集</Link>
+                    <DropdownItem key="payment">
+                      <Link href="/payment">payment</Link>
                     </DropdownItem>
-                    <DropdownItem key="ログアウト">
+                    <DropdownItem key="account">
+                      <Link href="/account">account setting</Link>
+                    </DropdownItem>
+                    <DropdownItem key="logout">
                       <div
                         className="flex justify-between items-center gap-2"
                         onClick={() => {
-                          localStorage.clear();
                           setUser(null);
+                          deleteSession();
                           router.push('/login');
                         }}
                       >
@@ -101,7 +105,7 @@ export const Navbar = () => {
                           width={39}
                           height={39}
                           src="/icons/icon-logout.png"
-                          alt=""
+                          alt="logout"
                         />
                       </div>
                     </DropdownItem>
@@ -125,13 +129,13 @@ export const Navbar = () => {
               {siteConfig.userNavItems.map((item, index) => (
                 <NavbarMenuItem key={`${item}-${index}`}>
                   <Link
-                    color={
-                      index === 2
-                        ? 'primary'
-                        : index === siteConfig.adminNavMenuItems.length - 1
-                          ? 'danger'
-                          : 'foreground'
-                    }
+                    // color={
+                    //   index === 2
+                    //     ? 'primary'
+                    //     : index === siteConfig.userNavItems.length - 1
+                    //       ? 'danger'
+                    //       : 'foreground'
+                    // }
                     href={item.href}
                     size="lg"
                   >
@@ -141,7 +145,14 @@ export const Navbar = () => {
               ))}
               <NavbarMenuItem>
                 <Divider />
-                <div className="flex justify-start items-center gap-2                    ">
+                <div
+                  className="flex justify-start items-center gap-2"
+                  onClick={() => {
+                    setUser(null);
+                    deleteSession();
+                    router.push('/login');
+                  }}
+                >
                   ログアウト
                   <Image
                     width={39}

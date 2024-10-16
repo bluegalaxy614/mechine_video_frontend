@@ -301,29 +301,77 @@ export const EditIcon: React.FC<IconSvgProps> = () => {
     </svg>
   );
 };
-// export const SearchIcon: React.FC<IconSvgProps> = () => {
-//   <svg
-//     aria-hidden="true"
-//     fill="none"
-//     focusable="false"
-//     height="1em"
-//     role="presentation"
-//     viewBox="0 0 24 24"
-//     width="1em"
-//   >
-//     <path
-//       d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z"
-//       stroke="currentColor"
-//       strokeLinecap="round"
-//       strokeLinejoin="round"
-//       strokeWidth="2"
-//     />
-//     <path
-//       d="M22 22L20 20"
-//       stroke="currentColor"
-//       strokeLinecap="round"
-//       strokeLinejoin="round"
-//       strokeWidth="2"
-//     />
-//   </svg>
-// };
+export const PayPal: React.FC<IconSvgProps> = () => {
+
+  return (
+    <svg role="img" viewBox="0 0 24 24" className="mb-3 h-6 w-6" >
+      <path
+        d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.93 4.778-4.005 7.201-9.138 7.201h-2.19a.563.563 0 0 0-.556.479l-1.187 7.527h-.506l-.24 1.516a.56.56 0 0 0 .554.647h3.882c.46 0 .85-.334.922-.788.06-.26.76-4.852.816-5.09a.932.932 0 0 1 .923-.788h.58c3.76 0 6.705-1.528 7.565-5.946.36-1.847.174-3.388-.777-4.471z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+};
+export const CardIcon: React.FC<IconSvgProps> = () => {
+
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      className="h-16 w-16 text-[white]"
+    >
+      <rect width="20" height="14" x="2" y="5" rx="2" />
+      <path d="M2 10h20" />
+    </svg>
+  );
+};
+export const Apple: React.FC<IconSvgProps> = () => {
+
+  return (
+    <svg role="img" viewBox="0 0 24 24" className="mb-3 h-6 w-6" >
+      <path
+        d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.93 4.778-4.005 7.201-9.138 7.201h-2.19a.563.563 0 0 0-.556.479l-1.187 7.527h-.506l-.24 1.516a.56.56 0 0 0 .554.647h3.882c.46 0 .85-.334.922-.788.06-.26.76-4.852.816-5.09a.932.932 0 0 1 .923-.788h.58c3.76 0 6.705-1.528 7.565-5.946.36-1.847.174-3.388-.777-4.471z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+};
+export const StarIcon: React.FC<IconSvgProps> = () => {
+  const [isStar, setIsStar] = React.useState(false);
+
+  const toggleColor = (e: React.MouseEvent<SVGSVGElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsStar(!isStar);
+  };
+
+  return (
+    <svg
+      height="40px"
+      width="40px"
+      version="1.1"
+      id="Capa_1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+      viewBox="0 0 47.94 47.94"
+      xmlSpace="preserve"
+      className="w-auto h-auto cursor-pointer"
+      onClick={toggleColor}
+    >
+      <path
+        style={{ fill: isStar ? '#ED8A19' : '#B0B0B0' }} // Change color based on state
+        d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
+        c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
+        c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
+        c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
+        c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
+        C22.602,0.567,25.338,0.567,26.285,2.486z"
+      />
+    </svg>
+  );
+};
