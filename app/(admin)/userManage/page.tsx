@@ -63,12 +63,10 @@ export default function UserManagePage() {
 
   const handleDelete = (id: String, event: React.MouseEvent) => {
     event.preventDefault();
-    console.log("deleted Icon clicked", id)
     const deleteUser = async (id) => {
       try {
         const res = await deleteUserById({ userId: id });
         setUsers((prevUsers) => prevUsers.filter(user => user._id !== id));
-        console.log(res.message);
         setMessage(res.message)
       } catch (error) {
         console.log(error)
@@ -84,8 +82,8 @@ export default function UserManagePage() {
     switch (key) {
       case 'avatar':
         return (
-          <div className="flex flex-col rouned-md">
-            <Avatar src={String(cellValue)} />
+          <div className="flex flex-col rouned-md fit-content">
+            <Avatar src={cellValue ? String(cellValue) : '/profile/user.png'} />
           </div>
         );
       case 'name':
@@ -107,7 +105,7 @@ export default function UserManagePage() {
       case 'role':
         return (
           <Chip
-            color={statusColorMap[users.role]}
+            color={statusColorMap[users?.role]}
             size="md"
             variant="flat"
             className="!w-[200px] flex mx-auto"

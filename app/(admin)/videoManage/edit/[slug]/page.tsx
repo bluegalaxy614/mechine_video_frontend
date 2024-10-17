@@ -9,7 +9,6 @@ import { Video } from '@/types/index';
 import { getVideoWithUserId, updateVideo } from '@/lib/api';
 
 export default function EditPage({ params }: { params: { slug: string } }) {
-  console.log('params = ', params)
   const id = params.slug;
   const [video, setVideo] = useState<Video>(null);
 
@@ -50,19 +49,15 @@ export default function EditPage({ params }: { params: { slug: string } }) {
 
   // Handle category change
   const handleCategoryChange = (value: string) => {
-    console.log(value);
     setSelectedCategory(value);
     setSelectedSubCategory('');
   };
 
   // Handle subcategory change
   const handleSubCategoryChange = (value: string) => {
-    console.log(value);
     setSelectedSubCategory(value);
-    console.log(selectedSubCategory);
   };
   const handleStatusChange = (value: string) => {
-    console.log(value);
     setStatus(value);
   };
 

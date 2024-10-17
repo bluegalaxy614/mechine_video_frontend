@@ -8,7 +8,7 @@ import { useStore } from '@/store/store';
 import { setSession } from '@/utils/utils';
 
 export default function RegisterPage() {
-  const { user, setUser } = useStore();
+  const setUser = useStore((state) => state.setUser);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -28,12 +28,12 @@ export default function RegisterPage() {
         confirmPassword,
       });
       const { user, message } = res.data;
-      setSession(user.token);
+      setSession(user?.token);
       setUser(user);
       setMessage(message);
-      if(user.role === "admin"){
+      if (user?.role === "admin") {
         router.push('/dashboard');
-      }else{
+      } else {
         router.push('/')
       }
     } catch (err) {

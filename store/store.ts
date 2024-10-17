@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { User, StorageState } from '../types/storeType';
+import { deleteSession, setSession } from '@/utils/utils';
 
 export const useStore = create<StorageState>((set) => ({
   user: typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('user') || 'null') : null,
@@ -7,8 +8,10 @@ export const useStore = create<StorageState>((set) => ({
     set({ user });
     if (typeof window !== 'undefined' && user) {
       localStorage.setItem('user', JSON.stringify(user));
+      setSession(user.token);
     } else if (typeof window !== 'undefined') {
       localStorage.removeItem('user');
+      deleteSession();
     }
   },
 

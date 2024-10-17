@@ -3,23 +3,24 @@
 import { Button } from '@nextui-org/button';
 import { useState } from 'react';
 import { subCategoryButtonProps } from '@/types';
+import { getCategoryLabelById } from '@/utils/utils';
 
 export default function SubCategoryButton({
   id,
   name,
-  category,
   setSelectedSubCategories,
 }: subCategoryButtonProps) {
   
   const [selected, setSelected] = useState(false);
+  const subLabel = getCategoryLabelById(id);
   const onClick = () => {
     setSelected(!selected);
     setSelectedSubCategories((prevState) => {
       if (!selected) {
-        return [...prevState, category];
+        return [...prevState, subLabel];
       } else {
         
-        return prevState.filter((cat) => !(cat.main === category.main && cat.sub === category.sub));
+        return prevState.filter((item) => item !== subLabel);
       }
     });
   };

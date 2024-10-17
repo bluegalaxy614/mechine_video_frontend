@@ -6,7 +6,7 @@ import CategoryButton from './categoryButton';
 import { Button } from '@nextui-org/button';
 import { SearchIcon } from './icons';
 import { Input } from '@nextui-org/input';
-import { searchVideos } from '@/lib/api';
+import { searchVideoInString, searchVideos } from '@/lib/api';
 import { Select, SelectItem } from '@nextui-org/select';
 import { Selection } from '@nextui-org/table';
 
@@ -17,27 +17,53 @@ export default function SearchCategories({
 }) {
   const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set(["uploadDate"]));
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [selectedSubCategories, setSelectedSubCategories] = useState(
-    []
-  );
+  const [selectedSubCategories, setSelectedSubCategories] = useState<string[]>([]);
+  const [inputValue, setInputValue] = useState<string>("");
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
 
   useEffect(() => {
-    const fetchVideos = async () => {
-      try {
-        console.log('Fetching search videos...');
-        const res = await searchVideos(
-          { selectedCategories, selectedSubCategories, currentPage, selectedKeys }
-        )
-        console.log(res)
-        const { videos, totalPage } = res;
-        setVideos(videos)
-        setTotalPages(totalPage)
-      } catch (error) {
-        console.error('Error fetching videos:', error);
-      }
+    if (inputValue.length === 0) {
+      const fetchVideos = async () => {
+        try {
+          setVideos([]);
+          const res = await searchVideos({
+            selectedCategories,
+            selectedSubCategories,
+            currentPage,
+            selectedKeys,
+          });
+          const { video, totalPages } = res;
+          console.log(res)
+          setTotalPages(totalPages);
+          setVideos(video);
+        } catch (error) {
+          console.error('Error fetching videos:', error);
+        }
+      };
+      fetchVideos();
     }
-    fetchVideos()
-  }, [selectedCategories, selectedSubCategories, selectedKeys])
+  }, [selectedCategories, selectedSubCategories, selectedKeys, currentPage,inputValue]);
+
+  useEffect(() => {
+    if (inputValue.length !== 0) {
+      const searchVideos = async () => {
+        try {
+          setVideos([]);
+          const res = await searchVideoInString({ inputValue, selectedKeys, currentPage });
+          const { video, totalPages } = res;
+          console.log(res)
+          setVideos(video);
+          setTotalPages(totalPages);
+        } catch (error) {
+          console.error('Error searching videos:', error);
+        }
+      };
+      searchVideos();
+    }
+  }, [inputValue, currentPage]);
 
   return (
     <section className="max-w-[1280px] mx-auto">
@@ -49,6 +75,8 @@ export default function SearchCategories({
             radius="lg"
             className="h-[48px] block w-full resize-none border-0 focus-visible:outline-none bg-transparent px-0 py-2 text-token-text-primary placeholder:text-token-text-secondary"
             placeholder="検索..."
+            value={inputValue}
+            onChange={handleInputChange}
             startContent={
               <SearchIcon className="text-black/50 mb-0.5 text-slate-400 pointer-events-none flex-shrink-0" />
             }
@@ -98,22 +126,21 @@ export default function SearchCategories({
         <p className="w-[181px] h-[35px] rounded-full bg-[#E4F1FF] text-[20px] flex justify-center items-center my-[40px]">
           サブカテゴリ
         </p>
-        <div className="flex flex-wrap content-start gap-3 py-[9px] h-[208px] overflow-y-auto my-[20px]">
+        <div className="flex flex-wrap content-start gap-3 py-[9px] max-h-[208px] overflow-y-auto my-[20px]">
           {categoryConfig
-            .filter((category) => selectedCategories.includes(category.id))
+            .filter((category) => selectedCategories.includes(category.label))
             .flatMap((category) => category.subCategories)
             .map((subCategory, index) => (
               <SubCategoryButton
                 key={index}
                 id={subCategory.id}
                 name={subCategory.label}
-                category={subCategory.category}
                 setSelectedSubCategories={setSelectedSubCategories}
               />
             ))}
         </div>
-      </div>
       <Divider />
+      </div>
     </section>
   );
 };

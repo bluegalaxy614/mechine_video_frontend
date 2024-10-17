@@ -9,14 +9,8 @@ import SearchCategories from '@/components/searchCategories';
 
 export default function VideoPage() {
   const [videos, setVideos] = useState([]);
-  const [totalPages, setTotalPages] = useState();
+  const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
-  const [displyVideos, setDisplyVideos] = useState([]);
-
-  useEffect(() => {
-    setDisplyVideos(videos)
-    console.log(videos)
-  },[videos])
 
   return (
     <>
@@ -27,18 +21,18 @@ export default function VideoPage() {
         currentPage={currentPage}
       />
       <section className="max-w-[1280px] mx-auto my-[30px]">
-        <VideoCards data={displyVideos} />
+        <VideoCards data={videos} />
         <Pagination
           showControls
           total={totalPages}
           page={currentPage}
-          onChange={setCurrentPage}
+          onChange={(page) => setCurrentPage(page)}
           className="flex align-items-center justify-center my-[30px]"
         />
       </section>
       <HomeFooter />
       <footer className="w-full flex items-center justify-center py-3 bg-[#4291EF]">
-        <p className="text-white text-[20px]"> All rights reserved.</p>
+        <p className="text-white text-[20px]">All rights reserved.</p>
       </footer>
     </>
   );

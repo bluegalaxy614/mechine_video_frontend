@@ -9,6 +9,7 @@ import { useStore } from '../store/store';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify'
+import { setSession } from '@/utils/utils';
 
 export interface ProvidersProps {
   children: React.ReactNode;
@@ -22,6 +23,10 @@ export function Providers({ children, themeProps }: ProvidersProps) {
   const errorMessage = useStore((state) => state.errorMessage);
   const setErrorMessage = useStore((state) => state.setErrorMessage);
   const setMessage = useStore((state) => state.setMessage);
+
+  if(user){
+    setSession(user.token);
+  }
 
   React.useEffect(() => {
     if (message) {
@@ -53,7 +58,7 @@ export function Providers({ children, themeProps }: ProvidersProps) {
   //   if (!user) {
   //     router.push('/login');
   //   }
-  // }, [user, router]);
+  // }, [user]);
 
   return (
     <NextUIProvider navigate={router.push}>

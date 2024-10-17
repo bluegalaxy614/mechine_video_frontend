@@ -21,7 +21,6 @@ export default function ViwerPage() {
 
   useEffect(() => {
     setDisplyVideos(videos)
-    console.log(videos)
   }, [videos])
   return (
     <>

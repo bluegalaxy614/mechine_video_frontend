@@ -26,7 +26,6 @@ export default function AskPage() {
         const res = await getUserMessage();
         const { chats } = res;
         setMessages(chats);
-        console.log(chats, res);
       } catch (error) {
         console.log(error);
       }
@@ -48,7 +47,7 @@ export default function AskPage() {
           {
             messages?.messages.map((item, index) => (
               <div key={index}>
-                <div className="flex justify-start items-center rounded-full min-w-[191px] h-[59px] p-1 hover:pointer my-[20px]">
+                <div className="flex justify-start items-center rounded-full min-w-[191px] h-[59px] p-1 hover:pointer my-[20px] gap-6">
                   <Avatar
                     size="md"
                     className="flex-none w-[60px] h-[60px]"
@@ -59,7 +58,7 @@ export default function AskPage() {
                     {item.from === 'admin' ? "管理チーム" : messages.userName}
                   </span>
                 </div>
-                <div className={`relative w-full p-[28px] gap-[20px] rounded-lg ${item.from === "admin" ? "bg-[#E4F1FF]" : "bg-[#F4F4F4]"}`}>
+                <div className={`relative w-full p-[28px] gap-[20px] rounded-lg ${item.from === "admin" ? "bg-[#E4F1FF]" : "bg-[#daebee]"}`}>
                   <p className="text-[14px]">
                     {item.content}
                   </p>

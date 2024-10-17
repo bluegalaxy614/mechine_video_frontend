@@ -15,11 +15,11 @@ import { getPosterVideos } from '@/lib/api';
 const icon = {
   icon: '/icons/icons-setting.png',
   title: '動画承認ステータス',
-  description: null,
+  description: "",
 };
 export default function ProfilePage() {
 
-  const [totalPages, setTotalPages] = useState();
+  const [totalPages, setTotalPages] = useState(0);
   const [page, setPage] = useState(1);
   const [displyVideos, setDisplyVideos] = useState([]);
   const [status, setStatus] = useState('all');

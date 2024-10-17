@@ -1,23 +1,13 @@
 'use client';
 import AdminChat from '@/components/adminChat';
 import { DeleteIcon } from '@/components/icons';
-import { getAllMessage } from '@/lib/api';
+import { deleteAllChats, getAllMessage, viewMessages } from '@/lib/api';
 import { Avatar } from '@nextui-org/avatar';
 import { Button } from '@nextui-org/button';
 import { useEffect, useState } from 'react';
 import { useStore } from '@/store/store';
+import { Message } from '@/types';
 
-interface Message {
-  userId: string;
-  userName: string;
-  userAvatar: string;
-  messages: {
-    from: string;
-    content: string;
-    date: string;
-  }[];
-  unread: number;
-}
 
 export default function MessagePage() {
   const [allMessage, setAllMessage] = useState<Message[] | null>(null);
@@ -44,6 +34,27 @@ export default function MessagePage() {
     }
   }, [userId, allMessage]);
 
+  const handleClick = (id) => {
+    setUserId(id);
+    const viewMsg = async (id) => {
+      try {
+        const res = await viewMessages({ userId: id });
+        console.log(res);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    viewMsg(id);
+  }
+
+  const handleDeleteChats = async () => {
+    try {
+      const res = await deleteAllChats({ userId: userId });
+      console.log(res)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <section className="w-full h-[calc(100vh-90px)] flex">
@@ -51,9 +62,9 @@ export default function MessagePage() {
         <div className="flex flex-col p-[10px] gap-4">
           {allMessage?.map((item) => (
             <Button
-              onClick={() => setUserId(item.userId)}
+              onClick={() => handleClick(item.userId)}
               key={item.userId}
-              className="w-[223px] h-[81px] mx-auto bg-[#E4F1FF] rounded-lg flex justify-start items-center px-[5px] gap-2"
+              className={`w-[223px] h-[81px] mx-auto rounded-lg flex justify-start items-center px-[5px] gap-2 ${item.userId === userId ? "bg-[#E4F1FF]" : ""}`}
             >
               <Avatar
                 src={item.userAvatar || '/profile/user.png'}
@@ -78,9 +89,12 @@ export default function MessagePage() {
           <div className="w-full h-[71px] border-b-2">
             <div className="flex h-full justify-end items-center gap-6 px-[30px]">
               <p className="text-[20px] text-[#ED1C24]">会話を削除しますか？</p>
-              <div className="!w-[30px] !h-[30px] bg-red-300 flex justify-center items-center rounded-md">
+              <Button
+                onClick={handleDeleteChats}
+                isDisabled={userId ? false : true}
+                className="flex justify-center items-center rounded-md w-[30px] h-[30px] bg-red-300">
                 <DeleteIcon />
-              </div>
+              </Button>
             </div>
           </div>
 
@@ -111,13 +125,35 @@ export default function MessagePage() {
 
           <div className="w-full h-[98px] flex-none border-t-2">
             <div className="flex h-full justify-end items-center gap-6 px-[30px]">
-              <AdminChat userId={userId}/>
+              <AdminChat userId={userId} setChats={setChats} />
             </div>
           </div>
         </div>
       </div>
 
-      <div className="w-[300px] flex-none border-l-2"></div>
+      <div className="w-[300px] flex-none border-l-2 py-[5px]">
+        <div className="flex flex-col max-w-md mx-auto p-4 rounded-lg gap-8">
+          <h1 className="text-xl font-bold text-center mb-4 text-[#4291EF]">お問い合わせ内容</h1>
+          <div className="mb-2">
+            <span className="font-semibold">修理したい機械名:</span>
+            <p>Komatsu PC210</p>
+          </div>
+          <div className="mb-2">
+            <span className="font-semibold">型式:</span>
+            <p>PC210-10</p>
+          </div>
+          <div className="mb-2">
+            <span className="font-semibold">メーカー:</span>
+            <p>Komatsu</p>
+          </div>
+          <div>
+            <span className="font-semibold">内容:</span>
+            <p>
+              動画「コマツPC210の油圧ポンプ交換手順」を見ましたが、交換中にネジが固くて外れません。動画では特別な工具を使っているようですが、詳細な工具名と、どのようにネジを外せば良いのかを教えていただけますか？
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }

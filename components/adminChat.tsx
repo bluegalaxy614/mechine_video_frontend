@@ -4,12 +4,13 @@ import { useStore } from "@/store/store";
 import { Button } from "@nextui-org/button";
 import Image from "next/image";
 import { useState } from "react";
-
+import { Message } from "@/types";
 interface AdminChatProps {
-    userId: string
+    userId: string;
+    setChats: React.Dispatch<React.SetStateAction<Message | null>>;
 }
 
-const AdminChat = ({ userId }: AdminChatProps) => {
+const AdminChat = ({ userId, setChats }: AdminChatProps) => {
     const [chat, setChat] = useState("");
 
     const setErrorMessage = useStore((state) => state.setErrorMessage);
@@ -29,6 +30,22 @@ const AdminChat = ({ userId }: AdminChatProps) => {
     const handleSendMessage = () => {
         if (chat.trim()) {
             askMessage(chat)
+            setChats((prevState) => {
+                if (!prevState) return prevState; // Return the previous state if it's null
+
+                const updatedChats = { ...prevState }; // Copy the object, not spread it into an array
+                updatedChats.messages = [
+                    ...updatedChats?.messages,
+                    {
+                        from: 'admin',
+                        content: chat,
+                        date: new Date().toISOString(),
+                    },
+                ];
+
+                return updatedChats;
+            });
+
             setChat("");
         }
     };
@@ -52,6 +69,7 @@ const AdminChat = ({ userId }: AdminChatProps) => {
                     <Button
                         className="flex justify-center items-center rounded-full w-[80px] bg-[#4291EF]"
                         onClick={handleSendMessage}
+                        isDisabled={userId ? false : true}
                     >
                         <Image width={28} height={28} src="/icons/icon-send.png" alt="send" />
                     </Button>

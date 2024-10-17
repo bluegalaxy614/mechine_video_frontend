@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { IconSvgProps } from '@/types';
+import { giveStartToVideo } from '@/lib/api';
 
 export const Logo: React.FC<IconSvgProps> = ({
   size = 36,
@@ -341,7 +342,12 @@ export const Apple: React.FC<IconSvgProps> = () => {
     </svg>
   );
 };
-export const StarIcon: React.FC<IconSvgProps> = () => {
+
+interface StarIconProps {
+  videoId: string;
+}
+
+export const StarIcon: React.FC<StarIconProps> = ({ videoId }) => {
   const [isStar, setIsStar] = React.useState(false);
 
   const toggleColor = (e: React.MouseEvent<SVGSVGElement>) => {
@@ -350,10 +356,25 @@ export const StarIcon: React.FC<IconSvgProps> = () => {
     setIsStar(!isStar);
   };
 
+  React.useEffect(() => {
+    const giveStar = async (videoId: string) => {
+      try {
+        const res = await giveStartToVideo({ videoId });
+        console.log(res)
+      } catch (error) {
+        console.log(error)
+      }
+    };
+
+    if (isStar) {
+      giveStar(videoId);
+    }
+  }, [isStar, videoId]);
+
   return (
     <svg
-      height="40px"
-      width="40px"
+      height="20px"
+      width="20px"
       version="1.1"
       id="Capa_1"
       xmlns="http://www.w3.org/2000/svg"

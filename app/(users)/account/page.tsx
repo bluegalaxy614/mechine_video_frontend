@@ -32,7 +32,6 @@ export default function ViewerProfilePage() {
     });
 
     const { id } = await response.json();
-    console.log(id)
 
     const { error } = await stripe.redirectToCheckout({ sessionId: id });
     if (error) {

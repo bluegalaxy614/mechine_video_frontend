@@ -36,7 +36,7 @@ const CompanySlider: React.FC<CompanySliderProps> = ({ slides, dir }) => {
       }}
       aria-label="Image Slider"
     >
-      {slides.map((slide, index) => (
+      {slides?.map((slide, index) => (
         <SplideSlide
           key={index}
           className="flex w-[220px] h-[120px] rounded-[30px] my-[30px] justify-center items-center mx-[10px] border border-gray-200"

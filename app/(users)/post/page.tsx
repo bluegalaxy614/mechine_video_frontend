@@ -8,6 +8,7 @@ import { categoryConfig } from '@/config/site';
 import { uploadVideo } from '@/lib/api';
 import { Slider } from '@nextui-org/slider';
 import { useStore } from '@/store/store';
+import { getCategoryLabelById } from '@/utils/utils';
 
 function getVideoSnapshot(videoElement: HTMLVideoElement) {
   const canvas = document.createElement('canvas');
@@ -53,7 +54,6 @@ export default function PostPage() {
     if (videoRef.current && !isNaN(value) && isFinite(value)) {
       videoRef.current.currentTime = value;
       setVideoTime(value);
-      setMessage("Successfully get the video thumbnail!")
     }
   };
 
@@ -65,7 +65,6 @@ export default function PostPage() {
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    console.log(e.target.name, e.target.value);
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -103,6 +102,7 @@ export default function PostPage() {
       const canvas = getVideoSnapshot(videoRef.current);
       const imageSrc = canvas.toDataURL('image/png');
       setScreenshot(imageSrc);
+      setMessage("Successfully get the video thumbnail!")
     }
   };
 
@@ -121,11 +121,11 @@ export default function PostPage() {
     setUploadedStatus(true);
 
     if (!video) {
-      console.log('No video selected');
       setErrorMessage('No video selected');
       return;
     }
-
+    const mainName = getCategoryLabelById(selectedCategory);
+    const subName = getCategoryLabelById(selectedSubCategory);
     const data = new FormData();
     data.append('video', video);
     data.append('videoDuration', videoDuration.toString());
@@ -135,8 +135,8 @@ export default function PostPage() {
     data.append('machineName', formData.machineName);
     data.append('format', formData.format);
     data.append('manufacturer', formData.manufacturer);
-    data.append('selectedCategory', selectedCategory);
-    data.append('selectedSubCategory', selectedSubCategory);
+    data.append('selectedCategory', mainName);
+    data.append('selectedSubCategory', subName);
 
     if (screenshot && videoRef.current) {
       const canvas = getVideoSnapshot(videoRef.current);
@@ -178,6 +178,7 @@ export default function PostPage() {
                   name="title"
                   value={formData.title}
                   onChange={handleInputChange}
+                  placeholder="入力してください..."
                 />
               </div>
 
@@ -188,6 +189,7 @@ export default function PostPage() {
                   value={formData.description}
                   onChange={handleInputChange}
                   rows={5}
+                  placeholder="入力してください..."
                 />
               </div>
             </div>
@@ -257,7 +259,8 @@ export default function PostPage() {
               name="videoCode"
               value={formData.videoCode}
               onChange={handleInputChange}
-            />
+              placeholder="入力してください..."
+              />
           </div>
 
           <div>
@@ -266,7 +269,8 @@ export default function PostPage() {
               name="machineName"
               value={formData.machineName}
               onChange={handleInputChange}
-            />
+              placeholder="入力してください..."
+              />
           </div>
 
           <div>
@@ -275,7 +279,8 @@ export default function PostPage() {
               name="format"
               value={formData.format}
               onChange={handleInputChange}
-            />
+              placeholder="入力してください..."
+              />
           </div>
 
           <div>
@@ -284,7 +289,8 @@ export default function PostPage() {
               name="manufacturer"
               value={formData.manufacturer}
               onChange={handleInputChange}
-            />
+              placeholder="入力してください..."
+              />
           </div>
 
           <div>

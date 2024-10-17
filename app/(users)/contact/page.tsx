@@ -33,7 +33,6 @@ export default function ContactPage() {
       )
       .then(
         (response) => {
-          console.log('SUCCESS!', response.status, response.text);
           setMessage("Email sent successfully!")
         },
         (err) => {

@@ -1,15 +1,13 @@
 import { Card } from '@nextui-org/card';
 import Image from 'next/image';
 import { NewsCardsProps } from '@/types';
+import { formatDate } from '@/utils/utils';
 
 const NewsCards = ({ data }: NewsCardsProps) => {
-  const formatDate = (dateStr: string) => {
-    const date = new Date(dateStr);
-    return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
-  };
+
   return (
     <div className="w-full flex flex-col space-y-4 p-2 my-[20px]">
-      {data.map((item, index) => (
+      {data?.map((item, index) => (
         <Card
           key={index}
           className="w-full lg:h-[176px] md:h-[170px] sm:h-[160px] xsm:h-[140px] py-[25px] shadow-lg rounded-lg border border-gray-200 shadow-md hover:shadow-default-300 hover:bg-[#E4F1FF]"

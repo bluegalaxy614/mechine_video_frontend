@@ -68,7 +68,6 @@ export default function Home() {
     const fetchVideos = async () => {
       setIsLoading(true);
       try {
-        console.log('Fetching videos...');
         const res: ResponseVideos = await getVideos(videoConfig);
         const { currentPage, totalPages, videos } = res
 
@@ -98,7 +97,6 @@ export default function Home() {
     const fetchVideos = async () => {
       setIsFavVideoLoading(true);
       try {
-        console.log('Fetching videos...');
         const res: ResponseVideos = await getVideos(favVideoConfig);
         const { currentPage, totalPages, videos } = res
 
@@ -127,8 +125,7 @@ export default function Home() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await getUsers({ perPage: 8, page: 1, sort: 'viewCounts' });
-        console.log(res.users)
+        const res = await getUsers({ perPage: 8, page: 1, sort: 'uploads' });
         setUsers(res.users);
       } catch (error) {
         console.error('Error fetching users:', error);
@@ -144,7 +141,6 @@ export default function Home() {
         const res = await getNews({
           currentPage: page,
         });
-        console.log(res);
         const { totalPages, news } = res;
         setNewsData(news);
         setIsNewsLoading(false);

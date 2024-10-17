@@ -27,10 +27,20 @@ import { Divider } from '@nextui-org/divider';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { deleteSession } from '@/utils/utils';
+import { useEffect, useState } from 'react';
 
 export const Navbar = () => {
   const { user, setUser } = useStore((state) => state);
   const router = useRouter();
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return null; 
+  }
   return (
     <div>
       <NextUINavbar
@@ -83,13 +93,13 @@ export const Navbar = () => {
                   </DropdownTrigger>
                   <DropdownMenu aria-label="Profile Actions" variant="flat">
                     <DropdownItem key="profile">
-                      <Link href="/profile">profile</Link>
+                      <Link href="/profile">プロフィール</Link>
                     </DropdownItem>
                     <DropdownItem key="payment">
-                      <Link href="/payment">payment</Link>
+                      <Link href="/payment">支払</Link>
                     </DropdownItem>
                     <DropdownItem key="account">
-                      <Link href="/account">account setting</Link>
+                      <Link href="/account">アカウント</Link>
                     </DropdownItem>
                     <DropdownItem key="logout">
                       <div

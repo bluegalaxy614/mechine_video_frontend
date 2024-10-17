@@ -27,9 +27,9 @@ const statusColorMap: Record<string, ChipProps['color']> = {
 
 interface Row {
   _id: string;
-  name: string;
-  duration: string;
-  viewers: string;
+  title: string;
+  videoDuration: string;
+  views: string;
   revenue: string;
   status: '未払い' | '支払い' | '保留中'; // use a union type for the possible statuses
 }[]
@@ -76,7 +76,6 @@ export default function PosterPaymentPage() {
     const deleteRow = async (id) => {
       try {
         const res = await deleteVideoById({ videoId: id });
-        console.log(res.message);
         setMessage(res.message)
         setVideos((prevVideos) => prevVideos.filter(video => video._id !== id));
       } catch (error) {
@@ -215,7 +214,7 @@ export default function PosterPaymentPage() {
             </TableHeader>
             <TableBody items={videos}>
               {(item) => (
-                <TableRow key={item.id} className="cursor-pointer">
+                <TableRow key={item._id} className="cursor-pointer">
                   {(columnKey) => (
                     <TableCell>{renderCell(item, columnKey)}</TableCell>
                   )}

@@ -48,6 +48,7 @@ const ChatInput = () => {
                     <Button
                         className="flex justify-center items-center rounded-full w-[80px] bg-[#4291EF]"
                         onClick={handleSendMessage}
+                        isDisabled={chat ? false : true}
                     >
                         <Image width={28} height={28} src="/icons/icon-send.png" alt="send" />
                     </Button>

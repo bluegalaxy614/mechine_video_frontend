@@ -27,10 +27,21 @@ import { Button } from '@nextui-org/button';
 import { Divider } from '@nextui-org/divider';
 import Image from 'next/image';
 import { deleteSession } from '@/utils/utils';
+import { useEffect, useState } from 'react';
 
 export const AdminNavbar = () => {
   const { user, setUser } = useStore((state) => state);
   const router = useRouter();
+  const [isClient, setIsClient] = useState(false);
+
+  // Ensure this runs only on the client side
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return null; // Return null during SSR to prevent mismatches
+  }
   return (
     <div>
       <NextUINavbar
@@ -76,7 +87,7 @@ export const AdminNavbar = () => {
                       src={user?.avatar ? user.avatar : '/profile/user.png'}
                     />
                     <span className="mx-auto text-[20px] text-[#1F2B3E]">
-                      {user.name}
+                      {user?.name}
                     </span>
                   </Button>
                 </DropdownTrigger>

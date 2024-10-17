@@ -51,7 +51,6 @@ export default function DashboardPage() {
         const res = await getNews({
           currentPage: page,
         });
-        console.log(res);
         const { totalPages, news } = res;
         setNewsData(news);
         setIsLoading(false);
@@ -81,17 +80,13 @@ export default function DashboardPage() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log('dashboard submitted');
-
     const data = {
       title: formData.title,
       content: formData.content
     }
 
     try {
-      console.log(data);
       const res = await createNews(data);
-      console.log(res);
       setFormData({
         title: '',
         content: '',

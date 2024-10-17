@@ -2,11 +2,10 @@ import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
-// Function to upload video and metadata
 export const uploadVideo = async (formData) => {
   try {
     const response = await axios.post(
-      `${API_URL}/api/videos/upload`,
+      `${API_URL}/api/users/upload`,
       formData,
       {
         headers: {
@@ -76,10 +75,28 @@ export const getUserMessage = async () => {
     throw error;
   }
 }
+export const giveStartToVideo = async (data) => {
+  try {
+    const response = await axios.post(`${API_URL}/api/users/giveStartToVideo`,data);
+    return response.data;
+  } catch (error) {
+    console.error('Upload error:', error);
+    throw error;
+  }
+}
 
 export const searchVideos = async (data) => {
   try {
-    const response = await axios.post(`${API_URL}/api/videos/search`, data);
+    const response = await axios.post(`${API_URL}/api/users/search`, data);
+    return response.data;
+  } catch (error) {
+    console.error('Upload error:', error);
+    throw error;
+  }
+}
+export const searchVideoInString = async (data) => {
+  try {
+    const response = await axios.post(`${API_URL}/api/users/searchVideoInString`, data);
     return response.data;
   } catch (error) {
     console.error('Upload error:', error);
@@ -90,7 +107,6 @@ export const searchVideos = async (data) => {
 export const createNews = async (data) => {
   try {
     const response = await axios.post(`${API_URL}/api/admin/createNews`, data);
-    console.log(response)
     return response.data;
   } catch (error) {
     console.error('Upload error:', error);
@@ -175,9 +191,27 @@ export const deleteVideoById = async (data) => {
     throw (error)
   }
 }
+export const viewMessages = async (data) => {
+  try {
+    const response = await axios.post(`${API_URL}/api/admin/viewMessages`, data);
+    return response.data;
+  } catch (error) {
+    console.error('Upload error:', error);
+    throw error;
+  }
+}
 export const sendAskMessage = async (data) => {
   try {
     const response = await axios.post(`${API_URL}/api/users/sendAskMessage`, data)
+    return response.data;
+  } catch (error) {
+    console.log(error)
+    throw (error)
+  }
+}
+export const deleteAllChats = async (data) => {
+  try {
+    const response = await axios.post(`${API_URL}/api/admin/deleteAllChats`, data)
     return response.data;
   } catch (error) {
     console.log(error)

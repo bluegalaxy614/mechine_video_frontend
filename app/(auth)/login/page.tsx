@@ -7,7 +7,7 @@ import { setSession } from '@/utils/utils';
 import { useStore } from '@/store/store';
 
 export default function LoginPage() {
-  const { setUser } = useStore();
+  const setUser = useStore((state) => state.setUser);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
@@ -21,10 +21,10 @@ export default function LoginPage() {
     try {
       const res = await authService.login({ email, password });
       const { user, message } = res.data;
-      setSession(user.token);
+      setSession(user?.token);
       setUser(user);
       setMessage(message);
-      if (user.role === "admin") {
+      if (user?.role === "admin") {
         router.push('/dashboard');
       } else {
         router.push('/')

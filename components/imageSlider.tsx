@@ -26,7 +26,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ slides }) => {
       }}
       aria-label="Image Slider"
     >
-      {slides.map((slide, index) => (
+      {slides?.map((slide, index) => (
         <SplideSlide
           key={index}
           className="relative w-full lg:h-[483px] md:h-[483px] sm:h-[400px] xsm:h-[300px] from-transparent"

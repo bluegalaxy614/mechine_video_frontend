@@ -7,7 +7,7 @@ const UserCards = ({ data }: UserCardsProps) => {
   return (
     <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xsm:grid-cols-1 gap-6">
       {data && data.length > 0 ? (
-        data.map((item, index) => (
+        data?.map((item, index) => (
           <Card
             className="flex w-[277px] h-[360px] rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 mx-auto"
             key={index}
@@ -29,7 +29,7 @@ const UserCards = ({ data }: UserCardsProps) => {
                   <p className="text-gray-700 text-[16px]">
                     投稿件数:{' '}
                     <strong className="text-[#ED1C24] text-[20px]">
-                      {item.number}件
+                      {item.uploads}件
                     </strong>
                   </p>
                 </div>

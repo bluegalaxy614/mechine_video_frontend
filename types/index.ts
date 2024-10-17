@@ -11,6 +11,17 @@ export interface BoxImageProps {
   info: string;
   unit: string;
 }
+export interface Message {
+  userId: string;
+  userName: string;
+  userAvatar: string;
+  messages: {
+    from: string;
+    content: string;
+    date: string;
+  }[];
+  unread: number;
+}
 
 export interface CategoryButtonProps {
   id: string;
@@ -130,23 +141,17 @@ export interface NewsCardsProps {
   }[];
 }
 
-export interface category {
-  main: string;
-  sub: string;
-}
-
 export interface subCategoryButtonProps {
   id: string;
   name: string;
-  category: category;
-  setSelectedSubCategories: React.Dispatch<React.SetStateAction<category[]>>;
+  setSelectedSubCategories: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 export interface UserCardsProps {
   data: {
     img: string;
     name: string;
-    number: string;
+    uploads: string;
   }[];
 }
 export interface VideoCardsProps {

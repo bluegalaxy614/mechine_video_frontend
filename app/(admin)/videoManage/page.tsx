@@ -19,7 +19,7 @@ import Image from 'next/image';
 import { Divider } from '@nextui-org/divider';
 import { Link } from '@nextui-org/link';
 import { deleteVideoById, getAllVideos } from '@/lib/api';
-
+import { formatDate } from '@/utils/utils';
 interface Row {
   _id: string;
   title: string;
@@ -29,7 +29,7 @@ interface Row {
   selectedCategory: string;
   selectedSubCategory: string;
   status: string;
-  createdAt: string;
+  uploadDate: string;
   actions: string;
 }
 
@@ -61,11 +61,9 @@ export default function VideoManagePage() {
 
   const handleDelete = (id: String, event: React.MouseEvent) => {
     event.preventDefault();
-    console.log("deleted Icon clicked", id)
     const deleteRow = async (id) => {
       try {
         const res = await deleteVideoById({ videoId: id });
-        console.log(res.message);
         setMessage(res.message)
         setVideos((prevVideos) => prevVideos.filter(video => video._id !== id));
       } catch (error) {
@@ -114,6 +112,12 @@ export default function VideoManagePage() {
         return (
           <div className="flex flex-col">
             <p className="text-bold text-[14px] capitalize">{String(cellValue)}</p>
+          </div>
+        );
+      case 'uploadDate':
+        return (
+          <div className="flex flex-col">
+            <p className="text-bold text-[14px] capitalize">{formatDate(cellValue)}</p>
           </div>
         );
       case 'status':

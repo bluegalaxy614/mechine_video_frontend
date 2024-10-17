@@ -8,9 +8,9 @@ interface StarButtonProps {
 const StarButton  = ({videoId}:StarButtonProps) => {
 return(
   <div
-    className="absolute bottom-[30px] right-[20px]"
+    className="absolute bottom-[20px] right-[20px]"
   >
-    <StarIcon/>
+    <StarIcon videoId={videoId} />
   </div>
 )
 }

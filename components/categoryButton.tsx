@@ -3,6 +3,7 @@
 import { Button } from '@nextui-org/button';
 import { useState } from 'react';
 import { CategoryButtonProps } from '@/types';
+import { getCategoryLabelById } from '@/utils/utils';
 
 export default function CategoryButton({
   id,
@@ -10,14 +11,15 @@ export default function CategoryButton({
   setSelectedCategories,
 }: CategoryButtonProps) {
   const [selectedState, setSelectedState] = useState(false);
+  const mainLabel = getCategoryLabelById(id);
 
   const onClick = () => {
     setSelectedState(!selectedState);
     setSelectedCategories((prevState) => {
       if (!selectedState) {
-        return [...prevState, id];
+        return [...prevState, mainLabel];
       } else {
-        return prevState.filter((categoryId) => categoryId !== id);
+        return prevState.filter((categoryId) => categoryId !== mainLabel);
       }
     });
   };
