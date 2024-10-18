@@ -20,8 +20,8 @@ export default function ViwerPage() {
   const [displyVideos, setDisplyVideos] = useState([]);
 
   useEffect(() => {
-    setDisplyVideos(videos)
-  }, [videos])
+    setDisplyVideos(videos);
+  }, [videos]);
   return (
     <>
       <SearchCategories

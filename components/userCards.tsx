@@ -19,7 +19,7 @@ const UserCards = ({ data }: UserCardsProps) => {
                 width={196}
                 height={192}
                 alt={`Profile picture of ${item.name}`}
-                src={item.img ? item.img :'/profile/user.png'} 
+                src={item.img ? item.img : '/profile/user.png'}
               />
               <div className="w-full flex flex-col mt-6 mb-8">
                 <h1 className="text-[20px] font-bold text-blue-500 text-center">

@@ -16,9 +16,7 @@ import {
 } from '@nextui-org/dropdown';
 import { Avatar } from '@nextui-org/avatar';
 import { Link } from '@nextui-org/link';
-import { link as linkStyles } from '@nextui-org/theme';
 import NextLink from 'next/link';
-import clsx from 'clsx';
 import { useStore } from '@/store/store';
 
 import { siteConfig } from '@/config/site';
@@ -39,7 +37,7 @@ export const Navbar = () => {
   }, []);
 
   if (!isClient) {
-    return null; 
+    return null;
   }
   return (
     <div>
@@ -62,24 +60,28 @@ export const Navbar = () => {
           </NavbarContent>
           <NavbarContent className="basis-1/5 sm:basis-full" justify="end">
             <ul className="hidden lg:flex md:flex gap-4 justify-start ml-2">
-              {siteConfig.userNavItems.map((item) => (
-                <NavbarItem key={item.href}>
-                  <NextLink
-                    className={clsx(
-                      linkStyles({ color: 'foreground' }),
-                      'data-[active=true]:text-primary data-[active=true]:font-medium',
-                    )}
-                    color="foreground"
-                    href={item.href}
-                  >
-                    {item.label}
-                  </NextLink>
-                </NavbarItem>
-              ))}
+              {siteConfig.userNavItems.map((item) => {
+                // const isActive = router.pathname === item.href;
+                return (
+                  <NavbarItem key={item.href}>
+                    <NextLink
+                      // className={clsx(
+                      //   linkStyles({ color: 'foreground' }),
+                      //   'data-[active=true]:text-primary data-[active=true]:font-large',
+                      // )}
+                      className="text-lg hover:text-[#4291EF] hover:font-bold hover:underline hover:underline-offset-8 hover:decoration-2"
+                      color="black"
+                      href={item.href}
+                    >
+                      {item.label}
+                    </NextLink>
+                  </NavbarItem>
+                )
+              })}
             </ul>
             <NavbarItem className="hidden lg:flex md:flex">
               {user ? (
-                <Dropdown placement="bottom-end">
+                <Dropdown placement="bottom-end" className="mt-[10px]">
                   <DropdownTrigger>
                     <Button className="flex justify-center items-center rounded-full bg-[#F4F4F4] min-w-[190px] conten-fit h-[65px] p-1 hover:pointer pr-[10px]">
                       <Avatar

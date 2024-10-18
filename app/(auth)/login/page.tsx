@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import authService from '@/lib/auth';
@@ -24,10 +24,10 @@ export default function LoginPage() {
       setSession(user?.token);
       setUser(user);
       setMessage(message);
-      if (user?.role === "admin") {
+      if (user?.role === 'admin') {
         router.push('/dashboard');
       } else {
-        router.push('/')
+        router.push('/');
       }
     } catch (err) {
       console.error(err);
@@ -126,7 +126,10 @@ export default function LoginPage() {
           </form>
 
           <div className="text-center mt-4">
-            <a href="/register" className="text-blue-500 text-sm underline mb-[30px]">
+            <a
+              href="/register"
+              className="text-blue-500 text-sm underline mb-[30px]"
+            >
               会員登録
             </a>
           </div>

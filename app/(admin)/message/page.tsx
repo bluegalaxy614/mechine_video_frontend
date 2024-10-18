@@ -8,7 +8,6 @@ import { useEffect, useState } from 'react';
 import { useStore } from '@/store/store';
 import { Message } from '@/types';
 
-
 export default function MessagePage() {
   const [allMessage, setAllMessage] = useState<Message[] | null>(null);
   const [userId, setUserId] = useState<string>('');
@@ -29,7 +28,8 @@ export default function MessagePage() {
 
   useEffect(() => {
     if (userId && allMessage) {
-      const userChats = allMessage.find((item) => item.userId === userId) || null;
+      const userChats =
+        allMessage.find((item) => item.userId === userId) || null;
       setChats(userChats);
     }
   }, [userId, allMessage]);
@@ -41,20 +41,20 @@ export default function MessagePage() {
         const res = await viewMessages({ userId: id });
         console.log(res);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
-    }
+    };
     viewMsg(id);
-  }
+  };
 
   const handleDeleteChats = async () => {
     try {
       const res = await deleteAllChats({ userId: userId });
-      console.log(res)
+      console.log(res);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   return (
     <section className="w-full h-[calc(100vh-90px)] flex">
@@ -64,7 +64,7 @@ export default function MessagePage() {
             <Button
               onClick={() => handleClick(item.userId)}
               key={item.userId}
-              className={`w-[223px] h-[81px] mx-auto rounded-lg flex justify-start items-center px-[5px] gap-2 ${item.userId === userId ? "bg-[#E4F1FF]" : ""}`}
+              className={`w-[223px] h-[81px] mx-auto rounded-lg flex justify-start items-center px-[5px] gap-2 ${item.userId === userId ? 'bg-[#E4F1FF]' : ''}`}
             >
               <Avatar
                 src={item.userAvatar || '/profile/user.png'}
@@ -73,7 +73,9 @@ export default function MessagePage() {
                 alt="user"
                 className="flex-none w-[60px] h-[60px]"
               />
-              <p className="grow text-[20px] text-center text-pretty">{item.userName}</p>
+              <p className="grow text-[20px] text-center text-pretty">
+                {item.userName}
+              </p>
               {item.unread > 0 && (
                 <span className="flex-none bg-[#ED1C24] rounded-full w-[21px] h-[21px] text-white flex justify-center items-center">
                   {item.unread}
@@ -92,19 +94,23 @@ export default function MessagePage() {
               <Button
                 onClick={handleDeleteChats}
                 isDisabled={userId ? false : true}
-                className="flex justify-center items-center rounded-md w-[30px] h-[30px] bg-red-300">
+                className="flex justify-center items-center rounded-md w-[30px] h-[30px] bg-red-300"
+              >
                 <DeleteIcon />
               </Button>
             </div>
           </div>
 
           <div className="w-full h-[calc(100vh-90px-71px-98px)] overflow-y-scroll grow px-[56px] py-[34px]">
-            {chats?.messages?.map((item, index) =>
-            (
+            {chats?.messages?.map((item, index) => (
               <div key={index} className="flex flex-col gap-[20px] py-[25px]">
                 <div className="flex justify-start items-center rounded-full min-w-[191px] h-[59px] p-1 hover:pointer gap-3">
                   <Avatar
-                    src={item.from === 'admin' ? (user.avatar || '/profile/avatar3.png') : (chats.userAvatar || '/profile/user.png')}
+                    src={
+                      item.from === 'admin'
+                        ? user.avatar || '/profile/avatar3.png'
+                        : chats.userAvatar || '/profile/user.png'
+                    }
                     name={chats.userName}
                     size="lg"
                     alt="user"
@@ -115,12 +121,15 @@ export default function MessagePage() {
                   </span>
                 </div>
 
-                <div className={`relative w-full p-[28px] gap-[20px] rounded-lg ${item.from === "admin" ? "bg-[#E4F1FF]" : "bg-[#F4F4F4]"}`}>
-                  <p className="text-[14px]">{item.content || 'No message content'}</p>
+                <div
+                  className={`relative w-full p-[28px] gap-[20px] rounded-lg ${item.from === 'admin' ? 'bg-[#E4F1FF]' : 'bg-[#F4F4F4]'}`}
+                >
+                  <p className="text-[14px]">
+                    {item.content || 'No message content'}
+                  </p>
                 </div>
               </div>
-            )
-            )}
+            ))}
           </div>
 
           <div className="w-full h-[98px] flex-none border-t-2">
@@ -133,7 +142,9 @@ export default function MessagePage() {
 
       <div className="w-[300px] flex-none border-l-2 py-[5px]">
         <div className="flex flex-col max-w-md mx-auto p-4 rounded-lg gap-8">
-          <h1 className="text-xl font-bold text-center mb-4 text-[#4291EF]">お問い合わせ内容</h1>
+          <h1 className="text-xl font-bold text-center mb-4 text-[#4291EF]">
+            お問い合わせ内容
+          </h1>
           <div className="mb-2">
             <span className="font-semibold">修理したい機械名:</span>
             <p>Komatsu PC210</p>

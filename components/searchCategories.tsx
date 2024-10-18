@@ -13,12 +13,16 @@ import { Selection } from '@nextui-org/table';
 export default function SearchCategories({
   setVideos,
   setTotalPages,
-  currentPage
+  currentPage,
 }) {
-  const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set(["uploadDate"]));
+  const [selectedKeys, setSelectedKeys] = useState<Selection>(
+    new Set(['uploadDate']),
+  );
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [selectedSubCategories, setSelectedSubCategories] = useState<string[]>([]);
-  const [inputValue, setInputValue] = useState<string>("");
+  const [selectedSubCategories, setSelectedSubCategories] = useState<string[]>(
+    [],
+  );
+  const [inputValue, setInputValue] = useState<string>('');
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
@@ -36,7 +40,7 @@ export default function SearchCategories({
             selectedKeys,
           });
           const { video, totalPages } = res;
-          console.log(res)
+          console.log(res);
           setTotalPages(totalPages);
           setVideos(video);
         } catch (error) {
@@ -45,16 +49,26 @@ export default function SearchCategories({
       };
       fetchVideos();
     }
-  }, [selectedCategories, selectedSubCategories, selectedKeys, currentPage,inputValue]);
+  }, [
+    selectedCategories,
+    selectedSubCategories,
+    selectedKeys,
+    currentPage,
+    inputValue,
+  ]);
 
   useEffect(() => {
     if (inputValue.length !== 0) {
       const searchVideos = async () => {
         try {
           setVideos([]);
-          const res = await searchVideoInString({ inputValue, selectedKeys, currentPage });
+          const res = await searchVideoInString({
+            inputValue,
+            selectedKeys,
+            currentPage,
+          });
           const { video, totalPages } = res;
-          console.log(res)
+          console.log(res);
           setVideos(video);
           setTotalPages(totalPages);
         } catch (error) {
@@ -90,22 +104,16 @@ export default function SearchCategories({
             並べ替え
           </p>
           <Select
-            defaultSelectedKeys={"uploadDate"}
+            defaultSelectedKeys={'uploadDate'}
             variant="bordered"
             selectedKeys={selectedKeys}
             onSelectionChange={setSelectedKeys}
             className="h-[41px] w-[144px] lg:text-[14px] md:text-[14px] sm:text-[14px] xsm:text-[10px]"
           >
-            <SelectItem
-              key={"uploadDate"}
-              value={"uploadDate"}
-            >
+            <SelectItem key={'uploadDate'} value={'uploadDate'}>
               最新順
             </SelectItem>
-            <SelectItem
-              key={"views"}
-              value={"views"}
-            >
+            <SelectItem key={'views'} value={'views'}>
               人気順
             </SelectItem>
           </Select>
@@ -139,8 +147,8 @@ export default function SearchCategories({
               />
             ))}
         </div>
-      <Divider />
+        <Divider />
       </div>
     </section>
   );
-};
+}

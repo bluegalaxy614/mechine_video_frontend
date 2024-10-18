@@ -102,7 +102,7 @@ export default function PostPage() {
       const canvas = getVideoSnapshot(videoRef.current);
       const imageSrc = canvas.toDataURL('image/png');
       setScreenshot(imageSrc);
-      setMessage("Successfully get the video thumbnail!")
+      setMessage('Successfully get the video thumbnail!');
     }
   };
 
@@ -260,7 +260,7 @@ export default function PostPage() {
               value={formData.videoCode}
               onChange={handleInputChange}
               placeholder="入力してください..."
-              />
+            />
           </div>
 
           <div>
@@ -270,7 +270,7 @@ export default function PostPage() {
               value={formData.machineName}
               onChange={handleInputChange}
               placeholder="入力してください..."
-              />
+            />
           </div>
 
           <div>
@@ -280,7 +280,7 @@ export default function PostPage() {
               value={formData.format}
               onChange={handleInputChange}
               placeholder="入力してください..."
-              />
+            />
           </div>
 
           <div>
@@ -290,7 +290,7 @@ export default function PostPage() {
               value={formData.manufacturer}
               onChange={handleInputChange}
               placeholder="入力してください..."
-              />
+            />
           </div>
 
           <div>

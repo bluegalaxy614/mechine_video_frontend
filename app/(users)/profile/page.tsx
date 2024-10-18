@@ -5,8 +5,6 @@ import { Pagination } from '@nextui-org/pagination';
 import BoxImage from '@/components/boxImage';
 import LineChart from '@/components/lineChart';
 import { Button } from '@nextui-org/button';
-// import { lastestVideos } from '@/config/data';
-// import SearchCategories from '@/components/searchCategories';
 import { Image } from '@nextui-org/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -15,10 +13,9 @@ import { getPosterVideos } from '@/lib/api';
 const icon = {
   icon: '/icons/icons-setting.png',
   title: '動画承認ステータス',
-  description: "",
+  description: '',
 };
 export default function ProfilePage() {
-
   const [totalPages, setTotalPages] = useState(0);
   const [page, setPage] = useState(1);
   const [displyVideos, setDisplyVideos] = useState([]);
@@ -31,19 +28,19 @@ export default function ProfilePage() {
           page: page,
           perPage: 20,
           sort: 'uploadDate',
-          status: status
-        })
-        const { currentPage, totalPages, videos } = res
-        setDisplyVideos(videos)
-        setTotalPages(totalPages)
+          status: status,
+        });
+        const { currentPage, totalPages, videos } = res;
+        console.log(currentPage)
+        setDisplyVideos(videos);
+        setTotalPages(totalPages);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
-    }
+    };
 
-    fetchVideos()
-  }, [page, status])
-
+    fetchVideos();
+  }, [page, status]);
 
   const data = {
     labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
@@ -123,16 +120,21 @@ export default function ProfilePage() {
             />
           </Link>
         </div>
-        {displyVideos?.length === 0 ?
-          <p className="mb-[30px]">There is no any video.</p> :
-          <><VideoCards data={displyVideos} /><Pagination
-            showControls
-            total={totalPages}
-            page={page}
-            initialPage={1}
-            className="flex align-items-center justify-center my-[30px]"
-            onChange={setPage} /></>
-        }
+        {displyVideos?.length === 0 ? (
+          <p className="mb-[30px]">There is no any video.</p>
+        ) : (
+          <>
+            <VideoCards data={displyVideos} />
+            <Pagination
+              showControls
+              total={totalPages}
+              page={page}
+              initialPage={1}
+              className="flex align-items-center justify-center my-[30px]"
+              onChange={setPage}
+            />
+          </>
+        )}
       </section>
       <footer className="w-full flex items-center justify-center py-3 bg-[#4291EF]">
         <p className="text-white text-[20px]"> All rights reserved.</p>

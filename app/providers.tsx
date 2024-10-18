@@ -8,7 +8,7 @@ import { ThemeProviderProps } from 'next-themes/dist/types';
 import { useStore } from '../store/store';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { toast } from 'react-toastify'
+import { toast } from 'react-toastify';
 import { setSession } from '@/utils/utils';
 
 export interface ProvidersProps {
@@ -24,35 +24,35 @@ export function Providers({ children, themeProps }: ProvidersProps) {
   const setErrorMessage = useStore((state) => state.setErrorMessage);
   const setMessage = useStore((state) => state.setMessage);
 
-  if(user){
+  if (user) {
     setSession(user.token);
   }
 
   React.useEffect(() => {
     if (message) {
       toast.success(message, {
-        position: "bottom-right",
+        position: 'bottom-right',
         autoClose: 1000,
         hideProgressBar: true,
         closeOnClick: true,
-        theme: "light",
+        theme: 'light',
       });
       setMessage('');
     }
-  }, [message])
+  }, [message]);
 
   React.useEffect(() => {
     if (errorMessage) {
       toast.error(errorMessage, {
-        position: "bottom-right",
+        position: 'bottom-right',
         autoClose: 1000,
         hideProgressBar: true,
         closeOnClick: true,
-        theme: "light",
+        theme: 'light',
       });
       setErrorMessage('');
     }
-  }, [errorMessage])
+  }, [errorMessage]);
 
   // React.useEffect(() => {
   //   if (!user) {

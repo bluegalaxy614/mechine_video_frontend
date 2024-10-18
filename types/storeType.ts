@@ -2,8 +2,8 @@ export interface User {
   name: string;
   email: string;
   avatar: string;
-  role:string;
-  token:string;
+  role: string;
+  token: string;
 }
 
 export interface StorageState {

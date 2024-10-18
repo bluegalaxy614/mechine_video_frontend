@@ -8,25 +8,19 @@ import ImageButton from '@/components/imageButton';
 import UserCards from '@/components/userCards';
 import CompanySlider from '@/components/companySlider';
 import HomeFooter from '@/components/homeFooter';
-// import SearchCategories from '@/components/searchCategories';
 import { Button } from '@nextui-org/button';
 import { Image } from '@nextui-org/image';
 import { companyList } from '@/config/site';
 import {
-  // users,
   slides,
   lastest,
   favorite,
-  // newsData,
-  // lastestVideos,
-  // favVideos,
   userIcon,
   news,
 } from '@/config/data';
 import { getNews, getUsers, getVideos } from '@/lib/api';
 import { Spinner } from '@nextui-org/spinner';
 import { Video } from '@/types';
-import SearchCategories from '@/components/searchCategories';
 import { Input } from '@nextui-org/input';
 import { SearchIcon } from '@/components/icons';
 
@@ -69,7 +63,7 @@ export default function Home() {
       setIsLoading(true);
       try {
         const res: ResponseVideos = await getVideos(videoConfig);
-        const { currentPage, totalPages, videos } = res
+        const { currentPage, totalPages, videos } = res;
 
         if (currentPage >= totalPages) {
           setLastPage(true);
@@ -78,7 +72,6 @@ export default function Home() {
         }
 
         setVideos(videos);
-
       } catch (error) {
         console.error('Error fetching videos:', error);
       } finally {
@@ -91,14 +84,14 @@ export default function Home() {
 
   useEffect(() => {
     setLastestVideos([...lastestVideos, ...videos]);
-  }, [videos])
+  }, [videos]);
 
   useEffect(() => {
     const fetchVideos = async () => {
       setIsFavVideoLoading(true);
       try {
         const res: ResponseVideos = await getVideos(favVideoConfig);
-        const { currentPage, totalPages, videos } = res
+        const { currentPage, totalPages, videos } = res;
 
         if (currentPage >= totalPages) {
           setFavPage(true);
@@ -107,7 +100,6 @@ export default function Home() {
         }
 
         setFavVideos(videos);
-
       } catch (error) {
         console.error('Error fetching videos:', error);
       } finally {
@@ -120,7 +112,7 @@ export default function Home() {
 
   useEffect(() => {
     setFavTotalVideos([...favTotalVideos, ...favVideos]);
-  }, [favVideos])
+  }, [favVideos]);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -132,7 +124,7 @@ export default function Home() {
       }
     };
     fetchUsers();
-  }, [])
+  }, []);
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -173,7 +165,7 @@ export default function Home() {
             <SearchIcon className="text-black/50 mb-0.5 text-slate-400 pointer-events-none flex-shrink-0" />
           }
         />
-      </section >
+      </section>
       <section className="max-w-[1280px] mx-auto">
         <ImageButton data={lastest} />
         <VideoCards data={lastestVideos} />

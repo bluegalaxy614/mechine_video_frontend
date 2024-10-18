@@ -1,5 +1,5 @@
 'use client';
-import React, { use, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import BoxImage from '@/components/boxImage';
 import {
   Table,
@@ -16,7 +16,7 @@ import { DeleteIcon } from '@/components/icons';
 import { tableConfig } from '@/config/site';
 import { Button } from '@nextui-org/button';
 import { Pagination } from '@nextui-org/pagination';
-import { deleteVideoById, getPosterVideos, getVideos } from '@/lib/api';
+import { deleteVideoById, getPosterVideos } from '@/lib/api';
 import { useStore } from '@/store/store';
 
 const statusColorMap: Record<string, ChipProps['color']> = {
@@ -32,7 +32,8 @@ interface Row {
   views: string;
   revenue: string;
   status: '未払い' | '支払い' | '保留中'; // use a union type for the possible statuses
-}[]
+}
+[];
 export default function PosterPaymentPage() {
   const [page, setPage] = useState(1);
   const [videos, setVideos] = useState([]);
@@ -51,39 +52,46 @@ export default function PosterPaymentPage() {
         const res = await getPosterVideos({
           page: page,
           perPage: 10,
-          sort: 'uploadDate'
+          sort: 'uploadDate',
         });
-        const { currentPage, totalPages, videos, paidVideos, unPaidVideos, totalPaidMounts } = res;
+        const {
+          currentPage,
+          totalPages,
+          videos,
+          paidVideos,
+          unPaidVideos,
+          totalPaidMounts,
+        } = res;
         setVideos(videos);
         setPages(totalPages);
         setPaidVideos(paidVideos);
         setUnPaidVideos(unPaidVideos);
         setTotalPaidMounts(totalPaidMounts);
-
       } catch (error) {
         console.log(error);
         setErrorMessage(error);
       }
-    }
+    };
     fetchVideos();
   }, [page]);
 
-  const handleGetPaid = () => {
-  }
+  const handleGetPaid = () => {};
 
   const handleDelete = (id: String, event: React.MouseEvent) => {
     event.preventDefault();
     const deleteRow = async (id) => {
       try {
         const res = await deleteVideoById({ videoId: id });
-        setMessage(res.message)
-        setVideos((prevVideos) => prevVideos.filter(video => video._id !== id));
+        setMessage(res.message);
+        setVideos((prevVideos) =>
+          prevVideos.filter((video) => video._id !== id),
+        );
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
-    }
+    };
     deleteRow(id);
-  }
+  };
   const renderCell = useCallback((user: Row, columnKey: React.Key) => {
     const cellValue = user[columnKey as keyof Row];
 

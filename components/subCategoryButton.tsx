@@ -10,7 +10,6 @@ export default function SubCategoryButton({
   name,
   setSelectedSubCategories,
 }: subCategoryButtonProps) {
-  
   const [selected, setSelected] = useState(false);
   const subLabel = getCategoryLabelById(id);
   const onClick = () => {
@@ -19,7 +18,6 @@ export default function SubCategoryButton({
       if (!selected) {
         return [...prevState, subLabel];
       } else {
-        
         return prevState.filter((item) => item !== subLabel);
       }
     });

@@ -1,5 +1,4 @@
 'use client';
-import { Input } from '@nextui-org/input';
 import { Button } from '@nextui-org/button';
 import Image from 'next/image';
 import { Select, SelectItem } from '@nextui-org/select';
@@ -19,14 +18,14 @@ export default function EditPage({ params }: { params: { slug: string } }) {
   useEffect(() => {
     const fetchVideo = async () => {
       try {
-        const res = await getVideoWithUserId({ videoId: id })
+        const res = await getVideoWithUserId({ videoId: id });
         const { video } = res;
         setVideo(video);
-        setStatus(video.status)
+        setStatus(video.status);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
-    }
+    };
     fetchVideo();
   }, [id]);
 
@@ -36,16 +35,16 @@ export default function EditPage({ params }: { params: { slug: string } }) {
       id: id,
       selectedCategory: selectedCategory,
       selectedSubCategory: selectedSubCategory,
-      status: status
-    }
+      status: status,
+    };
     try {
       const res = await updateVideo(data);
       const { video } = res;
       setVideo(video);
     } catch (error) {
-      console.error('Profile changing Error')
-    }
-  }
+      console.error('Profile changing Error');
+    };
+  };
 
   // Handle category change
   const handleCategoryChange = (value: string) => {
@@ -76,7 +75,10 @@ export default function EditPage({ params }: { params: { slug: string } }) {
           動画のカテゴリ変更や承認を行い、公開設定を管理します。
         </p>
       </div>
-      <form onSubmit={handleSubmit} className="max-w-[1280px] mx-auto flex flex-wrap lg:mt-[85px] md:mt-[55px] sm:mt-[45px] xsm:mt-[35px] gap-12">
+      <form
+        onSubmit={handleSubmit}
+        className="max-w-[1280px] mx-auto flex flex-wrap lg:mt-[85px] md:mt-[55px] sm:mt-[45px] xsm:mt-[35px] gap-12"
+      >
         <div className="flex flex-col w-[388px] h-[514px] gap-4 mx-auto">
           <div className="flex lg:mt-[85px] md:mt-[55px] sm:mt-[45px] xsm:mt-[35px] grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-6">
             <div className="w-[300px] flex flex-col justify-between gap-6 mx-auto">
@@ -156,15 +158,9 @@ export default function EditPage({ params }: { params: { slug: string } }) {
               className="w-full h-[41px] rounded-md"
               onChange={(value) => handleStatusChange(value.target.value)}
             >
-              <SelectItem key={'承認済み'}>
-                承認済み
-              </SelectItem>
-              <SelectItem key={'拒否'}>
-                拒否
-              </SelectItem>
-              <SelectItem key={'リクエスト中'}>
-                リクエスト中
-              </SelectItem>
+              <SelectItem key={'承認済み'}>承認済み</SelectItem>
+              <SelectItem key={'拒否'}>拒否</SelectItem>
+              <SelectItem key={'リクエスト中'}>リクエスト中</SelectItem>
             </Select>
             {/* <Input
               width={387}
@@ -199,7 +195,10 @@ export default function EditPage({ params }: { params: { slug: string } }) {
           </div>
         </div>
         <div className="w-full flex">
-          <Button type="submit" className="w-[185px] h-[30px] bg-[#4291EF] mx-auto mt-[40px] mb-[71px]">
+          <Button
+            type="submit"
+            className="w-[185px] h-[30px] bg-[#4291EF] mx-auto mt-[40px] mb-[71px]"
+          >
             <p className="text-[#FFFFFF] text-[20px]">アップデート</p>
             <Image width={28} height={28} src="/icons/icon-store.png" alt="" />
           </Button>

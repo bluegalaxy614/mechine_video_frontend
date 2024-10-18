@@ -4,7 +4,6 @@ import { NewsCardsProps } from '@/types';
 import { formatDate } from '@/utils/utils';
 
 const NewsCards = ({ data }: NewsCardsProps) => {
-
   return (
     <div className="w-full flex flex-col space-y-4 p-2 my-[20px]">
       {data?.map((item, index) => (
@@ -14,7 +13,12 @@ const NewsCards = ({ data }: NewsCardsProps) => {
         >
           <div className="flex justify-between mx-[20px]">
             <div className="flex-none max-w-[65px]">
-              <Image width={64} height={62} alt={item.title} src="/icons/icons-checked.png" />
+              <Image
+                width={64}
+                height={62}
+                alt={item.title}
+                src="/icons/icons-checked.png"
+              />
             </div>
             <div className="grow mt-4 ml-4 grid gap-4">
               <h1 className="lg:text-[20px] md:text-[20px] sm:text-[18px] xsm:text-[16px] text-[#4291EF] font-bold truncate">

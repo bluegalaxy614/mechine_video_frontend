@@ -13,7 +13,7 @@ import { formatDate } from '@/utils/utils';
 const VideoCards = ({ data }: VideoCardsProps) => {
   const user = useStore((state) => state.user);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [videoUrl, setVideoUrl] = useState<string>("");
+  const [videoUrl, setVideoUrl] = useState<string>('');
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const playerRef = useRef<any>(null);
 
@@ -29,14 +29,13 @@ const VideoCards = ({ data }: VideoCardsProps) => {
       });
 
       playerRef.current.on('timeupdate', () => {
-        if (user?.role !== "有料会員" && user?.role !== "admin") {
+        if (user?.role !== '有料会員' && user?.role !== 'admin') {
           if (playerRef.current.currentTime() >= 10) {
             playerRef.current.pause();
             playerRef.current.currentTime(0);
           }
         }
       });
-
     }
     return () => {
       if (playerRef.current) {
@@ -45,7 +44,6 @@ const VideoCards = ({ data }: VideoCardsProps) => {
       }
     };
   }, [videoUrl, isOpen]);
-
 
   return (
     <div>
@@ -65,7 +63,7 @@ const VideoCards = ({ data }: VideoCardsProps) => {
               <Image
                 width={332}
                 height={218}
-                alt={"Thumbnail of " + item.title}
+                alt={'Thumbnail of ' + item.title}
                 src={item.thumbnailsUrl}
                 unoptimized={true}
               />
@@ -128,7 +126,6 @@ const VideoCards = ({ data }: VideoCardsProps) => {
       </Modal>
     </div>
   );
-
 };
 
 export default VideoCards;

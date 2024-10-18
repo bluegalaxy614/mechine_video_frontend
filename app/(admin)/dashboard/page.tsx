@@ -82,8 +82,8 @@ export default function DashboardPage() {
     event.preventDefault();
     const data = {
       title: formData.title,
-      content: formData.content
-    }
+      content: formData.content,
+    };
 
     try {
       const res = await createNews(data);

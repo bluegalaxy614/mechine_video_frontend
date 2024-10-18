@@ -87,7 +87,7 @@ export interface LineChartProps {
         intersect?: boolean;
         backgroundColor?: string;
         titleColor?: string;
-        bodyColor?: string; 
+        bodyColor?: string;
       };
     };
     scales?: {
@@ -103,7 +103,7 @@ export interface LineChartProps {
       y: {
         grid?: {
           display: boolean;
-          color?: string; 
+          color?: string;
         };
         ticks?: {
           color?: string;
@@ -124,7 +124,7 @@ export interface LineChartProps {
     };
     elements?: {
       line?: {
-        tension?: number; 
+        tension?: number;
       };
       point?: {
         radius?: number;
@@ -157,41 +157,41 @@ export interface UserCardsProps {
 export interface VideoCardsProps {
   data: {
     _id: string;
-    title: String,
-    description: String,
-    videoDuration: String,
-    videoCode: String,
-    machineName: String,
-    format: String,
-    manufacturer: String,
-    selectedCategory: String,
-    selectedSubCategory: String,
-    thumbnailsUrl: string,
-    videoUrl: string,
-    posterId: string,
-    posterName: string,
-    uploadDate: string,
+    title: String;
+    description: String;
+    videoDuration: String;
+    videoCode: String;
+    machineName: String;
+    format: String;
+    manufacturer: String;
+    selectedCategory: String;
+    selectedSubCategory: String;
+    thumbnailsUrl: string;
+    videoUrl: string;
+    posterId: string;
+    posterName: string;
+    uploadDate: string;
     views: number;
-    status: string,
+    status: string;
   }[];
 }
 
 export interface Video {
   _id: string;
-  title: string,
-  description: string,
-  videoDuration: string,
-  videoCode: string,
-  machineName: string,
-  format: string,
-  manufacturer: string,
-  selectedCategory: string,
-  selectedSubCategory: string,
-  thumbnailsUrl: string,
-  videoUrl: string,
-  posterId: string,
-  posterName: string,
-  uploadDate: string,
-  views: number,
-  status: string,
+  title: string;
+  description: string;
+  videoDuration: string;
+  videoCode: string;
+  machineName: string;
+  format: string;
+  manufacturer: string;
+  selectedCategory: string;
+  selectedSubCategory: string;
+  thumbnailsUrl: string;
+  videoUrl: string;
+  posterId: string;
+  posterName: string;
+  uploadDate: string;
+  views: number;
+  status: string;
 }

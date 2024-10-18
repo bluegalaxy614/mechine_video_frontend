@@ -1,9 +1,9 @@
-import { Button } from "@nextui-org/button";
-import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card";
-import { Input } from "@nextui-org/input";
-import { Select, SelectItem } from "@nextui-org/select";
-import { RadioGroup, Radio } from "@nextui-org/radio";
-import { Apple, PayPal } from "./icons";
+import { Button } from '@nextui-org/button';
+import { Card, CardBody, CardFooter, CardHeader } from '@nextui-org/card';
+import { Input } from '@nextui-org/input';
+import { Select, SelectItem } from '@nextui-org/select';
+import { RadioGroup, Radio } from '@nextui-org/radio';
+import { Apple, PayPal } from './icons';
 
 export default function PaymentMethod() {
   return (
@@ -71,18 +71,42 @@ export default function PaymentMethod() {
           <div className="grid gap-2">
             <label htmlFor="month">Expires</label>
             <Select id="month" placeholder="Month" className="w-full">
-              <SelectItem key="1" value="1">January</SelectItem>
-              <SelectItem key="2" value="2">February</SelectItem>
-              <SelectItem key="3" value="3">March</SelectItem>
-              <SelectItem key="4" value="4">April</SelectItem>
-              <SelectItem key="5" value="5">May</SelectItem>
-              <SelectItem key="6" value="6">June</SelectItem>
-              <SelectItem key="7" value="7">July</SelectItem>
-              <SelectItem key="8" value="8">August</SelectItem>
-              <SelectItem key="9" value="9">September</SelectItem>
-              <SelectItem key="10" value="10">October</SelectItem>
-              <SelectItem key="11" value="11">November</SelectItem>
-              <SelectItem key="12" value="12">December</SelectItem>
+              <SelectItem key="1" value="1">
+                January
+              </SelectItem>
+              <SelectItem key="2" value="2">
+                February
+              </SelectItem>
+              <SelectItem key="3" value="3">
+                March
+              </SelectItem>
+              <SelectItem key="4" value="4">
+                April
+              </SelectItem>
+              <SelectItem key="5" value="5">
+                May
+              </SelectItem>
+              <SelectItem key="6" value="6">
+                June
+              </SelectItem>
+              <SelectItem key="7" value="7">
+                July
+              </SelectItem>
+              <SelectItem key="8" value="8">
+                August
+              </SelectItem>
+              <SelectItem key="9" value="9">
+                September
+              </SelectItem>
+              <SelectItem key="10" value="10">
+                October
+              </SelectItem>
+              <SelectItem key="11" value="11">
+                November
+              </SelectItem>
+              <SelectItem key="12" value="12">
+                December
+              </SelectItem>
             </Select>
           </div>
 

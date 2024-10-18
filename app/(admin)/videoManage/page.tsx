@@ -43,13 +43,17 @@ export default function VideoManagePage() {
   const [page, setPage] = useState(1);
   const [videos, setVideos] = useState<Row[]>([]);
   const [totalPages, setTotalPages] = useState(0);
-  const [message, setMessage] = useState<String>('');
+  const [message, setMessage] = useState<string>('');
   const rowsPerPage = 10;
-
+  console.log(message)
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await getAllVideos({ page: page, perPage: rowsPerPage, sort: 'createdAt' });
+        const res = await getAllVideos({
+          page: page,
+          perPage: rowsPerPage,
+          sort: 'createdAt',
+        });
         setTotalPages(res.totalPages);
         setVideos(res.videos);
       } catch (error) {
@@ -59,19 +63,21 @@ export default function VideoManagePage() {
     fetchData();
   }, [page]);
 
-  const handleDelete = (id: String, event: React.MouseEvent) => {
+  const handleDelete = (id: string, event: React.MouseEvent) => {
     event.preventDefault();
     const deleteRow = async (id) => {
       try {
         const res = await deleteVideoById({ videoId: id });
-        setMessage(res.message)
-        setVideos((prevVideos) => prevVideos.filter(video => video._id !== id));
+        setMessage(res.message);
+        setVideos((prevVideos) =>
+          prevVideos.filter((video) => video._id !== id),
+        );
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
-    }
+    };
     deleteRow(id);
-  }
+  };
 
   const renderCell = useCallback((videos: Row, columnKey: React.Key) => {
     const key = columnKey as keyof Row;
@@ -93,36 +99,51 @@ export default function VideoManagePage() {
       case 'title':
         return (
           <div className="flex flex-col">
-            <p className="text-bold text-[14px] capitalize">{String(cellValue)}</p>
+            <p className="text-bold text-[14px] capitalize">
+              {String(cellValue)}
+            </p>
           </div>
         );
       case 'description':
         return (
           <div className="flex flex-col">
-            <p className="text-bold text-[14px] capitalize truncate">{String(cellValue)}</p>
+            <p className="text-bold text-[14px] capitalize truncate">
+              {String(cellValue)}
+            </p>
           </div>
         );
       case 'posterName':
         return (
           <div className="flex flex-col">
-            <p className="text-bold text-[14px] capitalize">{String(cellValue)}</p>
+            <p className="text-bold text-[14px] capitalize">
+              {String(cellValue)}
+            </p>
           </div>
         );
       case 'selectedCategory':
         return (
           <div className="flex flex-col">
-            <p className="text-bold text-[14px] capitalize">{String(cellValue)}</p>
+            <p className="text-bold text-[14px] capitalize">
+              {String(cellValue)}
+            </p>
           </div>
         );
       case 'uploadDate':
         return (
           <div className="flex flex-col">
-            <p className="text-bold text-[14px] capitalize">{formatDate(cellValue)}</p>
+            <p className="text-bold text-[14px] capitalize">
+              {formatDate(cellValue)}
+            </p>
           </div>
         );
       case 'status':
         return (
-          <Chip color={statusColorMap[videos.status]} size="md" variant="flat" className="min-w-[100px] text-center">
+          <Chip
+            color={statusColorMap[videos.status]}
+            size="md"
+            variant="flat"
+            className="min-w-[100px] text-center"
+          >
             {String(cellValue)}
           </Chip>
         );

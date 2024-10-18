@@ -66,10 +66,11 @@ export const AdminNavbar = () => {
               {siteConfig.adminNavItems.map((item) => (
                 <NavbarItem key={item.href}>
                   <NextLink
-                    className={clsx(
-                      linkStyles({ color: 'foreground' }),
-                      'data-[active=true]:text-primary data-[active=true]:font-medium',
-                    )}
+                    // className={clsx(
+                    //   linkStyles({ color: 'foreground' }),
+                    //   'data-[active=true]:text-primary data-[active=true]:font-medium',
+                    // )}
+                    className="text-lg hover:text-[#4291EF] hover:font-bold hover:underline hover:underline-offset-8 hover:decoration-2"
                     color="foreground"
                     href={item.href}
                   >
@@ -134,13 +135,13 @@ export const AdminNavbar = () => {
               {siteConfig.adminNavItems.map((item, index) => (
                 <NavbarMenuItem key={`${item}-${index}`}>
                   <Link
-                    color={
-                      index === 2
-                        ? 'primary'
-                        : index === siteConfig.adminNavItems.length - 1
-                          ? 'danger'
-                          : 'foreground'
-                    }
+                    // color={
+                    //   index === 2
+                    //     ? 'primary'
+                    //     : index === siteConfig.adminNavItems.length - 1
+                    //       ? 'danger'
+                    //       : 'foreground'
+                    // }
                     href={item.href}
                     size="lg"
                   >

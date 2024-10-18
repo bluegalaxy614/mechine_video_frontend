@@ -3,7 +3,10 @@ import { User, StorageState } from '../types/storeType';
 import { deleteSession, setSession } from '@/utils/utils';
 
 export const useStore = create<StorageState>((set) => ({
-  user: typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('user') || 'null') : null,
+  user:
+    typeof window !== 'undefined'
+      ? JSON.parse(localStorage.getItem('user') || 'null')
+      : null,
   setUser: (user: User | null) => {
     set({ user });
     if (typeof window !== 'undefined' && user) {
@@ -23,5 +26,5 @@ export const useStore = create<StorageState>((set) => ({
   errorMessage: '',
   setErrorMessage: (errorMessage: string) => {
     set({ errorMessage });
-  }
+  },
 }));

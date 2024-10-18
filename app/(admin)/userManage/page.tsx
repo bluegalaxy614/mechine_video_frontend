@@ -45,19 +45,23 @@ export default function UserManagePage() {
   const [page, setPage] = useState(1);
   const [users, setUsers] = useState<Row[]>([]);
   const [totalPages, setTotalPages] = useState(0);
-  const [message, setMessage] = useState<String>('')
+  const [message, setMessage] = useState<String>('');
   const rowsPerPage = 10;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await getUsers({ perPage: rowsPerPage, page: page, sort: 'createdAt' });
-        setTotalPages(res.totalPages)
+        const res = await getUsers({
+          perPage: rowsPerPage,
+          page: page,
+          sort: 'createdAt',
+        });
+        setTotalPages(res.totalPages);
         setUsers(res.users);
       } catch (error) {
         console.error('Error fetching users:', error);
       }
-    }
+    };
     fetchData();
   }, [page]);
 
@@ -66,14 +70,14 @@ export default function UserManagePage() {
     const deleteUser = async (id) => {
       try {
         const res = await deleteUserById({ userId: id });
-        setUsers((prevUsers) => prevUsers.filter(user => user._id !== id));
-        setMessage(res.message)
+        setUsers((prevUsers) => prevUsers.filter((user) => user._id !== id));
+        setMessage(res.message);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
-    }
+    };
     deleteUser(id);
-  }
+  };
 
   const renderCell = useCallback((users: Row, columnKey: React.Key) => {
     const key = columnKey as keyof Row;
@@ -126,7 +130,9 @@ export default function UserManagePage() {
         } else {
           return (
             <div className="flex flex-col">
-              <p className="text-bold text-[14px] text-gray-400">No expiration data</p>
+              <p className="text-bold text-[14px] text-gray-400">
+                No expiration data
+              </p>
             </div>
           );
         }
@@ -224,10 +230,7 @@ export default function UserManagePage() {
           >
             <TableHeader columns={userTableConfig}>
               {(column) => (
-                <TableColumn
-                  key={column.uid}
-                  align="center"
-                >
+                <TableColumn key={column.uid} align="center">
                   {column.name}
                 </TableColumn>
               )}

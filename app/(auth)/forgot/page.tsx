@@ -16,7 +16,9 @@ export default function ForgotPage() {
       const res = await authService.forgotPassword({ email });
       setMessage(res.data.message);
     } catch (err) {
-      setErrorMessage(err.response?.data.message || 'An unexpected error occurred');
+      setErrorMessage(
+        err.response?.data.message || 'An unexpected error occurred',
+      );
     }
   };
   return (
@@ -28,9 +30,7 @@ export default function ForgotPage() {
         <h1 className="text-[#212121] text-[24px] font-bold">
           Mechanical Repair Support Platform
         </h1>
-        <p className="text-[#4291EF] lg:text-4xl font-bold">
-          メカニカルリペア
-        </p>
+        <p className="text-[#4291EF] lg:text-4xl font-bold">メカニカルリペア</p>
         <p className="text-[#4291EF] lg:text-4xl font-bold">
           サポートプラットフォーム
         </p>

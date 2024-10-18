@@ -31,13 +31,15 @@ export default function RegisterPage() {
       setSession(user?.token);
       setUser(user);
       setMessage(message);
-      if (user?.role === "admin") {
+      if (user?.role === 'admin') {
         router.push('/dashboard');
       } else {
-        router.push('/')
+        router.push('/');
       }
     } catch (err) {
-      setErrorMessage(err.response?.data.message || 'An unexpected error occurred');
+      setErrorMessage(
+        err.response?.data.message || 'An unexpected error occurred',
+      );
     }
   };
 
@@ -158,7 +160,10 @@ export default function RegisterPage() {
           </form>
 
           <div className="text-center mt-4">
-            <a href="/login" className="text-blue-500 text-sm underline mb-[30px]">
+            <a
+              href="/login"
+              className="text-blue-500 text-sm underline mb-[30px]"
+            >
               ログインはこちら
             </a>
           </div>

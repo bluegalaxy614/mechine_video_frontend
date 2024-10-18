@@ -10,7 +10,9 @@ import { CardIcon } from '@/components/icons';
 import PaymentMethod from '@/components/paymentMethod';
 import { Modal, ModalContent, useDisclosure } from '@nextui-org/modal';
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
+);
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
 export default function ViewerProfilePage() {
@@ -19,17 +21,20 @@ export default function ViewerProfilePage() {
   const setErrorMessage = useStore((state) => state.setErrorMessage);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
-  const isFree: boolean = user?.role === "無料会員";
+  const isFree: boolean = user?.role === '無料会員';
   const handleCheckout = async () => {
     setLoading(true);
     const stripe = await stripePromise;
 
-    const response = await fetch(`${API_URL}/api/payment/create-checkout-session`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      `${API_URL}/api/payment/create-checkout-session`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       },
-    });
+    );
 
     const { id } = await response.json();
 
@@ -51,7 +56,12 @@ export default function ViewerProfilePage() {
             <div className="w-full flex grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 xsm:grid-cols-1 gap-3">
               <div className="flex my-[40px] mx-auto">
                 <div className="relative rounded-[21px] border border-[#4291EF] border-[4px] flex justify-center items-center">
-                  <Image width={248} height={248} src="/profile/3.png" alt="profile" />
+                  <Image
+                    width={248}
+                    height={248}
+                    src="/profile/3.png"
+                    alt="profile"
+                  />
                   <p className="absolute bottom-[0px] text-[#FFFFFF] text-[20px] bg-[#4291EF] w-[248px] h-[51px] rounded-b-[12px] flex justify-center items-center mt-[-21px] z-[3]">
                     アバターアップロード
                   </p>
@@ -97,7 +107,9 @@ export default function ViewerProfilePage() {
             </h1>
 
             <div className="w-full flex flex-wrap mt-[30px] gap-[30px]">
-              <div className={`lg:w-[554px] md:w-[554px] sm:w-[450px] xsm:w-[330px] my-[20px] rounded-[24px] pt-[49px] pb-[46px] pl-[55px] pr-[59px] border-[6px] hover:border-[#4291EF] mx-auto ${isFree ? "bg-[#E4F1FF] border-[#4291EF]" : "bg-[#F4F4F4]"}`}>
+              <div
+                className={`lg:w-[554px] md:w-[554px] sm:w-[450px] xsm:w-[330px] my-[20px] rounded-[24px] pt-[49px] pb-[46px] pl-[55px] pr-[59px] border-[6px] hover:border-[#4291EF] mx-auto ${isFree ? 'bg-[#E4F1FF] border-[#4291EF]' : 'bg-[#F4F4F4]'}`}
+              >
                 <h1 className="text-[24px] text-[#4291EF] font-bold mb-[13px]">
                   無料プラン
                 </h1>
@@ -116,7 +128,9 @@ export default function ViewerProfilePage() {
                 </Button>
               </div>
 
-              <div className={`lg:w-[554px] md:w-[554px] sm:w-[450px] xsm:w-[330px] my-[20px] rounded-[24px] pt-[49px] pb-[46px] pl-[55px] pr-[59px] border-[6px] hover:border-[#4291EF] mx-auto ${!isFree ? "bg-[#E4F1FF] border-[#4291EF]" : "bg-[#F4F4F4]"}`}>
+              <div
+                className={`lg:w-[554px] md:w-[554px] sm:w-[450px] xsm:w-[330px] my-[20px] rounded-[24px] pt-[49px] pb-[46px] pl-[55px] pr-[59px] border-[6px] hover:border-[#4291EF] mx-auto ${!isFree ? 'bg-[#E4F1FF] border-[#4291EF]' : 'bg-[#F4F4F4]'}`}
+              >
                 <h1 className="text-[24px] text-[#4291EF] font-bold mb-[13px]">
                   有料プラン
                 </h1>
@@ -132,7 +146,12 @@ export default function ViewerProfilePage() {
                   <p className="text-[#FFFFFF] text-[20px]">
                     {loading ? '処理中...' : 'アップデート'}
                   </p>
-                  <Image width={28} height={28} src="/icons/icon-store.png" alt="icon" />
+                  <Image
+                    width={28}
+                    height={28}
+                    src="/icons/icon-store.png"
+                    alt="icon"
+                  />
                 </Button>
               </div>
             </div>
@@ -146,43 +165,38 @@ export default function ViewerProfilePage() {
             </h1>
 
             <div className="w-full">
-
-              <div className={`${true ? "flex justify-center items-center ": ""}relative lg:w-[554px] h-[300px] md:w-[554px] sm:w-[450px] xsm:w-[330px] my-[20px] rounded-[24px] pt-[49px] pb-[46px] pl-[55px] pr-[59px] border-[6px] hover:border-[#4291EF] bg-[#E4F1FF] border-[#4291EF]`}>
-                {
-                  false ? (
-                    <>
-                      <h1 className="text-[24px] text-[#4291EF] font-bold mb-[13px]">
-                        Card
-                      </h1>
-                      <Divider className="bg-[#4291EF]" />
-                      <p className="max-w-[440px] mx-h-[140px] text-[#999999] text-[20px] mt-[25px] mb-[50px]">
-                        Card Number: **** **** **** 4161
-                      </p>
-                    </>
-                  ) : (
-                    <div
-                      className="flex justify-center items-center rounded-lg bg-[#4291EF] w-[120px] h-[70px] border-[1px] hover:shadow-2xl"
-                      onClick={onOpen}
-                    >
-                      <CardIcon />
-                    </div>
-                  )
-                }
+              <div
+                className={`${true ? 'flex justify-center items-center ' : ''}relative lg:w-[554px] h-[300px] md:w-[554px] sm:w-[450px] xsm:w-[330px] my-[20px] rounded-[24px] pt-[49px] pb-[46px] pl-[55px] pr-[59px] border-[6px] hover:border-[#4291EF] bg-[#E4F1FF] border-[#4291EF]`}
+              >
+                {false ? (
+                  <>
+                    <h1 className="text-[24px] text-[#4291EF] font-bold mb-[13px]">
+                      Card
+                    </h1>
+                    <Divider className="bg-[#4291EF]" />
+                    <p className="max-w-[440px] mx-h-[140px] text-[#999999] text-[20px] mt-[25px] mb-[50px]">
+                      Card Number: **** **** **** 4161
+                    </p>
+                  </>
+                ) : (
+                  <div
+                    className="flex justify-center items-center rounded-lg bg-[#4291EF] w-[120px] h-[70px] border-[1px] hover:shadow-2xl"
+                    onClick={onOpen}
+                  >
+                    <CardIcon />
+                  </div>
+                )}
               </div>
             </div>
           </div>
         </div>
-      </section >
+      </section>
       <footer className="w-full flex items-center justify-center py-3 bg-[#4291EF]">
         <p className="text-white text-[20px]"> All rights reserved.</p>
       </footer>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange}  placement="top-center">
-        <ModalContent>
-          {(onClose) => (
-            <PaymentMethod />
-          )}
-        </ModalContent>
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
+        <ModalContent>{(onClose) => <PaymentMethod />}</ModalContent>
       </Modal>
-    </div >
+    </div>
   );
 }
