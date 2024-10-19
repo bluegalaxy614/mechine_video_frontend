@@ -28,6 +28,7 @@ import { Divider } from '@nextui-org/divider';
 import Image from 'next/image';
 import { deleteSession } from '@/utils/utils';
 import { useEffect, useState } from 'react';
+import { SiteConfig } from '../config/site';
 
 export const AdminNavbar = () => {
   const { user, setUser } = useStore((state) => state);
@@ -57,7 +58,7 @@ export const AdminNavbar = () => {
                 href="/dashboard"
               >
                 {/* <Logo /> */}
-                <p className="font-bold text-[40px] text-[#4291ef]">LOGO</p>
+                <p className="font-bold text-[40px] text-[#4291ef]">{siteConfig.name}</p>
               </NextLink>
             </NavbarBrand>
           </NavbarContent>

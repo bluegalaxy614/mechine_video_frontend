@@ -30,7 +30,8 @@ export default function AskPage() {
       }
     };
     fetchMessage();
-  });
+  },[]);
+  
   return (
     <div className="h-[calc(100vh-90px)] max-w-[1280px] flex flex-col mx-auto lg:px-[5px] md:px-[30px] sm:px-[40px] xsm:px-[30px]">
       <div className="w-full">

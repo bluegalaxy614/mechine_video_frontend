@@ -6,7 +6,7 @@ export type VideoTableConfig = typeof videoTableConfig;
 export type UserTableConfig = typeof userTableConfig;
 
 export const siteConfig = {
-  name: 'LOGO',
+  name: '修理指南書',
   description: 'Enjoy your life!',
   userNavItems: [
     {
@@ -30,28 +30,6 @@ export const siteConfig = {
       href: '/contact',
     },
   ],
-  // userNavMenuItems: [
-  //   {
-  //     label: 'ホーム',
-  //     href: '/',
-  //   },
-  //   {
-  //     label: 'すべての動画',
-  //     href: '/videos',
-  //   },
-  //   {
-  //     label: '投稿する',
-  //     href: '/post',
-  //   },
-  //   {
-  //     label: 'マイページ',
-  //     href: '/myPage',
-  //   },
-  //   {
-  //     label: 'お問い合わせ',
-  //     href: '/contact',
-  //   },
-  // ],
   adminNavItems: [
     {
       label: 'ダッシュボード',
@@ -70,24 +48,14 @@ export const siteConfig = {
       href: '/message',
     },
   ],
-  // adminNavMenuItems: [
-  //   {
-  //     label: 'ダッシュボード',
-  //     href: '/dashboard',
-  //   },
-  //   {
-  //     label: 'ビデオステータス',
-  //     href: '/videoManage',
-  //   },
-  //   {
-  //     label: 'ユーザリスト',
-  //     href: '/userManage',
-  //   },
-  //   {
-  //     label: 'メッセージ',
-  //     href: '/message',
-  //   },
-  // ],
+  contactInfo:{
+    phone:"03-8765-4321",
+    email:"info@shinansho.com",
+    address:"東京都 港区 六本木 2-15-8",
+    twitter:"",
+    facebook:"",
+    youtube:""
+  }
 };
 
 export const categoryConfig = [

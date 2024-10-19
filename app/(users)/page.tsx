@@ -29,6 +29,7 @@ interface ResponseVideos {
   totalPages: number;
   videos: any[];
 }
+
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [lastPage, setLastPage] = useState(true);
@@ -107,7 +108,7 @@ export default function Home() {
       }
     };
 
-    fetchVideos(); // Call the async function inside useEffect
+    fetchVideos();
   }, [favVideoConfig]);
 
   useEffect(() => {
@@ -134,7 +135,7 @@ export default function Home() {
           currentPage: page,
         });
         const { totalPages, news } = res;
-        setNewsData(news);
+        setNewsData([...newsData, ...news]);
         setIsNewsLoading(false);
 
         if (page >= totalPages) {

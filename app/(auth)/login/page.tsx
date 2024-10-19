@@ -8,6 +8,7 @@ import { useStore } from '@/store/store';
 
 export default function LoginPage() {
   const setUser = useStore((state) => state.setUser);
+  const setUnread = useStore((state) => state.setUnread);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
@@ -20,10 +21,13 @@ export default function LoginPage() {
     setErrorMessage('');
     try {
       const res = await authService.login({ email, password });
-      const { user, message } = res.data;
+      const { user, message, unread } = res.data;
+      console.log(res.data)
       setSession(user?.token);
+      setUnread(unread);
       setUser(user);
       setMessage(message);
+
       if (user?.role === 'admin') {
         router.push('/dashboard');
       } else {

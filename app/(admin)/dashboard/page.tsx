@@ -10,7 +10,7 @@ import { chartData } from '@/config/data';
 import { useEffect, useState } from 'react';
 import { createNews, getNews } from '@/lib/api';
 import { Spinner } from '@nextui-org/spinner';
-import { title } from 'process';
+import { useStore } from '@/store/store';
 
 const icon = {
   icon: '/icons/icons-setting.png',
@@ -18,22 +18,13 @@ const icon = {
   content: 'ニュース記事の作成、公開状況を管理し、最新情報をユーザーに届けます',
 };
 
-// interface NewsData {
-//   id: number;
-//   title: string;
-//   content: string;
-// }
-
-// interface ApiResponse {
-//   totalPage: number;
-//   // news: NewsData[];
-// }
-
 export default function DashboardPage() {
   const [totalVideoCounts, setTotalVideoCounts] = useState<number>(0);
   const [totalViewCounts, setTotalViewCounts] = useState<number>(0);
   const [totalUserCounts, setTotalUserCounts] = useState<number>(0);
   const [totalCoinCounts, setTotalCoinCounts] = useState<number>(0);
+
+  const setMessage = useStore((state) => state.setMessage);
 
   const [page, setPage] = useState<number>(1);
   const [lastPage, setLastPage] = useState<boolean>(true);
@@ -44,30 +35,31 @@ export default function DashboardPage() {
     content: '',
   });
 
-  useEffect(() => {
-    const fetchNews = async () => {
-      setIsLoading(true);
-      try {
-        const res = await getNews({
-          currentPage: page,
-        });
-        const { totalPages, news } = res;
-        setNewsData(news);
-        setIsLoading(false);
+  const fetchNews = async () => {
+    setIsLoading(true);
+    try {
+      const res = await getNews({
+        currentPage: page,
+      });
+      const { totalPages, news } = res;
+      setNewsData([...newsData, ...news]);
+      setIsLoading(false);
 
-        if (page >= totalPages) {
-          setLastPage(true);
-        } else {
-          setLastPage(false);
-        }
-      } catch (error) {
-        console.error('Error fetching news:', error);
-        setIsLoading(false);
+      if (page >= totalPages) {
+        setLastPage(true);
+      } else {
+        setLastPage(false);
       }
-    };
+    } catch (error) {
+      console.error('Error fetching news:', error);
+      setIsLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchNews();
   }, [page]);
+
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -87,6 +79,9 @@ export default function DashboardPage() {
 
     try {
       const res = await createNews(data);
+      const { message } = res;
+      fetchNews();
+      setMessage(message);
       setFormData({
         title: '',
         content: '',

@@ -10,11 +10,10 @@ import {
   Title,
   Tooltip,
   Legend,
-  Filler, // For filling areas below the line (optional)
+  Filler,
 } from 'chart.js';
 import Image from 'next/image';
 
-// Register required chart components
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -23,7 +22,7 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  Filler, // Optional if using fill properties in datasets
+  Filler,
 );
 import { LineChartProps } from '@/types';
 

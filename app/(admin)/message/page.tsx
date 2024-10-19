@@ -7,6 +7,7 @@ import { Button } from '@nextui-org/button';
 import { useEffect, useState } from 'react';
 import { useStore } from '@/store/store';
 import { Message } from '@/types';
+import { Badge } from "@nextui-org/badge";
 
 export default function MessagePage() {
   const [allMessage, setAllMessage] = useState<Message[] | null>(null);
@@ -14,15 +15,15 @@ export default function MessagePage() {
   const [chats, setChats] = useState<Message | null>(null);
   const user = useStore((state) => state.user);
 
+  const fetchData = async () => {
+    try {
+      const { messages } = await getAllMessage();
+      setAllMessage(messages);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { messages } = await getAllMessage();
-        setAllMessage(messages);
-      } catch (error) {
-        console.log(error);
-      }
-    };
     fetchData();
   }, []);
 
@@ -36,10 +37,15 @@ export default function MessagePage() {
 
   const handleClick = (id) => {
     setUserId(id);
+    setAllMessage((prevMessages) => {
+      return prevMessages.map((item) =>
+        item.userId === id ? { ...item, unread: 0 } : item
+      );
+    });
     const viewMsg = async (id) => {
       try {
         const res = await viewMessages({ userId: id });
-        console.log(res);
+
       } catch (error) {
         console.log(error);
       }
@@ -50,6 +56,7 @@ export default function MessagePage() {
   const handleDeleteChats = async () => {
     try {
       const res = await deleteAllChats({ userId: userId });
+      fetchData()
       console.log(res);
     } catch (error) {
       console.log(error);
@@ -58,30 +65,27 @@ export default function MessagePage() {
 
   return (
     <section className="w-full h-[calc(100vh-90px)] flex">
-      <div className="w-[240px] flex-none border-r-2">
-        <div className="flex flex-col p-[10px] gap-4">
+      <div className="fit-content px-[10px] border-r-2">
+        <div className="flex flex-col justify-start align-center p-[10px] gap-4">
           {allMessage?.map((item) => (
-            <Button
+            <div
               onClick={() => handleClick(item.userId)}
               key={item.userId}
-              className={`w-[223px] h-[81px] mx-auto rounded-lg flex justify-start items-center px-[5px] gap-2 ${item.userId === userId ? 'bg-[#E4F1FF]' : ''}`}
+              className={`cursor-pointer hover:bg-[#E4F1FF] shadow-md fit-content h-[81px] mx-auto rounded-lg flex justify-start items-center px-[5px] gap-2 ${item.userId === userId ? 'bg-[#E4F1FF]' : ''}`}
             >
-              <Avatar
-                src={item.userAvatar || '/profile/user.png'}
-                name={item.userName}
-                size="lg"
-                alt="user"
-                className="flex-none w-[60px] h-[60px]"
-              />
-              <p className="grow text-[20px] text-center text-pretty">
+              <Badge content={item.unread} isInvisible={item.unread > 0 ? false : true} color="danger">
+                <Avatar
+                  src={item.userAvatar || '/profile/user.png'}
+                  name={item.userName}
+                  size="lg"
+                  alt="user"
+                  className="flex-none w-[60px] h-[60px]"
+                />
+              </Badge>
+              <p className="hidden sm:block text-[20px] min-w-[100px] text-center text-pretty">
                 {item.userName}
               </p>
-              {item.unread > 0 && (
-                <span className="flex-none bg-[#ED1C24] rounded-full w-[21px] h-[21px] text-white flex justify-center items-center">
-                  {item.unread}
-                </span>
-              )}
-            </Button>
+            </div>
           ))}
         </div>
       </div>
@@ -103,7 +107,7 @@ export default function MessagePage() {
 
           <div className="w-full h-[calc(100vh-90px-71px-98px)] overflow-y-scroll grow px-[56px] py-[34px]">
             {chats?.messages?.map((item, index) => (
-              <div key={index} className="flex flex-col gap-[20px] py-[25px]">
+              <div key={index} className="flex flex-col min-w-[370px] gap-[20px] py-[25px]">
                 <div className="flex justify-start items-center rounded-full min-w-[191px] h-[59px] p-1 hover:pointer gap-3">
                   <Avatar
                     src={
@@ -140,7 +144,7 @@ export default function MessagePage() {
         </div>
       </div>
 
-      <div className="w-[300px] flex-none border-l-2 py-[5px]">
+      {/* <div className="w-[300px] flex-none border-l-2 py-[5px]">
         <div className="flex flex-col max-w-md mx-auto p-4 rounded-lg gap-8">
           <h1 className="text-xl font-bold text-center mb-4 text-[#4291EF]">
             お問い合わせ内容
@@ -164,7 +168,7 @@ export default function MessagePage() {
             </p>
           </div>
         </div>
-      </div>
+      </div> */}
     </section>
   );
 }

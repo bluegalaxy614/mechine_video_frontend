@@ -54,7 +54,7 @@ export const Navbar = () => {
                 href="/"
               >
                 {/* <Logo /> */}
-                <p className="font-bold text-[40px] text-[#4291ef]">LOGO</p>
+                <p className="font-bold text-[40px] text-[#4291ef]">{siteConfig.name}</p>
               </NextLink>
             </NavbarBrand>
           </NavbarContent>
@@ -65,10 +65,6 @@ export const Navbar = () => {
                 return (
                   <NavbarItem key={item.href}>
                     <NextLink
-                      // className={clsx(
-                      //   linkStyles({ color: 'foreground' }),
-                      //   'data-[active=true]:text-primary data-[active=true]:font-large',
-                      // )}
                       className="text-lg hover:text-[#4291EF] hover:font-bold hover:underline hover:underline-offset-8 hover:decoration-2"
                       color="black"
                       href={item.href}
@@ -141,13 +137,6 @@ export const Navbar = () => {
               {siteConfig.userNavItems.map((item, index) => (
                 <NavbarMenuItem key={`${item}-${index}`}>
                   <Link
-                    // color={
-                    //   index === 2
-                    //     ? 'primary'
-                    //     : index === siteConfig.userNavItems.length - 1
-                    //       ? 'danger'
-                    //       : 'foreground'
-                    // }
                     href={item.href}
                     size="lg"
                   >

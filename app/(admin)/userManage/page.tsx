@@ -11,9 +11,8 @@ import {
   TableHeader,
   TableRow,
 } from '@nextui-org/table';
-// import { userTableRows } from '@/config/data';
 import { userTableConfig } from '@/config/site';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Tooltip } from '@nextui-org/tooltip';
 import { Divider } from '@nextui-org/divider';
 import { Avatar } from '@nextui-org/avatar';
@@ -203,7 +202,6 @@ export default function UserManagePage() {
             selectionMode="multiple"
             color="primary"
             classNames={{
-              // wrapper: 'h-[500px]',
               base: 'w-full',
             }}
             topContent={

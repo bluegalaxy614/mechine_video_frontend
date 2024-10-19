@@ -96,6 +96,15 @@ export const searchVideos = async (data) => {
     throw error;
   }
 };
+export const readMessage = async () => {
+  try {
+    const response = await axios.post(`${API_URL}/api/users/readMessage`);
+    return response.data;
+  } catch (error) {
+    console.error('Upload error:', error);
+    throw error;
+  }
+};
 export const searchVideoInString = async (data) => {
   try {
     const response = await axios.post(

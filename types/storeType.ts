@@ -13,4 +13,6 @@ export interface StorageState {
   setMessage: (message: string) => void;
   errorMessage: string;
   setErrorMessage: (errorMessage: string) => void;
+  unread: boolean;
+  setUnread: (unread: boolean) => void;
 }

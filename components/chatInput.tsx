@@ -3,7 +3,7 @@ import { sendAskMessage } from '@/lib/api';
 import { useStore } from '@/store/store';
 import { Button } from '@nextui-org/button';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const ChatInput = () => {
   const [chat, setChat] = useState('');
@@ -11,7 +11,6 @@ const ChatInput = () => {
   const setMessage = useStore((state) => state.setMessage);
 
   const askMessage = async (chat) => {
-    console.log('here');
     try {
       const res = await sendAskMessage({
         content: chat,
@@ -28,6 +27,12 @@ const ChatInput = () => {
       setChat('');
     }
   };
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter'&& !event.shiftKey) {
+      event.preventDefault();
+      handleSendMessage();
+    }
+  };
 
   return (
     <div className="flex w-full flex-col gap-1.5 rounded-[26px] p-1.5 transition-colors bg-[#f4f4f4] dark:bg-token-main-surface-secondary">
@@ -40,6 +45,7 @@ const ChatInput = () => {
             className="block h-10 w-full resize-none border-0 focus-visible:outline-none bg-transparent px-0 py-2 text-token-text-primary placeholder:text-token-text-secondary"
             placeholder="Message to Admin"
             rows={1}
+            onKeyDown={handleKeyDown}
           />
         </div>
 

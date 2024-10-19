@@ -3,7 +3,7 @@ import { sendAnswerMessage } from '@/lib/api';
 import { useStore } from '@/store/store';
 import { Button } from '@nextui-org/button';
 import Image from 'next/image';
-import { useState } from 'react';
+import {useState } from 'react';
 import { Message } from '@/types';
 interface AdminChatProps {
   userId: string;
@@ -50,6 +50,13 @@ const AdminChat = ({ userId, setChats }: AdminChatProps) => {
     }
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
+      handleSendMessage();
+    }
+  };
+
   return (
     <div className="flex w-full flex-col gap-1.5 rounded-[26px] p-1.5 transition-colors bg-[#f4f4f4] dark:bg-token-main-surface-secondary">
       <div className="flex items-end gap-1.5 pl-4 md:gap-2">
@@ -61,13 +68,14 @@ const AdminChat = ({ userId, setChats }: AdminChatProps) => {
             className="block h-10 w-full resize-none border-0 focus-visible:outline-none bg-transparent px-0 py-2 text-token-text-primary placeholder:text-token-text-secondary"
             placeholder="Message to Admin"
             rows={1}
+            onKeyDown={handleKeyDown}
           />
         </div>
 
         {/* Send Button */}
         <div className="min-w-8">
           <Button
-            className="flex justify-center items-center rounded-full w-[80px] bg-[#4291EF]"
+            className="flex justify-center items-center cursor-pointer rounded-full w-[80px] bg-[#4291EF]"
             onClick={handleSendMessage}
             isDisabled={userId ? false : true}
           >

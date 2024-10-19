@@ -11,7 +11,6 @@ import {
 } from '@nextui-org/table';
 import { Chip, ChipProps } from '@nextui-org/chip';
 import { Tooltip } from '@nextui-org/tooltip';
-// import { rows } from '@/config/data';
 import { DeleteIcon } from '@/components/icons';
 import { tableConfig } from '@/config/site';
 import { Button } from '@nextui-org/button';
@@ -24,7 +23,6 @@ const statusColorMap: Record<string, ChipProps['color']> = {
   未払い: 'danger',
   保留中: 'warning',
 };
-
 interface Row {
   _id: string;
   title: string;
@@ -34,6 +32,7 @@ interface Row {
   status: '未払い' | '支払い' | '保留中'; // use a union type for the possible statuses
 }
 [];
+
 export default function PosterPaymentPage() {
   const [page, setPage] = useState(1);
   const [videos, setVideos] = useState([]);

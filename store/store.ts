@@ -27,4 +27,9 @@ export const useStore = create<StorageState>((set) => ({
   setErrorMessage: (errorMessage: string) => {
     set({ errorMessage });
   },
+
+  unread:false,
+  setUnread:(unread:boolean) => {
+    set({unread});
+  }
 }));

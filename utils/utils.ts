@@ -8,25 +8,16 @@ export const deleteSession = (): void => {
 };
 
 export const getCategoryLabelById = (id: string) => {
-  // Search through the main categories
   const mainCategory = categoryConfig.find((category) => category.id === id);
-
-  // If found in main category, return the label
   if (mainCategory) {
     return mainCategory.label;
   }
-
-  // If not found in main category, search subcategories
   for (const category of categoryConfig) {
     const subCategory = category.subCategories.find((sub) => sub.id === id);
-
-    // If found in subcategory, return its label
     if (subCategory) {
       return subCategory.label;
     }
   }
-
-  // Return null if no match is found
   return null;
 };
 
@@ -34,3 +25,16 @@ export const formatDate = (dateStr: string) => {
   const date = new Date(dateStr);
   return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
 };
+
+export const getVideoSnapshot = (videoElement: HTMLVideoElement) => {
+  const canvas = document.createElement('canvas');
+  canvas.width = videoElement.videoWidth;
+  canvas.height = videoElement.videoHeight;
+
+  const ctx = canvas.getContext('2d');
+  if (ctx) {
+    ctx.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+  }
+
+  return canvas;
+}

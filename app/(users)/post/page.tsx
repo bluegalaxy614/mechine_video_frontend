@@ -9,19 +9,7 @@ import { uploadVideo } from '@/lib/api';
 import { Slider } from '@nextui-org/slider';
 import { useStore } from '@/store/store';
 import { getCategoryLabelById } from '@/utils/utils';
-
-function getVideoSnapshot(videoElement: HTMLVideoElement) {
-  const canvas = document.createElement('canvas');
-  canvas.width = videoElement.videoWidth;
-  canvas.height = videoElement.videoHeight;
-
-  const ctx = canvas.getContext('2d');
-  if (ctx) {
-    ctx.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
-  }
-
-  return canvas;
-}
+import { getVideoSnapshot } from '@/utils/utils';
 
 export default function PostPage() {
   const videoRef = useRef<HTMLVideoElement | null>(null);

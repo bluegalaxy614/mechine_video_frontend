@@ -24,9 +24,11 @@ export function Providers({ children, themeProps }: ProvidersProps) {
   const setErrorMessage = useStore((state) => state.setErrorMessage);
   const setMessage = useStore((state) => state.setMessage);
 
-  if (user) {
-    setSession(user.token);
-  }
+  React.useEffect(() => {
+    if (user) {
+      setSession(user.token);
+    }
+  }, [user])
 
   React.useEffect(() => {
     if (message) {
@@ -53,12 +55,6 @@ export function Providers({ children, themeProps }: ProvidersProps) {
       setErrorMessage('');
     }
   }, [errorMessage]);
-
-  // React.useEffect(() => {
-  //   if (!user) {
-  //     router.push('/login');
-  //   }
-  // }, [user]);
 
   return (
     <NextUIProvider navigate={router.push}>

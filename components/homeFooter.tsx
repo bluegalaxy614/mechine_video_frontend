@@ -1,7 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { siteConfig } from '@/config/site';
 
 const HomeFooter = () => {
+  const { phone, email, address, twitter, facebook, youtube } = siteConfig.contactInfo;
   return (
     <div className="relative flex flex-col items-center justify-center w-full h-[532px]">
       <Image
@@ -34,7 +36,7 @@ const HomeFooter = () => {
 
               <div className="w-full flex lg:justify-start md:justify-start sm:justify-center xsm:justify-center gap-6 my-4">
                 <Link
-                  href="https://twitter.com/repair_video"
+                  href={twitter}
                   aria-label="Twitter"
                 >
                   <Image
@@ -45,7 +47,7 @@ const HomeFooter = () => {
                   />
                 </Link>
                 <Link
-                  href="https://twitter.com/repair_video"
+                  href={facebook}
                   aria-label="Facebook"
                 >
                   <Image
@@ -56,7 +58,7 @@ const HomeFooter = () => {
                   />
                 </Link>
                 <Link
-                  href="https://twitter.com/repair_video"
+                  href={youtube}
                   aria-label="YouTube"
                 >
                   <Image
@@ -83,7 +85,7 @@ const HomeFooter = () => {
                     電話番号
                   </p>
                   <p className="lg:text-[22px] md:text-[20px] sm:text-[18px] xsm:text-[16px] font-bold text-white h-[40px] flex items-center">
-                    03-8765-4321
+                    {phone}
                   </p>
                 </div>
                 <div className="flex gap-3 items-center">
@@ -97,7 +99,7 @@ const HomeFooter = () => {
                     メールアドレス
                   </p>
                   <p className="lg:text-[22px] md:text-[20px] sm:text-[18px] xsm:text-[16px] font-bold text-white h-[40px] flex items-center">
-                    contact@sample.jp
+                    {email}
                   </p>
                 </div>
                 <div className="flex gap-3 items-center">
@@ -111,7 +113,7 @@ const HomeFooter = () => {
                     所在地
                   </p>
                   <p className="lg:text-[22px] md:text-[20px] sm:text-[18px] xsm:text-[16px] font-bold text-white h-[40px] flex items-center">
-                    東京都 港区 六本木 2-15-8
+                    {address}
                   </p>
                 </div>
               </div>

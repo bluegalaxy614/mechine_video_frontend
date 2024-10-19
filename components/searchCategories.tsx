@@ -1,5 +1,5 @@
 import { Divider } from '@nextui-org/divider';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import SubCategoryButton from './subCategoryButton';
 import { categoryConfig } from '@/config/site';
 import CategoryButton from './categoryButton';

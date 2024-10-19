@@ -9,6 +9,7 @@ import { setSession } from '@/utils/utils';
 
 export default function RegisterPage() {
   const setUser = useStore((state) => state.setUser);
+  const setUnread = useStore((state) => state.setUnread);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -27,9 +28,10 @@ export default function RegisterPage() {
         password,
         confirmPassword,
       });
-      const { user, message } = res.data;
+      const { user, message, unread } = res.data;
       setSession(user?.token);
       setUser(user);
+      setUnread(unread);
       setMessage(message);
       if (user?.role === 'admin') {
         router.push('/dashboard');
