@@ -46,6 +46,7 @@ export default function UserManagePage() {
   const [totalPages, setTotalPages] = useState(0);
   const [inputValue, setInputValue] = useState<string>('');
   const rowsPerPage = 10;
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -188,7 +189,7 @@ export default function UserManagePage() {
   };
 
   return (
-    <section className="h-[calc(100vh-90px)] flex flex-col px-[60px] py-[30px] gap-12">
+    <section className="h-[calc(100vh-90px)] flex flex-col lg:px-[60px] md:px-[40px] sm:px-[10px] xsm:px-[5px] py-[30px] gap-12">
       <div className="max-w-[913px] lg:px-0 md:px-[40px] sm:px-[50px] xsm:px-[30px]">
         <Input
           isClearable
@@ -225,7 +226,7 @@ export default function UserManagePage() {
         />
       </div>
       <div className="w-full mx-auto lg:px-[0px] md:px-[40px] sm:px-[50px] xsm:px-[35px]">
-        <div className="w-full">
+        <div className="w-full over-flow-x-scroll">
           <Table
             isHeaderSticky
             aria-label="Payment Table"
