@@ -34,9 +34,10 @@ export default function RootLayout({
       <head />
       <body
         className={clsx(
-          'min-h-screen bg-background font-sans antialiased overflow-x-hidden scroll-smooth',
+          'min-h-screen font-sans antialiased overflow-x-hidden scroll-smooth',
           fontSans.variable,
         )}
+        style={{ backgroundColor: '#ffffff' }}
       >
         <Providers themeProps={{ attribute: 'class', defaultTheme: 'light' }}>
           <div className="relative flex flex-col h-screen w-[100vw]">

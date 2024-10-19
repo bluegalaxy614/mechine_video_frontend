@@ -160,7 +160,7 @@ export default function Home() {
           isClearable
           fullWidth={true}
           radius="lg"
-          className="block w-full resize-none border-0 focus-visible:outline-none bg-transparent px-0 py-2 text-token-text-primary placeholder:text-token-text-secondary"
+          className="h-full rounded-[15px] block w-full resize-none border border-2"
           placeholder="検索..."
           startContent={
             <SearchIcon className="text-black/50 mb-0.5 text-slate-400 pointer-events-none flex-shrink-0" />

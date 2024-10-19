@@ -191,39 +191,19 @@ export default function UserManagePage() {
   return (
     <section className="h-[calc(100vh-90px)] flex flex-col lg:px-[60px] md:px-[40px] sm:px-[10px] xsm:px-[5px] py-[30px] gap-12">
       <div className="max-w-[913px] lg:px-0 md:px-[40px] sm:px-[50px] xsm:px-[30px]">
+      <div className="max-w-[913px] lg:px-0 md:px-[40px] sm:px-[50px] xsm:px-[30px]">
         <Input
-          isClearable
-          fullWidth={true}
-          radius="lg"
           value={inputValue}
           onChange={handleInputChange}
-          className="h-[48px] rounded-full"
-          classNames={{
-            label: 'text-black/50 dark:text-white/90',
-            input: [
-              'bg-transparent',
-              'text-black/90 dark:text-white/90',
-              'placeholder:text-default-700/50 dark:placeholder:text-white/60',
-            ],
-            innerWrapper: 'bg-transparent',
-            inputWrapper: [
-              'shadow-xl',
-              'bg-default-200/50',
-              'dark:bg-default/60',
-              'backdrop-blur-xl',
-              'backdrop-saturate-200',
-              'hover:bg-default-200/70',
-              'dark:hover:bg-default/70',
-              'group-data-[focus=true]:bg-default-200/50',
-              'dark:group-data-[focus=true]:bg-default/60',
-              '!cursor-text',
-            ],
-          }}
+          isClearable
+          fullWidth={true}
+          className="h-full w-full rounded-[15px] border border-2"
           placeholder="検索..."
           startContent={
             <SearchIcon className="text-black/50 mb-0.5 dark:text-white/90 text-slate-400 pointer-events-none flex-shrink-0" />
           }
         />
+      </div>
       </div>
       <div className="w-full mx-auto lg:px-[0px] md:px-[40px] sm:px-[50px] xsm:px-[35px]">
         <div className="w-full over-flow-x-scroll">
