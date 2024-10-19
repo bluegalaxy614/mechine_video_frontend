@@ -133,7 +133,9 @@ export default function Home() {
           currentPage: page,
         });
         const { totalPages, news } = res;
-        setNewsData([...newsData, ...news]);
+        setNewsData((prevState) => {
+          return prevState ? [...prevState, ...news] : [...news];
+        });
         setIsNewsLoading(false);
 
         if (page >= totalPages) {

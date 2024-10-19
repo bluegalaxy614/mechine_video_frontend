@@ -73,81 +73,72 @@ export default function PosterPaymentPage() {
       }
     };
     fetchVideos();
-  }, [page]);
+  }, [page, setErrorMessage]); // Add setErrorMessage to the dependency array
 
   const handleGetPaid = () => {};
+  const handleDelete = useCallback(
+    (id: string, event: React.MouseEvent) => {
+      event.preventDefault();
+      const deleteRow = async (id: string) => {
+        try {
+          const res = await deleteVideoById({ videoId: id });
+          setMessage(res.message);
+          setVideos((prevVideos) =>
+            prevVideos.filter((video) => video._id !== id),
+          );
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      deleteRow(id);
+    },
+    [setMessage, setVideos], // Empty dependency array since it doesn't rely on other variables
+  );
 
-  const handleDelete = (id: string, event: React.MouseEvent) => {
-    event.preventDefault();
-    const deleteRow = async (id) => {
-      try {
-        const res = await deleteVideoById({ videoId: id });
-        setMessage(res.message);
-        setVideos((prevVideos) =>
-          prevVideos.filter((video) => video._id !== id),
-        );
-      } catch (error) {
-        console.log(error);
+  const renderCell = useCallback(
+    (user: Row, columnKey: React.Key) => {
+      const cellValue = user[columnKey as keyof Row];
+
+      switch (columnKey) {
+        case 'title':
+        case 'videoDuration':
+        case 'views':
+        case 'revenue':
+          return (
+            <div className="flex flex-col">
+              <p className="text-bold text-[14px] capitalize">{cellValue}</p>
+            </div>
+          );
+        case 'status':
+          return (
+            <Chip
+              className="capitalize"
+              color={statusColorMap[user.status]}
+              size="sm"
+              variant="flat"
+            >
+              {cellValue}
+            </Chip>
+          );
+        case 'actions':
+          return (
+            <div className="relative flex items-center gap-2">
+              <Tooltip color="danger" content="Delete">
+                <span
+                  className="text-lg text-danger cursor-pointer active:opacity-50"
+                  onClick={(event) => handleDelete(user._id, event)}
+                >
+                  <DeleteIcon />
+                </span>
+              </Tooltip>
+            </div>
+          );
+        default:
+          return cellValue;
       }
-    };
-    deleteRow(id);
-  };
-  const renderCell = useCallback((user: Row, columnKey: React.Key) => {
-    const cellValue = user[columnKey as keyof Row];
-
-    switch (columnKey) {
-      case 'title':
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-[14px] capitalize">{cellValue}</p>
-          </div>
-        );
-      case 'videoDuration':
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-[14px] capitalize">{cellValue}</p>
-          </div>
-        );
-      case 'views':
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-[14px] capitalize">{cellValue}</p>
-          </div>
-        );
-      case 'revenue':
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-[14px] capitalize">{cellValue}</p>
-          </div>
-        );
-      case 'status':
-        return (
-          <Chip
-            className="capitalize"
-            color={statusColorMap[user.status]}
-            size="sm"
-            variant="flat"
-          >
-            {cellValue}
-          </Chip>
-        );
-      case 'actions':
-        return (
-          <div className="relative flex items-center gap-2">
-            <Tooltip color="danger" content="Delete">
-              <span
-                className="text-lg text-danger cursor-pointer active:opacity-50"
-                onClick={(event) => handleDelete(user._id, event)}
-              >
-                <DeleteIcon />
-              </span>
-            </Tooltip>
-          </div>
-        );
-      default:
-        return cellValue;
-    }
-  }, []);
+    },
+    [handleDelete], // Now 'handleDelete' is stable and won't cause re-renders
+  );
 
   return (
     <div className="min-h-[calc(100vh-90px)]">
