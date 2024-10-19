@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { RegisterData, LoginData, ForgotPasswordData } from '@/types/libType';
 
-const API_URL = process.env.NEXT_PUBLIC_SERVER_URL;
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
 const authService = {
   register: async (data: RegisterData) => {
