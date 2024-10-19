@@ -137,6 +137,15 @@ export const getNews = async (data) => {
     throw error;
   }
 };
+export const getAnalyseData = async () => {
+  try {
+    const response = await axios.post(`${API_URL}/api/admin/getAnalyseData`);
+    return response.data;
+  } catch (error) {
+    console.error('Upload error:', error);
+    throw error;
+  }
+};
 
 export const getVideoWithUserId = async (data) => {
   try {

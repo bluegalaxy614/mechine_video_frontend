@@ -16,9 +16,9 @@ import {
 } from '@nextui-org/dropdown';
 import { Avatar } from '@nextui-org/avatar';
 import { Link } from '@nextui-org/link';
-import { link as linkStyles } from '@nextui-org/theme';
+// import { link as linkStyles } from '@nextui-org/theme';
 import NextLink from 'next/link';
-import clsx from 'clsx';
+// import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
 import { useStore } from '@/store/store';
 
@@ -28,7 +28,7 @@ import { Divider } from '@nextui-org/divider';
 import Image from 'next/image';
 import { deleteSession } from '@/utils/utils';
 import { useEffect, useState } from 'react';
-import { SiteConfig } from '../config/site';
+// import { SiteConfig } from '../config/site';
 
 export const AdminNavbar = () => {
   const { user, setUser } = useStore((state) => state);
@@ -58,7 +58,9 @@ export const AdminNavbar = () => {
                 href="/dashboard"
               >
                 {/* <Logo /> */}
-                <p className="font-bold text-[40px] text-[#4291ef]">{siteConfig.name}</p>
+                <p className="font-bold text-[40px] text-[#4291ef]">
+                  {siteConfig.name}
+                </p>
               </NextLink>
             </NavbarBrand>
           </NavbarContent>

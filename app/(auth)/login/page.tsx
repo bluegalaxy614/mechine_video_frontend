@@ -22,7 +22,7 @@ export default function LoginPage() {
     try {
       const res = await authService.login({ email, password });
       const { user, message, unread } = res.data;
-      console.log(res.data)
+      console.log(res.data);
       setSession(user?.token);
       setUnread(unread);
       setUser(user);

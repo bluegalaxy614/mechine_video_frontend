@@ -136,6 +136,7 @@ export default function PostPage() {
 
     try {
       const res = await uploadVideo(data);
+      console.log(res);
       setUploadedStatus(false);
       setMessage('Video uploaded successfully');
     } catch (error) {

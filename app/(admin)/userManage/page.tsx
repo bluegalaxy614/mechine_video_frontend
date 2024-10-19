@@ -44,9 +44,9 @@ export default function UserManagePage() {
   const [page, setPage] = useState(1);
   const [users, setUsers] = useState<Row[]>([]);
   const [totalPages, setTotalPages] = useState(0);
-  const [message, setMessage] = useState<String>('');
+  const [message, setMessage] = useState<string>('');
   const rowsPerPage = 10;
-
+  console.log(message);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -64,7 +64,7 @@ export default function UserManagePage() {
     fetchData();
   }, [page]);
 
-  const handleDelete = (id: String, event: React.MouseEvent) => {
+  const handleDelete = (id: string, event: React.MouseEvent) => {
     event.preventDefault();
     const deleteUser = async (id) => {
       try {
@@ -116,7 +116,7 @@ export default function UserManagePage() {
             {String(cellValue)}
           </Chip>
         );
-      case 'expired':
+      case 'expired': {
         const expiredValue = cellValue as Row['expired'];
         if (expiredValue && expiredValue.start && expiredValue.end) {
           return (
@@ -135,6 +135,7 @@ export default function UserManagePage() {
             </div>
           );
         }
+      }
 
       case 'actions':
         return (

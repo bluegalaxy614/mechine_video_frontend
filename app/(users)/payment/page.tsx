@@ -61,14 +61,15 @@ export default function PosterPaymentPage() {
           unPaidVideos,
           totalPaidMounts,
         } = res;
+        setPage(currentPage);
         setVideos(videos);
         setPages(totalPages);
         setPaidVideos(paidVideos);
         setUnPaidVideos(unPaidVideos);
         setTotalPaidMounts(totalPaidMounts);
       } catch (error) {
-        console.log(error);
         setErrorMessage(error);
+        console.log(error);
       }
     };
     fetchVideos();
@@ -76,7 +77,7 @@ export default function PosterPaymentPage() {
 
   const handleGetPaid = () => {};
 
-  const handleDelete = (id: String, event: React.MouseEvent) => {
+  const handleDelete = (id: string, event: React.MouseEvent) => {
     event.preventDefault();
     const deleteRow = async (id) => {
       try {

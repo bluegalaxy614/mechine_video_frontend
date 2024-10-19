@@ -3,7 +3,7 @@ import { sendAskMessage } from '@/lib/api';
 import { useStore } from '@/store/store';
 import { Button } from '@nextui-org/button';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const ChatInput = () => {
   const [chat, setChat] = useState('');
@@ -28,7 +28,7 @@ const ChatInput = () => {
     }
   };
   const handleKeyDown = (event) => {
-    if (event.key === 'Enter'&& !event.shiftKey) {
+    if (event.key === 'Enter' && !event.shiftKey) {
       event.preventDefault();
       handleSendMessage();
     }

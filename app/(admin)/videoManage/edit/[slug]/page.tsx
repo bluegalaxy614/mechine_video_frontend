@@ -43,7 +43,7 @@ export default function EditPage({ params }: { params: { slug: string } }) {
       setVideo(video);
     } catch (error) {
       console.error('Profile changing Error');
-    };
+    }
   };
 
   // Handle category change

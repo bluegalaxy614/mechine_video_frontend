@@ -3,7 +3,8 @@ import Link from 'next/link';
 import { siteConfig } from '@/config/site';
 
 const HomeFooter = () => {
-  const { phone, email, address, twitter, facebook, youtube } = siteConfig.contactInfo;
+  const { phone, email, address, twitter, facebook, youtube } =
+    siteConfig.contactInfo;
   return (
     <div className="relative flex flex-col items-center justify-center w-full h-[532px]">
       <Image
@@ -35,10 +36,7 @@ const HomeFooter = () => {
               </div>
 
               <div className="w-full flex lg:justify-start md:justify-start sm:justify-center xsm:justify-center gap-6 my-4">
-                <Link
-                  href={twitter}
-                  aria-label="Twitter"
-                >
+                <Link href={twitter} aria-label="Twitter">
                   <Image
                     width={30}
                     height={30}
@@ -46,10 +44,7 @@ const HomeFooter = () => {
                     alt="Twitter"
                   />
                 </Link>
-                <Link
-                  href={facebook}
-                  aria-label="Facebook"
-                >
+                <Link href={facebook} aria-label="Facebook">
                   <Image
                     width={30}
                     height={30}
@@ -57,10 +52,7 @@ const HomeFooter = () => {
                     alt="Facebook"
                   />
                 </Link>
-                <Link
-                  href={youtube}
-                  aria-label="YouTube"
-                >
+                <Link href={youtube} aria-label="YouTube">
                   <Image
                     width={30}
                     height={30}

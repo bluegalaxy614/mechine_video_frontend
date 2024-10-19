@@ -54,11 +54,4 @@ const chartData = {
     },
   ],
 };
-export {
-  slides,
-  lastest,
-  favorite,
-  userIcon,
-  news,
-  chartData,
-};
+export { slides, lastest, favorite, userIcon, news, chartData };

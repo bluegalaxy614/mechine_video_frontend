@@ -3,7 +3,7 @@ import { sendAnswerMessage } from '@/lib/api';
 import { useStore } from '@/store/store';
 import { Button } from '@nextui-org/button';
 import Image from 'next/image';
-import {useState } from 'react';
+import { useState } from 'react';
 import { Message } from '@/types';
 interface AdminChatProps {
   userId: string;
@@ -31,21 +31,22 @@ const AdminChat = ({ userId, setChats }: AdminChatProps) => {
     if (chat.trim()) {
       askMessage(chat);
       setChats((prevState) => {
-        if (!prevState) return prevState; // Return the previous state if it's null
+        if (!prevState) return prevState; // Return the previous state if it's null or undefined
 
-        const updatedChats = { ...prevState }; // Copy the object, not spread it into an array
-        updatedChats.messages = [
-          ...updatedChats?.messages,
-          {
-            from: 'admin',
-            content: chat,
-            date: new Date().toISOString(),
-          },
-        ];
+        // Copy the object
+        const updatedChats = { ...prevState };
+        updatedChats.messages = updatedChats.messages
+          ? [...updatedChats.messages]
+          : [];
+
+        updatedChats.messages.push({
+          from: 'admin',
+          content: chat,
+          date: new Date().toISOString(),
+        });
 
         return updatedChats;
       });
-
       setChat('');
     }
   };

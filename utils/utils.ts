@@ -37,4 +37,4 @@ export const getVideoSnapshot = (videoElement: HTMLVideoElement) => {
   }
 
   return canvas;
-}
+};

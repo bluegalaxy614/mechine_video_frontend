@@ -2,8 +2,8 @@ import { Button } from '@nextui-org/button';
 import { Card, CardBody, CardFooter, CardHeader } from '@nextui-org/card';
 import { Input } from '@nextui-org/input';
 import { Select, SelectItem } from '@nextui-org/select';
-import { RadioGroup, Radio } from '@nextui-org/radio';
-import { Apple, PayPal } from './icons';
+// import { RadioGroup, Radio } from '@nextui-org/radio';
+// import { Apple, PayPal } from './icons';
 
 export default function PaymentMethod() {
   return (

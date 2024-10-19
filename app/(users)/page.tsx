@@ -11,23 +11,17 @@ import HomeFooter from '@/components/homeFooter';
 import { Button } from '@nextui-org/button';
 import { Image } from '@nextui-org/image';
 import { companyList } from '@/config/site';
-import {
-  slides,
-  lastest,
-  favorite,
-  userIcon,
-  news,
-} from '@/config/data';
+import { slides, lastest, favorite, userIcon, news } from '@/config/data';
 import { getNews, getUsers, getVideos } from '@/lib/api';
 import { Spinner } from '@nextui-org/spinner';
-import { Video } from '@/types';
+import { UserCard, Video } from '@/types';
 import { Input } from '@nextui-org/input';
 import { SearchIcon } from '@/components/icons';
 
 interface ResponseVideos {
   currentPage: number;
   totalPages: number;
-  videos: any[];
+  videos: Video[];
 }
 
 export default function Home() {
@@ -41,7 +35,7 @@ export default function Home() {
   const [favTotalVideos, setFavTotalVideos] = useState<Video[]>([]);
   const [favVideos, setFavVideos] = useState<Video[]>([]);
 
-  const [users, setUsers] = useState<any[]>([]);
+  const [users, setUsers] = useState<UserCard[]>([]);
 
   const [page, setPage] = useState<number>(1);
   const [lastNewsPage, setLastNewsPage] = useState<boolean>(true);
@@ -84,7 +78,9 @@ export default function Home() {
   }, [videoConfig]);
 
   useEffect(() => {
-    setLastestVideos([...lastestVideos, ...videos]);
+    setLastestVideos((prevState) => {
+      return prevState ? [...prevState, ...videos] : [...videos];
+    });
   }, [videos]);
 
   useEffect(() => {
@@ -112,7 +108,9 @@ export default function Home() {
   }, [favVideoConfig]);
 
   useEffect(() => {
-    setFavTotalVideos([...favTotalVideos, ...favVideos]);
+    setFavTotalVideos((prevState) => {
+      return prevState ? [...prevState, ...favVideos] : [...favVideos];
+    });
   }, [favVideos]);
 
   useEffect(() => {
@@ -144,8 +142,8 @@ export default function Home() {
           setLastNewsPage(false);
         }
       } catch (error) {
-        console.error('Error fetching news:', error);
         setIsNewsLoading(false);
+        console.error('Error fetching news:', error);
       }
     };
 

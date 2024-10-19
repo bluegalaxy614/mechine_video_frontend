@@ -54,7 +54,9 @@ export const Navbar = () => {
                 href="/"
               >
                 {/* <Logo /> */}
-                <p className="font-bold text-[40px] text-[#4291ef]">{siteConfig.name}</p>
+                <p className="font-bold text-[40px] text-[#4291ef]">
+                  {siteConfig.name}
+                </p>
               </NextLink>
             </NavbarBrand>
           </NavbarContent>
@@ -72,7 +74,7 @@ export const Navbar = () => {
                       {item.label}
                     </NextLink>
                   </NavbarItem>
-                )
+                );
               })}
             </ul>
             <NavbarItem className="hidden lg:flex md:flex">
@@ -136,10 +138,7 @@ export const Navbar = () => {
             <div className="mx-4 mt-2 flex flex-col gap-2 mt-[30px]">
               {siteConfig.userNavItems.map((item, index) => (
                 <NavbarMenuItem key={`${item}-${index}`}>
-                  <Link
-                    href={item.href}
-                    size="lg"
-                  >
+                  <Link href={item.href} size="lg">
                     {item.label}
                   </Link>
                 </NavbarMenuItem>

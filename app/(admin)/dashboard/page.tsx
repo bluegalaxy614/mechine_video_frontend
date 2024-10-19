@@ -8,7 +8,7 @@ import { Input } from '@nextui-org/input';
 import NewsCards from '@/components/newCards';
 import { chartData } from '@/config/data';
 import { useEffect, useState } from 'react';
-import { createNews, getNews } from '@/lib/api';
+import { createNews, getAnalyseData, getNews } from '@/lib/api';
 import { Spinner } from '@nextui-org/spinner';
 import { useStore } from '@/store/store';
 
@@ -19,10 +19,10 @@ const icon = {
 };
 
 export default function DashboardPage() {
-  const [totalVideoCounts, setTotalVideoCounts] = useState<number>(0);
-  const [totalViewCounts, setTotalViewCounts] = useState<number>(0);
-  const [totalUserCounts, setTotalUserCounts] = useState<number>(0);
-  const [totalCoinCounts, setTotalCoinCounts] = useState<number>(0);
+  const [viewerNumber, setViewerNumber] = useState<number>(0);
+  const [postersNumber, setPostersNumber] = useState<number>(0);
+  const [videoNumber, setVideoNumber] = useState<number>(0);
+  const [paid, setPaid] = useState<number>(0);
 
   const setMessage = useStore((state) => state.setMessage);
 
@@ -34,6 +34,19 @@ export default function DashboardPage() {
     title: '',
     content: '',
   });
+
+  const fetchData = async () => {
+    try {
+      const res = await getAnalyseData();
+      const { viewer, posters, video, paidCount } = res.data;
+      setViewerNumber(viewer);
+      setPostersNumber(posters);
+      setVideoNumber(video);
+      setPaid(paidCount);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const fetchNews = async () => {
     setIsLoading(true);
@@ -58,8 +71,11 @@ export default function DashboardPage() {
 
   useEffect(() => {
     fetchNews();
-  }, [page]);
+  });
 
+  useEffect(() => {
+    fetchData();
+  }, [page]);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -99,28 +115,28 @@ export default function DashboardPage() {
             id={1}
             image={'/icons/icons-checked.png'}
             title="総投稿件数"
-            info="250"
+            info={`${videoNumber / 1000}千+`}
             unit="件"
           />
           <BoxImage
             id={2}
             image={'/icons/viwer.png'}
             title="総視聴者数"
-            info="8"
-            unit="件"
+            info={`${viewerNumber / 1000}千+`}
+            unit="人"
           />
           <BoxImage
             id={3}
             image={'/icons/user.png'}
             title="未払い総額"
-            info="4万+"
-            unit="円"
+            info={`${postersNumber / 1000}千+`}
+            unit="人"
           />
           <BoxImage
             id={4}
             image={'/icons/icon-coin.png'}
             title="総輸入額"
-            info="4万+"
+            info={`${paid / 10000}万+`}
             unit="円"
           />
         </section>

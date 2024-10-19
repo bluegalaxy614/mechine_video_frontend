@@ -34,6 +34,7 @@ export default function ContactPage() {
       .then(
         (response) => {
           setMessage('Email sent successfully!');
+          console.log(response);
         },
         (err) => {
           console.error('FAILED...', err);

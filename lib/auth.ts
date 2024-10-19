@@ -3,16 +3,19 @@ import { RegisterData, LoginData, ForgotPasswordData } from '@/types/libType';
 
 const API_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 
-const register = async (data: RegisterData) => {
-  return axios.post(`${API_URL}/api/auth/register`, data);
+const authService = {
+  register: async (data: RegisterData) => {
+    return axios.post(`${API_URL}/api/auth/register`, data);
+  },
+
+  login: async (data: LoginData) => {
+    return axios.post(`${API_URL}/api/auth/login`, data);
+  },
+
+  forgotPassword: async (data: ForgotPasswordData) => {
+    return axios.post(`${API_URL}/api/auth/forgot-password`, data);
+  },
 };
 
-const login = async (data: LoginData) => {
-  return axios.post(`${API_URL}/api/auth/login`, data);
-};
-
-const forgotPassword = async (data: ForgotPasswordData) => {
-  return axios.post(`${API_URL}/api/auth/forgot-password`, data);
-};
-
-export default { register, login, forgotPassword };
+// Export the named variable instead of an anonymous default export
+export default authService;

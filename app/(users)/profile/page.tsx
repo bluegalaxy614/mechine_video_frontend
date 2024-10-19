@@ -31,7 +31,7 @@ export default function ProfilePage() {
           status: status,
         });
         const { currentPage, totalPages, videos } = res;
-        console.log(currentPage)
+        console.log(currentPage);
         setDisplyVideos(videos);
         setTotalPages(totalPages);
       } catch (error) {

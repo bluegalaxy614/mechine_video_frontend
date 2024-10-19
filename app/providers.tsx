@@ -21,14 +21,12 @@ export function Providers({ children, themeProps }: ProvidersProps) {
   const user = useStore((state) => state.user);
   const message = useStore((state) => state.message);
   const errorMessage = useStore((state) => state.errorMessage);
-  const setErrorMessage = useStore((state) => state.setErrorMessage);
-  const setMessage = useStore((state) => state.setMessage);
 
   React.useEffect(() => {
     if (user) {
       setSession(user.token);
     }
-  }, [user])
+  }, [user]);
 
   React.useEffect(() => {
     if (message) {
@@ -39,7 +37,6 @@ export function Providers({ children, themeProps }: ProvidersProps) {
         closeOnClick: true,
         theme: 'light',
       });
-      setMessage('');
     }
   }, [message]);
 
@@ -52,7 +49,6 @@ export function Providers({ children, themeProps }: ProvidersProps) {
         closeOnClick: true,
         theme: 'light',
       });
-      setErrorMessage('');
     }
   }, [errorMessage]);
 

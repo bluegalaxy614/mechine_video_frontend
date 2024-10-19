@@ -14,21 +14,21 @@ export default function RootLayout({
 }) {
   const unread = useStore((state) => state.unread);
   const setUnread = useStore((state) => state.setUnread);
-  const user = useStore((state) => state.user);
+  // const user = useStore((state) => state.user);
   const router = useRouter();
 
   const showMessage = async () => {
     try {
       await readMessage();
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
   const handleClick = () => {
     setUnread(false);
     showMessage();
     router.push('/ask');
-  }
+  };
 
   return (
     <div>
@@ -39,11 +39,7 @@ export default function RootLayout({
           className="absolute rounded-full !fixed flex justify-center items-center right-2 bottom-[100px] lg:w-[72px] lg:h-[72px] md:w-[72px] md:h-[72px] sm:w-[60px] sm:h-[60px] xsm:w-[50px] xsm:h-[50px] bg-white rounded-full border border-gray-200 shadow-md"
           onClick={handleClick}
         >
-          <Badge
-            isInvisible={!unread}
-            content={'new'}
-            color="danger"
-          >
+          <Badge isInvisible={!unread} content={'new'} color="danger">
             <Image
               src="/icons/icon-ask.png"
               alt="home"

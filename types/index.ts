@@ -147,12 +147,13 @@ export interface subCategoryButtonProps {
   setSelectedSubCategories: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
+export interface UserCard {
+  avatar: string;
+  name: string;
+  posterCounts: number;
+}
 export interface UserCardsProps {
-  data: {
-    img: string;
-    name: string;
-    uploads: string;
-  }[];
+  data: UserCard[];
 }
 export interface VideoCardsProps {
   data: {

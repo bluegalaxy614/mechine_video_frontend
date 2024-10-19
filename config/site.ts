@@ -48,14 +48,14 @@ export const siteConfig = {
       href: '/message',
     },
   ],
-  contactInfo:{
-    phone:"03-8765-4321",
-    email:"info@shinansho.com",
-    address:"東京都 港区 六本木 2-15-8",
-    twitter:"",
-    facebook:"",
-    youtube:""
-  }
+  contactInfo: {
+    phone: '03-8765-4321',
+    email: 'info@shinansho.com',
+    address: '東京都 港区 六本木 2-15-8',
+    twitter: '',
+    facebook: '',
+    youtube: '',
+  },
 };
 
 export const categoryConfig = [

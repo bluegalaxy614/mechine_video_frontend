@@ -9,13 +9,14 @@ import 'video.js/dist/video-js.css';
 import StarButton from './starButton';
 import { useStore } from '@/store/store';
 import { formatDate } from '@/utils/utils';
+import Player from 'video.js/dist/types/player';
 
 const VideoCards = ({ data }: VideoCardsProps) => {
   const user = useStore((state) => state.user);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [videoUrl, setVideoUrl] = useState<string>('');
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const playerRef = useRef<any>(null);
+  const playerRef = useRef<Player | null>(null);
 
   useEffect(() => {
     if (isOpen && videoRef.current && !playerRef.current) {
@@ -43,7 +44,7 @@ const VideoCards = ({ data }: VideoCardsProps) => {
         playerRef.current = null;
       }
     };
-  }, [videoUrl, isOpen]);
+  }, [videoUrl, isOpen, user?.role]);
 
   return (
     <div>
@@ -110,7 +111,7 @@ const VideoCards = ({ data }: VideoCardsProps) => {
       </div>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
         <ModalContent>
-          {(onClose) => (
+          {() => (
             <div data-vjs-player>
               <video
                 ref={videoRef}

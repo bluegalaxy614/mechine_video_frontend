@@ -16,7 +16,7 @@ export default function AdminLayout({
     if (user?.role !== 'admin') {
       router.push('/login');
     }
-  }, [router])
+  }, [router, user]);
   return (
     <div className="relative flex flex-col h-screen w-[100vw]">
       <AdminNavbar />

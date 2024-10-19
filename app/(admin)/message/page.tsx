@@ -7,7 +7,7 @@ import { Button } from '@nextui-org/button';
 import { useEffect, useState } from 'react';
 import { useStore } from '@/store/store';
 import { Message } from '@/types';
-import { Badge } from "@nextui-org/badge";
+import { Badge } from '@nextui-org/badge';
 
 export default function MessagePage() {
   const [allMessage, setAllMessage] = useState<Message[] | null>(null);
@@ -39,13 +39,13 @@ export default function MessagePage() {
     setUserId(id);
     setAllMessage((prevMessages) => {
       return prevMessages.map((item) =>
-        item.userId === id ? { ...item, unread: 0 } : item
+        item.userId === id ? { ...item, unread: 0 } : item,
       );
     });
     const viewMsg = async (id) => {
       try {
         const res = await viewMessages({ userId: id });
-
+        console.log(res);
       } catch (error) {
         console.log(error);
       }
@@ -56,7 +56,7 @@ export default function MessagePage() {
   const handleDeleteChats = async () => {
     try {
       const res = await deleteAllChats({ userId: userId });
-      fetchData()
+      fetchData();
       console.log(res);
     } catch (error) {
       console.log(error);
@@ -73,7 +73,11 @@ export default function MessagePage() {
               key={item.userId}
               className={`cursor-pointer hover:bg-[#E4F1FF] shadow-md fit-content h-[81px] mx-auto rounded-lg flex justify-start items-center px-[5px] gap-2 ${item.userId === userId ? 'bg-[#E4F1FF]' : ''}`}
             >
-              <Badge content={item.unread} isInvisible={item.unread > 0 ? false : true} color="danger">
+              <Badge
+                content={item.unread}
+                isInvisible={item.unread > 0 ? false : true}
+                color="danger"
+              >
                 <Avatar
                   src={item.userAvatar || '/profile/user.png'}
                   name={item.userName}
@@ -107,7 +111,10 @@ export default function MessagePage() {
 
           <div className="w-full h-[calc(100vh-90px-71px-98px)] overflow-y-scroll grow px-[56px] py-[34px]">
             {chats?.messages?.map((item, index) => (
-              <div key={index} className="flex flex-col min-w-[370px] gap-[20px] py-[25px]">
+              <div
+                key={index}
+                className="flex flex-col min-w-[370px] gap-[20px] py-[25px]"
+              >
                 <div className="flex justify-start items-center rounded-full min-w-[191px] h-[59px] p-1 hover:pointer gap-3">
                   <Avatar
                     src={

@@ -166,9 +166,9 @@ export default function ViewerProfilePage() {
 
             <div className="w-full">
               <div
-                className={`${true ? 'flex justify-center items-center ' : ''}relative lg:w-[554px] h-[300px] md:w-[554px] sm:w-[450px] xsm:w-[330px] my-[20px] rounded-[24px] pt-[49px] pb-[46px] pl-[55px] pr-[59px] border-[6px] hover:border-[#4291EF] bg-[#E4F1FF] border-[#4291EF]`}
+                className={`${isFree ? 'flex justify-center items-center ' : ''}relative lg:w-[554px] h-[300px] md:w-[554px] sm:w-[450px] xsm:w-[330px] my-[20px] rounded-[24px] pt-[49px] pb-[46px] pl-[55px] pr-[59px] border-[6px] hover:border-[#4291EF] bg-[#E4F1FF] border-[#4291EF]`}
               >
-                {false ? (
+                {isFree ? (
                   <>
                     <h1 className="text-[24px] text-[#4291EF] font-bold mb-[13px]">
                       Card
@@ -195,7 +195,7 @@ export default function ViewerProfilePage() {
         <p className="text-white text-[20px]"> All rights reserved.</p>
       </footer>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
-        <ModalContent>{(onClose) => <PaymentMethod />}</ModalContent>
+        <ModalContent>{() => <PaymentMethod />}</ModalContent>
       </Modal>
     </div>
   );

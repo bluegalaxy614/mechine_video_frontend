@@ -19,7 +19,7 @@ const UserCards = ({ data }: UserCardsProps) => {
                 width={196}
                 height={192}
                 alt={`Profile picture of ${item.name}`}
-                src={item.img ? item.img : '/profile/user.png'}
+                src={item.avatar ? item.avatar : '/profile/user.png'}
               />
               <div className="w-full flex flex-col mt-6 mb-8">
                 <h1 className="text-[20px] font-bold text-blue-500 text-center">
@@ -29,7 +29,7 @@ const UserCards = ({ data }: UserCardsProps) => {
                   <p className="text-gray-700 text-[16px]">
                     投稿件数:{' '}
                     <strong className="text-[#ED1C24] text-[20px]">
-                      {item.uploads}件
+                      {item.posterCounts}件
                     </strong>
                   </p>
                 </div>

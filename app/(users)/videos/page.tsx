@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ImageSlider from '@/components/imageSlider';
 import VideoCards from '@/components/videoCards';
 import HomeFooter from '@/components/homeFooter';

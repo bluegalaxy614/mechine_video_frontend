@@ -1,5 +1,5 @@
 import { Divider } from '@nextui-org/divider';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import SubCategoryButton from './subCategoryButton';
 import { categoryConfig } from '@/config/site';
 import CategoryButton from './categoryButton';
@@ -28,11 +28,15 @@ export default function SearchCategories({
     setInputValue(e.target.value);
   };
 
+  // UseCallback to memoize the functions if needed
+  const memoizedSetVideos = useCallback(setVideos, [setVideos]);
+  const memoizedSetTotalPages = useCallback(setTotalPages, [setTotalPages]);
+
   useEffect(() => {
     if (inputValue.length === 0) {
       const fetchVideos = async () => {
         try {
-          setVideos([]);
+          memoizedSetVideos([]);
           const res = await searchVideos({
             selectedCategories,
             selectedSubCategories,
@@ -41,8 +45,8 @@ export default function SearchCategories({
           });
           const { video, totalPages } = res;
           console.log(res);
-          setTotalPages(totalPages);
-          setVideos(video);
+          memoizedSetTotalPages(totalPages);
+          memoizedSetVideos(video);
         } catch (error) {
           console.error('Error fetching videos:', error);
         }
@@ -55,13 +59,15 @@ export default function SearchCategories({
     selectedKeys,
     currentPage,
     inputValue,
+    memoizedSetVideos,
+    memoizedSetTotalPages,
   ]);
 
   useEffect(() => {
     if (inputValue.length !== 0) {
       const searchVideos = async () => {
         try {
-          setVideos([]);
+          memoizedSetVideos([]);
           const res = await searchVideoInString({
             inputValue,
             selectedKeys,
@@ -69,15 +75,21 @@ export default function SearchCategories({
           });
           const { video, totalPages } = res;
           console.log(res);
-          setVideos(video);
-          setTotalPages(totalPages);
+          memoizedSetVideos(video);
+          memoizedSetTotalPages(totalPages);
         } catch (error) {
           console.error('Error searching videos:', error);
         }
       };
       searchVideos();
     }
-  }, [inputValue, currentPage]);
+  }, [
+    inputValue,
+    currentPage,
+    selectedKeys,
+    memoizedSetVideos,
+    memoizedSetTotalPages,
+  ]);
 
   return (
     <section className="max-w-[1280px] mx-auto">
