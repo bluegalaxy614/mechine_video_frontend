@@ -44,6 +44,7 @@ export default function VideoManagePage() {
   const [totalPages, setTotalPages] = useState(0);
   const [inputValue, setInputValue] = useState<string>('');
   const rowsPerPage = 10;
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
