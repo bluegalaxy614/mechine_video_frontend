@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://199.188.238.224:5000';
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
 export const uploadVideo = async (formData) => {
   try {
@@ -257,6 +257,18 @@ export const deleteAllChats = async (data) => {
   try {
     const response = await axios.post(
       `${API_URL}/api/admin/deleteAllChats`,
+      data,
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+export const searchUsersInString = async (data) => {
+  try {
+    const response = await axios.post(
+      `${API_URL}/api/admin/searchUsersInString`,
       data,
     );
     return response.data;

@@ -7,7 +7,7 @@ import { Image } from '@nextui-org/image';
 import { Input } from '@nextui-org/input';
 import NewsCards from '@/components/newCards';
 import { chartData } from '@/config/data';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { createNews, getAnalyseData, getNews } from '@/lib/api';
 import { Spinner } from '@nextui-org/spinner';
 import { useStore } from '@/store/store';
@@ -48,14 +48,14 @@ export default function DashboardPage() {
     }
   };
 
-  const fetchNews = async () => {
+  const fetchNews = useCallback(async (page) => {
     setIsLoading(true);
     try {
       const res = await getNews({
         currentPage: page,
       });
       const { totalPages, news } = res;
-      setNewsData([...newsData, ...news]);
+      setNewsData((prevNews) => [...prevNews, ...news]); // Use functional update to avoid stale state
       setIsLoading(false);
 
       if (page >= totalPages) {
@@ -67,15 +67,15 @@ export default function DashboardPage() {
       console.error('Error fetching news:', error);
       setIsLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
-    fetchNews();
-  }, [page]);
+    fetchNews(page);
+  }, [page, fetchNews]);
 
   useEffect(() => {
     fetchData();
-  }, [page]);
+  });
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -96,7 +96,7 @@ export default function DashboardPage() {
     try {
       const res = await createNews(data);
       const { message } = res;
-      fetchNews();
+      fetchNews(page);
       setMessage(message);
       setFormData({
         title: '',

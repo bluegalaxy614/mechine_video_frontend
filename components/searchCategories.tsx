@@ -68,10 +68,12 @@ export default function SearchCategories({
       const searchVideos = async () => {
         try {
           memoizedSetVideos([]);
+          const perPage = 20;
           const res = await searchVideoInString({
             inputValue,
             selectedKeys,
             currentPage,
+            perPage,
           });
           const { video, totalPages } = res;
           console.log(res);

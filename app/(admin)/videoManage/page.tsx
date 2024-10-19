@@ -11,14 +11,13 @@ import {
   TableHeader,
   TableRow,
 } from '@nextui-org/table';
-// import { videoTableRows } from '@/config/data';
 import { videoTableConfig } from '@/config/site';
 import { useCallback, useEffect, useState } from 'react';
 import { Tooltip } from '@nextui-org/tooltip';
 import Image from 'next/image';
 import { Divider } from '@nextui-org/divider';
 import { Link } from '@nextui-org/link';
-import { deleteVideoById, getAllVideos } from '@/lib/api';
+import { deleteVideoById, getAllVideos, searchVideoInString } from '@/lib/api';
 import { formatDate } from '@/utils/utils';
 interface Row {
   _id: string;
@@ -43,9 +42,8 @@ export default function VideoManagePage() {
   const [page, setPage] = useState(1);
   const [videos, setVideos] = useState<Row[]>([]);
   const [totalPages, setTotalPages] = useState(0);
-  const [message, setMessage] = useState<string>('');
+  const [inputValue, setInputValue] = useState<string>('');
   const rowsPerPage = 10;
-  console.log(message);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -60,15 +58,16 @@ export default function VideoManagePage() {
         console.log(error);
       }
     };
-    fetchData();
-  }, [page]);
+    if (inputValue.length === 0) {
+      fetchData();
+    }
+  }, [page, inputValue]);
 
   const handleDelete = (id: string, event: React.MouseEvent) => {
     event.preventDefault();
     const deleteRow = async (id) => {
       try {
-        const res = await deleteVideoById({ videoId: id });
-        setMessage(res.message);
+        await deleteVideoById({ videoId: id });
         setVideos((prevVideos) =>
           prevVideos.filter((video) => video._id !== id),
         );
@@ -152,10 +151,41 @@ export default function VideoManagePage() {
     }
   }, []);
 
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const memoizedSetVideos = useCallback(setVideos, [setVideos]);
+  const memoizedSetTotalPages = useCallback(setTotalPages, [setTotalPages]);
+
+  useEffect(() => {
+    if (inputValue.length !== 0) {
+      const searchVideos = async () => {
+        try {
+          memoizedSetVideos([]);
+          const perPage = 10;
+          const res = await searchVideoInString({
+            inputValue,
+            page,
+            perPage,
+          });
+          const { video, totalPages } = res;
+          memoizedSetVideos(video);
+          memoizedSetTotalPages(totalPages);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      searchVideos();
+    }
+  }, [inputValue, page, memoizedSetTotalPages, memoizedSetVideos]);
+
   return (
     <section className="h-[calc(100vh-90px)] flex flex-col px-[60px] py-[30px] gap-12">
       <div className="max-w-[913px] lg:px-0 md:px-[40px] sm:px-[50px] xsm:px-[30px]">
         <Input
+          value={inputValue}
+          onChange={handleInputChange}
           isClearable
           fullWidth={true}
           radius="lg"

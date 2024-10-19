@@ -16,7 +16,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { Tooltip } from '@nextui-org/tooltip';
 import { Divider } from '@nextui-org/divider';
 import { Avatar } from '@nextui-org/avatar';
-import { deleteUserById, getUsers } from '@/lib/api';
+import { deleteUserById, getUsers, searchUsersInString } from '@/lib/api';
 
 const statusColorMap: Record<string, ChipProps['color']> = {
   Admin: 'primary',
@@ -44,9 +44,8 @@ export default function UserManagePage() {
   const [page, setPage] = useState(1);
   const [users, setUsers] = useState<Row[]>([]);
   const [totalPages, setTotalPages] = useState(0);
-  const [message, setMessage] = useState<string>('');
+  const [inputValue, setInputValue] = useState<string>('');
   const rowsPerPage = 10;
-  console.log(message);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -61,16 +60,40 @@ export default function UserManagePage() {
         console.error('Error fetching users:', error);
       }
     };
-    fetchData();
-  }, [page]);
+    if (inputValue.length === 0) {
+      fetchData();
+    }
+  }, [page, inputValue]);
+
+  const memoizedSetUsers = useCallback(setUsers, [setUsers]);
+  const memoizedSetTotalPages = useCallback(setTotalPages, [setTotalPages]);
+
+  useEffect(() => {
+    if (inputValue.length !== 0) {
+      const searchUsers = async () => {
+        try {
+          memoizedSetUsers([]);
+          const res = await searchUsersInString({
+            inputValue,
+            page,
+          });
+          const { users, totalPages } = res;
+          memoizedSetUsers(users);
+          memoizedSetTotalPages(totalPages);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      searchUsers();
+    }
+  }, [inputValue, memoizedSetTotalPages, memoizedSetUsers, page]);
 
   const handleDelete = (id: string, event: React.MouseEvent) => {
     event.preventDefault();
     const deleteUser = async (id) => {
       try {
-        const res = await deleteUserById({ userId: id });
+        await deleteUserById({ userId: id });
         setUsers((prevUsers) => prevUsers.filter((user) => user._id !== id));
-        setMessage(res.message);
       } catch (error) {
         console.log(error);
       }
@@ -160,6 +183,10 @@ export default function UserManagePage() {
     }
   }, []);
 
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
   return (
     <section className="h-[calc(100vh-90px)] flex flex-col px-[60px] py-[30px] gap-12">
       <div className="max-w-[913px] lg:px-0 md:px-[40px] sm:px-[50px] xsm:px-[30px]">
@@ -167,6 +194,8 @@ export default function UserManagePage() {
           isClearable
           fullWidth={true}
           radius="lg"
+          value={inputValue}
+          onChange={handleInputChange}
           className="h-[48px] rounded-full"
           classNames={{
             label: 'text-black/50 dark:text-white/90',
