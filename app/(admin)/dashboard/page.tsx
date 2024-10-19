@@ -71,7 +71,7 @@ export default function DashboardPage() {
 
   useEffect(() => {
     fetchNews();
-  });
+  },[]);
 
   useEffect(() => {
     fetchData();
