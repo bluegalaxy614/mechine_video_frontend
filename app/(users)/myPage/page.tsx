@@ -6,6 +6,8 @@ import SearchCategories from '@/components/searchCategories';
 import ImageButton from '@/components/imageButton';
 import { Button } from '@nextui-org/button';
 import Image from 'next/image';
+import { useStore } from '@/store/store';
+import { useRouter } from 'next/navigation';
 
 const icon = {
   icon: '/icons/view.png',
@@ -18,7 +20,15 @@ export default function ViwerPage() {
   const [totalPages, setTotalPages] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   const [displyVideos, setDisplyVideos] = useState([]);
+  const user = useStore((state) => state.user);
 
+  const router = useRouter();
+
+  useEffect(() => {
+    if(!user){
+      router.push('/login');
+    }
+  },[user]);
   useEffect(() => {
     setDisplyVideos(videos);
   }, [videos]);

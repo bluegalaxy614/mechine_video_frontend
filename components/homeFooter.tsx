@@ -31,7 +31,7 @@ const HomeFooter = () => {
 
               <div className="max-w-[500px] flex justify-center gap-4">
                 <p className="lg:text-[20px] md:text-[18px] sm:text-[16px] xsm:text-[14px]  text-white">
-                  ご質問やサポートが必要な場合、または修理業者とのマッチングサービスに関するお問い合わせは、下記のフォームよりお気軽にご連絡ください。機械修理動画プラットフォームに関する詳細情報や、投稿・視聴に関するサポートなど、私たちのチームが迅速に対応し、必要な情報を提供いたします。
+                  ご質問やサポートが必要な場合、または修理業者とのマッチングサービスに関するお問い合わせは、下記のフォームよりお気軽にご連絡ください。修理指南書に関する詳細情報や、投稿・視聴に関するサポートなど、私たちのチームが迅速に対応し、必要な情報を提供いたします。
                 </p>
               </div>
 
@@ -66,7 +66,7 @@ const HomeFooter = () => {
           <div className="lg:w-1/2 md:w-1/2 sm:w-full xsm:w-full flex justify-center lg:px-[0px] md:px-[40px] sm:px-[30px] xsm:px-[30px]">
             <div className="w-full flex justify-center items-center">
               <div className="flex w-[500px] flex-col gap-4">
-                <div className="flex gap-3 items-center">
+                {/* <div className="flex gap-3 items-center">
                   <Image
                     width={30}
                     height={30}
@@ -79,7 +79,7 @@ const HomeFooter = () => {
                   <p className="lg:text-[22px] md:text-[20px] sm:text-[18px] xsm:text-[16px] font-bold text-white h-[40px] flex items-center">
                     {phone}
                   </p>
-                </div>
+                </div> */}
                 <div className="flex gap-3 items-center">
                   <Image
                     width={30}
@@ -90,9 +90,12 @@ const HomeFooter = () => {
                   <p className="lg:text-[22px] md:text-[20px] sm:text-[18px] xsm:text-[16px] lg:w-[170px] md:w-[160px] sm:w-[140px] xsm:w-[130px] font-bold text-[#C7C7C7] h-[40px] flex items-center">
                     メールアドレス
                   </p>
-                  <p className="lg:text-[22px] md:text-[20px] sm:text-[18px] xsm:text-[16px] font-bold text-white h-[40px] flex items-center">
+                  <Link 
+                    href={`mailto:${email}`} 
+                    className="text-white font-bold h-[40px] lg:text-[22px] md:text-[20px] sm:text-[18px] xsm:text-[16px]"
+                  >
                     {email}
-                  </p>
+                  </Link>
                 </div>
                 <div className="flex gap-3 items-center">
                   <Image
@@ -104,7 +107,7 @@ const HomeFooter = () => {
                   <p className="lg:text-[22px] md:text-[20px] sm:text-[18px] xsm:text-[16px] lg:w-[170px] md:w-[160px] sm:w-[140px] xsm:w-[130px] font-bold text-[#C7C7C7] h-[40px] flex items-center">
                     所在地
                   </p>
-                  <p className="lg:text-[22px] md:text-[20px] sm:text-[18px] xsm:text-[16px] font-bold text-white h-[40px] flex items-center">
+                  <p className="lg:text-[22px] md:text-[20px] sm:text-[18px] xsm:text-[16px] font-bold text-white h-[40px]">
                     {address}
                   </p>
                 </div>

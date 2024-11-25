@@ -49,9 +49,9 @@ export const siteConfig = {
     },
   ],
   contactInfo: {
-    phone: '03-8765-4321',
+    phone: '',
     email: 'info@shinansho.com',
-    address: '東京都 港区 六本木 2-15-8',
+    address: '三重県 鈴鹿市 汲川原町 460番地',
     twitter: '',
     facebook: '',
     youtube: '',

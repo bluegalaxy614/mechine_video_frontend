@@ -51,7 +51,7 @@ export default function ContactPage() {
           className="flex flex-col pt-[51px] px-[65px] mx-auto gap-[25px]"
         >
           <h1 className="text-[32px] text-[#4291EF] font-bold">
-            プロフィール編集
+          お問い合わせ
           </h1>
           <Divider className="bg-[#4291EF]" />
           <div>
@@ -93,7 +93,7 @@ export default function ContactPage() {
             type="submit"
             className="w-[141px] h-[26px] bg-[#4291EF] mt-[40px] mb-[71px] mx-auto"
           >
-            <p className="text-[#FFFFFF] text-[20px]">提出</p>
+            <p className="text-[#FFFFFF] text-[20px]">送信</p>
             <Image width={28} height={28} src="/icons/icon-store.png" alt="" />
           </Button>
         </form>

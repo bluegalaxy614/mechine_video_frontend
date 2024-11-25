@@ -9,6 +9,8 @@ import { Image } from '@nextui-org/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { getPosterVideos } from '@/lib/api';
+import { useStore } from '@/store/store';
+import { useRouter } from 'next/navigation';
 
 const icon = {
   icon: '/icons/icons-setting.png',
@@ -20,7 +22,15 @@ export default function ProfilePage() {
   const [page, setPage] = useState(1);
   const [displyVideos, setDisplyVideos] = useState([]);
   const [status, setStatus] = useState('all');
+  const user = useStore((state) => state.user);
 
+  const router = useRouter();
+
+  useEffect(() => {
+    if(!user){
+      router.push('/login');
+    }
+  },[user]);
   useEffect(() => {
     const fetchVideos = async () => {
       try {
@@ -108,7 +118,7 @@ export default function ProfilePage() {
             </Button>
           </div>
           <Link
-            href="/poster/submission"
+            href="/post"
             className="flex items-center justify-center gap-5 rounded-full w-[144px] h-[41px] bg-[#4291EF] text-white text-[16px]"
           >
             投稿する

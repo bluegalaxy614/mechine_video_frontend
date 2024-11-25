@@ -17,6 +17,7 @@ import { Button } from '@nextui-org/button';
 import { Pagination } from '@nextui-org/pagination';
 import { deleteVideoById, getPosterVideos } from '@/lib/api';
 import { useStore } from '@/store/store';
+import { useRouter } from 'next/navigation';
 
 const statusColorMap: Record<string, ChipProps['color']> = {
   支払い: 'success',
@@ -44,7 +45,15 @@ export default function PosterPaymentPage() {
 
   const setMessage = useStore((state) => state.setMessage);
   const setErrorMessage = useStore((state) => state.setErrorMessage);
+  const user = useStore((state) => state.user);
 
+  const router = useRouter();
+
+  useEffect(() => {
+    if(!user){
+      router.push('/login');
+    }
+  },[user]);
   useEffect(() => {
     const fetchVideos = async () => {
       try {

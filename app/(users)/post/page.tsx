@@ -3,13 +3,14 @@ import { Input, Textarea } from '@nextui-org/input';
 import { Button } from '@nextui-org/button';
 import Image from 'next/image';
 import { Select, SelectItem } from '@nextui-org/select';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { categoryConfig } from '@/config/site';
 import { uploadVideo } from '@/lib/api';
 import { Slider } from '@nextui-org/slider';
 import { useStore } from '@/store/store';
 import { getCategoryLabelById } from '@/utils/utils';
 import { getVideoSnapshot } from '@/utils/utils';
+import { useRouter } from 'next/navigation';
 
 export default function PostPage() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -31,7 +32,15 @@ export default function PostPage() {
   const [videoPreview, setVideoPreview] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [selectedSubCategory, setSelectedSubCategory] = useState<string>('');
+  const user = useStore((state) => state.user);
 
+  const router = useRouter();
+
+  useEffect(() => {
+    if(!user){
+      router.push('/login');
+    }
+  },[user]);
   const handleTimeUpdate = () => {
     if (videoRef.current) {
       setVideoTime(videoRef.current.currentTime);
@@ -149,7 +158,7 @@ export default function PostPage() {
     <div className="relative h-[calc(100vh-90px)] w-full flex flex-col justify-between">
       <form
         onSubmit={handleSubmit}
-        className="max-w-[1280px] mx-auto flex flex-wrap lg:mt-[85px] md:mt-[60px] sm:mt-[50px] xsm:mt-[30px] gap-12"
+        className="pb-[40px] max-w-[1280px] mx-auto flex flex-wrap lg:mt-[85px] md:mt-[60px] sm:mt-[50px] xsm:mt-[30px] gap-12"
       >
         <div className="flex flex-col max-w-[900px] mx-auto lg:px-0 md:px-[20px] sm:px-[30px] xsm:px-[30px]">
           <h1 className="text-[30px] text-[#4291EF] font-bold">
@@ -195,13 +204,14 @@ export default function PostPage() {
                     >
                       <source src={videoPreview} type="video/mp4" />
                       <source src={videoPreview} type="video/avi" />
+                      <source src={videoPreview} type="video/mov" />
                       Your browser does not support the video tag.
                     </video>
                   )}
                   <Input
                     type="file"
                     name="video"
-                    accept=".mp4, .avi"
+                    accept=".mp4, .avi, .mov"
                     onChange={handleFileChange}
                     className="hidden"
                     required
@@ -311,7 +321,7 @@ export default function PostPage() {
             </Select>
           </div>
           <Button type="submit" color="primary" isLoading={uploadedStatus}>
-            提出
+          投稿
           </Button>
         </div>
       </form>

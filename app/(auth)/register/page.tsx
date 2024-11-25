@@ -120,7 +120,7 @@ export default function RegisterPage() {
                 className="block text-gray-700 text-sm font-bold mb-2"
                 htmlFor="password"
               >
-                密碼
+                パスワード
               </label>
               <input
                 type="password"
@@ -128,7 +128,7 @@ export default function RegisterPage() {
                 name="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="請輸入密碼"
+                placeholder="パスワードを入力してください。"
                 className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
             </div>
@@ -138,7 +138,7 @@ export default function RegisterPage() {
                 className="block text-gray-700 text-sm font-bold mb-2"
                 htmlFor="confirmPassword"
               >
-                確認密碼
+                パスワード密碼
               </label>
               <input
                 type="password"
@@ -146,7 +146,7 @@ export default function RegisterPage() {
                 name="confirmPassword"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                placeholder="請確認密碼"
+                placeholder="パスワードを入力してください。"
                 className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
             </div>

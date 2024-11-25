@@ -186,7 +186,7 @@ export default function DashboardPage() {
               type="submit"
               className="w-[178px] h-[36px] bg-[#4291EF] rounded-full mt-[40px] mb-[71px]"
             >
-              <p className="text-[#FFFFFF] text-[20px]">提出</p>
+              <p className="text-[#FFFFFF] text-[20px]">投稿</p>
               <Image width={28} height={28} src="/icons/icon-save.png" alt="" />
             </Button>
           </form>

@@ -5,16 +5,35 @@ import { Button } from '@nextui-org/button';
 import Image from 'next/image';
 import { useState } from 'react';
 
-const ChatInput = () => {
+const ChatInput = ({ addNewMessage }) => {
   const [chat, setChat] = useState('');
   const setErrorMessage = useStore((state) => state.setErrorMessage);
   const setMessage = useStore((state) => state.setMessage);
 
+  // const askMessage = async (chat) => {
+  //   try {
+  //     const res = await sendAskMessage({
+  //       content: chat,
+  //     });
+  //     setMessage(res.message);
+  //   } catch (error) {
+  //     setErrorMessage(error);
+  //   }
+  // };
   const askMessage = async (chat) => {
     try {
       const res = await sendAskMessage({
         content: chat,
       });
+
+      // New message is added to the list
+      const newMessage = {
+        from: 'user', // Assuming the user is sending the message
+        content: chat,
+        date: new Date().toISOString(), // Use current timestamp
+      };
+
+      addNewMessage(newMessage); // Call parent function to update messages
       setMessage(res.message);
     } catch (error) {
       setErrorMessage(error);

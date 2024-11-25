@@ -1,7 +1,9 @@
 'use client';
 import ChatInput from '@/components/chatInput';
 import { getUserMessage } from '@/lib/api';
+import { useStore } from '@/store/store';
 import { Avatar } from '@nextui-org/avatar';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 interface Message {
@@ -18,6 +20,15 @@ interface Message {
 
 export default function AskPage() {
   const [messages, setMessages] = useState<Message>(null);
+  const user = useStore((state) => state.user);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if(!user){
+      router.push('/login');
+    }
+  },[user]);
 
   useEffect(() => {
     const fetchMessage = async () => {
@@ -31,6 +42,15 @@ export default function AskPage() {
     };
     fetchMessage();
   }, []);
+
+  const addNewMessage = (newMessage) => {
+    setMessages((prevMessages) => {
+      return {
+        ...prevMessages,
+        messages: [...prevMessages.messages, newMessage], // Add new message to the messages array
+      };
+    });
+  };
 
   return (
     <div className="h-[calc(100vh-90px)] max-w-[1280px] flex flex-col mx-auto lg:px-[5px] md:px-[30px] sm:px-[40px] xsm:px-[30px]">
@@ -71,7 +91,7 @@ export default function AskPage() {
         </div>
         <div className="h-[98px] border-t-2 w-full">
           <div className="flex h-full justify-end items-center gap-6">
-            <ChatInput />
+            <ChatInput addNewMessage={addNewMessage} />
           </div>
         </div>
       </div>

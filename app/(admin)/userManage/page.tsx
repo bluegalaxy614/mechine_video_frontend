@@ -191,19 +191,19 @@ export default function UserManagePage() {
   return (
     <section className="h-[calc(100vh-90px)] flex flex-col lg:px-[60px] md:px-[40px] sm:px-[10px] xsm:px-[5px] py-[30px] gap-12">
       <div className="max-w-[913px] lg:px-0 md:px-[40px] sm:px-[50px] xsm:px-[30px]">
-      <div className="max-w-[913px] lg:px-0 md:px-[40px] sm:px-[50px] xsm:px-[30px]">
-        <Input
-          value={inputValue}
-          onChange={handleInputChange}
-          isClearable
-          fullWidth={true}
-          className="h-full w-full rounded-[15px] border border-2"
-          placeholder="検索..."
-          startContent={
-            <SearchIcon className="text-black/50 mb-0.5 dark:text-white/90 text-slate-400 pointer-events-none flex-shrink-0" />
-          }
-        />
-      </div>
+        <div className="max-w-[913px] lg:px-0 md:px-[40px] sm:px-[50px] xsm:px-[30px]">
+          <Input
+            value={inputValue}
+            onChange={handleInputChange}
+            isClearable
+            fullWidth={true}
+            className="h-full w-full rounded-[15px] border border-2"
+            placeholder="検索..."
+            startContent={
+              <SearchIcon className="text-black/50 mb-0.5 dark:text-white/90 text-slate-400 pointer-events-none flex-shrink-0" />
+            }
+          />
+        </div>
       </div>
       <div className="w-full mx-auto lg:px-[0px] md:px-[40px] sm:px-[50px] xsm:px-[35px]">
         <div className="w-full over-flow-x-scroll">
