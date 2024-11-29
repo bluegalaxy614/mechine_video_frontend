@@ -3,12 +3,25 @@ import { sendAskMessage } from '@/lib/api';
 import { useStore } from '@/store/store';
 import { Button } from '@nextui-org/button';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { loadStripe } from '@stripe/stripe-js';
+
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+const API_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://160.251.181.158';
 
 const ChatInput = ({ addNewMessage }) => {
   const [chat, setChat] = useState('');
+  const user = useStore((state) => state.user);
   const setErrorMessage = useStore((state) => state.setErrorMessage);
   const setMessage = useStore((state) => state.setMessage);
+  const router = useRouter();
+  useEffect(() => {
+    if(!user){
+      router.push('/login');
+    }
+  },[user]);
+  const token = user?.token;
 
   // const askMessage = async (chat) => {
   //   try {
@@ -20,6 +33,40 @@ const ChatInput = ({ addNewMessage }) => {
   //     setErrorMessage(error);
   //   }
   // };
+  // const handleCheckout = async (chat) => {
+  //   // setLoading(true);
+  //   const stripe = await stripePromise;
+
+  //   try {
+  //     const response = await fetch(`${API_URL}/api/payment/stripe`, {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         'Authorization': `Bearer ${token}`,
+  //       },
+  //     });
+
+  //     if (!response.ok) {
+  //       setErrorMessage('Failed to create checkout session');
+  //       return;
+  //     }
+
+  //     const { id } = await response.json();
+
+  //     const { error } = await stripe.redirectToCheckout({ sessionId: id });
+  //     if (error) {
+  //       setErrorMessage('Stripe checkout failed');
+  //     } else {
+  //       setMessage('Success');
+  //       askMessage(chat);
+  //     }
+  //   } catch (err) {
+  //     setErrorMessage('Failed to initiate checkout');
+  //   } finally {
+  //     // setLoading(false);
+  //   }
+  // };
+
   const askMessage = async (chat) => {
     try {
       const res = await sendAskMessage({

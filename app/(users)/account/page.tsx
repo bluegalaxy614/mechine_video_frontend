@@ -3,47 +3,98 @@ import { Input } from '@nextui-org/input';
 import { Button } from '@nextui-org/button';
 import { Divider } from '@nextui-org/divider';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { useStore } from '@/store/store';
 import { CardIcon } from '@/components/icons';
 import PaymentMethod from '@/components/paymentMethod';
+import { useRouter } from 'next/navigation';
 import { Modal, ModalContent, useDisclosure } from '@nextui-org/modal';
 
-const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
-);
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+const API_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://160.251.181.158';
 
 export default function ViewerProfilePage() {
   const [loading, setLoading] = useState(false);
   const user = useStore((state) => state.user);
   const setErrorMessage = useStore((state) => state.setErrorMessage);
+  const setMessage = useStore((state) => state.setMessage);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const router = useRouter();
+
+  useEffect(() => {
+    if(!user){
+      router.push('/login');
+    }
+  },[user]);
+  const token = user.token;
 
   const isFree: boolean = user?.role === '無料会員';
+
   const handleCheckout = async () => {
     setLoading(true);
     const stripe = await stripePromise;
 
-    const response = await fetch(
-      `${API_URL}/api/payment/create-checkout-session`,
-      {
+    try {
+      const response = await fetch(`${API_URL}/api/payment/create-checkout-session`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
         },
-      },
-    );
+      });
 
-    const { id } = await response.json();
+      if (!response.ok) {
+        setErrorMessage('Failed to create checkout session');
+        return;
+      }
 
-    const { error } = await stripe.redirectToCheckout({ sessionId: id });
-    if (error) {
-      setErrorMessage('Stripe checkout failed');
+      const { id } = await response.json();
+
+      const { error } = await stripe.redirectToCheckout({ sessionId: id });
+      if (error) {
+        setErrorMessage('Stripe checkout failed');
+      } else {
+        setMessage('Success');
+      }
+    } catch (err) {
+      setErrorMessage('Failed to initiate checkout');
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
+
+  const handleDown = async () => {
+    const stripe = await stripePromise;
+
+    try {
+      const response = await fetch(`${API_URL}/api/payment/create-down-session`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        setErrorMessage('Failed to create checkout session');
+        return;
+      }
+
+      const { id } = await response.json();
+
+      const { error } = await stripe.redirectToCheckout({ sessionId: id });
+      if (error) {
+        setErrorMessage('Stripe checkout failed');
+      } else {
+        setMessage('Success');
+      }
+    } catch (err) {
+      setErrorMessage('Failed to initiate checkout');
+    } finally {
+    }
+  };
+
   return (
     <div className="min-h-[calc(100vh-90px)] flex flex-col lg:w-full xsm:w-fit justify-between">
       <section className="max-w-[1280px] mx-auto flex flex-col lg:mt-[85px] md:mt-[55px] sm:mt-[45px] xsm:mt-[35px]">
@@ -117,7 +168,10 @@ export default function ViewerProfilePage() {
                 <p className="max-w-[440px] mx-h-[140px] text-[#999999] text-[20px] mt-[25px] mb-[50px]">
                   すべての動画を視聴可能ですが、各動画の視聴時間は10秒に制限されています。ただし、2025年12月末まで、無料プランでも全動画を制限なしで視聴できます。
                 </p>
-                <Button className="w-[185px] h-[31px] bg-[#4291EF] mx-auto">
+                <Button
+                className="w-[185px] h-[31px] bg-[#4291EF] mx-auto"
+                  onClick={handleDown}
+                >
                   <p className="text-[#FFFFFF] text-[20px]">アップデート</p>
                   <Image
                     width={28}
@@ -138,6 +192,7 @@ export default function ViewerProfilePage() {
                 <p className="max-w-[440px] mx-h-[140px] text-[#999999] text-[20px] mt-[25px] mb-[50px]">
                   月額8,000円で、すべての動画をフルで視聴可能。制限なくコンテンツを楽しむことができ、修理技術を学ぶには最適なプランです。
                 </p>
+                {isFree &&
                 <Button
                   className="w-[185px] h-[31px] bg-[#4291EF] mx-auto"
                   onClick={handleCheckout}
@@ -153,12 +208,13 @@ export default function ViewerProfilePage() {
                     alt="icon"
                   />
                 </Button>
+                }
               </div>
             </div>
           </div>
         </div>
-        <Divider />
-        <div className="flex mt-[91px] lg:mx-0 md:mx-auto sm:mx-auto xsm:mx-auto">
+        {/* <Divider /> */}
+        {/* <div className="flex mt-[91px] lg:mx-0 md:mx-auto sm:mx-auto xsm:mx-auto">
           <div className="w-full flex flex-col lg:px-[0px] md:px-[80px] sm:px-[60px] xsm:px-[40px]">
             <h1 className="text-[32px] text-[#4291EF] font-bold">
               Add a PaymentMethod
@@ -189,7 +245,7 @@ export default function ViewerProfilePage() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </section>
       <footer className="w-full flex items-center justify-center py-3 bg-[#4291EF]">
         <p className="text-white text-[20px]"> All rights reserved.</p>

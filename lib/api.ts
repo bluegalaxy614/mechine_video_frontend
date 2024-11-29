@@ -1,6 +1,8 @@
+import { useStore } from '@/store/store';
 import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://160.251.181.158';
+const API_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://160.251.181.158';
+const user = useStore((state) => state.user);
 
 export const uploadVideo = async (formData) => {
   try {
@@ -23,6 +25,7 @@ export const updateProfile = async (formData) => {
       {
         headers: {
           'Content-Type': 'multipart/form-data',
+          'Authorization': `Bearer ${user.token}`,
         },
       },
     );

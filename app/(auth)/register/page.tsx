@@ -1,4 +1,5 @@
 'use client';
+
 import React from 'react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -138,7 +139,7 @@ export default function RegisterPage() {
                 className="block text-gray-700 text-sm font-bold mb-2"
                 htmlFor="confirmPassword"
               >
-                パスワード密碼
+                パスワード再入力
               </label>
               <input
                 type="password"
