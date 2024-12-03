@@ -17,6 +17,7 @@ import { Tooltip } from '@nextui-org/tooltip';
 import { Divider } from '@nextui-org/divider';
 import { Avatar } from '@nextui-org/avatar';
 import { deleteUserById, getUsers, searchUsersInString } from '@/lib/api';
+import { formatDate } from '@/utils/utils';
 
 const statusColorMap: Record<string, ChipProps['color']> = {
   Admin: 'primary',
@@ -29,7 +30,7 @@ interface Row {
   avatar: string;
   name: string;
   email: string;
-  date: string;
+  createdAt: string;
   status: string;
   role: string;
   expired: {
@@ -115,13 +116,20 @@ export default function UserManagePage() {
         );
       case 'name':
       case 'email':
-      case 'date':
         return (
           <div className="flex flex-col">
             <p className="text-bold text-[14px]">{String(cellValue)}</p>
           </div>
         );
-      case 'posterCounts':
+      case 'createdAt':{
+        const date = cellValue as Row['createdAt'];
+        return (
+          <div className="flex flex-col">
+            <p className="text-bold text-[14px]">{formatDate(date)}</p>
+          </div>
+        );
+        }
+        case 'posterCounts':
         return (
           <div className="flex flex-col">
             <p className="text-bold text-[14px] rounded-full bg-[#E4F1FF] text-[#4291EF] mx-auto px-[5px]">
@@ -146,7 +154,8 @@ export default function UserManagePage() {
           return (
             <div className="flex flex-col">
               <p className="text-bold text-[14px]">
-                {`${expiredValue.start} - ${expiredValue.end}`}
+                {/* {`${expiredValue.start} - ${expiredValue.end}`} */}
+                {`${formatDate(expiredValue.start)} - ${formatDate(expiredValue.end)}`}
               </p>
             </div>
           );
@@ -154,7 +163,7 @@ export default function UserManagePage() {
           return (
             <div className="flex flex-col">
               <p className="text-bold text-[14px] text-gray-400">
-                No expiration data
+                -
               </p>
             </div>
           );

@@ -150,69 +150,73 @@ export default function ViewerProfilePage() {
             </Button>
           </div>
         </div>
-        <Divider />
-        <div className="flex mt-[91px]">
-          <div className="w-full flex flex-col lg:px-[0px] md:px-[80px] sm:px-[60px] xsm:px-[40px]">
-            <h1 className="text-[32px] text-[#4291EF] font-bold">
-              プロフィール編集
-            </h1>
-
-            <div className="w-full flex flex-wrap mt-[30px] gap-[30px]">
-              <div
-                className={`lg:w-[554px] md:w-[554px] sm:w-[450px] xsm:w-[330px] my-[20px] rounded-[24px] pt-[49px] pb-[46px] pl-[55px] pr-[59px] border-[6px] hover:border-[#4291EF] mx-auto ${isFree ? 'bg-[#E4F1FF] border-[#4291EF]' : 'bg-[#F4F4F4]'}`}
-              >
-                <h1 className="text-[24px] text-[#4291EF] font-bold mb-[13px]">
-                  無料プラン
+        {user?.role =="admin" ? null :
+          <div>
+            <Divider />
+            <div className="flex mt-[91px]">
+              <div className="w-full flex flex-col lg:px-[0px] md:px-[80px] sm:px-[60px] xsm:px-[40px]">
+                <h1 className="text-[32px] text-[#4291EF] font-bold">
+                  プロフィール編集
                 </h1>
-                <Divider className="bg-[#4291EF]" />
-                <p className="max-w-[440px] mx-h-[140px] text-[#999999] text-[20px] mt-[25px] mb-[50px]">
-                  すべての動画を視聴可能ですが、各動画の視聴時間は10秒に制限されています。ただし、2025年12月末まで、無料プランでも全動画を制限なしで視聴できます。
-                </p>
-                <Button
-                className="w-[185px] h-[31px] bg-[#4291EF] mx-auto"
-                  onClick={handleDown}
-                >
-                  <p className="text-[#FFFFFF] text-[20px]">アップデート</p>
-                  <Image
-                    width={28}
-                    height={28}
-                    src="/icons/icon-store.png"
-                    alt="storeIcon"
-                  />
-                </Button>
-              </div>
 
-              <div
-                className={`lg:w-[554px] md:w-[554px] sm:w-[450px] xsm:w-[330px] my-[20px] rounded-[24px] pt-[49px] pb-[46px] pl-[55px] pr-[59px] border-[6px] hover:border-[#4291EF] mx-auto ${!isFree ? 'bg-[#E4F1FF] border-[#4291EF]' : 'bg-[#F4F4F4]'}`}
-              >
-                <h1 className="text-[24px] text-[#4291EF] font-bold mb-[13px]">
-                  有料プラン
-                </h1>
-                <Divider className="bg-[#4291EF]" />
-                <p className="max-w-[440px] mx-h-[140px] text-[#999999] text-[20px] mt-[25px] mb-[50px]">
-                  月額8,000円で、すべての動画をフルで視聴可能。制限なくコンテンツを楽しむことができ、修理技術を学ぶには最適なプランです。
-                </p>
-                {isFree &&
-                <Button
-                  className="w-[185px] h-[31px] bg-[#4291EF] mx-auto"
-                  onClick={handleCheckout}
-                  disabled={loading}
-                >
-                  <p className="text-[#FFFFFF] text-[20px]">
-                    {loading ? '処理中...' : 'アップデート'}
-                  </p>
-                  <Image
-                    width={28}
-                    height={28}
-                    src="/icons/icon-store.png"
-                    alt="icon"
-                  />
-                </Button>
-                }
+                <div className="w-full flex flex-wrap mt-[30px] gap-[30px]">
+                  <div
+                    className={`lg:w-[554px] md:w-[554px] sm:w-[450px] xsm:w-[330px] my-[20px] rounded-[24px] pt-[49px] pb-[46px] pl-[55px] pr-[59px] border-[6px] hover:border-[#4291EF] mx-auto ${isFree ? 'bg-[#E4F1FF] border-[#4291EF]' : 'bg-[#F4F4F4]'}`}
+                  >
+                    <h1 className="text-[24px] text-[#4291EF] font-bold mb-[13px]">
+                      無料プラン
+                    </h1>
+                    <Divider className="bg-[#4291EF]" />
+                    <p className="max-w-[440px] mx-h-[140px] text-[#999999] text-[20px] mt-[25px] mb-[50px]">
+                      すべての動画を視聴可能ですが、各動画の視聴時間は10秒に制限されています。ただし、2025年12月末まで、無料プランでも全動画を制限なしで視聴できます。
+                    </p>
+                    <Button
+                    className="w-[185px] h-[31px] bg-[#4291EF] mx-auto"
+                      onClick={handleDown}
+                    >
+                      <p className="text-[#FFFFFF] text-[20px]">アップデート</p>
+                      <Image
+                        width={28}
+                        height={28}
+                        src="/icons/icon-store.png"
+                        alt="storeIcon"
+                      />
+                    </Button>
+                  </div>
+
+                  <div
+                    className={`lg:w-[554px] md:w-[554px] sm:w-[450px] xsm:w-[330px] my-[20px] rounded-[24px] pt-[49px] pb-[46px] pl-[55px] pr-[59px] border-[6px] hover:border-[#4291EF] mx-auto ${!isFree ? 'bg-[#E4F1FF] border-[#4291EF]' : 'bg-[#F4F4F4]'}`}
+                  >
+                    <h1 className="text-[24px] text-[#4291EF] font-bold mb-[13px]">
+                      有料プラン
+                    </h1>
+                    <Divider className="bg-[#4291EF]" />
+                    <p className="max-w-[440px] mx-h-[140px] text-[#999999] text-[20px] mt-[25px] mb-[50px]">
+                      月額8,000円で、すべての動画をフルで視聴可能。制限なくコンテンツを楽しむことができ、修理技術を学ぶには最適なプランです。
+                    </p>
+                    {isFree &&
+                    <Button
+                      className="w-[185px] h-[31px] bg-[#4291EF] mx-auto"
+                      onClick={handleCheckout}
+                      disabled={loading}
+                    >
+                      <p className="text-[#FFFFFF] text-[20px]">
+                        {loading ? '処理中...' : 'アップデート'}
+                      </p>
+                      <Image
+                        width={28}
+                        height={28}
+                        src="/icons/icon-store.png"
+                        alt="icon"
+                      />
+                    </Button>
+                    }
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
         </div>
+        }
         {/* <Divider /> */}
         {/* <div className="flex mt-[91px] lg:mx-0 md:mx-auto sm:mx-auto xsm:mx-auto">
           <div className="w-full flex flex-col lg:px-[0px] md:px-[80px] sm:px-[60px] xsm:px-[40px]">

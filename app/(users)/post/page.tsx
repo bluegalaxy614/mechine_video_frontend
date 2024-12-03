@@ -295,6 +295,12 @@ export default function PostPage() {
           <div>
             <p className="mb-2">メインカテゴリ</p>
             <Select
+             scrollShadowProps={{
+              isEnabled: false,
+            }}
+            classNames={{
+              listbox: "max-h-60 overflow-y-auto", // Add scrolling for the dropdown
+            }}
               value={selectedCategory}
               onChange={(e) => handleCategoryChange(e.target.value)}
             >
@@ -309,6 +315,12 @@ export default function PostPage() {
           <div>
             <p className="mb-2">サブカテゴリ</p>
             <Select
+             scrollShadowProps={{
+              isEnabled: false,
+            }}
+            classNames={{
+              listbox: "max-h-60 overflow-y-auto", // Add scrolling for the dropdown
+            }}
               disabled={filteredSubCategories.length === 0}
               value={selectedSubCategory}
               onChange={(e) => handleSubCategoryChange(e.target.value)}

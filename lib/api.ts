@@ -1,8 +1,9 @@
+"use client";
+
 import { useStore } from '@/store/store';
 import axios from 'axios';
 
 const API_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://160.251.181.158';
-const user = useStore((state) => state.user);
 
 export const uploadVideo = async (formData) => {
   try {
@@ -18,7 +19,8 @@ export const uploadVideo = async (formData) => {
   }
 };
 export const updateProfile = async (formData) => {
-  try {
+const user = useStore((state) => state.user);
+try {
     const response = await axios.post(
       `${API_URL}/api/users/updateProfile`,
       formData,
@@ -81,6 +83,19 @@ export const giveStartToVideo = async (data) => {
   try {
     const response = await axios.post(
       `${API_URL}/api/users/giveStartToVideo`,
+      data,
+    );
+    return response.data;
+  } catch (error) {
+    console.error('Upload error:', error);
+    throw error;
+  }
+};
+
+export const sendTimer = async (data) => {
+  try {
+    const response = await axios.post(
+      `${API_URL}/api/users/sendTimer`,
       data,
     );
     return response.data;

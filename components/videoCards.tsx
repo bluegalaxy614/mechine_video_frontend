@@ -10,6 +10,7 @@ import StarButton from './starButton';
 import { useStore } from '@/store/store';
 import { formatDate } from '@/utils/utils';
 import Player from 'video.js/dist/types/player';
+import { sendTimer } from '@/lib/api';
 
 const VideoCards = ({ data }: VideoCardsProps) => {
   const user = useStore((state) => state.user);
@@ -19,6 +20,26 @@ const VideoCards = ({ data }: VideoCardsProps) => {
   const playerRef = useRef<Player | null>(null);
   const [totalPlayedTime, setTotalPlayedTime] = useState<number>(0);
   const lastTimeUpdateRef = useRef<number | null>(null);
+  const [videoId, setVideoId] = useState<string | null>(null);
+
+  const handleClose = () => {
+    console.log(totalPlayedTime.toFixed(2))
+    const PlayedTime = totalPlayedTime.toFixed(2);
+    const setPlayedTimer = async (PlayedTime, videoId) => {
+      try{
+        const res = await sendTimer({PlayedTime, videoId});
+        setTotalPlayedTime(0);
+        setVideoId(null);
+      }catch(err){
+        console.log(err)
+      }
+    }
+
+    if(Number(PlayedTime) > 10.00 && user?.role == '有料会員'){
+      setPlayedTimer(PlayedTime, videoId);
+    }
+
+  }
 
   useEffect(() => {
     if (isOpen && videoRef.current && !playerRef.current) {
@@ -77,6 +98,7 @@ const VideoCards = ({ data }: VideoCardsProps) => {
               setVideoUrl(item.videoUrl);
               setTotalPlayedTime(0); // Reset total played time
               lastTimeUpdateRef.current = null; // Reset time tracking
+              setVideoId(item._id);
             }}
           >
             <div className="w-[332px] h-[218px] rounded-t-[18px] overflow-hidden">
@@ -117,7 +139,7 @@ const VideoCards = ({ data }: VideoCardsProps) => {
           </Card>
         ))}
       </div>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange} onClose={handleClose} placement="top-center">
         <ModalContent>
           {() => (
             <div data-vjs-player>

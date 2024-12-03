@@ -6,6 +6,7 @@ import { Badge } from '@nextui-org/badge';
 import { useStore } from '@/store/store';
 import { useRouter } from 'next/navigation';
 import { readMessage } from '@/lib/api';
+import { AdminNavbar } from '@/components/adminNav';
 
 export default function RootLayout({
   children,
@@ -14,7 +15,7 @@ export default function RootLayout({
 }) {
   const unread = useStore((state) => state.unread);
   const setUnread = useStore((state) => state.setUnread);
-  // const user = useStore((state) => state.user);
+  const user = useStore((state) => state.user);
   const router = useRouter();
 
   const showMessage = async () => {
@@ -33,7 +34,7 @@ export default function RootLayout({
   return (
     <div>
       <div className="relative flex flex-col h-screen w-[100vw]">
-        <Navbar />
+        {user?.role == "admin" ? <AdminNavbar/>:<Navbar />}
         <main className="mt-[90px]">{children}</main>
         <div
           className="absolute rounded-full !fixed flex justify-center items-center right-2 bottom-[100px] lg:w-[72px] lg:h-[72px] md:w-[72px] md:h-[72px] sm:w-[60px] sm:h-[60px] xsm:w-[50px] xsm:h-[50px] bg-white rounded-full border border-gray-200 shadow-md"

@@ -38,7 +38,7 @@ const UserCards = ({ data }: UserCardsProps) => {
           </Card>
         ))
       ) : (
-        <p>No data available</p>
+        <p>ユーザーがいません</p>
       )}
     </div>
   );

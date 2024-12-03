@@ -6,6 +6,7 @@ import Image from 'next/image';
 import emailjs from 'emailjs-com'; // Import EmailJS
 import { useState } from 'react';
 import { useStore } from '@/store/store';
+import { useRouter } from 'next/navigation';
 
 export default function ContactPage() {
   const [name, setName] = useState('');
@@ -13,6 +14,8 @@ export default function ContactPage() {
   const [content, setContent] = useState('');
   const setMessage = useStore((state) => state.setMessage);
   const setErrorMessage = useStore((state) => state.setErrorMessage);
+
+  const router = useRouter();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,12 +36,13 @@ export default function ContactPage() {
       )
       .then(
         (response) => {
-          setMessage('Email sent successfully!');
+          setMessage('メールが正常に送信されました！');
+          router.push(`/contact/success/${name}/${content}`)
           console.log(response);
         },
         (err) => {
           console.error('FAILED...', err);
-          setErrorMessage('Failed to send email.');
+          setErrorMessage('メールの送信に失敗しました!');
         },
       );
   };

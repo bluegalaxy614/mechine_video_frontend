@@ -79,7 +79,7 @@ export default function ProfilePage() {
               id={2}
               image={'/icons/icon-clock.png'}
               title="総視聴時間"
-              info="40000"
+              info="4000"
               unit="時間"
             />
             <BoxImage
@@ -131,7 +131,7 @@ export default function ProfilePage() {
           </Link>
         </div>
         {displyVideos?.length === 0 ? (
-          <p className="mb-[30px]">There is no any video.</p>
+          <p className="mb-[30px]">ビデオはありません.</p>
         ) : (
           <>
             <VideoCards data={displyVideos} />

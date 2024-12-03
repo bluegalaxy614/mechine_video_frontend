@@ -91,7 +91,7 @@ export const categoryConfig = [
     subCategories: [
       {
         id: '2_1',
-        label: 'プレスブレーキ・aベンダー',
+        label: 'プレスブレーキ・ベンダー',
       },
       {
         id: '2_2',
@@ -518,7 +518,7 @@ export const userTableConfig = [
   },
   {
     name: '登録日',
-    uid: 'date',
+    uid: 'createdAt',
   },
   {
     name: '投稿数',

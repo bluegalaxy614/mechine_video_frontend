@@ -27,8 +27,8 @@ const statusColorMap: Record<string, ChipProps['color']> = {
 interface Row {
   _id: string;
   title: string;
-  videoDuration: string;
-  views: string;
+  videoDuration: number;
+  views: number;
   revenue: string;
   status: '未払い' | '支払い' | '保留中'; // use a union type for the possible statuses
 }
@@ -109,9 +109,14 @@ export default function PosterPaymentPage() {
       const cellValue = user[columnKey as keyof Row];
 
       switch (columnKey) {
-        case 'title':
-        case 'videoDuration':
         case 'views':
+        case 'videoDuration':
+          return (
+            <div className="flex flex-col">
+              <p className="text-bold text-[14px]">{String(cellValue)}</p>
+            </div>
+          );
+        case 'title':
         case 'revenue':
           return (
             <div className="flex flex-col">

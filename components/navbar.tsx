@@ -143,6 +143,15 @@ export const Navbar = () => {
                   </Link>
                 </NavbarMenuItem>
               ))}
+              <NavbarMenuItem key="profile">
+                <Link href="/profile">プロフィール</Link>
+              </NavbarMenuItem>
+              <NavbarMenuItem key="payment">
+                <Link href="/payment">支払</Link>
+              </NavbarMenuItem>
+              <NavbarMenuItem key="account">
+                <Link href="/account">アカウント</Link>
+              </NavbarMenuItem>
               <NavbarMenuItem>
                 <Divider />
                 <div

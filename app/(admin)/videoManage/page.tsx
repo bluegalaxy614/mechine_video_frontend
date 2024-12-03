@@ -89,8 +89,7 @@ export default function VideoManagePage() {
           <div className="flex flex-col rounded-md w-[71px] h-[71px] overflow-hidden">
             <Image
               src={String(cellValue)}
-              width={71}
-              height={47}
+              fill
               alt="thumbnail"
               unoptimized={true}
             />

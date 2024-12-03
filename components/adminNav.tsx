@@ -96,16 +96,13 @@ export const AdminNavbar = () => {
                   </Button>
                 </DropdownTrigger>
                 <DropdownMenu aria-label="Profile Actions" variant="flat">
-                  <DropdownItem key="profile">
-                    <Link href="/profile">profile</Link>
-                  </DropdownItem>
-                  <DropdownItem key="payment">
-                    <Link href="/payment">payment</Link>
-                  </DropdownItem>
+                  <DropdownItem key="account">
+                      <Link href="/account">アカウント</Link>
+                    </DropdownItem>
                   <DropdownItem key="ログアウト">
                     <Divider />
                     <div
-                      className="flex justify-between items-center gap-2"
+                      className="flex justify-between items-center gap-2 cursor"
                       onClick={() => {
                         setUser(null);
                         deleteSession();
@@ -152,6 +149,9 @@ export const AdminNavbar = () => {
                   </Link>
                 </NavbarMenuItem>
               ))}
+              <NavbarMenuItem>
+               <Link href="/account">アカウント</Link>
+              </NavbarMenuItem>
               <NavbarMenuItem>
                 <Divider />
                 <div
