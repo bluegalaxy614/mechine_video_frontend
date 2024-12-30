@@ -85,7 +85,7 @@ export default function ProfilePage() {
             <BoxImage
               id={3}
               image={'/icons/icon-coin.png'}
-              title="総輸入額"
+              title="総収入額"
               info="50万+"
               unit="円"
             />

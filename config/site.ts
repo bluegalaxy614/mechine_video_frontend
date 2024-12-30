@@ -7,7 +7,7 @@ export type UserTableConfig = typeof userTableConfig;
 
 export const siteConfig = {
   name: '修理指南書',
-  description: 'Enjoy your life!',
+  description: '修理指南書',
   userNavItems: [
     {
       label: 'ホーム',
@@ -42,6 +42,10 @@ export const siteConfig = {
     {
       label: 'ユーザリスト',
       href: '/userManage',
+    },
+    {
+      label: '支払い管理',
+      href: '/paymentManage',
     },
     {
       label: 'メッセージ',
@@ -490,6 +494,14 @@ export const videoTableConfig = [
     uid: 'selectedSubCategory',
   },
   {
+    name : '総プレイ時間 (s)',
+    uid : 'videoDuration'
+  },
+  {
+    name : '視聴者数',
+    uid : 'views'
+  },
+  {
     name: 'ステータス',
     uid: 'status',
   },
@@ -525,12 +537,63 @@ export const userTableConfig = [
     uid: 'posterCounts',
   },
   {
+    name: '総プレイ時間 (s)',
+    uid: 'totalPlayedTime'
+  },
+  {
+    name: '総収入',
+    uid: 'totalIncome',
+  },
+  {
+    name : '有給',
+    uid:'paid',
+  },
+  {
+    name: '無給',
+    uid: 'unPaid'
+  },
+  {
     name: '役割',
     uid: 'role',
   },
   {
     name: '決済状況(から～まで)',
     uid: 'expired',
+  },
+  {
+    name: 'アクション',
+    uid: 'actions',
+  },
+];
+
+export const paymentTableConfig = [
+  {
+    name: '',
+    uid: 'avatar',
+  },
+  {
+    name: '名前',
+    uid: 'name',
+  },
+  {
+    name: '総収入',
+    uid: 'totalIncome',
+  },
+  {
+    name : '有給',
+    uid:'paid',
+  },
+  {
+    name: '無給',
+    uid: 'unPaid'
+  },
+  {
+    name: '最終支払日',
+    uid: 'lastPaidDate',
+  },
+  {
+    name: '役割',
+    uid: 'paymentStatus',
   },
   {
     name: 'アクション',

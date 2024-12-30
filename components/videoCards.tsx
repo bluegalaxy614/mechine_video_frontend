@@ -23,8 +23,8 @@ const VideoCards = ({ data }: VideoCardsProps) => {
   const [videoId, setVideoId] = useState<string | null>(null);
 
   const handleClose = () => {
-    console.log(totalPlayedTime.toFixed(2))
     const PlayedTime = totalPlayedTime.toFixed(2);
+    
     const setPlayedTimer = async (PlayedTime, videoId) => {
       try{
         const res = await sendTimer({PlayedTime, videoId});
@@ -35,7 +35,9 @@ const VideoCards = ({ data }: VideoCardsProps) => {
       }
     }
 
-    if(Number(PlayedTime) > 10.00 && user?.role == '有料会員'){
+    // if(Number(PlayedTime) > 10.00 && user?.role == '有料会員'){
+    if(user?.role == '有料会員'){
+      console.log(PlayedTime);
       setPlayedTimer(PlayedTime, videoId);
     }
 

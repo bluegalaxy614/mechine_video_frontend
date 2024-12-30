@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
-const API_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://160.251.181.158';
+const API_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:5000';
 
 const ChatInput = ({ addNewMessage }) => {
   const [chat, setChat] = useState('');

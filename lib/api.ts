@@ -3,7 +3,7 @@
 import { useStore } from '@/store/store';
 import axios from 'axios';
 
-const API_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://160.251.181.158';
+const API_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:5000';
 
 export const uploadVideo = async (formData) => {
   try {
@@ -18,6 +18,7 @@ export const uploadVideo = async (formData) => {
     throw error;
   }
 };
+
 export const updateProfile = async (formData) => {
 const user = useStore((state) => state.user);
 try {
@@ -27,7 +28,7 @@ try {
       {
         headers: {
           'Content-Type': 'multipart/form-data',
-          'Authorization': `Bearer ${user.token}`,
+          'Authorization': `Bearer ${user?.token}`,
         },
       },
     );
@@ -59,7 +60,30 @@ export const getPosterVideos = async (data) => {
     throw error;
   }
 };
-
+export const getPosterVideosById = async (data) => {
+  try {
+    const response = await axios.post(
+      `${API_URL}/api/admin/getPosterVideosById`,
+      data,
+    );
+    return response.data;
+  } catch (error) {
+    console.error('Upload error:', error);
+    throw error;
+  }
+};
+export const getPaid = async (data) => {
+  try {
+    const response = await axios.post(
+      `${API_URL}/api/users/getPaid`,
+      data
+    );
+    return response.data;
+  } catch (error) {
+    console.error('error:', error);
+    throw error;
+  }
+};
 export const getUsers = async (data) => {
   try {
     const response = await axios.post(`${API_URL}/api/users/getUsers`, data);
@@ -79,10 +103,10 @@ export const getUserMessage = async () => {
     throw error;
   }
 };
-export const giveStartToVideo = async (data) => {
+export const giveStarToVideo = async (data) => {
   try {
     const response = await axios.post(
-      `${API_URL}/api/users/giveStartToVideo`,
+      `${API_URL}/api/users/giveStarToVideo`,
       data,
     );
     return response.data;
@@ -235,10 +259,35 @@ export const deleteUserById = async (data) => {
     throw error;
   }
 };
+export const cancelUserById = async (data) => {
+  try {
+    const response = await axios.post(
+      `${API_URL}/api/admin/cancelUserById`,
+      data,
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
 export const deleteVideoById = async (data) => {
   try {
     const response = await axios.post(
       `${API_URL}/api/admin/deleteVideoById`,
+      data,
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+export const discardVideoById = async (data) => {
+  try {
+    const response = await axios.post(
+      `${API_URL}/api/admin/discardVideoById`,
       data,
     );
     return response.data;

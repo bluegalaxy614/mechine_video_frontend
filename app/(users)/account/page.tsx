@@ -7,29 +7,35 @@ import { useEffect, useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { useStore } from '@/store/store';
 import { CardIcon } from '@/components/icons';
-import PaymentMethod from '@/components/paymentMethod';
 import { useRouter } from 'next/navigation';
+import { updateProfile } from '@/lib/api';
 import { Modal, ModalContent, useDisclosure } from '@nextui-org/modal';
+import PaymentMethod from '@/components/paymentMethod';
+
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
-const API_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://160.251.181.158';
+const API_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:5000';
+
 
 export default function ViewerProfilePage() {
   const [loading, setLoading] = useState(false);
   const user = useStore((state) => state.user);
+  const setUser = useStore((state) => state.setUser);
   const setErrorMessage = useStore((state) => state.setErrorMessage);
   const setMessage = useStore((state) => state.setMessage);
+  const router = useRouter();  
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const router = useRouter();
+
 
   useEffect(() => {
     if(!user){
       router.push('/login');
     }
   },[user]);
-  const token = user.token;
+  const token = user?.token;
 
   const isFree: boolean = user?.role === '無料会員';
+  const paymentStatus: boolean = user?.paymentStatus;
 
   const handleCheckout = async () => {
     setLoading(true);
@@ -49,9 +55,12 @@ export default function ViewerProfilePage() {
         return;
       }
 
-      const { id } = await response.json();
+      const { id, role } = await response.json();
+
+      setUser({ ...user, role: role });
 
       const { error } = await stripe.redirectToCheckout({ sessionId: id });
+      
       if (error) {
         setErrorMessage('Stripe checkout failed');
       } else {
@@ -94,7 +103,33 @@ export default function ViewerProfilePage() {
     } finally {
     }
   };
+  
+  const uploadAvatar = async (formData) => {
+    try {
+        const response = await updateProfile(formData);
+        return response; // Assuming your API returns the updated user data
+    } catch (error) {
+        console.error('Upload error:', error);
+        throw error;
+    }
+  };
 
+  const handleFileChange = async (e) => {
+      const file = e.target.files[0];
+      console.log("File selected:", file);
+      if (file) {
+          const formData = new FormData();
+          formData.append('avatar', file);
+
+          try {
+              const response = await uploadAvatar(formData);
+              const { avatar } = response; // Adjust based on your response structure
+              setUser({...user, avatar : avatar});
+            } catch (err) {
+              console.error('Error updating avatar:', err);
+          }
+      }
+  };
   return (
     <div className="min-h-[calc(100vh-90px)] flex flex-col lg:w-full xsm:w-fit justify-between">
       <section className="max-w-[1280px] mx-auto flex flex-col lg:mt-[85px] md:mt-[55px] sm:mt-[45px] xsm:mt-[35px]">
@@ -106,20 +141,30 @@ export default function ViewerProfilePage() {
 
             <div className="w-full flex grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 xsm:grid-cols-1 gap-3">
               <div className="flex my-[40px] mx-auto">
-                <div className="relative rounded-[21px] border border-[#4291EF] border-[4px] flex justify-center items-center">
+                <div className="relative h-[254px] rounded-[21px] border border-[#4291EF] border-[4px] flex justify-center items-center">
                   <Image
                     width={248}
                     height={248}
-                    src="/profile/3.png"
+                    src={user?.avatar || '/profile/user.png'}
                     alt="profile"
+                    unoptimized={false}
                   />
-                  <p className="absolute bottom-[0px] text-[#FFFFFF] text-[20px] bg-[#4291EF] w-[248px] h-[51px] rounded-b-[12px] flex justify-center items-center mt-[-21px] z-[3]">
-                    アバターアップロード
-                  </p>
+                  <div className="absolute bottom-[0px] text-[#FFFFFF] text-[20px] bg-[#4291EF] w-[248px] h-[51px] rounded-b-[12px] flex justify-center items-center mt-[-21px] z-[3]">
+                    <label className="relative flex flex-col justify-center items-center w-full h-full cursor-pointer">
+                      アバターアップロード
+                      <Input
+                        type="file"
+                        name="video"
+                        accept=".jpeg, .jpg, .png"
+                        onChange={handleFileChange}
+                        className="hidden"
+                      />                                      
+                    </label>
+                  </div>
                 </div>
               </div>
 
-              <div className="flex flex-col gap-6 my-[40px] mx-auto">
+              <div className="flex flex-col gap-12 my-[40px] mx-auto">
                 <div className="min-w-[320px] h-[41px]">
                   <p className="mb-2">ユーザー名</p>
                   <Input
@@ -135,6 +180,36 @@ export default function ViewerProfilePage() {
                     fullWidth
                     placeholder="taro.tanaka@example.com"
                     labelPlacement="outside"
+                  />
+                </div>
+
+                <div className="max-w-[320px] h-[41px]">
+                  <p className="mb-2">現在のパスワード</p>
+                  <Input
+                    fullWidth
+                    placeholder=""
+                    labelPlacement="outside"
+                    type='password'
+                  />
+                </div>
+
+                <div className="max-w-[320px] h-[41px]">
+                  <p className="mb-2">新しいパスワード</p>
+                  <Input
+                    fullWidth
+                    placeholder=""
+                    labelPlacement="outside"
+                    type='password'
+                  />
+                </div>
+
+                <div className="max-w-[320px] h-[41px]">
+                  <p className="mb-2">パスワードを確認</p>
+                  <Input
+                    fullWidth
+                    placeholder=""
+                    labelPlacement="outside"
+                    type='password'
                   />
                 </div>
               </div>
@@ -217,25 +292,28 @@ export default function ViewerProfilePage() {
             </div>
         </div>
         }
-        {/* <Divider /> */}
-        {/* <div className="flex mt-[91px] lg:mx-0 md:mx-auto sm:mx-auto xsm:mx-auto">
+        <Divider />
+        {/* <Elements stripe={stripePromise}>
+            <CreateAccount />
+        </Elements> */}
+        <div className="flex mt-[91px] lg:mx-0 md:mx-auto sm:mx-auto xsm:mx-auto">
           <div className="w-full flex flex-col lg:px-[0px] md:px-[80px] sm:px-[60px] xsm:px-[40px]">
             <h1 className="text-[32px] text-[#4291EF] font-bold">
-              Add a PaymentMethod
+              出金方法を追加
             </h1>
 
             <div className="w-full">
               <div
-                className={`${isFree ? 'flex justify-center items-center ' : ''}relative lg:w-[554px] h-[300px] md:w-[554px] sm:w-[450px] xsm:w-[330px] my-[20px] rounded-[24px] pt-[49px] pb-[46px] pl-[55px] pr-[59px] border-[6px] hover:border-[#4291EF] bg-[#E4F1FF] border-[#4291EF]`}
+                className={`${paymentStatus ? 'flex justify-center items-center ' : ''} flex justify-center items-center relative lg:w-[554px] h-[300px] md:w-[554px] sm:w-[450px] xsm:w-[330px] my-[20px] rounded-[24px] pt-[49px] pb-[46px] pl-[55px] pr-[59px] border-[6px] hover:border-[#4291EF] bg-[#E4F1FF] border-[#4291EF]`}
               >
-                {isFree ? (
+                {paymentStatus ? (
                   <>
                     <h1 className="text-[24px] text-[#4291EF] font-bold mb-[13px]">
-                      Card
+                      カード
                     </h1>
                     <Divider className="bg-[#4291EF]" />
-                    <p className="max-w-[440px] mx-h-[140px] text-[#999999] text-[20px] mt-[25px] mb-[50px]">
-                      Card Number: **** **** **** 4161
+                    <p className="max-w-[440px] max-h-[140px] text-[#999999] text-[20px] mt-[25px] mb-[50px]">
+                      カード番号: **** **** **** {user?.cardNumber?.slice(-4) || "無効なカード番号"}
                     </p>
                   </>
                 ) : (
@@ -249,7 +327,7 @@ export default function ViewerProfilePage() {
               </div>
             </div>
           </div>
-        </div> */}
+        </div>
       </section>
       <footer className="w-full flex items-center justify-center py-3 bg-[#4291EF]">
         <p className="text-white text-[20px]"> All rights reserved.</p>

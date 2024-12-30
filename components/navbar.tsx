@@ -26,6 +26,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { deleteSession } from '@/utils/utils';
 import { useEffect, useState } from 'react';
+import authService from '@/lib/auth';
 
 export const Navbar = () => {
   const { user, setUser } = useStore((state) => state);
@@ -84,7 +85,7 @@ export const Navbar = () => {
                     <Button className="flex justify-center items-center rounded-full bg-[#F4F4F4] min-w-[190px] conten-fit h-[65px] p-1 hover:pointer pr-[10px]">
                       <Avatar
                         className="h-[57px] w-[57px] border-2 border-default-500 border-[#4291EF]"
-                        src={user.avatar || '/profile/user.png'}
+                        src={user?.avatar || '/profile/user.png'}
                       />
                       <span className="mx-auto text-[20px] text-[#1F2B3E]">
                         {user.name}
@@ -157,6 +158,7 @@ export const Navbar = () => {
                 <div
                   className="flex justify-start items-center gap-2"
                   onClick={() => {
+                    authService.logout({email : user?.email})
                     setUser(null);
                     deleteSession();
                     router.push('/login');

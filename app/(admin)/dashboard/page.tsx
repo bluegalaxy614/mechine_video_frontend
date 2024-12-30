@@ -116,28 +116,28 @@ export default function DashboardPage() {
             id={1}
             image={'/icons/icons-checked.png'}
             title="総投稿件数"
-            info={`${videoNumber / 1000}千+`}
+            info={`${(videoNumber / 1000).toFixed(0)} 千+`}
             unit="件"
           />
           <BoxImage
             id={2}
             image={'/icons/viwer.png'}
             title="総視聴者数"
-            info={`${viewerNumber / 1000}千+`}
+            info={`${(viewerNumber / 1000).toFixed(0)} 千+`}
             unit="人"
           />
           <BoxImage
             id={3}
             image={'/icons/user.png'}
-            title="未払い総額"
-            info={`${postersNumber / 1000}千+`}
+            title="ポスターの総数"
+            info={`${(postersNumber / 1000).toFixed(0)} 千+`}
             unit="人"
           />
           <BoxImage
             id={4}
             image={'/icons/icon-coin.png'}
-            title="総輸入額"
-            info={`${paid / 10000}万+`}
+            title="総収入額"
+            info={`${(paid / 10000).toFixed(0)} 万+`}
             unit="円"
           />
         </section>

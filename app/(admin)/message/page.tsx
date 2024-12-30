@@ -119,7 +119,7 @@ export default function MessagePage() {
                   <Avatar
                     src={
                       item.from === 'admin'
-                        ? user.avatar || '/profile/avatar3.png'
+                        ? user?.avatar || '/profile/avatar3.png'
                         : chats.userAvatar || '/profile/user.png'
                     }
                     name={chats.userName}

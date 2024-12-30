@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { IconSvgProps } from '@/types';
-import { giveStartToVideo } from '@/lib/api';
+import { giveStarToVideo } from '@/lib/api';
 
 export const Logo: React.FC<IconSvgProps> = ({
   size = 36,
@@ -24,6 +24,35 @@ export const Logo: React.FC<IconSvgProps> = ({
     />
   </svg>
 );
+export const EyeIcon = (props) => {
+  return (
+    <svg
+      aria-hidden="true"
+      fill="none"
+      focusable="false"
+      height="1em"
+      role="presentation"
+      viewBox="0 0 20 20"
+      width="1em"
+      {...props}
+    >
+      <path
+        d="M12.9833 10C12.9833 11.65 11.65 12.9833 10 12.9833C8.35 12.9833 7.01666 11.65 7.01666 10C7.01666 8.35 8.35 7.01666 10 7.01666C11.65 7.01666 12.9833 8.35 12.9833 10Z"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.5}
+      />
+      <path
+        d="M9.99999 16.8916C12.9417 16.8916 15.6833 15.1583 17.5917 12.1583C18.3417 10.9833 18.3417 9.00831 17.5917 7.83331C15.6833 4.83331 12.9417 3.09998 9.99999 3.09998C7.05833 3.09998 4.31666 4.83331 2.40833 7.83331C1.65833 9.00831 1.65833 10.9833 2.40833 12.1583C4.31666 15.1583 7.05833 16.8916 9.99999 16.8916Z"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.5}
+      />
+    </svg>
+  );
+};
 
 export const DiscordIcon: React.FC<IconSvgProps> = ({
   size = 24,
@@ -302,6 +331,38 @@ export const EditIcon: React.FC<IconSvgProps> = () => {
     </svg>
   );
 };
+export const LikeIcon: React.FC = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 122.88 122.88"
+      className="w-6 h-6"
+    >
+      <title>like-button</title>
+      <circle cx="61.44" cy="61.44" r="61.44" className="fill-green-600" />
+      <path
+        d="M32.5,53.39H43.06a2.18,2.18,0,0,1,2.17,2.18V84.52a2.19,2.19,0,0,1-2.17,2.18H32.5a2.19,2.19,0,0,1-2.18-2.18V55.57a2.19,2.19,0,0,1,2.18-2.18ZM60.2,31.68c1.14-5.82,10.66-.46,11.29,8.91a40.41,40.41,0,0,1-.81,9.93H84.29c5.65.23,10.59,4.28,7.1,10.93.8,2.9.92,6.3-1.24,7.65.27,4.57-1,7.41-3.37,9.65A11.42,11.42,0,0,1,85,84.63c-1.83,2.58-3.31,2-6.19,2h-23c-3.64,0-5.62-1-8-4V57C54.72,55.17,58.36,45.8,60.2,39.65v-8Z"
+        className="fill-white"
+      />
+    </svg>
+  );
+};
+export const DisLikeIcon: React.FC = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 122.88 122.88"
+      className="w-6 h-6"
+    >
+      <title>dislike-button</title>
+      <circle cx="61.44" cy="61.44" r="61.44" className="fill-red-600" />
+      <path
+        d="M32.5,72.66H43.06a2.18,2.18,0,0,0,2.17-2.18V41.53a2.18,2.18,0,0,0-2.17-2.18H32.5a2.19,2.19,0,0,0-2.18,2.18v29a2.19,2.19,0,0,0,2.18,2.18ZM60.2,94.37c1.14,5.82,10.66.46,11.29-8.91a40.41,40.41,0,0,0-.81-9.93H84.29c5.65-.23,10.59-4.28,7.1-10.93.8-2.9.92-6.3-1.24-7.65.27-4.57-1-7.41-3.37-9.65A11.39,11.39,0,0,0,85,41.42c-1.83-2.58-3.31-2-6.19-2h-23c-3.64,0-5.62,1-8,4V69C54.72,70.88,58.36,80.25,60.2,86.4v8Z"
+        className="fill-white"
+      />
+    </svg>
+  );
+};
 export const PayPal: React.FC<IconSvgProps> = () => {
   return (
     <svg role="img" viewBox="0 0 24 24" className="mb-3 h-6 w-6">
@@ -356,8 +417,8 @@ export const StarIcon: React.FC<StarIconProps> = ({ videoId }) => {
   React.useEffect(() => {
     const giveStar = async (videoId: string) => {
       try {
-        const res = await giveStartToVideo({ videoId });
-        console.log(res);
+        const res = await giveStarToVideo({ videoId });
+        // console.log(res);
       } catch (error) {
         console.log(error);
       }

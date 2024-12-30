@@ -11,7 +11,7 @@ export const useStore = create<StorageState>((set) => ({
     set({ user });
     if (typeof window !== 'undefined' && user) {
       localStorage.setItem('user', JSON.stringify(user));
-      setSession(user.token);
+      setSession(user?.token);
     } else if (typeof window !== 'undefined') {
       localStorage.removeItem('user');
       deleteSession();
@@ -32,4 +32,12 @@ export const useStore = create<StorageState>((set) => ({
   setUnread: (unread: boolean) => {
     set({ unread });
   },
+  paymentStatus:false,
+  setPaymentStatus: (paymentStatus: boolean) => {
+    set({ paymentStatus });
+  },
+  cardNumber:'',
+  setCardNumber: (cardNumber : string) => {
+    set({cardNumber})
+  }
 }));

@@ -1,5 +1,5 @@
 'use client';
-import { DeleteIcon, EditIcon, SearchIcon } from '@/components/icons';
+import { DeleteIcon, EditIcon, SearchIcon,EyeIcon } from '@/components/icons';
 import { Chip, ChipProps } from '@nextui-org/chip';
 import { Input } from '@nextui-org/input';
 import { Pagination } from '@nextui-org/pagination';
@@ -17,7 +17,7 @@ import { Tooltip } from '@nextui-org/tooltip';
 import Image from 'next/image';
 import { Divider } from '@nextui-org/divider';
 import { Link } from '@nextui-org/link';
-import { deleteVideoById, getAllVideos, searchVideoInString } from '@/lib/api';
+import { deleteVideoById, discardVideoById, getAllVideos, searchVideoInString } from '@/lib/api';
 import { formatDate } from '@/utils/utils';
 interface Row {
   _id: string;
@@ -27,6 +27,8 @@ interface Row {
   posterName: string;
   selectedCategory: string;
   selectedSubCategory: string;
+  videoDuration:Number;
+  views:Number;
   status: string;
   uploadDate: string;
   actions: string;
@@ -78,7 +80,24 @@ export default function VideoManagePage() {
     };
     deleteRow(id);
   };
-
+  const handleDiscard = (id: string, event: React.MouseEvent) => {
+    event.preventDefault();
+    const deleteRow = async (id) => {
+      try {
+        await discardVideoById({ videoId: id });
+        const res = await getAllVideos({
+          page: page,
+          perPage: rowsPerPage,
+          sort: 'createdAt',
+        });
+        setTotalPages(res.totalPages);
+        setVideos(res.videos);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    deleteRow(id);
+  };
   const renderCell = useCallback((videos: Row, columnKey: React.Key) => {
     const key = columnKey as keyof Row;
     const cellValue = videos[key];
@@ -131,7 +150,23 @@ export default function VideoManagePage() {
         return (
           <div className="flex flex-col">
             <p className="text-bold text-[14px] capitalize">
-              {formatDate(cellValue)}
+              {formatDate(String(cellValue))}
+            </p>
+          </div>
+        );
+      case 'videoDuration':
+        return (
+          <div className="flex flex-col">
+            <p className="text-bold text-[14px] capitalize">
+              {String(Number(cellValue).toFixed(2))}
+            </p>
+          </div>
+        );
+      case 'views':
+        return (
+          <div className="flex flex-col">
+            <p className="text-bold text-[14px] capitalize">
+              {String(cellValue)}
             </p>
           </div>
         );
@@ -245,14 +280,22 @@ export default function VideoManagePage() {
                     <TableCell>
                       {columnKey === 'actions' ? (
                         <div className="relative flex items-center gap-2">
-                          <Tooltip color="primary" content="Edit">
+                          <Tooltip color="primary" content="編集">
                             <span className="text-lg text-danger cursor-pointer active:opacity-50">
                               <Link href={`/videoManage/edit/${item._id}`}>
                                 <EditIcon />
                               </Link>
                             </span>
                           </Tooltip>
-                          <Tooltip color="danger" content="Delete">
+                          <Tooltip color="danger" content="点検">
+                            <span
+                              className="text-lg text-danger cursor-pointer active:opacity-50"
+                              onClick={(event) => handleDiscard(item._id, event)}
+                            >
+                              <EyeIcon />
+                            </span>
+                          </Tooltip>
+                          <Tooltip color="danger" content="削除">
                             <span
                               className="text-lg text-danger cursor-pointer active:opacity-50"
                               onClick={(event) => handleDelete(item._id, event)}

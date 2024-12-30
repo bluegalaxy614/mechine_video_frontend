@@ -28,6 +28,7 @@ import { Divider } from '@nextui-org/divider';
 import Image from 'next/image';
 import { deleteSession } from '@/utils/utils';
 import { useEffect, useState } from 'react';
+import authService from '@/lib/auth';
 // import { SiteConfig } from '../config/site';
 
 export const AdminNavbar = () => {
@@ -73,7 +74,8 @@ export const AdminNavbar = () => {
                     //   linkStyles({ color: 'foreground' }),
                     //   'data-[active=true]:text-primary data-[active=true]:font-medium',
                     // )}
-                    className="text-lg hover:text-[#4291EF] hover:font-bold hover:underline hover:underline-offset-8 hover:decoration-2"
+                    // className="text-lg 'data-[active=true]:ext-[#4291EF] hover:text-[#4291EF] hover:font-bold hover:underline hover:underline-offset-8 hover:decoration-2"
+                    className="text-lg data-[active=true]:text-[#4291EF] hover:text-[#4291EF] hover:font-bold hover:underline hover:underline-offset-8 hover:decoration-2"
                     color="foreground"
                     href={item.href}
                   >
@@ -88,7 +90,7 @@ export const AdminNavbar = () => {
                   <Button className="flex justify-center items-center rounded-full bg-[#F4F4F4] min-w-[190px] conten-fit h-[65px] p-1 hover:pointer pr-[10px]">
                     <Avatar
                       className="h-[57px] w-[57px] border-2 border-default-500 border-[#4291EF]"
-                      src={user?.avatar ? user.avatar : '/profile/user.png'}
+                      src={user?.avatar ? user?.avatar : '/profile/user.png'}
                     />
                     <span className="mx-auto text-[20px] text-[#1F2B3E]">
                       {user?.name}
@@ -104,6 +106,7 @@ export const AdminNavbar = () => {
                     <div
                       className="flex justify-between items-center gap-2 cursor"
                       onClick={() => {
+                        authService.logout({email:user?.email});
                         setUser(null);
                         deleteSession();
                         router.push('/login');
@@ -142,6 +145,7 @@ export const AdminNavbar = () => {
                     //       ? 'danger'
                     //       : 'foreground'
                     // }
+                    className="text-lg data-[active=true]:text-[#4291EF] hover:text-[#4291EF] hover:font-bold hover:underline hover:underline-offset-8 hover:decoration-2"
                     href={item.href}
                     size="lg"
                   >

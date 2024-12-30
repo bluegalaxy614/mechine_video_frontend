@@ -15,9 +15,10 @@ import { DeleteIcon } from '@/components/icons';
 import { tableConfig } from '@/config/site';
 import { Button } from '@nextui-org/button';
 import { Pagination } from '@nextui-org/pagination';
-import { deleteVideoById, getPosterVideos } from '@/lib/api';
+import { deleteVideoById, getPaid, getPosterVideos } from '@/lib/api';
 import { useStore } from '@/store/store';
 import { useRouter } from 'next/navigation';
+import { error } from 'console';
 
 const statusColorMap: Record<string, ChipProps['color']> = {
   支払い: 'success',
@@ -75,7 +76,7 @@ export default function PosterPaymentPage() {
         setPages(totalPages);
         setPaidVideos(paidVideos);
         setUnPaidVideos(unPaidVideos);
-        setTotalPaidMounts(totalPaidMounts);
+        setTotalPaidMounts(totalPaidMounts || '0');
       } catch (error) {
         setErrorMessage(error);
         console.log(error);
@@ -84,7 +85,14 @@ export default function PosterPaymentPage() {
     fetchVideos();
   }, [page, setErrorMessage]); // Add setErrorMessage to the dependency array
 
-  const handleGetPaid = () => {};
+  const handleGetPaid = async () => {
+    try{
+      const res = await getPaid({data:""});
+      console.log(res)
+    }catch(error){
+      console.log(error)
+    }
+  };
   const handleDelete = useCallback(
     (id: string, event: React.MouseEvent) => {
       event.preventDefault();
@@ -120,7 +128,7 @@ export default function PosterPaymentPage() {
         case 'revenue':
           return (
             <div className="flex flex-col">
-              <p className="text-bold text-[14px] capitalize">{cellValue}</p>
+              <p className="text-bold text-[14px] capitalize">{String(cellValue)}</p>
             </div>
           );
         case 'status':
@@ -167,15 +175,15 @@ export default function PosterPaymentPage() {
         <BoxImage
           id={2}
           image={'/icons/icon-cancel.png'}
-          title="未払い動画の数"
+          title="未払い金"
           info={unPaidVideos}
-          unit="件"
+          unit="円"
         />
         <BoxImage
           id={3}
           image={'/icons/icon-coin.png'}
           title="未払い総額"
-          info={`${totalPaidMounts}万+`}
+          info={`${totalPaidMounts}`}
           unit="円"
         />
       </section>

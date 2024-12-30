@@ -15,6 +15,10 @@ export interface LoginData {
   password: string;
 }
 
+export interface LogOutData {
+  email: string;
+}
+
 export interface ForgotPasswordData {
   email: string;
 }

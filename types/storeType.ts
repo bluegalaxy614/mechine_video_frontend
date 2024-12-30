@@ -4,6 +4,8 @@ export interface User {
   avatar: string;
   role: string;
   token: string;
+  paymentStatus:boolean;
+  cardNumber:string;
 }
 
 export interface StorageState {
@@ -15,4 +17,8 @@ export interface StorageState {
   setErrorMessage: (errorMessage: string) => void;
   unread: boolean;
   setUnread: (unread: boolean) => void;
+  paymentStatus:boolean;
+  setPaymentStatus :(paymentStatus: boolean) => void;
+  cardNumber:string;
+  setCardNumber:(cardNumber:string) => void;
 }

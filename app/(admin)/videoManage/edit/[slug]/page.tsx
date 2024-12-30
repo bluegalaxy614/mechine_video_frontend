@@ -118,6 +118,9 @@ export default function EditPage({ params }: { params: { slug: string } }) {
               selectedKeys={selectedCategory}
               defaultSelectedKeys={video?.selectedCategory}
               className="w-full h-[41px] rounded-md"
+              classNames={{
+                listbox: "max-h-60 overflow-y-auto", // Add scrolling for the dropdown
+              }}
               onChange={(value) => {
                 console.log(value);
                 handleCategoryChange(value.target.value);
@@ -156,6 +159,7 @@ export default function EditPage({ params }: { params: { slug: string } }) {
               aria-label="select the subcategory"
               defaultSelectedKeys={video?.status}
               className="w-full h-[41px] rounded-md"
+
               onChange={(value) => handleStatusChange(value.target.value)}
             >
               <SelectItem key={'承認済み'}>承認済み</SelectItem>

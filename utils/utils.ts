@@ -22,7 +22,11 @@ export const getCategoryLabelById = (id: string) => {
 };
 
 export const formatDate = (dateStr: string) => {
+  console.log(dateStr)
   const date = new Date(dateStr);
+  if(isNaN(date.getFullYear())) {
+    return "-";
+  }
   return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
 };
 

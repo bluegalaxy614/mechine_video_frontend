@@ -9,7 +9,7 @@ export default function PaymentMethod() {
   return (
     <Card>
       <CardHeader>
-        <p>Add a new payment method to your account.</p>
+        <p className="mb-4 text-[16px]">新しい支払い方法をアカウントに追加してください。</p>
       </CardHeader>
       <CardBody className="grid gap-6">
         {/* <div>
@@ -53,23 +53,23 @@ export default function PaymentMethod() {
         </div> */}
 
         <div className="grid gap-2">
-          <label htmlFor="name">Name</label>
+          <label htmlFor="name">名前</label>
           <Input id="name" placeholder="First Last" className="w-full" />
         </div>
 
         <div className="grid gap-2">
-          <label htmlFor="city">City</label>
-          <Input id="city" placeholder="City" className="w-full" />
+          <label htmlFor="city">都市</label>
+          <Input id="city" placeholder="" className="w-full" />
         </div>
 
         <div className="grid gap-2">
-          <label htmlFor="number">Card number</label>
-          <Input id="number" placeholder="Card Number" className="w-full" />
+          <label htmlFor="number">カード番号</label>
+          <Input id="number" placeholder="" className="w-full" />
         </div>
 
         <div className="grid grid-cols-3 gap-4">
           <div className="grid gap-2">
-            <label htmlFor="month">Expires</label>
+            <label htmlFor="month">有効期限</label>
             <Select id="month" placeholder="Month" className="w-full">
               <SelectItem key="1" value="1">
                 January

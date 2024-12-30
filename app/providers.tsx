@@ -24,7 +24,7 @@ export function Providers({ children, themeProps }: ProvidersProps) {
 
   React.useEffect(() => {
     if (user) {
-      setSession(user.token);
+      setSession(user?.token);
     }
   }, [user]);
 

@@ -99,7 +99,7 @@ export default function PostPage() {
       const canvas = getVideoSnapshot(videoRef.current);
       const imageSrc = canvas.toDataURL('image/png');
       setScreenshot(imageSrc);
-      setMessage('Successfully get the video thumbnail!');
+      setMessage('動画のサムネイルを正常に取得しました！');
     }
   };
 

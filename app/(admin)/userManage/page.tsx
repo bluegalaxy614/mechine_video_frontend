@@ -18,6 +18,7 @@ import { Divider } from '@nextui-org/divider';
 import { Avatar } from '@nextui-org/avatar';
 import { deleteUserById, getUsers, searchUsersInString } from '@/lib/api';
 import { formatDate } from '@/utils/utils';
+import { Badge } from '@nextui-org/badge';
 
 const statusColorMap: Record<string, ChipProps['color']> = {
   Admin: 'primary',
@@ -38,6 +39,10 @@ interface Row {
     end: string;
   };
   posterCounts: number;
+  totalPlayedTime : number;
+  totalIncome: number;
+  paid: number;
+  unPaid:number;
   actions: string;
 }
 
@@ -110,9 +115,11 @@ export default function UserManagePage() {
     switch (key) {
       case 'avatar':
         return (
-          <div className="flex flex-col rouned-md fit-content">
-            <Avatar src={cellValue ? String(cellValue) : '/profile/user.png'} />
-          </div>
+            <Badge content="" color={`${users.status ? "success" : "danger"}`} shape="circle" placement="bottom-right">
+              <div className="flex flex-col rouned-md fit-content">
+                  <Avatar src={cellValue ? String(cellValue) : '/profile/user.png'} />
+              </div>
+            </Badge>
         );
       case 'name':
       case 'email':
@@ -129,10 +136,10 @@ export default function UserManagePage() {
           </div>
         );
         }
-        case 'posterCounts':
+      case 'posterCounts':
         return (
           <div className="flex flex-col">
-            <p className="text-bold text-[14px] rounded-full bg-[#E4F1FF] text-[#4291EF] mx-auto px-[5px]">
+            <p className="text-bold text-[14px] rounded-full bg-[#E4F1FF] text-[#4291EF] mx-auto px-[10px]">
               {String(cellValue)}
             </p>
           </div>
@@ -147,6 +154,14 @@ export default function UserManagePage() {
           >
             {String(cellValue)}
           </Chip>
+        );
+      case 'totalPlayedTime':
+        return (
+          <div className="flex flex-col">
+            <p className="text-bold text-[14px] text-[blue] rounded-full bg-[#E4F1FF] text-[#4291EF] mx-auto px-[10px]">
+              {`${Number(cellValue).toFixed(2)} 円`}
+            </p>
+          </div>
         );
       case 'expired': {
         const expiredValue = cellValue as Row['expired'];
@@ -173,12 +188,12 @@ export default function UserManagePage() {
       case 'actions':
         return (
           <div className="relative flex items-center gap-2">
-            <Tooltip color="primary" content="Edit">
+            <Tooltip color="primary" content="編集">
               <span className="text-lg text-danger cursor-pointer active:opacity-50">
                 <EditIcon />
               </span>
             </Tooltip>
-            <Tooltip color="danger" content="Delete">
+            <Tooltip color="danger" content="削除">
               <span
                 className="text-lg text-danger cursor-pointer active:opacity-50"
                 onClick={(event) => handleDelete(users._id, event)}
@@ -189,7 +204,7 @@ export default function UserManagePage() {
           </div>
         );
       default:
-        return <>{String(cellValue)}</>;
+        return <>{cellValue !== undefined ? String(cellValue) : "-"}</>;
     }
   }, []);
 
@@ -215,7 +230,7 @@ export default function UserManagePage() {
         </div>
       </div>
       <div className="w-full mx-auto lg:px-[0px] md:px-[40px] sm:px-[50px] xsm:px-[35px]">
-        <div className="w-full over-flow-x-scroll">
+        <div className="w-full">
           <Table
             isHeaderSticky
             aria-label="Payment Table"
